@@ -40,7 +40,7 @@ Public Class Form1
     'The end of the thumbstick neutral zone.
     Private Const NeutralEnd = 16256
 
-    Private ReadOnly Connected(0 To 15) As Boolean
+    Private ReadOnly Connected(0 To 3) As Boolean
 
     Dim ControllerNumber As Integer = 0
 
