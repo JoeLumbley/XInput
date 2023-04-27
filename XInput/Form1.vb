@@ -106,7 +106,7 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateButtonPosition()
-        'The range of buttons is 0 to 65535.
+        'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
         'What buttons are down?
         Select Case ControllerPosition.Gamepad.wButtons
@@ -265,7 +265,7 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateRightTriggerPosition()
-        'The range of trigger is 0 to 255.
+        'The range of trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
 
         If ControllerPosition.Gamepad.bRightTrigger > 0 Then
 
@@ -280,7 +280,7 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateLeftTriggerPosition()
-        'The range of trigger is 0 to 255.
+        'The range of trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
 
         If ControllerPosition.Gamepad.bLeftTrigger > 0 Then
 
@@ -317,10 +317,10 @@ Public Class XInput
     ' Define the XINPUT_GAMEPAD structure
     <StructLayout(LayoutKind.Sequential)>
     Public Structure XINPUT_GAMEPAD
-        Public wButtons As UShort
-        Public bLeftTrigger As Byte
-        Public bRightTrigger As Byte
-        Public sThumbLX As Short
+        Public wButtons As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
+        Public bLeftTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        Public bRightTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        Public sThumbLX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
         Public sThumbLY As Short
         Public sThumbRX As Short
         Public sThumbRY As Short
