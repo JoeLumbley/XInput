@@ -347,3 +347,13 @@ End Class
 'XInput Game Controller APIs
 'https://learn.microsoft.com/en-us/windows/win32/api/_xinput/
 '
+'Short Data Type (Visual Basic)
+'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/short-data-type
+'
+'Byte Data Type (Visual Basic)
+'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/byte-data-type
+'
+'UShort Data Type (Visual Basic)
+'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/ushort-data-type
+'
+'
