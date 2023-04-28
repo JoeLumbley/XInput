@@ -171,8 +171,8 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateLeftThumbstickPosition()
-        'The range on the X-axis is -32768 to 32512.
-        'The range on the Y-axis is -32768 to 32512.
+        'The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        'The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
 
         'What position is the left thumbstick in on the X-axis?
         If ControllerPosition.Gamepad.sThumbLX <= NeutralStart Then
@@ -218,8 +218,8 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateRightThumbstickPosition()
-        'The range on the X-axis is -32768 to 32512.
-        'The range on the Y-axis is -32768 to 32512.
+        'The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        'The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
 
         'What position is the right thumbstick in on the X-axis?
         If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
