@@ -321,9 +321,9 @@ Public Class XInput
         Public bLeftTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
         Public bRightTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
         Public sThumbLX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
-        Public sThumbLY As Short
-        Public sThumbRX As Short
-        Public sThumbRY As Short
+        Public sThumbLY As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
+        Public sThumbRX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
+        Public sThumbRY As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
     End Structure
 End Class
 
