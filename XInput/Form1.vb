@@ -47,6 +47,9 @@ Public Class Form1
 
     Dim ControllerPosition As XINPUT_STATE
 
+    Dim vibration As XINPUT_VIBRATION
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Text = "XInput - Code with Joe"
@@ -362,6 +365,22 @@ Public Class Form1
 
     End Sub
 
+    Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
+
+        vibration.wLeftMotorSpeed = 65535 'full speed
+        vibration.wRightMotorSpeed = 0
+        XInputSetState(0, vibration)
+
+    End Sub
+
+    Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
+
+        vibration.wLeftMotorSpeed = 0
+        vibration.wRightMotorSpeed = 65535 'full speed
+        XInputSetState(0, vibration)
+
+    End Sub
+
 End Class
 
 Public Class XInput
@@ -393,6 +412,16 @@ Public Class XInput
         Public sThumbRX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
         Public sThumbRY As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
     End Structure
+
+    <DllImport("XInput9_1_0.dll")>
+    Public Shared Function XInputSetState(ByVal playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
+    End Function
+
+    Public Structure XINPUT_VIBRATION
+        Public wLeftMotorSpeed As UShort
+        Public wRightMotorSpeed As UShort
+    End Structure
+
 End Class
 
 'Learn more:

@@ -32,6 +32,8 @@ Partial Class Form1
         LabelRightThumbY = New Label()
         LabelRightThumbX = New Label()
         Timer2 = New Timer(components)
+        ButtonVibrateLeft = New Button()
+        ButtonVibrateRight = New Button()
         SuspendLayout()
         ' 
         ' Timer1
@@ -100,11 +102,34 @@ Partial Class Form1
         LabelRightThumbX.TabIndex = 6
         LabelRightThumbX.Text = "LabelRightThumbX"
         ' 
+        ' Timer2
+        ' 
+        ' 
+        ' ButtonVibrateLeft
+        ' 
+        ButtonVibrateLeft.Location = New Point(14, 233)
+        ButtonVibrateLeft.Name = "ButtonVibrateLeft"
+        ButtonVibrateLeft.Size = New Size(138, 34)
+        ButtonVibrateLeft.TabIndex = 7
+        ButtonVibrateLeft.Text = "Vibrate Left"
+        ButtonVibrateLeft.UseVisualStyleBackColor = True
+        ' 
+        ' ButtonVibrateRight
+        ' 
+        ButtonVibrateRight.Location = New Point(377, 232)
+        ButtonVibrateRight.Name = "ButtonVibrateRight"
+        ButtonVibrateRight.Size = New Size(138, 34)
+        ButtonVibrateRight.TabIndex = 8
+        ButtonVibrateRight.Text = "Vibrate Right"
+        ButtonVibrateRight.UseVisualStyleBackColor = True
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
+        Controls.Add(ButtonVibrateRight)
+        Controls.Add(ButtonVibrateLeft)
         Controls.Add(LabelRightThumbX)
         Controls.Add(LabelRightThumbY)
         Controls.Add(LabelLeftThumbY)
@@ -127,4 +152,6 @@ Partial Class Form1
     Friend WithEvents LabelRightThumbY As Label
     Friend WithEvents LabelRightThumbX As Label
     Friend WithEvents Timer2 As Timer
+    Friend WithEvents ButtonVibrateLeft As Button
+    Friend WithEvents ButtonVibrateRight As Button
 End Class
