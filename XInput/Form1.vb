@@ -30,7 +30,6 @@
 'https://monica.im/
 
 Imports System.Runtime.InteropServices
-Imports System.Threading
 Imports XInput.XInput
 
 Public Class Form1
@@ -57,6 +56,8 @@ Public Class Form1
         InitializeTimer1()
 
         InitializeTimer2()
+
+        ClearLabels()
 
     End Sub
 
@@ -367,16 +368,31 @@ Public Class Form1
 
     Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
 
-        vibration.wLeftMotorSpeed = 65535 'full speed
-        vibration.wRightMotorSpeed = 0
-        XInputSetState(0, vibration)
+        VibrateLeft(0, 65535)
 
     End Sub
 
     Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
 
+        VibrateRight(0, 65535)
+
+    End Sub
+    Private Sub VibrateLeft(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
+
+        vibration.wRightMotorSpeed = 0
+
+        vibration.wLeftMotorSpeed = Speed
+
+        XInputSetState(ControllerNumber, vibration)
+
+    End Sub
+
+    Private Sub VibrateRight(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
+
         vibration.wLeftMotorSpeed = 0
-        vibration.wRightMotorSpeed = 65535 'full speed
+
+        vibration.wRightMotorSpeed = Speed
+
         XInputSetState(0, vibration)
 
     End Sub
