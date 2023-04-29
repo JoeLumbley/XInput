@@ -31,6 +31,7 @@ Partial Class Form1
         LabelLeftThumbY = New Label()
         LabelRightThumbY = New Label()
         LabelRightThumbX = New Label()
+        Timer2 = New Timer(components)
         SuspendLayout()
         ' 
         ' Timer1
@@ -125,4 +126,5 @@ Partial Class Form1
     Friend WithEvents LabelLeftThumbY As Label
     Friend WithEvents LabelRightThumbY As Label
     Friend WithEvents LabelRightThumbX As Label
+    Friend WithEvents Timer2 As Timer
 End Class

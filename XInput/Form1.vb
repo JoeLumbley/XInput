@@ -30,6 +30,7 @@
 'https://monica.im/
 
 Imports System.Runtime.InteropServices
+Imports System.Threading
 Imports XInput.XInput
 
 Public Class Form1
@@ -49,6 +50,14 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Text = "XInput - Code with Joe"
+
+        InitializeTimer1()
+
+        InitializeTimer2()
+
+    End Sub
+
+    Private Sub InitializeTimer1()
 
         Timer1.Interval = 15 'Polling frequency in milliseconds.
 
@@ -111,61 +120,88 @@ Public Class Form1
         'What buttons are down?
         Select Case ControllerPosition.Gamepad.wButtons
             Case 0 'All the buttons are up.
-                LabelButtons.Text = ""
+                'LabelButtons.Text = ""
             Case 1 'DPad up is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Up"
+                Timer2.Start()
             Case 2 'DPad down is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Down"
+                Timer2.Start()
             Case 4 'DPad left is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Left"
+                Timer2.Start()
             Case 5 'DPad up and left is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Up Left"
+                Timer2.Start()
             Case 6 'DPad down left is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Down Left"
+                Timer2.Start()
             Case 8 'DPad right is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Right"
+                Timer2.Start()
             Case 9 'DPad up right is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Up Right"
+                Timer2.Start()
             Case 10 'DPad down right is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Down Right"
+                Timer2.Start()
             Case 16 'Start is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Start"
+                Timer2.Start()
             Case 32 'Back is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Back"
+                Timer2.Start()
             Case 64 'Left stick is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left Stick"
+                Timer2.Start()
             Case 128 'Right stick is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right Stick"
+                Timer2.Start()
             Case 256 'Left bumper is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left Bumper"
+                Timer2.Start()
             Case 512 'Right bumper is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right Bumper"
+                Timer2.Start()
             Case 4096 'A is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: A"
+                Timer2.Start()
             Case 8192 'B is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: B"
+                Timer2.Start()
             Case 16384 'X is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: X"
+                Timer2.Start()
             Case 32768 'Y is down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Y"
+                Timer2.Start()
             Case 48 'Back and start are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Back+Start"
+                Timer2.Start()
             Case 192 'Left and right sticks are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left and Right Stick"
+                Timer2.Start()
             Case 768 'Left and right bumpers are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left and Right Bumper"
+                Timer2.Start()
             Case 12288 'A and b are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B"
+                Timer2.Start()
             Case 20480 'A and x are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+X"
+                Timer2.Start()
             Case 36864 'A and y are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+Y"
+                Timer2.Start()
             Case 24576 'B and x are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X"
+                Timer2.Start()
             Case 40960 'B and y are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+Y"
+                Timer2.Start()
             Case 49152 'X and y are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: X+Y"
+                Timer2.Start()
         End Select
 
     End Sub
@@ -179,19 +215,19 @@ Public Class Form1
             'The left thumbstick is in the left position.
 
             LabelLeftThumbX.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Left"
-            'Timer2.Start()
+            Timer2.Start()
 
 
         ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
             'The left thumbstick is in the right position.
 
             LabelLeftThumbX.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Right"
-            'Timer2.Start()
+            Timer2.Start()
 
         Else
             'The left thumbstick is in the neutral position.
 
-            LabelLeftThumbX.Text = ""
+            'LabelLeftThumbX.Text = ""
 
         End If
 
@@ -200,18 +236,18 @@ Public Class Form1
             'The left thumbstick is in the up position.
 
             LabelLeftThumbY.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Down"
-            'Timer2.Start()
+            Timer2.Start()
 
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
             'The left thumbstick is in the down position.
 
             LabelLeftThumbY.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Up"
-            'Timer2.Start()
+            Timer2.Start()
 
         Else
             'The left thumbstick is in the neutral position.
 
-            LabelLeftThumbY.Text = ""
+            'LabelLeftThumbY.Text = ""
 
         End If
 
@@ -226,19 +262,19 @@ Public Class Form1
             'The right thumbstick is in the left position.
 
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Left"
-            'Timer2.Start()
+            Timer2.Start()
 
 
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
             'The right thumbstick is in the right position.
 
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Right"
-            'Timer2.Start()
+            Timer2.Start()
 
         Else
             'The right thumbstick is in the neutral position.
 
-            LabelRightThumbX.Text = ""
+            'LabelRightThumbX.Text = ""
 
         End If
 
@@ -247,18 +283,18 @@ Public Class Form1
             'The right thumbstick is in the up position.
 
             LabelRightThumbY.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Down"
-            'Timer2.Start()
+            Timer2.Start()
 
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
             'The right thumbstick is in the down position.
 
             LabelRightThumbY.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Up"
-            'Timer2.Start()
+            Timer2.Start()
 
         Else
             'The right thumbstick is in the neutral position.
 
-            LabelRightThumbY.Text = ""
+            'LabelRightThumbY.Text = ""
 
         End If
 
@@ -291,6 +327,38 @@ Public Class Form1
             LabelLeftTrigger.Text = ""
 
         End If
+
+    End Sub
+
+    Private Sub InitializeTimer2()
+
+        Timer2.Interval = 400 'Label display time in milliseconds.
+
+    End Sub
+
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+
+        ClearLabels()
+
+        Timer2.Stop()
+
+    End Sub
+
+    Private Sub ClearLabels()
+
+        LabelButtons.Text = ""
+
+        LabelLeftThumbX.Text = ""
+
+        LabelLeftThumbY.Text = ""
+
+        LabelLeftTrigger.Text = ""
+
+        LabelRightThumbX.Text = ""
+
+        LabelRightThumbY.Text = ""
+
+        LabelRightTrigger.Text = ""
 
     End Sub
 
