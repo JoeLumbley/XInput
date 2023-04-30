@@ -219,6 +219,7 @@ Public Class Form1
             'The left thumbstick is in the left position.
 
             LabelLeftThumbX.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Left"
+
             Timer2.Start()
 
 
@@ -226,6 +227,7 @@ Public Class Form1
             'The left thumbstick is in the right position.
 
             LabelLeftThumbX.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Right"
+
             Timer2.Start()
 
         Else
@@ -238,12 +240,14 @@ Public Class Form1
             'The left thumbstick is in the up position.
 
             LabelLeftThumbY.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Down"
+
             Timer2.Start()
 
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
             'The left thumbstick is in the down position.
 
             LabelLeftThumbY.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Up"
+
             Timer2.Start()
 
         Else
@@ -262,6 +266,7 @@ Public Class Form1
             'The right thumbstick is in the left position.
 
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Left"
+
             Timer2.Start()
 
 
@@ -269,6 +274,7 @@ Public Class Form1
             'The right thumbstick is in the right position.
 
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Right"
+
             Timer2.Start()
 
         Else
@@ -281,12 +287,14 @@ Public Class Form1
             'The right thumbstick is in the up position.
 
             LabelRightThumbY.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Down"
+
             Timer2.Start()
 
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
             'The right thumbstick is in the down position.
 
             LabelRightThumbY.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Up"
+
             Timer2.Start()
 
         Else
@@ -299,9 +307,12 @@ Public Class Form1
     Private Sub UpdateRightTriggerPosition()
         'The range of trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
 
+        'What position is the right trigger in?
         If ControllerPosition.Gamepad.bRightTrigger > 0 Then
+            'The right trigger is in the down position.
 
-            LabelRightTrigger.Text = "Controller: " & ControllerNumber.ToString & " Right Trigger: Down"
+            LabelRightTrigger.Text = "Controller: " & ControllerNumber.ToString & " Right Trigger"
+
             Timer2.Start()
 
         Else
@@ -314,9 +325,12 @@ Public Class Form1
     Private Sub UpdateLeftTriggerPosition()
         'The range of trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
 
+        'What position is the left trigger in?
         If ControllerPosition.Gamepad.bLeftTrigger > 0 Then
+            'The left trigger is in the down position.
 
-            LabelLeftTrigger.Text = "Controller: " & ControllerNumber.ToString & " Left Trigger: Down"
+            LabelLeftTrigger.Text = "Controller: " & ControllerNumber.ToString & " Left Trigger"
+
             Timer2.Start()
 
         Else
@@ -369,6 +383,7 @@ Public Class Form1
         VibrateRight(0, 65535)
 
     End Sub
+
     Private Sub VibrateLeft(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The left motor is the low-frequency rumble motor.
@@ -382,8 +397,6 @@ Public Class Form1
         Vibrate(ControllerNumber)
 
     End Sub
-
-
 
     Private Sub VibrateRight(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
@@ -425,6 +438,7 @@ Public Class Form1
 End Class
 
 Public Class XInput
+
     ' Define the function signature for the XInputGetState function
     <DllImport("XInput9_1_0.dll")>
     Public Shared Function XInputGetState(
