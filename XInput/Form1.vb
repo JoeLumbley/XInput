@@ -379,6 +379,7 @@ Public Class Form1
     End Sub
     Private Sub VibrateLeft(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
+        'The left motor is the low-frequency rumble motor.
 
         'Turn right motor off.
         vibration.wRightMotorSpeed = 0
@@ -393,6 +394,7 @@ Public Class Form1
 
     Private Sub VibrateRight(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
+        'The right motor is the high-frequency rumble motor.
 
         'Turn left motor off.
         vibration.wLeftMotorSpeed = 0
@@ -465,6 +467,12 @@ End Class
 'XINPUT_GAMEPAD Structure
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad
 '
+'XInputSetState Function
+'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate
+'
+'XINPUT_VIBRATION Structure
+'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration
+'
 'XInput Game Controller APIs
 'https://learn.microsoft.com/en-us/windows/win32/api/_xinput/
 '
@@ -476,5 +484,4 @@ End Class
 '
 'UShort Data Type (Visual Basic)
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/ushort-data-type
-'
 '
