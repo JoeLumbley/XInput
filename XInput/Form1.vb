@@ -378,22 +378,30 @@ Public Class Form1
 
     End Sub
     Private Sub VibrateLeft(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
+        'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
 
+        'Turn right motor off.
         vibration.wRightMotorSpeed = 0
 
+        'Set left motor speed.
         vibration.wLeftMotorSpeed = Speed
 
+        'Turn left motor on.
         XInputSetState(ControllerNumber, vibration)
 
     End Sub
 
     Private Sub VibrateRight(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
+        'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
 
+        'Turn left motor off.
         vibration.wLeftMotorSpeed = 0
 
+        'Set right motor speed.
         vibration.wRightMotorSpeed = Speed
 
-        XInputSetState(0, vibration)
+        'Turn right motor on.
+        XInputSetState(ControllerNumber, vibration)
 
     End Sub
 
@@ -434,8 +442,8 @@ Public Class XInput
     End Function
 
     Public Structure XINPUT_VIBRATION
-        Public wLeftMotorSpeed As UShort
-        Public wRightMotorSpeed As UShort
+        Public wLeftMotorSpeed As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
+        Public wRightMotorSpeed As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
     End Structure
 
 End Class
