@@ -231,8 +231,6 @@ Public Class Form1
         Else
             'The left thumbstick is in the neutral position.
 
-            'LabelLeftThumbX.Text = ""
-
         End If
 
         'What position is the left thumbstick in on the Y-axis?
@@ -250,8 +248,6 @@ Public Class Form1
 
         Else
             'The left thumbstick is in the neutral position.
-
-            'LabelLeftThumbY.Text = ""
 
         End If
 
@@ -278,8 +274,6 @@ Public Class Form1
         Else
             'The right thumbstick is in the neutral position.
 
-            'LabelRightThumbX.Text = ""
-
         End If
 
         'What position is the right thumbstick in on the Y-axis?
@@ -298,8 +292,6 @@ Public Class Form1
         Else
             'The right thumbstick is in the neutral position.
 
-            'LabelRightThumbY.Text = ""
-
         End If
 
     End Sub
@@ -310,10 +302,10 @@ Public Class Form1
         If ControllerPosition.Gamepad.bRightTrigger > 0 Then
 
             LabelRightTrigger.Text = "Controller: " & ControllerNumber.ToString & " Right Trigger: Down"
+            Timer2.Start()
 
         Else
-
-            LabelRightTrigger.Text = ""
+            'The right trigger is in the neutral position.
 
         End If
 
@@ -325,10 +317,10 @@ Public Class Form1
         If ControllerPosition.Gamepad.bLeftTrigger > 0 Then
 
             LabelLeftTrigger.Text = "Controller: " & ControllerNumber.ToString & " Left Trigger: Down"
+            Timer2.Start()
 
         Else
-
-            LabelLeftTrigger.Text = ""
+            'The left trigger is in the neutral position.
 
         End If
 
@@ -381,29 +373,52 @@ Public Class Form1
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The left motor is the low-frequency rumble motor.
 
-        'Turn right motor off.
+        'Set right motor off (zero speed).
         vibration.wRightMotorSpeed = 0
 
         'Set left motor speed.
         vibration.wLeftMotorSpeed = Speed
 
-        'Turn left motor on.
-        XInputSetState(ControllerNumber, vibration)
+        Vibrate(ControllerNumber)
 
     End Sub
+
+
 
     Private Sub VibrateRight(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The right motor is the high-frequency rumble motor.
 
-        'Turn left motor off.
+        'Set left motor off (zero speed).
         vibration.wLeftMotorSpeed = 0
 
         'Set right motor speed.
         vibration.wRightMotorSpeed = Speed
 
-        'Turn right motor on.
-        XInputSetState(ControllerNumber, vibration)
+        Vibrate(ControllerNumber)
+
+    End Sub
+
+    Private Sub Vibrate(ByVal ControllerNumber As Integer)
+
+        Try
+
+            'Turn motor on.
+            If XInputSetState(ControllerNumber, vibration) = 0 Then
+                'Success
+                'Text = XInputSetState(ControllerNumber, vibration).ToString
+            Else
+                'Fail
+                'Text = XInputSetState(ControllerNumber, vibration).ToString
+            End If
+
+        Catch ex As Exception
+
+            MsgBox(ex.ToString)
+
+            Exit Sub
+
+        End Try
 
     End Sub
 
