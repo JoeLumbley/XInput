@@ -26,7 +26,7 @@
 'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 'SOFTWARE.
 '
-'Monica is our ChatGPT copilot on this app.
+'Monica is our ChatGPT copilot.
 'https://monica.im/
 
 Imports System.Runtime.InteropServices
