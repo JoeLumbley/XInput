@@ -59,7 +59,7 @@ Public Class Form1
     End Structure
 
     <DllImport("XInput9_1_0.dll")>
-    Private Shared Function XInputSetState(ByVal playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
+    Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
     End Function
 
     Public Structure XINPUT_VIBRATION
