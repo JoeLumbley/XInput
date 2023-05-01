@@ -76,6 +76,9 @@ Public Class Form1
     'The end of the thumbstick neutral zone.
     Private Const NeutralEnd = 16256
 
+    'The end of the trigger neutral zone.
+    Private Const TriggerNeutralEnd = 64
+
     Private ReadOnly Connected(0 To 3) As Boolean
 
     Dim ControllerNumber As Integer = 0
@@ -343,7 +346,7 @@ Public Class Form1
         'The range of trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
 
         'What position is the right trigger in?
-        If ControllerPosition.Gamepad.bRightTrigger > 0 Then
+        If ControllerPosition.Gamepad.bRightTrigger > TriggerNeutralEnd Then
             'The right trigger is in the down position.
 
             LabelRightTrigger.Text = "Controller: " & ControllerNumber.ToString & " Right Trigger"
@@ -361,7 +364,7 @@ Public Class Form1
         'The range of trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
 
         'What position is the left trigger in?
-        If ControllerPosition.Gamepad.bLeftTrigger > 0 Then
+        If ControllerPosition.Gamepad.bLeftTrigger > TriggerNeutralEnd Then
             'The left trigger is in the down position.
 
             LabelLeftTrigger.Text = "Controller: " & ControllerNumber.ToString & " Left Trigger"
