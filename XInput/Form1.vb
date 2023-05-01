@@ -30,15 +30,11 @@
 'https://monica.im/
 
 Imports System.Runtime.InteropServices
-'Imports XInput.XInput
 
 Public Class Form1
 
     <DllImport("XInput9_1_0.dll")>
-    Private Shared Function XInputGetState(
-        dwUserIndex As Integer,
-        ByRef pState As XINPUT_STATE
-    ) As Integer
+    Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
     End Function
 
     ' Define the XINPUT_STATE structure
@@ -84,7 +80,6 @@ Public Class Form1
     Dim ControllerPosition As XINPUT_STATE
 
     Dim vibration As XINPUT_VIBRATION
-
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -473,48 +468,6 @@ Public Class Form1
     End Sub
 
 End Class
-
-'Public Class XInput
-
-' Define the function signature for the XInputGetState function
-'<DllImport("XInput9_1_0.dll")>
-'Public Shared Function XInputGetState(
-'    dwUserIndex As Integer,
-'    ByRef pState As XINPUT_STATE
-') As Integer
-'End Function
-
-'' Define the XINPUT_STATE structure
-'<StructLayout(LayoutKind.Explicit)>
-'Public Structure XINPUT_STATE
-'    <FieldOffset(0)>
-'    Public dwPacketNumber As UInteger
-'    <FieldOffset(4)>
-'    Public Gamepad As XINPUT_GAMEPAD
-'End Structure
-
-'' Define the XINPUT_GAMEPAD structure
-'<StructLayout(LayoutKind.Sequential)>
-'Public Structure XINPUT_GAMEPAD
-'    Public wButtons As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
-'    Public bLeftTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
-'    Public bRightTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
-'    Public sThumbLX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
-'    Public sThumbLY As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
-'    Public sThumbRX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
-'    Public sThumbRY As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
-'End Structure
-
-'<DllImport("XInput9_1_0.dll")>
-'Public Shared Function XInputSetState(ByVal playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
-'End Function
-
-'Public Structure XINPUT_VIBRATION
-'    Public wLeftMotorSpeed As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
-'    Public wRightMotorSpeed As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
-'End Structure
-
-'End Class
 
 'Learn more:
 '
