@@ -32,11 +32,12 @@
 Imports System.Runtime.InteropServices
 
 Public Class Form1
-    'XInput9_1_0.dll is used for Windows versions prior to Windows 8
-    'XInputUap.dll is used for Windows 8 and later versions, including Windows 10.
-    <DllImport("XInputUap.dll")>
+
+    <DllImport("XInput1_4.dll")>
     Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
     End Function
+    'XInput1_4.dll seems to be the current version
+    'XInput9_1_0.dll is maintained primarily for backward compatibility. 
 
     ' Define the XINPUT_STATE structure
     <StructLayout(LayoutKind.Explicit)>
@@ -59,7 +60,7 @@ Public Class Form1
         Public sThumbRY As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
     End Structure
 
-    <DllImport("XInputUap.dll")>
+    <DllImport("XInput1_4.dll")>
     Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
     End Function
 
@@ -493,8 +494,17 @@ End Class
 'XINPUT_VIBRATION Structure
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration
 '
+'Getting Started with XInput in Windows Applications
+'https://learn.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput
+'
 'XInput Game Controller APIs
 'https://learn.microsoft.com/en-us/windows/win32/api/_xinput/
+'
+'XInput Versions
+'https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-versions
+'
+'Comparison of XInput and DirectInput Features
+'https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-and-directinput
 '
 'Short Data Type (Visual Basic)
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/short-data-type
