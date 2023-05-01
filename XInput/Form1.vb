@@ -81,11 +81,11 @@ Public Class Form1
 
     Private ReadOnly Connected(0 To 3) As Boolean
 
-    Dim ControllerNumber As Integer = 0
+    Private ControllerNumber As Integer = 0
 
-    Dim ControllerPosition As XINPUT_STATE
+    Private ControllerPosition As XINPUT_STATE
 
-    Dim vibration As XINPUT_VIBRATION
+    Private vibration As XINPUT_VIBRATION
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
