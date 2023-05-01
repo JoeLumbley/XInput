@@ -36,6 +36,7 @@ Public Class Form1
     <DllImport("XInput1_4.dll")>
     Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
     End Function
+
     'XInput1_4.dll seems to be the current version
     'XInput9_1_0.dll is maintained primarily for backward compatibility. 
 
