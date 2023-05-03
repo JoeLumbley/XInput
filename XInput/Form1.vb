@@ -110,6 +110,10 @@ Public Class Form1
 
         ClearLabels()
 
+        TrackBarSpeed.Value = 32767
+
+        UpdateSpeedLabel()
+
     End Sub
 
     Private Sub InitializeTimer1()
@@ -136,9 +140,6 @@ Public Class Form1
                 If XInputGetState(ControllerNumber, ControllerPosition) = 0 Then
                     ' The function call was successful, so you can access the controller state now
 
-
-                    UpdateBatteryLevel()
-
                     UpdateButtonPosition()
 
                     UpdateLeftThumbstickPosition()
@@ -148,6 +149,8 @@ Public Class Form1
                     UpdateLeftTriggerPosition()
 
                     UpdateRightTriggerPosition()
+
+                    UpdateBatteryLevel()
 
                     Connected(ControllerNumber) = True
 
@@ -172,28 +175,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateBatteryLevel()
 
-        If XInputGetBatteryInformation(NumControllerToVib.Value, BATTERY_DEVTYPE_GAMEPAD, batteryInfo) = 0 Then
-
-            Select Case batteryInfo.BatteryLevel
-                Case 0
-                    LabelBatteryLevel.Text = "Battery Level: EMPTY"
-                Case 1
-                    LabelBatteryLevel.Text = "Battery Level: LOW"
-                Case 2
-                    LabelBatteryLevel.Text = "Battery Level: MEDIUM"
-                Case 3
-                    LabelBatteryLevel.Text = "Battery Level: FULL"
-            End Select
-
-        Else
-
-            LabelBatteryLevel.Text = ""
-
-        End If
-
-    End Sub
 
     Private Sub UpdateButtonPosition()
         'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
@@ -451,13 +433,13 @@ Public Class Form1
 
     Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
 
-        VibrateLeft(NumControllerToVib.Value, 65535)
+        VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
 
     End Sub
 
     Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
 
-        VibrateRight(NumControllerToVib.Value, 65535)
+        VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
 
     End Sub
 
@@ -512,9 +494,43 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateBatteryLevel()
 
+        'Get battery level
+        If XInputGetBatteryInformation(NumControllerToVib.Value, BATTERY_DEVTYPE_GAMEPAD, batteryInfo) = 0 Then
+            'Success
 
+            Select Case batteryInfo.BatteryLevel
+                Case 0
+                    LabelBatteryLevel.Text = "Battery Level: EMPTY"
+                Case 1
+                    LabelBatteryLevel.Text = "Battery Level: LOW"
+                Case 2
+                    LabelBatteryLevel.Text = "Battery Level: MEDIUM"
+                Case 3
+                    LabelBatteryLevel.Text = "Battery Level: FULL"
+            End Select
 
+        Else
+            'Fail
+
+            LabelBatteryLevel.Text = ""
+
+        End If
+
+    End Sub
+
+    Private Sub TrackBarSpeed_Scroll(sender As Object, e As EventArgs) Handles TrackBarSpeed.Scroll
+
+        UpdateSpeedLabel()
+
+    End Sub
+
+    Private Sub UpdateSpeedLabel()
+
+        LabelSpeed.Text = "Vibration Speed: " & TrackBarSpeed.Value
+
+    End Sub
 
 End Class
 

@@ -36,7 +36,11 @@ Partial Class Form1
         ButtonVibrateRight = New Button()
         NumControllerToVib = New NumericUpDown()
         LabelBatteryLevel = New Label()
+        TrackBarSpeed = New TrackBar()
+        LabelSpeed = New Label()
+        Label1 = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
+        CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Timer1
@@ -72,7 +76,7 @@ Partial Class Form1
         ' LabelLeftThumbX
         ' 
         LabelLeftThumbX.AutoSize = True
-        LabelLeftThumbX.Location = New Point(13, 49)
+        LabelLeftThumbX.Location = New Point(14, 68)
         LabelLeftThumbX.Name = "LabelLeftThumbX"
         LabelLeftThumbX.Size = New Size(149, 25)
         LabelLeftThumbX.TabIndex = 3
@@ -81,7 +85,7 @@ Partial Class Form1
         ' LabelLeftThumbY
         ' 
         LabelLeftThumbY.AutoSize = True
-        LabelLeftThumbY.Location = New Point(14, 74)
+        LabelLeftThumbY.Location = New Point(15, 93)
         LabelLeftThumbY.Name = "LabelLeftThumbY"
         LabelLeftThumbY.Size = New Size(148, 25)
         LabelLeftThumbY.TabIndex = 4
@@ -110,7 +114,7 @@ Partial Class Form1
         ' 
         ' ButtonVibrateLeft
         ' 
-        ButtonVibrateLeft.Location = New Point(14, 233)
+        ButtonVibrateLeft.Location = New Point(14, 194)
         ButtonVibrateLeft.Name = "ButtonVibrateLeft"
         ButtonVibrateLeft.Size = New Size(138, 34)
         ButtonVibrateLeft.TabIndex = 7
@@ -119,7 +123,7 @@ Partial Class Form1
         ' 
         ' ButtonVibrateRight
         ' 
-        ButtonVibrateRight.Location = New Point(389, 233)
+        ButtonVibrateRight.Location = New Point(389, 194)
         ButtonVibrateRight.Name = "ButtonVibrateRight"
         ButtonVibrateRight.Size = New Size(138, 34)
         ButtonVibrateRight.TabIndex = 8
@@ -128,26 +132,56 @@ Partial Class Form1
         ' 
         ' NumControllerToVib
         ' 
-        NumControllerToVib.Location = New Point(182, 236)
+        NumControllerToVib.Location = New Point(197, 147)
         NumControllerToVib.Maximum = New [Decimal](New Integer() {3, 0, 0, 0})
         NumControllerToVib.Name = "NumControllerToVib"
-        NumControllerToVib.Size = New Size(180, 31)
+        NumControllerToVib.Size = New Size(138, 31)
         NumControllerToVib.TabIndex = 9
         ' 
         ' LabelBatteryLevel
         ' 
         LabelBatteryLevel.AutoSize = True
-        LabelBatteryLevel.Location = New Point(182, 289)
+        LabelBatteryLevel.Location = New Point(341, 149)
         LabelBatteryLevel.Name = "LabelBatteryLevel"
         LabelBatteryLevel.Size = New Size(147, 25)
         LabelBatteryLevel.TabIndex = 10
         LabelBatteryLevel.Text = "LabelBatteryLevel"
         ' 
+        ' TrackBarSpeed
+        ' 
+        TrackBarSpeed.Location = New Point(172, 194)
+        TrackBarSpeed.Maximum = 65535
+        TrackBarSpeed.Name = "TrackBarSpeed"
+        TrackBarSpeed.Size = New Size(180, 69)
+        TrackBarSpeed.TabIndex = 11
+        TrackBarSpeed.TickFrequency = 5555
+        ' 
+        ' LabelSpeed
+        ' 
+        LabelSpeed.AutoSize = True
+        LabelSpeed.Location = New Point(182, 238)
+        LabelSpeed.Name = "LabelSpeed"
+        LabelSpeed.Size = New Size(103, 25)
+        LabelSpeed.TabIndex = 12
+        LabelSpeed.Text = "LabelSpeed"
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Location = New Point(14, 149)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(177, 25)
+        Label1.TabIndex = 13
+        Label1.Text = "Controller to Vibrate:"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(800, 538)
+        Controls.Add(Label1)
+        Controls.Add(LabelSpeed)
+        Controls.Add(TrackBarSpeed)
         Controls.Add(LabelBatteryLevel)
         Controls.Add(NumControllerToVib)
         Controls.Add(ButtonVibrateRight)
@@ -162,6 +196,7 @@ Partial Class Form1
         Name = "Form1"
         Text = "Form1"
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).EndInit()
+        CType(TrackBarSpeed, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -179,4 +214,7 @@ Partial Class Form1
     Friend WithEvents ButtonVibrateRight As Button
     Friend WithEvents NumControllerToVib As NumericUpDown
     Friend WithEvents LabelBatteryLevel As Label
+    Friend WithEvents TrackBarSpeed As TrackBar
+    Friend WithEvents LabelSpeed As Label
+    Friend WithEvents Label1 As Label
 End Class
