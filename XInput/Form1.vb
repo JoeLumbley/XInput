@@ -70,6 +70,17 @@ Public Class Form1
         Public wRightMotorSpeed As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
     End Structure
 
+    <DllImport("xinput1_4.dll")>
+    Private Shared Function XInputGetBatteryInformation(ByVal playerIndex As Integer, ByVal devType As Byte, ByRef batteryInfo As XINPUT_BATTERY_INFORMATION) As Integer
+    End Function
+
+    Public Structure XINPUT_BATTERY_INFORMATION
+        Public BatteryType As Byte
+        Public BatteryLevel As Byte
+    End Structure
+
+    Private batteryInfo As XINPUT_BATTERY_INFORMATION
+
     'The start of the thumbstick neutral zone.
     Private Const NeutralStart = -16256
 
@@ -86,6 +97,8 @@ Public Class Form1
     Private ControllerPosition As XINPUT_STATE
 
     Private vibration As XINPUT_VIBRATION
+
+    Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -123,6 +136,9 @@ Public Class Form1
                 If XInputGetState(ControllerNumber, ControllerPosition) = 0 Then
                     ' The function call was successful, so you can access the controller state now
 
+
+                    UpdateBatteryLevel()
+
                     UpdateButtonPosition()
 
                     UpdateLeftThumbstickPosition()
@@ -153,6 +169,29 @@ Public Class Form1
             End Try
 
         Next
+
+    End Sub
+
+    Private Sub UpdateBatteryLevel()
+
+        If XInputGetBatteryInformation(NumControllerToVib.Value, BATTERY_DEVTYPE_GAMEPAD, batteryInfo) = 0 Then
+
+            Select Case batteryInfo.BatteryLevel
+                Case 0
+                    LabelBatteryLevel.Text = "Battery Level: EMPTY"
+                Case 1
+                    LabelBatteryLevel.Text = "Battery Level: LOW"
+                Case 2
+                    LabelBatteryLevel.Text = "Battery Level: MEDIUM"
+                Case 3
+                    LabelBatteryLevel.Text = "Battery Level: FULL"
+            End Select
+
+        Else
+
+            LabelBatteryLevel.Text = ""
+
+        End If
 
     End Sub
 
@@ -412,13 +451,13 @@ Public Class Form1
 
     Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
 
-        VibrateLeft(0, 65535)
+        VibrateLeft(NumControllerToVib.Value, 65535)
 
     End Sub
 
     Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
 
-        VibrateRight(0, 65535)
+        VibrateRight(NumControllerToVib.Value, 65535)
 
     End Sub
 
@@ -473,6 +512,10 @@ Public Class Form1
 
     End Sub
 
+
+
+
+
 End Class
 
 'Learn more:
@@ -497,6 +540,12 @@ End Class
 '
 'XINPUT_VIBRATION Structure
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration
+'
+'XInputGetBatteryInformation Function
+'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation
+'
+'XINPUT_BATTERY_INFORMATION Structure
+'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information
 '
 'Getting Started with XInput in Windows Applications
 'https://learn.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput

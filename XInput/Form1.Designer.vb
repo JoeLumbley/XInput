@@ -34,6 +34,9 @@ Partial Class Form1
         Timer2 = New Timer(components)
         ButtonVibrateLeft = New Button()
         ButtonVibrateRight = New Button()
+        NumControllerToVib = New NumericUpDown()
+        LabelBatteryLevel = New Label()
+        CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Timer1
@@ -116,18 +119,37 @@ Partial Class Form1
         ' 
         ' ButtonVibrateRight
         ' 
-        ButtonVibrateRight.Location = New Point(377, 232)
+        ButtonVibrateRight.Location = New Point(389, 233)
         ButtonVibrateRight.Name = "ButtonVibrateRight"
         ButtonVibrateRight.Size = New Size(138, 34)
         ButtonVibrateRight.TabIndex = 8
         ButtonVibrateRight.Text = "Vibrate Right"
         ButtonVibrateRight.UseVisualStyleBackColor = True
         ' 
+        ' NumControllerToVib
+        ' 
+        NumControllerToVib.Location = New Point(182, 236)
+        NumControllerToVib.Maximum = New [Decimal](New Integer() {3, 0, 0, 0})
+        NumControllerToVib.Name = "NumControllerToVib"
+        NumControllerToVib.Size = New Size(180, 31)
+        NumControllerToVib.TabIndex = 9
+        ' 
+        ' LabelBatteryLevel
+        ' 
+        LabelBatteryLevel.AutoSize = True
+        LabelBatteryLevel.Location = New Point(182, 289)
+        LabelBatteryLevel.Name = "LabelBatteryLevel"
+        LabelBatteryLevel.Size = New Size(147, 25)
+        LabelBatteryLevel.TabIndex = 10
+        LabelBatteryLevel.Text = "LabelBatteryLevel"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
+        Controls.Add(LabelBatteryLevel)
+        Controls.Add(NumControllerToVib)
         Controls.Add(ButtonVibrateRight)
         Controls.Add(ButtonVibrateLeft)
         Controls.Add(LabelRightThumbX)
@@ -139,6 +161,7 @@ Partial Class Form1
         Controls.Add(LabelButtons)
         Name = "Form1"
         Text = "Form1"
+        CType(NumControllerToVib, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -154,4 +177,6 @@ Partial Class Form1
     Friend WithEvents Timer2 As Timer
     Friend WithEvents ButtonVibrateLeft As Button
     Friend WithEvents ButtonVibrateRight As Button
+    Friend WithEvents NumControllerToVib As NumericUpDown
+    Friend WithEvents LabelBatteryLevel As Label
 End Class
