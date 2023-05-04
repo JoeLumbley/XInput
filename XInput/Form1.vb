@@ -126,7 +126,15 @@ Public Class Form1
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
+        UpdateControllerData()
+
+    End Sub
+
+    Private Sub UpdateControllerData()
+
         UpdateControllerPosition()
+
+        UpdateBatteryLevel()
 
     End Sub
 
@@ -150,8 +158,6 @@ Public Class Form1
 
                     UpdateRightTriggerPosition()
 
-                    UpdateBatteryLevel()
-
                     Connected(ControllerNumber) = True
 
                 Else
@@ -174,8 +180,6 @@ Public Class Form1
         Next
 
     End Sub
-
-
 
     Private Sub UpdateButtonPosition()
         'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
