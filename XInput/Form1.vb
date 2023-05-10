@@ -1,9 +1,9 @@
 ﻿'XInput
 '
-'This is an example application that demonstrates how to use Xbox controllers
-'in VB.NET. It was written in 2023 and works on Windows 10 and 11.
-'I’m currently working on a video that explains the code in more detail on
-'my YouTube channel at https://www.youtube.com/@codewithjoe6074.
+'This is an example application that demonstrates the use of Xbox controllers,
+'including the vibration effect (rumble). It was written in VB.NET in 2023 and
+'is compatible with Windows 10 and 11. I'm making a video to explain the code on
+'my YouTube channel. https://www.youtube.com/@codewithjoe6074
 '
 'MIT License
 'Copyright(c) 2023 Joseph W. Lumbley
@@ -75,15 +75,22 @@ Public Class Form1
     End Function
 
     Public Structure XINPUT_BATTERY_INFORMATION
-        Public BatteryType As Byte
-        Public BatteryLevel As Byte
+        Public BatteryType As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        Public BatteryLevel As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
     End Structure
 
-    Public Enum BATTERY_TYPE As Byte
-        BATTERY_TYPE_DISCONNECTED = &H0
-        BATTERY_TYPE_WIRED = &H1
-        BATTERY_TYPE_ALKALINE = &H2
-        BATTERY_TYPE_NIMH = &H3
+    Public Enum BATTERY_TYPE As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        DISCONNECTED = 0
+        WIRED = 1
+        ALKALINE = 2
+        NIMH = 3
+    End Enum
+
+    Public Enum BatteryLevel As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        EMPTY = 0
+        LOW = 1
+        MEDIUM = 2
+        FULL = 3
     End Enum
 
     Private batteryInfo As XINPUT_BATTERY_INFORMATION
@@ -106,10 +113,6 @@ Public Class Form1
     Private vibration As XINPUT_VIBRATION
 
     Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
-
-    Private Const BATTERY_TYPE_DISCONNECTED As Integer = 0
-
-    Private Const BATTERY_TYPE_WIRED As Integer = 1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -145,7 +148,7 @@ Public Class Form1
 
         UpdateControllerPosition()
 
-        UpdateBatteryLevel()
+        UpdateBatteryInfo()
 
     End Sub
 
@@ -462,7 +465,7 @@ Public Class Form1
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The left motor is the low-frequency rumble motor.
 
-        'Set right motor off (zero speed).
+        'Turn right motor off (set zero speed).
         vibration.wRightMotorSpeed = 0
 
         'Set left motor speed.
@@ -476,7 +479,7 @@ Public Class Form1
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The right motor is the high-frequency rumble motor.
 
-        'Set left motor off (zero speed).
+        'Turn left motor off (set zero speed).
         vibration.wLeftMotorSpeed = 0
 
         'Set right motor speed.
@@ -509,41 +512,54 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateBatteryLevel()
+    Private Sub UpdateBatteryInfo()
 
         'Get battery level
         If XInputGetBatteryInformation(NumControllerToVib.Value, BATTERY_DEVTYPE_GAMEPAD, batteryInfo) = 0 Then
             'Success
 
-            Select Case batteryInfo.BatteryLevel
-                Case 0
-                    LabelBatteryLevel.Text = "Battery Level: EMPTY"
-                Case 1
-                    LabelBatteryLevel.Text = "Battery Level: LOW"
-                Case 2
-                    LabelBatteryLevel.Text = "Battery Level: MEDIUM"
-                Case 3
-                    LabelBatteryLevel.Text = "Battery Level: FULL"
-            End Select
+            UpdateBatteryLevel()
 
-            Select Case batteryInfo.BatteryType
-                Case BATTERY_TYPE.BATTERY_TYPE_DISCONNECTED
-                    LabelBatteryType.Text = "Controller is not connected"
-                Case BATTERY_TYPE.BATTERY_TYPE_WIRED
-                    LabelBatteryType.Text = "Controller is connected by a wired connection"
-                Case BATTERY_TYPE.BATTERY_TYPE_ALKALINE
-                    LabelBatteryType.Text = "Controller is connected wirelessly and is using alkaline batteries"
-                Case BATTERY_TYPE.BATTERY_TYPE_NIMH
-                    LabelBatteryType.Text = "Controller is connected wirelessly and is using rechargeable NiMH batteries"
-            End Select
+            UpdateBatteryType()
 
         Else
             'Fail
 
             LabelBatteryLevel.Text = ""
+
             LabelBatteryType.Text = ""
 
         End If
+
+    End Sub
+
+    Private Sub UpdateBatteryType()
+
+        Select Case batteryInfo.BatteryType
+            Case BATTERY_TYPE.DISCONNECTED
+                LabelBatteryType.Text = "Controller is not connected"
+            Case BATTERY_TYPE.WIRED
+                LabelBatteryType.Text = "Controller is connected by a wired connection"
+            Case BATTERY_TYPE.ALKALINE
+                LabelBatteryType.Text = "Controller is connected wirelessly and is using alkaline batteries"
+            Case BATTERY_TYPE.NIMH
+                LabelBatteryType.Text = "Controller is connected wirelessly and is using rechargeable NiMH batteries"
+        End Select
+
+    End Sub
+
+    Private Sub UpdateBatteryLevel()
+
+        Select Case batteryInfo.BatteryLevel
+            Case BatteryLevel.EMPTY
+                LabelBatteryLevel.Text = "Battery Level: EMPTY"
+            Case BatteryLevel.LOW
+                LabelBatteryLevel.Text = "Battery Level: LOW"
+            Case BatteryLevel.MEDIUM
+                LabelBatteryLevel.Text = "Battery Level: MEDIUM"
+            Case BatteryLevel.FULL
+                LabelBatteryLevel.Text = "Battery Level: FULL"
+        End Select
 
     End Sub
 
