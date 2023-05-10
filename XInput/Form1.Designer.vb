@@ -39,6 +39,7 @@ Partial Class Form1
         TrackBarSpeed = New TrackBar()
         LabelSpeed = New Label()
         Label1 = New Label()
+        LabelBatteryType = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -174,11 +175,21 @@ Partial Class Form1
         Label1.TabIndex = 13
         Label1.Text = "Controller to Vibrate:"
         ' 
+        ' LabelBatteryType
+        ' 
+        LabelBatteryType.AutoSize = True
+        LabelBatteryType.Location = New Point(14, 281)
+        LabelBatteryType.Name = "LabelBatteryType"
+        LabelBatteryType.Size = New Size(145, 25)
+        LabelBatteryType.TabIndex = 14
+        LabelBatteryType.Text = "LabelBatteryType"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 538)
+        Controls.Add(LabelBatteryType)
         Controls.Add(Label1)
         Controls.Add(LabelSpeed)
         Controls.Add(TrackBarSpeed)
@@ -217,4 +228,5 @@ Partial Class Form1
     Friend WithEvents TrackBarSpeed As TrackBar
     Friend WithEvents LabelSpeed As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents LabelBatteryType As Label
 End Class

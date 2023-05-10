@@ -526,10 +526,22 @@ Public Class Form1
                     LabelBatteryLevel.Text = "Battery Level: FULL"
             End Select
 
+            Select Case batteryInfo.BatteryType
+                Case BATTERY_TYPE.BATTERY_TYPE_DISCONNECTED
+                    LabelBatteryType.Text = "Controller is not connected"
+                Case BATTERY_TYPE.BATTERY_TYPE_WIRED
+                    LabelBatteryType.Text = "Controller is connected by a wired connection"
+                Case BATTERY_TYPE.BATTERY_TYPE_ALKALINE
+                    LabelBatteryType.Text = "Controller is connected wirelessly and is using alkaline batteries"
+                Case BATTERY_TYPE.BATTERY_TYPE_NIMH
+                    LabelBatteryType.Text = "Controller is connected wirelessly and is using rechargeable NiMH batteries"
+            End Select
+
         Else
             'Fail
 
             LabelBatteryLevel.Text = ""
+            LabelBatteryType.Text = ""
 
         End If
 
