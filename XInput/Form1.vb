@@ -79,6 +79,13 @@ Public Class Form1
         Public BatteryLevel As Byte
     End Structure
 
+    Public Enum BATTERY_TYPE As Byte
+        BATTERY_TYPE_DISCONNECTED = &H0
+        BATTERY_TYPE_WIRED = &H1
+        BATTERY_TYPE_ALKALINE = &H2
+        BATTERY_TYPE_NIMH = &H3
+    End Enum
+
     Private batteryInfo As XINPUT_BATTERY_INFORMATION
 
     'The start of the thumbstick neutral zone.
@@ -99,6 +106,10 @@ Public Class Form1
     Private vibration As XINPUT_VIBRATION
 
     Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
+
+    Private Const BATTERY_TYPE_DISCONNECTED As Integer = 0
+
+    Private Const BATTERY_TYPE_WIRED As Integer = 1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
