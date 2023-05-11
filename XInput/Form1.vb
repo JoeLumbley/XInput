@@ -101,8 +101,9 @@ Public Class Form1
     'The end of the thumbstick neutral zone.
     Private Const NeutralEnd = 16256
 
-    'The end of the trigger neutral zone.
-    Private Const TriggerNeutralEnd = 64
+    'Set the trigger threshold to 64 or 1/4 pull.
+    Private Const TriggerThreshold = 64 '63.75 = 255 / 4
+    'The distance the trigger moves before it engages.
 
     Private ReadOnly Connected(0 To 3) As Boolean
 
@@ -382,10 +383,10 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateRightTriggerPosition()
-        'The range of trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        'The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
 
         'What position is the right trigger in?
-        If ControllerPosition.Gamepad.bRightTrigger > TriggerNeutralEnd Then
+        If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
             'The right trigger is in the down position.
 
             LabelRightTrigger.Text = "Controller: " & ControllerNumber.ToString & " Right Trigger"
@@ -400,10 +401,10 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateLeftTriggerPosition()
-        'The range of trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        'The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
 
         'What position is the left trigger in?
-        If ControllerPosition.Gamepad.bLeftTrigger > TriggerNeutralEnd Then
+        If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
             'The left trigger is in the down position.
 
             LabelLeftTrigger.Text = "Controller: " & ControllerNumber.ToString & " Left Trigger"
