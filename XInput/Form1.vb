@@ -391,14 +391,14 @@ Public Class Form1
 
         'What position is the right trigger in?
         If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
-            'The right trigger is in the down position.
+            'The right trigger is in the down position. Trigger Break. Bang!
 
             LabelRightTrigger.Text = "Controller: " & ControllerNumber.ToString & " Right Trigger"
 
             Timer2.Start()
 
         Else
-            'The right trigger is in the neutral position.
+            'The right trigger is in the neutral position. Pre-Travel.
 
         End If
 
@@ -410,14 +410,14 @@ Public Class Form1
 
         'What position is the left trigger in?
         If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
-            'The left trigger is in the down position.
+            'The left trigger is in the down position. Trigger Break. Bang!
 
             LabelLeftTrigger.Text = "Controller: " & ControllerNumber.ToString & " Left Trigger"
 
             Timer2.Start()
 
         Else
-            'The left trigger is in the neutral position.
+            'The left trigger is in the neutral position. Pre-Travel.
 
         End If
 
