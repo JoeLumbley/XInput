@@ -103,7 +103,7 @@ Public Class Form1
 
     'Set the trigger threshold to 64 or 1/4 pull.
     Private Const TriggerThreshold As Integer = 64 '63.75 = 255 / 4
-    'The distance the trigger moves before it engages.
+    'The trigger position must be greater than the trigger threshold to register as pressed.
 
     Private ReadOnly Connected(0 To 3) As Boolean 'True or False
 
@@ -387,6 +387,7 @@ Public Class Form1
 
     Private Sub UpdateRightTriggerPosition()
         'The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        'The trigger position must be greater than the trigger threshold to register as pressed.
 
         'What position is the right trigger in?
         If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
@@ -405,6 +406,7 @@ Public Class Form1
 
     Private Sub UpdateLeftTriggerPosition()
         'The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        'The trigger position must be greater than the trigger threshold to register as pressed.
 
         'What position is the left trigger in?
         If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
