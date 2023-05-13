@@ -82,7 +82,7 @@ Public Class Form1
         DISCONNECTED = 0
         WIRED = 1
         ALKALINE = 2
-        NIMH = 3
+        NIMH = 3 ' Nickel metal hydride battery.
         UNKNOWN = 4
     End Enum
 
