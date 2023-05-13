@@ -529,9 +529,7 @@ Public Class Form1
         Else
             'Fail
 
-            LabelBatteryLevel.Text = ""
-
-            LabelBatteryType.Text = ""
+            ClearBatteryLabels()
 
         End If
 
@@ -575,6 +573,14 @@ Public Class Form1
                 LabelBatteryLevel.Text = ""
             End If
         End With
+
+    End Sub
+
+    Private Sub ClearBatteryLabels()
+
+        LabelBatteryLevel.Text = ""
+
+        LabelBatteryType.Text = ""
 
     End Sub
 
