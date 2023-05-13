@@ -40,25 +40,23 @@ Public Class Form1
     'XInput1_4.dll seems to be the current version
     'XInput9_1_0.dll is maintained primarily for backward compatibility. 
 
-    ' Define the XINPUT_STATE structure
     <StructLayout(LayoutKind.Explicit)>
     Public Structure XINPUT_STATE
         <FieldOffset(0)>
-        Public dwPacketNumber As UInteger
+        Public dwPacketNumber As UInteger 'Unsigned 32-bit (4-byte) integer range 0 through 4,294,967,295.
         <FieldOffset(4)>
         Public Gamepad As XINPUT_GAMEPAD
     End Structure
 
-    ' Define the XINPUT_GAMEPAD structure
     <StructLayout(LayoutKind.Sequential)>
     Public Structure XINPUT_GAMEPAD
         Public wButtons As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
         Public bLeftTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
-        Public bRightTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        Public bRightTrigger As Byte
         Public sThumbLX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
-        Public sThumbLY As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
-        Public sThumbRX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
-        Public sThumbRY As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
+        Public sThumbLY As Short
+        Public sThumbRX As Short
+        Public sThumbRY As Short
     End Structure
 
     <DllImport("XInput1_4.dll")>
@@ -66,24 +64,26 @@ Public Class Form1
     End Function
 
     Public Structure XINPUT_VIBRATION
-        Public wLeftMotorSpeed As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
-        Public wRightMotorSpeed As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
+        Public wLeftMotorSpeed As UShort
+        Public wRightMotorSpeed As UShort
     End Structure
 
     <DllImport("xinput1_4.dll")>
-    Private Shared Function XInputGetBatteryInformation(ByVal playerIndex As Integer, ByVal devType As Byte, ByRef batteryInfo As XINPUT_BATTERY_INFORMATION) As Integer
+    Private Shared Function XInputGetBatteryInformation(ByVal playerIndex As Integer, ByVal devType As Byte,
+                                                        ByRef batteryInfo As XINPUT_BATTERY_INFORMATION) As Integer
     End Function
 
     Public Structure XINPUT_BATTERY_INFORMATION
-        Public BatteryType As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
-        Public BatteryLevel As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        Public BatteryType As Byte
+        Public BatteryLevel As Byte
     End Structure
 
-    Public Enum BATTERY_TYPE As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+    Public Enum BATTERY_TYPE As Byte
         DISCONNECTED = 0
         WIRED = 1
         ALKALINE = 2
         NIMH = 3
+        UNKNOWN = 4
     End Enum
 
     Public Enum BatteryLevel As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
@@ -96,16 +96,16 @@ Public Class Form1
     Private batteryInfo As XINPUT_BATTERY_INFORMATION
 
     'The start of the thumbstick neutral zone.
-    Private Const NeutralStart = -16256
+    Private Const NeutralStart As Integer = -16256 'Signed 32-bit (4-byte) integer range -2,147,483,648 through 2,147,483,647.
 
     'The end of the thumbstick neutral zone.
-    Private Const NeutralEnd = 16256
+    Private Const NeutralEnd As Integer = 16256
 
     'Set the trigger threshold to 64 or 1/4 pull.
-    Private Const TriggerThreshold = 64 '63.75 = 255 / 4
+    Private Const TriggerThreshold As Integer = 64 '63.75 = 255 / 4
     'The distance the trigger moves before it engages.
 
-    Private ReadOnly Connected(0 To 3) As Boolean
+    Private ReadOnly Connected(0 To 3) As Boolean 'True or False
 
     Private ControllerNumber As Integer = 0
 
@@ -283,6 +283,9 @@ Public Class Form1
                 Timer2.Start()
             Case 49152 'X and y are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: X+Y"
+                Timer2.Start()
+            Case Else
+                LabelButtons.Text = ControllerPosition.Gamepad.wButtons.ToString
                 Timer2.Start()
         End Select
 
@@ -545,22 +548,33 @@ Public Class Form1
                 LabelBatteryType.Text = "Controller is connected wirelessly and is using alkaline batteries"
             Case BATTERY_TYPE.NIMH
                 LabelBatteryType.Text = "Controller is connected wirelessly and is using rechargeable NiMH batteries"
+            Case BATTERY_TYPE.UNKNOWN
+                LabelBatteryType.Text = "Controller is connected wirelessly and is using unknown battery type."
         End Select
 
     End Sub
 
     Private Sub UpdateBatteryLevel()
 
-        Select Case batteryInfo.BatteryLevel
-            Case BatteryLevel.EMPTY
-                LabelBatteryLevel.Text = "Battery Level: EMPTY"
-            Case BatteryLevel.LOW
-                LabelBatteryLevel.Text = "Battery Level: LOW"
-            Case BatteryLevel.MEDIUM
-                LabelBatteryLevel.Text = "Battery Level: MEDIUM"
-            Case BatteryLevel.FULL
-                LabelBatteryLevel.Text = "Battery Level: FULL"
-        End Select
+        With batteryInfo
+            'This value is only valid for wireless controllers with a known battery type.
+            If .BatteryType = BATTERY_TYPE.ALKALINE Or .BatteryType = BATTERY_TYPE.NIMH Then
+                'Valid.
+                Select Case .BatteryLevel
+                    Case BatteryLevel.EMPTY
+                        LabelBatteryLevel.Text = "Battery Level: EMPTY"
+                    Case BatteryLevel.LOW
+                        LabelBatteryLevel.Text = "Battery Level: LOW"
+                    Case BatteryLevel.MEDIUM
+                        LabelBatteryLevel.Text = "Battery Level: MEDIUM"
+                    Case BatteryLevel.FULL
+                        LabelBatteryLevel.Text = "Battery Level: FULL"
+                End Select
+            Else
+                'Invalid.
+                LabelBatteryLevel.Text = ""
+            End If
+        End With
 
     End Sub
 
@@ -619,12 +633,21 @@ End Class
 'Comparison of XInput and DirectInput Features
 'https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-and-directinput
 '
-'Short Data Type (Visual Basic)
+'Short Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/short-data-type
 '
-'Byte Data Type (Visual Basic)
+'Byte Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/byte-data-type
 '
-'UShort Data Type (Visual Basic)
+'UShort Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/ushort-data-type
+'
+'UInteger Data Type
+'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/uinteger-data-type
+'
+'Boolean Data Type
+'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/boolean-data-type
+'
+'Integer Data Type
+'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/integer-data-type
 '
