@@ -203,65 +203,65 @@ Public Class Form1
         Select Case ControllerPosition.Gamepad.wButtons
             Case 0 'All the buttons are up.
                 'LabelButtons.Text = ""
-            Case 1 'DPad up is down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Up"
+            Case 1 '˄
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: ˄"
                 Timer2.Start()
-            Case 2 'DPad down is down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Down"
+            Case 2 '˅
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: ˅"
                 Timer2.Start()
-            Case 4 'DPad left is down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Left"
+            Case 4 '˂
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: ˂"
                 Timer2.Start()
-            Case 5 'DPad up and left is down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Up Left"
+            Case 5 '˄+˂
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: ˄+˂"
                 Timer2.Start()
-            Case 6 'DPad down left is down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Down Left"
+            Case 6 '˅+˂
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: ˅+˂"
                 Timer2.Start()
-            Case 8 'DPad right is down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Right"
+            Case 8 '˃
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: ˃"
                 Timer2.Start()
-            Case 9 'DPad up right is down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Up Right"
+            Case 9 '˄+˃
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: ˄+˃"
                 Timer2.Start()
-            Case 10 'DPad down right is down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Dpad: Down Right"
+            Case 10 '˅+˃
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: ˅+˃"
                 Timer2.Start()
-            Case 16 'Start is down.
+            Case 16 'Start
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Start"
                 Timer2.Start()
-            Case 32 'Back is down.
+            Case 32 'Back
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Back"
                 Timer2.Start()
-            Case 64 'Left stick is down.
+            Case 64 'Left Stick
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left Stick"
                 Timer2.Start()
-            Case 128 'Right stick is down.
+            Case 128 'Right Stick
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right Stick"
                 Timer2.Start()
-            Case 256 'Left bumper is down.
+            Case 256 'Left bumper
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left Bumper"
                 Timer2.Start()
-            Case 512 'Right bumper is down.
+            Case 512 'Right bumper
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right Bumper"
                 Timer2.Start()
-            Case 4096 'A is down.
+            Case 4096 'A
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: A"
                 Timer2.Start()
-            Case 8192 'B is down.
+            Case 8192 'B
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: B"
                 Timer2.Start()
-            Case 16384 'X is down.
+            Case 16384 'X
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: X"
                 Timer2.Start()
-            Case 32768 'Y is down.
+            Case 32768 'Y
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Y"
                 Timer2.Start()
-            Case 48 'Back and start are down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Back+Start"
+            Case 48 'Start+Back
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Start+Back"
                 Timer2.Start()
-            Case 192 'Left and right sticks are down.
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left and Right Stick"
+            Case 192 'Left+Right Sticks
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left+Right Stick"
                 Timer2.Start()
             Case 768 'Left and right bumpers are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left and Right Bumper"
@@ -278,12 +278,40 @@ Public Class Form1
             Case 24576 'B and x are down.
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X"
                 Timer2.Start()
-            Case 40960 'B and y are down.
+            Case 40960 'B+Y
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+Y"
                 Timer2.Start()
-            Case 49152 'X and y are down.
+            Case 49152 'X+Y
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: X+Y"
                 Timer2.Start()
+
+
+            Case 28672 'A+B+X
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X"
+                Timer2.Start()
+
+            Case 45056 'A+B+Y
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+Y"
+                Timer2.Start()
+
+            Case 53248 'A+X+Y
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+X+Y"
+                Timer2.Start()
+
+            Case 57344 'B+X+Y
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X+Y"
+                Timer2.Start()
+
+
+            Case 61440 'A+B+X+Y
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X+Y"
+                Timer2.Start()
+
+            Case 4097 '˄+A
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: ˄+A"
+                Timer2.Start()
+
+
             Case Else
                 LabelButtons.Text = ControllerPosition.Gamepad.wButtons.ToString
                 Timer2.Start()
