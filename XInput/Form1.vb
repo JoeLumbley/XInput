@@ -26,7 +26,7 @@
 'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 'SOFTWARE.
 '
-'Monica is our ChatGPT copilot.
+'Monica is our an AI assistant.
 'https://monica.im/
 
 Imports System.Runtime.InteropServices
@@ -324,7 +324,7 @@ Public Class Form1
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Down+Left+A"
                 Timer2.Start()
 
-            Case Else
+            Case Else 'Any buttons not handled yet.
                 LabelButtons.Text = ControllerPosition.Gamepad.wButtons.ToString
                 Timer2.Start()
         End Select
