@@ -284,8 +284,6 @@ Public Class Form1
             Case 49152 'X+Y
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: X+Y"
                 Timer2.Start()
-
-
             Case 28672 'A+B+X
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X"
                 Timer2.Start()
@@ -301,7 +299,6 @@ Public Class Form1
             Case 61440 'A+B+X+Y
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X+Y"
                 Timer2.Start()
-
             Case 4097 'Up+A
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Up+A"
                 Timer2.Start()
@@ -320,7 +317,6 @@ Public Class Form1
             Case 4101 'Up+Left+A
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Up+Left+A"
                 Timer2.Start()
-
             Case 4106 'Down+Right+A
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Down+Right+A"
                 Timer2.Start()
@@ -331,8 +327,6 @@ Public Class Form1
             Case Else
                 LabelButtons.Text = ControllerPosition.Gamepad.wButtons.ToString
                 Timer2.Start()
-
-
         End Select
 
     End Sub
@@ -348,7 +342,6 @@ Public Class Form1
             LabelLeftThumbX.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Left"
 
             Timer2.Start()
-
 
         ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
             'The left thumbstick is in the right position.
@@ -395,7 +388,6 @@ Public Class Form1
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Left"
 
             Timer2.Start()
-
 
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
             'The right thumbstick is in the right position.
@@ -603,9 +595,10 @@ Public Class Form1
     Private Sub UpdateBatteryLevel()
 
         With batteryInfo
+
             'This value is only valid for wireless controllers with a known battery type.
             If .BatteryType = BATTERY_TYPE.ALKALINE Or .BatteryType = BATTERY_TYPE.NIMH Then
-                'Valid.
+                'Valid
                 Select Case .BatteryLevel
                     Case BatteryLevel.EMPTY
                         LabelBatteryLevel.Text = "Battery Level: EMPTY"
@@ -617,9 +610,10 @@ Public Class Form1
                         LabelBatteryLevel.Text = "Battery Level: FULL"
                 End Select
             Else
-                'Invalid.
+                'Invalid
                 LabelBatteryLevel.Text = ""
             End If
+
         End With
 
     End Sub
