@@ -357,14 +357,14 @@ Public Class Form1
 
         'What position is the left thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
-            'The left thumbstick is in the up position.
+            'The left thumbstick is in the down position.
 
             LabelLeftThumbY.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Down"
 
             Timer2.Start()
 
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
-            'The left thumbstick is in the down position.
+            'The left thumbstick is in the up position.
 
             LabelLeftThumbY.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Up"
 
