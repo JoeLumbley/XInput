@@ -202,7 +202,6 @@ Public Class Form1
         'What buttons are down?
         Select Case ControllerPosition.Gamepad.wButtons
             Case 0 'All the buttons are up.
-                'LabelButtons.Text = ""
             Case 1 'Up
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Up"
                 Timer2.Start()
