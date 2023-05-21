@@ -96,13 +96,13 @@ Public Class Form1
     Private batteryInfo As XINPUT_BATTERY_INFORMATION
 
     'The start of the thumbstick neutral zone.
-    Private Const NeutralStart As Integer = -16256 'Signed 32-bit (4-byte) integer range -2,147,483,648 through 2,147,483,647.
+    Private Const NeutralStart As Short = -16256 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
 
     'The end of the thumbstick neutral zone.
-    Private Const NeutralEnd As Integer = 16256
+    Private Const NeutralEnd As Short = 16256
 
     'Set the trigger threshold to 64 or 1/4 pull.
-    Private Const TriggerThreshold As Integer = 64 '63.75 = 255 / 4
+    Private Const TriggerThreshold As Byte = 64 '63.75 = 255 / 4
     'The trigger position must be greater than the trigger threshold to register as pressed.
 
     Private ReadOnly Connected(0 To 3) As Boolean 'True or False
