@@ -322,41 +322,19 @@ Public Class Form1
 
     Private Sub DoButtonLogic()
 
-        If DPadUpPressed = True Then
-            If DPadLeftPressed = True Then
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left+Up"
-                Timer2.Start()
-            ElseIf DPadRightPressed = True Then
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right+Up"
-                Timer2.Start()
-            Else
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Up"
-                Timer2.Start()
-            End If
-        End If
+        DoDPadLogic()
 
-        If DPadDownPressed = True Then
-            If DPadLeftPressed = True Then
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left+Down"
-                Timer2.Start()
-            ElseIf DPadRightPressed = True Then
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right+Down"
-                Timer2.Start()
-            Else
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Down"
-                Timer2.Start()
-            End If
-        End If
+        DoLetterButtonLogic()
 
-        If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-            LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left"
-            Timer2.Start()
-        End If
+        DoStartBackLogic()
 
-        If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-            LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right"
-            Timer2.Start()
-        End If
+        DoBumperLogic()
+
+        DoStickLogic()
+
+    End Sub
+
+    Private Sub DoLetterButtonLogic()
 
         If AButtonPressed = True Then
             If BButtonPressed = True Then
@@ -433,6 +411,10 @@ Public Class Form1
             End If
         End If
 
+    End Sub
+
+    Private Sub DoStartBackLogic()
+
         If StartButtonPressed = True Then
             If BackButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Start+Back"
@@ -447,6 +429,10 @@ Public Class Form1
                 Timer2.Start()
             End If
         End If
+
+    End Sub
+
+    Private Sub DoBumperLogic()
 
         If LeftBumperButtonPressed = True Then
             If RightBumperButtonPressed = True Then
@@ -463,6 +449,10 @@ Public Class Form1
             End If
         End If
 
+    End Sub
+
+    Private Sub DoStickLogic()
+
         If LeftStickButtonPressed = True Then
             If RightStickButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Stick+Right Stick"
@@ -476,6 +466,46 @@ Public Class Form1
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Right Stick"
                 Timer2.Start()
             End If
+        End If
+
+    End Sub
+
+    Private Sub DoDPadLogic()
+
+        If DPadUpPressed = True Then
+            If DPadLeftPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left+Up"
+                Timer2.Start()
+            ElseIf DPadRightPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right+Up"
+                Timer2.Start()
+            Else
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Up"
+                Timer2.Start()
+            End If
+        End If
+
+        If DPadDownPressed = True Then
+            If DPadLeftPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left+Down"
+                Timer2.Start()
+            ElseIf DPadRightPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right+Down"
+                Timer2.Start()
+            Else
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Down"
+                Timer2.Start()
+            End If
+        End If
+
+        If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
+            LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left"
+            Timer2.Start()
+        End If
+
+        If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
+            LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right"
+            Timer2.Start()
         End If
 
     End Sub
