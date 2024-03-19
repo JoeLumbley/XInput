@@ -207,6 +207,8 @@ Public Class Form1
 
                     UpdateButtonPosition()
 
+                    DoButtonLogic()
+
                     UpdateLeftThumbstickPosition()
 
                     UpdateRightThumbstickPosition()
@@ -324,6 +326,10 @@ Public Class Form1
         Else
             YButtonPressed = False
         End If
+
+    End Sub
+
+    Private Sub DoButtonLogic()
 
         If DPadUpPressed = True Then
             If DPadLeftPressed = True Then
