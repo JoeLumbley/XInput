@@ -116,24 +116,24 @@ Public Class Form1
 
     Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
 
-    Private DPadUp As Integer = 1
-    Private DPadDown As Integer = 2
-    Private DPadLeft As Integer = 4
-    Private DPadRight As Integer = 8
+    Private Const DPadUp As Integer = 1
+    Private Const DPadDown As Integer = 2
+    Private Const DPadLeft As Integer = 4
+    Private Const DPadRight As Integer = 8
 
-    Private StartButton As Integer = 16
-    Private BackButton As Integer = 32
+    Private Const StartButton As Integer = 16
+    Private Const BackButton As Integer = 32
 
-    Private LeftStickButton As Integer = 64
-    Private RightStickButton As Integer = 128
+    Private Const LeftStickButton As Integer = 64
+    Private Const RightStickButton As Integer = 128
 
-    Private LeftBumperButton As Integer = 256
-    Private RightBumperButton As Integer = 512
+    Private Const LeftBumperButton As Integer = 256
+    Private Const RightBumperButton As Integer = 512
 
-    Private AButton As Integer = 4096
-    Private BButton As Integer = 8192
-    Private XButton As Integer = 16384
-    Private YButton As Integer = 32768
+    Private Const AButton As Integer = 4096
+    Private Const BButton As Integer = 8192
+    Private Const XButton As Integer = 16384
+    Private Const YButton As Integer = 32768
 
     Private DPadUpPressed As Boolean = False
     Private DPadDownPressed As Boolean = False
