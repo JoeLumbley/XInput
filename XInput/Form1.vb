@@ -30,6 +30,7 @@
 'https://monica.im/
 
 Imports System.Runtime.InteropServices
+Imports System.Windows.Forms.AxHost
 
 Public Class Form1
 
@@ -115,6 +116,47 @@ Public Class Form1
 
     Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
 
+    Private DPadUp As Integer = 1
+    Private DPadDown As Integer = 2
+    Private DPadLeft As Integer = 4
+    Private DPadRight As Integer = 8
+
+    Private StartButton As Integer = 16
+    Private BackButton As Integer = 32
+
+    Private LeftStickButton As Integer = 64
+    Private RightStickButton As Integer = 128
+
+    Private LeftBumperButton As Integer = 256
+    Private RightBumperButton As Integer = 512
+
+    Private AButton As Integer = 4096
+    Private BButton As Integer = 8192
+    Private XButton As Integer = 16384
+    Private YButton As Integer = 32768
+
+    Private DPadUpPressed As Boolean = False
+    Private DPadDownPressed As Boolean = False
+    Private DPadLeftPressed As Boolean = False
+    Private DPadRightPressed As Boolean = False
+
+    Private StartButtonPressed As Boolean = False
+    Private BackButtonPressed As Boolean = False
+
+    Private LeftStickButtonPressed As Boolean = False
+    Private RightStickButtonPressed As Boolean = False
+
+    Private LeftBumperButtonPressed As Boolean = False
+    Private RightBumperButtonPressed As Boolean = False
+
+    Private AButtonPressed As Boolean = False
+    Private BButtonPressed As Boolean = False
+    Private XButtonPressed As Boolean = False
+    Private YButtonPressed As Boolean = False
+
+
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Text = "XInput - Code with Joe"
@@ -199,134 +241,245 @@ Public Class Form1
     Private Sub UpdateButtonPosition()
         'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
-        'What buttons are down?
-        Select Case ControllerPosition.Gamepad.wButtons
-            Case 0 'All the buttons are up.
-            Case 1 'Up
+        If (ControllerPosition.Gamepad.wButtons And DPadUp) <> 0 Then
+            DPadUpPressed = True
+        Else
+            DPadUpPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And DPadDown) <> 0 Then
+            DPadDownPressed = True
+        Else
+            DPadDownPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And DPadLeft) <> 0 Then
+            DPadLeftPressed = True
+        Else
+            DPadLeftPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And DPadRight) <> 0 Then
+            DPadRightPressed = True
+        Else
+            DPadRightPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And StartButton) <> 0 Then
+            StartButtonPressed = True
+        Else
+            StartButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And BackButton) <> 0 Then
+            BackButtonPressed = True
+        Else
+            BackButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And LeftStickButton) <> 0 Then
+            LeftStickButtonPressed = True
+        Else
+            LeftStickButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And RightStickButton) <> 0 Then
+            RightStickButtonPressed = True
+        Else
+            RightStickButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And LeftBumperButton) <> 0 Then
+            LeftBumperButtonPressed = True
+        Else
+            LeftBumperButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And RightBumperButton) <> 0 Then
+            RightBumperButtonPressed = True
+        Else
+            RightBumperButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And AButton) <> 0 Then
+            AButtonPressed = True
+        Else
+            AButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And BButton) <> 0 Then
+            BButtonPressed = True
+        Else
+            BButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And XButton) <> 0 Then
+            XButtonPressed = True
+        Else
+            XButtonPressed = False
+        End If
+
+        If (ControllerPosition.Gamepad.wButtons And YButton) <> 0 Then
+            YButtonPressed = True
+        Else
+            YButtonPressed = False
+        End If
+
+        If DPadUpPressed = True Then
+            If DPadLeftPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left+Up"
+                Timer2.Start()
+            ElseIf DPadRightPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right+Up"
+                Timer2.Start()
+            Else
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Up"
                 Timer2.Start()
-            Case 2 'Down
+            End If
+        End If
+
+        If DPadDownPressed = True Then
+            If DPadLeftPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left+Down"
+                Timer2.Start()
+            ElseIf DPadRightPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right+Down"
+                Timer2.Start()
+            Else
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Down"
                 Timer2.Start()
-            Case 4 'Left
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left"
-                Timer2.Start()
-            Case 5 'Up+Left
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Up+Left"
-                Timer2.Start()
-            Case 6 'Down+Left
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Down+Left"
-                Timer2.Start()
-            Case 8 'Right
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right"
-                Timer2.Start()
-            Case 9 'Up+Right
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Up+Right"
-                Timer2.Start()
-            Case 10 'Down+Right
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Down+Right"
-                Timer2.Start()
-            Case 16 'Start
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Start"
-                Timer2.Start()
-            Case 32 'Back
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Back"
-                Timer2.Start()
-            Case 64 'Left Stick
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left Stick"
-                Timer2.Start()
-            Case 128 'Right Stick
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right Stick"
-                Timer2.Start()
-            Case 256 'Left bumper
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left Bumper"
-                Timer2.Start()
-            Case 512 'Right bumper
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right Bumper"
-                Timer2.Start()
-            Case 4096 'A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: A"
-                Timer2.Start()
-            Case 8192 'B
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: B"
-                Timer2.Start()
-            Case 16384 'X
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: X"
-                Timer2.Start()
-            Case 32768 'Y
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Y"
-                Timer2.Start()
-            Case 48 'Start+Back
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Start+Back"
-                Timer2.Start()
-            Case 192 'Left+Right Sticks
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left+Right Stick"
-                Timer2.Start()
-            Case 768 'Left+Right Bumpers
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left and Right Bumper"
-                Timer2.Start()
-            Case 12288 'A+B
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B"
-                Timer2.Start()
-            Case 20480 'A+X
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+X"
-                Timer2.Start()
-            Case 36864 'A+Y
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+Y"
-                Timer2.Start()
-            Case 24576 'B+X
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X"
-                Timer2.Start()
-            Case 40960 'B+Y
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+Y"
-                Timer2.Start()
-            Case 49152 'X+Y
+            End If
+        End If
+
+        If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
+            LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left"
+            Timer2.Start()
+        End If
+
+        If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
+            LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right"
+            Timer2.Start()
+        End If
+
+        If AButtonPressed = True Then
+            If BButtonPressed = True Then
+                If XButtonPressed = True Then
+                    If YButtonPressed = True Then
+                        LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X+Y"
+                        Timer2.Start()
+                    Else
+                        LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X"
+                        Timer2.Start()
+                    End If
+                Else
+                    If YButtonPressed = True Then
+                        LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+Y"
+                        Timer2.Start()
+                    Else
+                        LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B"
+                        Timer2.Start()
+                    End If
+                End If
+            Else
+                If XButtonPressed = True Then
+                    If YButtonPressed = True Then
+                        LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+X+Y"
+                        Timer2.Start()
+                    Else
+                        LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+X"
+                        Timer2.Start()
+                    End If
+                Else
+                    If YButtonPressed = True Then
+                        LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+Y"
+                        Timer2.Start()
+                    Else
+                        LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A"
+                        Timer2.Start()
+                    End If
+                End If
+            End If
+        End If
+
+        If BButtonPressed = True AndAlso AButtonPressed = False Then
+            If XButtonPressed = True Then
+                If YButtonPressed = True Then
+                    LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X+Y"
+                    Timer2.Start()
+                Else
+                    LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X"
+                    Timer2.Start()
+                End If
+            Else
+                If YButtonPressed = True Then
+                    LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+Y"
+                    Timer2.Start()
+                Else
+                    LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B"
+                    Timer2.Start()
+                End If
+            End If
+        End If
+
+        If XButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
+            If YButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: X+Y"
                 Timer2.Start()
-            Case 28672 'A+B+X
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X"
+            Else
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: X"
                 Timer2.Start()
-            Case 45056 'A+B+Y
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+Y"
+            End If
+        Else
+            If YButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Y"
                 Timer2.Start()
-            Case 53248 'A+X+Y
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+X+Y"
-                Timer2.Start()
-            Case 57344 'B+X+Y
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X+Y"
-                Timer2.Start()
-            Case 61440 'A+B+X+Y
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X+Y"
-                Timer2.Start()
-            Case 4097 'Up+A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Up+A"
-                Timer2.Start()
-            Case 4098 'Down+A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Down+A"
-                Timer2.Start()
-            Case 4100 'Left+A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left+A"
-                Timer2.Start()
-            Case 4104 'Right+A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Right+A"
-                Timer2.Start()
-            Case 4105 'Up+Right+A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Up+Right+A"
-                Timer2.Start()
-            Case 4101 'Up+Left+A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Up+Left+A"
-                Timer2.Start()
-            Case 4106 'Down+Right+A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Down+Right+A"
-                Timer2.Start()
-            Case 4102 'Down+Left+A
-                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Down+Left+A"
-                Timer2.Start()
+            End If
+        End If
 
-            Case Else 'Any buttons not handled yet.
-                LabelButtons.Text = ControllerPosition.Gamepad.wButtons.ToString
+        If StartButtonPressed = True Then
+            If BackButtonPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Start+Back"
                 Timer2.Start()
-        End Select
+            Else
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Start"
+                Timer2.Start()
+            End If
+        Else
+            If BackButtonPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Back"
+                Timer2.Start()
+            End If
+        End If
+
+        If LeftBumperButtonPressed = True Then
+            If RightBumperButtonPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Bumper+Right Bumper"
+                Timer2.Start()
+            Else
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Bumper"
+                Timer2.Start()
+            End If
+        Else
+            If RightBumperButtonPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Right Bumper"
+                Timer2.Start()
+            End If
+        End If
+
+        If LeftStickButtonPressed = True Then
+            If RightStickButtonPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Stick+Right Stick"
+                Timer2.Start()
+            Else
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Stick"
+                Timer2.Start()
+            End If
+        Else
+            If RightStickButtonPressed = True Then
+                LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Right Stick"
+                Timer2.Start()
+            End If
+        End If
 
     End Sub
 
