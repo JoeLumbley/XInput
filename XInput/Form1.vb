@@ -1,13 +1,11 @@
 ﻿'XInput
-'
+
 'This is an example application that demonstrates the use of Xbox controllers,
-'including the vibration effect (rumble). It was written in VB.NET in 2023 and
-'is compatible with Windows 10 and 11. I'm making a video to explain the code on
-'my YouTube channel. https://www.youtube.com/@codewithjoe6074
-'
+'including the vibration effect (rumble).
+
 'MIT License
 'Copyright(c) 2023 Joseph W. Lumbley
-'
+
 'Permission Is hereby granted, free Of charge, to any person obtaining a copy
 'of this software And associated documentation files (the "Software"), to deal
 'in the Software without restriction, including without limitation the rights
@@ -25,12 +23,8 @@
 'LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or OTHERWISE, ARISING FROM,
 'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 'SOFTWARE.
-'
-'Monica is our an AI assistant.
-'https://monica.im/
 
 Imports System.Runtime.InteropServices
-Imports System.Windows.Forms.AxHost
 
 Public Class Form1
 
@@ -153,9 +147,6 @@ Public Class Form1
     Private BButtonPressed As Boolean = False
     Private XButtonPressed As Boolean = False
     Private YButtonPressed As Boolean = False
-
-
-
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -798,62 +789,86 @@ Public Class Form1
 
 End Class
 
-'Learn more:
-'
+
 'Consuming Unmanaged DLL Functions
 'https://learn.microsoft.com/en-us/dotnet/framework/interop/consuming-unmanaged-dll-functions
-'
+
+
 'Passing Structures
 'https://learn.microsoft.com/en-us/dotnet/framework/interop/passing-structures
-'
+
+
 'XInputGetState Function
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate
-'
+
+
 'XINPUT_STATE Structure
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state
-'
+
+
 'XINPUT_GAMEPAD Structure
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad
-'
+
+
 'XInputSetState Function
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate
-'
+
+
 'XINPUT_VIBRATION Structure
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration
-'
+
+
 'XInputGetBatteryInformation Function
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation
-'
+
+
 'XINPUT_BATTERY_INFORMATION Structure
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information
-'
+
+
 'Getting Started with XInput in Windows Applications
 'https://learn.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput
-'
+
+
 'XInput Game Controller APIs
 'https://learn.microsoft.com/en-us/windows/win32/api/_xinput/
-'
+
+
 'XInput Versions
 'https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-versions
-'
+
+
 'Comparison of XInput and DirectInput Features
 'https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-and-directinput
-'
+
+
 'Short Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/short-data-type
-'
+
+
 'Byte Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/byte-data-type
-'
+
+
 'UShort Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/ushort-data-type
-'
+
+
 'UInteger Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/uinteger-data-type
-'
+
+
 'Boolean Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/boolean-data-type
-'
+
+
 'Integer Data Type
 'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/integer-data-type
-'
+
+
+'Monica is our an AI assistant.
+'https://monica.im/
+
+
+'I also make coding videos on my YouTube channel.
+'https://www.youtube.com/@codewithjoe6074
