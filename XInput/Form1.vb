@@ -827,7 +827,7 @@ End Class
 
 'This involves using Platform Invocation Services (P/Invoke) to call functions in the unmanaged DLL from your managed VB.NET code.
 
-'To consume unmanaged DLL functions in VB.NET, you typically use the DllImport attribute to declare the external functions from the DLL.
+'To consume unmanaged DLL functions use the DllImport attribute to declare the external functions from the DLL.
 
 'https://learn.microsoft.com/en-us/dotnet/framework/interop/consuming-unmanaged-dll-functions
 
