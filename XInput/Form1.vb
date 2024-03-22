@@ -825,7 +825,8 @@ End Class
 'Consuming unmanaged DLL functions refers to the process of using functions that are defined in a DLL (Dynamic Link Library)
 'which is written in a language like C or C++.
 
-'This involves using Platform Invocation Services (P/Invoke) to call functions in the unmanaged DLL from your managed VB.NET code.
+'This involves using Platform Invocation Services (P/Invoke) to call functions in the unmanaged DLL from your managed VB.NET
+'code.
 
 'To consume unmanaged DLL functions use the DllImport attribute to declare the external functions from the DLL.
 
@@ -847,11 +848,14 @@ End Class
 
 'XInputGetState Function
 
-'The XInputGetState function is a part of the XInput API, which is used in programming for Microsoft Xbox controllers on Windows platforms.
+'The XInputGetState function is a part of the XInput API, which is used in programming for Microsoft Xbox controllers on
+'Windows platforms.
 
-'This function is specifically used to retrieve the current state of a controller, including the state of its buttons, triggers, and thumbsticks.
+'This function is specifically used to retrieve the current state of a controller, including the state of its buttons,
+'triggers, and thumbsticks.
 
-'When using the XInputGetState function you can obtain information about the current state of an Xbox controller connected to the system.
+'When using the XInputGetState function you can obtain information about the current state of an Xbox controller connected
+'to the system.
 
 'This information typically includes the status of each button, trigger values, And thumbstick positions.
 
