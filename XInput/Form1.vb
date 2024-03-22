@@ -834,11 +834,11 @@ End Class
 
 'Passing Structures
 
-'Passing structures refers to the process of sending structured data, typically defined by a user in a programming language, as a parameter to a function or method.
+'Passing structures refers to the process of sending structured data as a parameter to a function or method.
 
 'Structures, also known as structs in some programming languages, allow you to group related data together under a single name.
 
-'When passing structures as parameters in a programming language like VB.NET, you are essentially sending a block of data that contains multiple fields or members.
+'When passing structures as parameters you are essentially sending a block of data that contains multiple fields or members.
 
 'This can be useful for organizing related data and passing them around your program efficiently.
 
