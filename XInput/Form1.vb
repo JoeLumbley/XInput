@@ -821,14 +821,40 @@ End Class
 
 
 'Consuming Unmanaged DLL Functions
+
+'Consuming unmanaged DLL functions refers to the process of using functions that are defined in a DLL (Dynamic Link Library)
+'which is written in a language like C or C++.
+
+'This involves using Platform Invocation Services (P/Invoke) to call functions in the unmanaged DLL from your managed VB.NET code.
+
+'To consume unmanaged DLL functions in VB.NET, you typically use the DllImport attribute to declare the external functions from the DLL.
+
 'https://learn.microsoft.com/en-us/dotnet/framework/interop/consuming-unmanaged-dll-functions
 
 
 'Passing Structures
+
+'Passing structures refers to the process of sending structured data, typically defined by a user in a programming language, as a parameter to a function or method.
+
+'Structures, also known as structs in some programming languages, allow you to group related data together under a single name.
+
+'When passing structures as parameters in a programming language like VB.NET, you are essentially sending a block of data that contains multiple fields or members.
+
+'This can be useful for organizing related data and passing them around your program efficiently.
+
 'https://learn.microsoft.com/en-us/dotnet/framework/interop/passing-structures
 
 
 'XInputGetState Function
+
+'The XInputGetState function is a part of the XInput API, which is used in programming for Microsoft Xbox controllers on Windows platforms.
+
+'This function is specifically used to retrieve the current state of a controller, including the state of its buttons, triggers, and thumbsticks.
+
+'When using the XInputGetState function you can obtain information about the current state of an Xbox controller connected to the system.
+
+'This information typically includes the status of each button, trigger values, And thumbstick positions.
+
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate
 
 
