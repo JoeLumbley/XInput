@@ -837,7 +837,8 @@ End Class
 
 'Passing structures refers to the process of sending structured data as a parameter to a function or method.
 
-'Structures, also known as structs in some programming languages, allow you to group related data together under a single name.
+'Structures, also known as structs in some programming languages, allow you to group related data together under a single
+'name.
 
 'When passing structures as parameters you are essentially sending a block of data that contains multiple fields or members.
 
@@ -863,10 +864,18 @@ End Class
 
 
 'XINPUT_STATE Structure
+
+'The XINPUT_STATE structure is used to hold the current state of an Xbox controller, including information about button
+'presses, trigger values, and thumbstick positions.
+
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state
 
 
 'XINPUT_GAMEPAD Structure
+
+'The XINPUT_GAMEPAD structure represents the state of the gamepad (Xbox controller) input, including information about
+'button presses, trigger values, and thumbstick positions.
+
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad
 
 
