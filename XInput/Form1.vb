@@ -317,9 +317,7 @@ Public Class Form1
         End If
 
         If ControllerPosition.Gamepad.wButtons = 0 Then
-
             LabelButtons.Text = ""
-
         End If
 
     End Sub
