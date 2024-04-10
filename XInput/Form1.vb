@@ -154,8 +154,6 @@ Public Class Form1
 
         InitializeTimer1()
 
-        InitializeTimer2()
-
         ClearLabels()
 
         TrackBarSpeed.Value = 32767
@@ -318,6 +316,12 @@ Public Class Form1
             YButtonPressed = False
         End If
 
+        If ControllerPosition.Gamepad.wButtons = 0 Then
+
+            LabelButtons.Text = ""
+
+        End If
+
     End Sub
 
     Private Sub DoButtonLogic()
@@ -341,36 +345,28 @@ Public Class Form1
                 If XButtonPressed = True Then
                     If YButtonPressed = True Then
                         LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X+Y"
-                        Timer2.Start()
                     Else
                         LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+X"
-                        Timer2.Start()
                     End If
                 Else
                     If YButtonPressed = True Then
                         LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B+Y"
-                        Timer2.Start()
                     Else
                         LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+B"
-                        Timer2.Start()
                     End If
                 End If
             Else
                 If XButtonPressed = True Then
                     If YButtonPressed = True Then
                         LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+X+Y"
-                        Timer2.Start()
                     Else
                         LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+X"
-                        Timer2.Start()
                     End If
                 Else
                     If YButtonPressed = True Then
                         LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A+Y"
-                        Timer2.Start()
                     Else
                         LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: A"
-                        Timer2.Start()
                     End If
                 End If
             End If
@@ -380,18 +376,14 @@ Public Class Form1
             If XButtonPressed = True Then
                 If YButtonPressed = True Then
                     LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X+Y"
-                    Timer2.Start()
                 Else
                     LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+X"
-                    Timer2.Start()
                 End If
             Else
                 If YButtonPressed = True Then
                     LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B+Y"
-                    Timer2.Start()
                 Else
                     LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: B"
-                    Timer2.Start()
                 End If
             End If
         End If
@@ -399,15 +391,12 @@ Public Class Form1
         If XButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
             If YButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: X+Y"
-                Timer2.Start()
             Else
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: X"
-                Timer2.Start()
             End If
         Else
             If YButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Y"
-                Timer2.Start()
             End If
         End If
 
@@ -418,15 +407,12 @@ Public Class Form1
         If StartButtonPressed = True Then
             If BackButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Start+Back"
-                Timer2.Start()
             Else
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Start"
-                Timer2.Start()
             End If
         Else
             If BackButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Back"
-                Timer2.Start()
             End If
         End If
 
@@ -437,15 +423,12 @@ Public Class Form1
         If LeftBumperButtonPressed = True Then
             If RightBumperButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Bumper+Right Bumper"
-                Timer2.Start()
             Else
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Bumper"
-                Timer2.Start()
             End If
         Else
             If RightBumperButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Right Bumper"
-                Timer2.Start()
             End If
         End If
 
@@ -456,15 +439,12 @@ Public Class Form1
         If LeftStickButtonPressed = True Then
             If RightStickButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Stick+Right Stick"
-                Timer2.Start()
             Else
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Left Stick"
-                Timer2.Start()
             End If
         Else
             If RightStickButtonPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Buttons: Right Stick"
-                Timer2.Start()
             End If
         End If
 
@@ -475,37 +455,29 @@ Public Class Form1
         If DPadUpPressed = True Then
             If DPadLeftPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left+Up"
-                Timer2.Start()
             ElseIf DPadRightPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right+Up"
-                Timer2.Start()
             Else
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Up"
-                Timer2.Start()
             End If
         End If
 
         If DPadDownPressed = True Then
             If DPadLeftPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left+Down"
-                Timer2.Start()
             ElseIf DPadRightPressed = True Then
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right+Down"
-                Timer2.Start()
             Else
                 LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Down"
-                Timer2.Start()
             End If
         End If
 
         If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
             LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Left"
-            Timer2.Start()
         End If
 
         If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
             LabelButtons.Text = "Controller: " & ControllerNumber.ToString & " Button: Right"
-            Timer2.Start()
         End If
 
     End Sub
@@ -520,17 +492,15 @@ Public Class Form1
 
             LabelLeftThumbX.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Left"
 
-            Timer2.Start()
-
         ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
             'The left thumbstick is in the right position.
 
             LabelLeftThumbX.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Right"
 
-            Timer2.Start()
-
         Else
             'The left thumbstick is in the neutral position.
+
+            LabelLeftThumbX.Text = String.Empty
 
         End If
 
@@ -540,17 +510,15 @@ Public Class Form1
 
             LabelLeftThumbY.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Down"
 
-            Timer2.Start()
-
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
             'The left thumbstick is in the up position.
 
             LabelLeftThumbY.Text = "Controller: " & ControllerNumber.ToString & " Left Thumbstick: Up"
 
-            Timer2.Start()
-
         Else
             'The left thumbstick is in the neutral position.
+
+            LabelLeftThumbY.Text = String.Empty
 
         End If
 
@@ -566,17 +534,15 @@ Public Class Form1
 
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Left"
 
-            Timer2.Start()
-
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
             'The right thumbstick is in the right position.
 
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Right"
 
-            Timer2.Start()
-
         Else
             'The right thumbstick is in the neutral position.
+
+            LabelRightThumbX.Text = String.Empty
 
         End If
 
@@ -586,17 +552,15 @@ Public Class Form1
 
             LabelRightThumbY.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Down"
 
-            Timer2.Start()
-
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
             'The right thumbstick is in the down position.
 
             LabelRightThumbY.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Up"
 
-            Timer2.Start()
-
         Else
             'The right thumbstick is in the neutral position.
+
+            LabelRightThumbY.Text = String.Empty
 
         End If
 
@@ -612,10 +576,10 @@ Public Class Form1
 
             LabelRightTrigger.Text = "Controller: " & ControllerNumber.ToString & " Right Trigger"
 
-            Timer2.Start()
-
         Else
             'The right trigger is in the neutral position. Pre-Travel.
+
+            LabelRightTrigger.Text = String.Empty
 
         End If
 
@@ -631,26 +595,12 @@ Public Class Form1
 
             LabelLeftTrigger.Text = "Controller: " & ControllerNumber.ToString & " Left Trigger"
 
-            Timer2.Start()
-
         Else
             'The left trigger is in the neutral position. Pre-Travel.
 
+            LabelLeftTrigger.Text = String.Empty
+
         End If
-
-    End Sub
-
-    Private Sub InitializeTimer2()
-
-        Timer2.Interval = 400 'Label display time in milliseconds.
-
-    End Sub
-
-    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-
-        ClearLabels()
-
-        Timer2.Stop()
 
     End Sub
 
@@ -848,7 +798,7 @@ End Class
 
 'XInputGetState Function
 
-'The XInputGetState function is specifically used to retrieve the current state of a Xbox controller.
+'The XInputGetState function is used to retrieve the current state of a Xbox controller.
 
 'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate
 

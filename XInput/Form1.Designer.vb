@@ -31,7 +31,6 @@ Partial Class Form1
         LabelLeftThumbY = New Label()
         LabelRightThumbY = New Label()
         LabelRightThumbX = New Label()
-        Timer2 = New Timer(components)
         ButtonVibrateLeft = New Button()
         ButtonVibrateRight = New Button()
         NumControllerToVib = New NumericUpDown()
@@ -110,9 +109,6 @@ Partial Class Form1
         LabelRightThumbX.TabIndex = 6
         LabelRightThumbX.Text = "LabelRightThumbX"
         ' 
-        ' Timer2
-        ' 
-        ' 
         ' ButtonVibrateLeft
         ' 
         ButtonVibrateLeft.Location = New Point(14, 194)
@@ -134,7 +130,7 @@ Partial Class Form1
         ' NumControllerToVib
         ' 
         NumControllerToVib.Location = New Point(197, 147)
-        NumControllerToVib.Maximum = New [Decimal](New Integer() {3, 0, 0, 0})
+        NumControllerToVib.Maximum = New Decimal(New Integer() {3, 0, 0, 0})
         NumControllerToVib.Name = "NumControllerToVib"
         NumControllerToVib.Size = New Size(138, 31)
         NumControllerToVib.TabIndex = 9
@@ -186,7 +182,7 @@ Partial Class Form1
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleDimensions = New SizeF(10.0F, 25.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 538)
         Controls.Add(LabelBatteryType)
@@ -220,7 +216,6 @@ Partial Class Form1
     Friend WithEvents LabelLeftThumbY As Label
     Friend WithEvents LabelRightThumbY As Label
     Friend WithEvents LabelRightThumbX As Label
-    Friend WithEvents Timer2 As Timer
     Friend WithEvents ButtonVibrateLeft As Button
     Friend WithEvents ButtonVibrateRight As Button
     Friend WithEvents NumControllerToVib As NumericUpDown
