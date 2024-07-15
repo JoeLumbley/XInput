@@ -649,6 +649,11 @@ Public Class Form1
 
         Vibrate(ControllerNumber)
 
+        'Turn left motor off (set zero speed).
+        vibration.wLeftMotorSpeed = 0
+
+        Vibrate(ControllerNumber)
+
     End Sub
 
     Private Sub VibrateRight(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
@@ -660,6 +665,11 @@ Public Class Form1
 
         'Set right motor speed.
         vibration.wRightMotorSpeed = Speed
+
+        Vibrate(ControllerNumber)
+
+        'Turn right motor off (set zero speed).
+        vibration.wRightMotorSpeed = 0
 
         Vibrate(ControllerNumber)
 
