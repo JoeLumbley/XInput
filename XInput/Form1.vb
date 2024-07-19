@@ -651,9 +651,6 @@ Public Class Form1
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The left motor is the low-frequency rumble motor.
 
-        'Turn right motor off (set zero speed).
-        'vibration.wRightMotorSpeed = 0
-
         'Set left motor speed.
         vibration.wLeftMotorSpeed = Speed
 
@@ -663,20 +660,11 @@ Public Class Form1
 
         IsLeftVibrating = True
 
-
-        ''Turn left motor off (set zero speed).
-        'vibration.wLeftMotorSpeed = 0
-
-        'Vibrate(ControllerNumber)
-
     End Sub
 
     Private Sub VibrateRight(CID As Integer, Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The right motor is the high-frequency rumble motor.
-
-        'Turn left motor off (set zero speed).
-        'vibration.wLeftMotorSpeed = 0
 
         'Set right motor speed.
         vibration.wRightMotorSpeed = Speed
@@ -686,11 +674,6 @@ Public Class Form1
         RightVibrateStart = Now
 
         IsRightVibrating = True
-
-        ''Turn right motor off (set zero speed).
-        'vibration.wRightMotorSpeed = 0
-
-        'Vibrate(ControllerNumber)
 
     End Sub
 
@@ -717,9 +700,15 @@ Public Class Form1
 
     End Sub
 
-
-
     Private Sub UpdateVibrateTimer()
+
+        UpdateLeftVibrateTimer()
+
+        UpdateRightVibrateTimer()
+
+    End Sub
+
+    Private Sub UpdateLeftVibrateTimer()
 
         Dim CurrentTime As DateTime = Now
 
@@ -740,7 +729,13 @@ Public Class Form1
 
         End If
 
-        ElapsedTime = CurrentTime - RightVibrateStart
+    End Sub
+
+    Private Sub UpdateRightVibrateTimer()
+
+        Dim CurrentTime As DateTime = Now
+
+        Dim ElapsedTime As TimeSpan = CurrentTime - RightVibrateStart
 
         If IsRightVibrating = True Then
 
@@ -755,13 +750,9 @@ Public Class Form1
 
             End If
 
-
         End If
 
     End Sub
-
-
-
 
     Private Sub UpdateBatteryInfo()
 
