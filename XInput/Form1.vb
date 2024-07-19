@@ -709,30 +709,6 @@ Public Class Form1
 
     Private Sub UpdateLeftVibrateTimer()
 
-        'For Each Con In IsLeftVibrating
-
-        '    If Con = True Then
-
-        '        Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Array.IndexOf(IsLeftVibrating, Con))
-
-        '        If ElapsedTime.Milliseconds >= 800 Then
-
-        '            IsLeftVibrating(Array.IndexOf(IsLeftVibrating, Con)) = False
-
-        '            'Turn left motor off (set zero speed).
-        '            vibration.wLeftMotorSpeed = 0
-
-        '            Vibrate(Array.IndexOf(IsLeftVibrating, Con))
-
-        '        End If
-
-        '    End If
-
-        'Next
-
-
-
-
         For Each Con In IsLeftVibrating
 
             Dim index As Integer = Array.IndexOf(IsLeftVibrating, Con)
@@ -759,27 +735,6 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateRightVibrateTimer()
-
-        'For Each Con In IsRightVibrating
-
-        '    If Con = True Then
-
-        '        Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Array.IndexOf(IsRightVibrating, Con))
-
-        '        If ElapsedTime.Milliseconds >= 800 Then
-
-        '            IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
-
-        '            'Turn right motor off (set zero speed).
-        '            vibration.wRightMotorSpeed = 0
-
-        '            Vibrate(Array.IndexOf(IsRightVibrating, Con))
-
-        '        End If
-
-        '    End If
-
-        'Next
 
         For Each Con In IsRightVibrating
 
