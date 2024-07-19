@@ -721,11 +721,11 @@ Public Class Form1
 
     Private Sub UpdateLeftVibrateTimer()
 
-        For Each Con In IsLeftVibrating
+        For Each IsConVibrating In IsLeftVibrating
 
-            Dim Index As Integer = Array.IndexOf(IsLeftVibrating, Con)
+            Dim Index As Integer = Array.IndexOf(IsLeftVibrating, IsConVibrating)
 
-            If Index <> -1 AndAlso Con = True Then
+            If Index <> -1 AndAlso IsConVibrating = True Then
 
                 Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
 
