@@ -55,41 +55,7 @@ Public Class Form1
         Public sThumbRY As Short
     End Structure
 
-    <DllImport("XInput1_4.dll")>
-    Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
-    End Function
-
-    Public Structure XINPUT_VIBRATION
-        Public wLeftMotorSpeed As UShort
-        Public wRightMotorSpeed As UShort
-    End Structure
-
-    <DllImport("xinput1_4.dll")>
-    Private Shared Function XInputGetBatteryInformation(ByVal playerIndex As Integer, ByVal devType As Byte,
-                                                        ByRef batteryInfo As XINPUT_BATTERY_INFORMATION) As Integer
-    End Function
-
-    Public Structure XINPUT_BATTERY_INFORMATION
-        Public BatteryType As Byte
-        Public BatteryLevel As Byte
-    End Structure
-
-    Public Enum BATTERY_TYPE As Byte
-        DISCONNECTED = 0
-        WIRED = 1
-        ALKALINE = 2
-        NIMH = 3 ' Nickel metal hydride battery.
-        UNKNOWN = 4
-    End Enum
-
-    Public Enum BatteryLevel As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
-        EMPTY = 0
-        LOW = 1
-        MEDIUM = 2
-        FULL = 3
-    End Enum
-
-    Private batteryInfo As XINPUT_BATTERY_INFORMATION
+    Private ControllerPosition As XINPUT_STATE
 
     'Set the start of the thumbstick neutral zone to 1/2 over.
     Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
@@ -107,17 +73,6 @@ Public Class Form1
     'A byte is a unsigned 8-bit (1-byte) integer range 0 through 255. This gives us 256 values.
 
     Private ReadOnly Connected(0 To 3) As Boolean 'True or False
-
-    Private ControllerPosition As XINPUT_STATE
-
-    Private vibration As XINPUT_VIBRATION
-
-    Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
-
-    Private Const DPadUp As Integer = 1
-    Private Const DPadDown As Integer = 2
-    Private Const DPadLeft As Integer = 4
-    Private Const DPadRight As Integer = 8
 
     Private Const StartButton As Integer = 16
     Private Const BackButton As Integer = 32
@@ -152,6 +107,17 @@ Public Class Form1
     Private XButtonPressed As Boolean = False
     Private YButtonPressed As Boolean = False
 
+    <DllImport("XInput1_4.dll")>
+    Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
+    End Function
+
+    Public Structure XINPUT_VIBRATION
+        Public wLeftMotorSpeed As UShort
+        Public wRightMotorSpeed As UShort
+    End Structure
+
+    Private Vibration As XINPUT_VIBRATION
+
     Private LeftVibrateStart(0 To 3) As Date
 
     Private RightVibrateStart(0 To 3) As Date
@@ -159,6 +125,44 @@ Public Class Form1
     Private IsLeftVibrating(0 To 3) As Boolean
 
     Private IsRightVibrating(0 To 3) As Boolean
+
+    <DllImport("xinput1_4.dll")>
+    Private Shared Function XInputGetBatteryInformation(ByVal playerIndex As Integer, ByVal devType As Byte,
+                                                        ByRef batteryInfo As XINPUT_BATTERY_INFORMATION) As Integer
+    End Function
+
+    Public Structure XINPUT_BATTERY_INFORMATION
+        Public BatteryType As Byte
+        Public BatteryLevel As Byte
+    End Structure
+
+    Public Enum BATTERY_TYPE As Byte
+        DISCONNECTED = 0
+        WIRED = 1
+        ALKALINE = 2
+        NIMH = 3 ' Nickel metal hydride battery.
+        UNKNOWN = 4
+    End Enum
+
+    Public Enum BatteryLevel As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        EMPTY = 0
+        LOW = 1
+        MEDIUM = 2
+        FULL = 3
+    End Enum
+
+    Private batteryInfo As XINPUT_BATTERY_INFORMATION
+
+
+
+    Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
+
+    Private Const DPadUp As Integer = 1
+    Private Const DPadDown As Integer = 2
+    Private Const DPadLeft As Integer = 4
+    Private Const DPadRight As Integer = 8
+
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -342,9 +346,9 @@ Public Class Form1
             YButtonPressed = False
         End If
 
-        If ControllerPosition.Gamepad.wButtons = 0 Then
-            LabelButtons.Text = ""
-        End If
+        'If ControllerPosition.Gamepad.wButtons = 0 Then
+        '    LabelButtons.Text = ""
+        'End If
 
     End Sub
 
@@ -663,7 +667,7 @@ Public Class Form1
         'The left motor is the low-frequency rumble motor.
 
         'Set left motor speed.
-        vibration.wLeftMotorSpeed = Speed
+        Vibration.wLeftMotorSpeed = Speed
 
         Vibrate(CID)
 
@@ -678,7 +682,7 @@ Public Class Form1
         'The right motor is the high-frequency rumble motor.
 
         'Set right motor speed.
-        vibration.wRightMotorSpeed = Speed
+        Vibration.wRightMotorSpeed = Speed
 
         Vibrate(CID)
 
@@ -693,7 +697,7 @@ Public Class Form1
         Try
 
             'Turn motor on.
-            If XInputSetState(CID, vibration) = 0 Then
+            If XInputSetState(CID, Vibration) = 0 Then
                 'Success
                 'Text = XInputSetState(ControllerNumber, vibration).ToString
             Else
@@ -734,7 +738,7 @@ Public Class Form1
                     IsLeftVibrating(Index) = False
 
                     ' Turn left motor off (set zero speed).
-                    vibration.wLeftMotorSpeed = 0
+                    Vibration.wLeftMotorSpeed = 0
 
                     Vibrate(Index)
 
@@ -761,7 +765,7 @@ Public Class Form1
                     IsRightVibrating(Index) = False
 
                     ' Turn right motor off (set zero speed).
-                    vibration.wRightMotorSpeed = 0
+                    Vibration.wRightMotorSpeed = 0
 
                     Vibrate(Index)
 
