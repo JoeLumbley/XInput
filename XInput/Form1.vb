@@ -729,7 +729,7 @@ Public Class Form1
 
                 Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
 
-                If ElapsedTime.TotalMilliseconds >= 800 Then
+                If ElapsedTime.TotalSeconds >= 1 Then
 
                     IsLeftVibrating(Index) = False
 
@@ -756,7 +756,7 @@ Public Class Form1
 
                 Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Index)
 
-                If ElapsedTime.TotalMilliseconds >= 800 Then
+                If ElapsedTime.TotalSeconds >= 1 Then
 
                     IsRightVibrating(Index) = False
 
