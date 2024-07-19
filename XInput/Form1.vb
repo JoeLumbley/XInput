@@ -24,6 +24,7 @@
 'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Imports System.IO
 Imports System.Runtime.InteropServices
 
 Public Class Form1
@@ -151,13 +152,13 @@ Public Class Form1
     Private XButtonPressed As Boolean = False
     Private YButtonPressed As Boolean = False
 
-    Private LeftVibrateStart As DateTime
+    Private LeftVibrateStart(0 To 3) As Date
 
-    Private RightVibrateStart As DateTime
+    Private RightVibrateStart(0 To 3) As Date
 
-    Private IsLeftVibrating As Boolean = False
+    Private IsLeftVibrating(0 To 3) As Boolean
 
-    Private IsRightVibrating As Boolean = False
+    Private IsRightVibrating(0 To 3) As Boolean
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -654,9 +655,9 @@ Public Class Form1
 
         Vibrate(CID)
 
-        LeftVibrateStart = Now
+        LeftVibrateStart(CID) = Now
 
-        IsLeftVibrating = True
+        IsLeftVibrating(CID) = True
 
     End Sub
 
@@ -669,9 +670,9 @@ Public Class Form1
 
         Vibrate(CID)
 
-        RightVibrateStart = Now
+        RightVibrateStart(CID) = Now
 
-        IsRightVibrating = True
+        IsRightVibrating(CID) = True
 
     End Sub
 
@@ -708,43 +709,100 @@ Public Class Form1
 
     Private Sub UpdateLeftVibrateTimer()
 
-        If IsLeftVibrating = True Then
+        'For Each Con In IsLeftVibrating
 
-            Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart
+        '    If Con = True Then
 
-            If ElapsedTime.Milliseconds >= 800 Then
+        '        Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Array.IndexOf(IsLeftVibrating, Con))
 
-                IsLeftVibrating = False
+        '        If ElapsedTime.Milliseconds >= 800 Then
 
-                'Turn left motor off (set zero speed).
-                vibration.wLeftMotorSpeed = 0
-                Vibrate(0)
-                Vibrate(1)
+        '            IsLeftVibrating(Array.IndexOf(IsLeftVibrating, Con)) = False
+
+        '            'Turn left motor off (set zero speed).
+        '            vibration.wLeftMotorSpeed = 0
+
+        '            Vibrate(Array.IndexOf(IsLeftVibrating, Con))
+
+        '        End If
+
+        '    End If
+
+        'Next
+
+
+
+
+        For Each Con In IsLeftVibrating
+
+            Dim index As Integer = Array.IndexOf(IsLeftVibrating, Con)
+
+            If index <> -1 AndAlso Con = True Then
+
+                Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(index)
+
+                If ElapsedTime.TotalMilliseconds >= 800 Then
+
+                    IsLeftVibrating(index) = False
+
+                    ' Turn left motor off (set zero speed).
+                    vibration.wLeftMotorSpeed = 0
+
+                    Vibrate(index)
+
+                End If
 
             End If
 
-        End If
+        Next
 
     End Sub
 
     Private Sub UpdateRightVibrateTimer()
 
-        If IsRightVibrating = True Then
+        'For Each Con In IsRightVibrating
 
-            Dim ElapsedTime As TimeSpan = Now - RightVibrateStart
+        '    If Con = True Then
 
-            If ElapsedTime.Milliseconds >= 800 Then
+        '        Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Array.IndexOf(IsRightVibrating, Con))
 
-                IsRightVibrating = False
+        '        If ElapsedTime.Milliseconds >= 800 Then
 
-                'Turn right motor off (set zero speed).
-                vibration.wRightMotorSpeed = 0
-                Vibrate(0)
-                Vibrate(1)
+        '            IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
+
+        '            'Turn right motor off (set zero speed).
+        '            vibration.wRightMotorSpeed = 0
+
+        '            Vibrate(Array.IndexOf(IsRightVibrating, Con))
+
+        '        End If
+
+        '    End If
+
+        'Next
+
+        For Each Con In IsRightVibrating
+
+            Dim index As Integer = Array.IndexOf(IsRightVibrating, Con)
+
+            If index <> -1 AndAlso Con = True Then
+
+                Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(index)
+
+                If ElapsedTime.TotalMilliseconds >= 800 Then
+
+                    IsRightVibrating(index) = False
+
+                    ' Turn right motor off (set zero speed).
+                    vibration.wRightMotorSpeed = 0
+
+                    Vibrate(index)
+
+                End If
 
             End If
 
-        End If
+        Next
 
     End Sub
 
