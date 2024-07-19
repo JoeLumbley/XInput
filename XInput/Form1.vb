@@ -172,6 +172,18 @@ Public Class Form1
 
         UpdateSpeedLabel()
 
+        For Each Con In IsLeftVibrating
+
+            IsLeftVibrating(Array.IndexOf(IsLeftVibrating, Con)) = False
+
+        Next
+
+        For Each Con In IsRightVibrating
+
+            IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
+
+        Next
+
     End Sub
 
     Private Sub InitializeTimer1()
@@ -734,14 +746,13 @@ Public Class Form1
 
     End Sub
 
-
     Private Sub UpdateRightVibrateTimer()
 
-        For Each Con In IsRightVibrating
+        For Each IsConVibrating In IsRightVibrating
 
-            Dim Index As Integer = Array.IndexOf(IsRightVibrating, Con)
+            Dim Index As Integer = Array.IndexOf(IsRightVibrating, IsConVibrating)
 
-            If Index <> -1 AndAlso Con = True Then
+            If Index <> -1 AndAlso IsConVibrating = True Then
 
                 Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Index)
 
