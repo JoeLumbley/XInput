@@ -55,6 +55,9 @@ Public Class Form1
         Public sThumbRY As Short
     End Structure
 
+    Private ConButtons(0 To 3) As UShort
+
+
     Private ControllerPosition As XINPUT_STATE
 
     'Set the start of the thumbstick neutral zone to 1/2 over.
@@ -224,7 +227,7 @@ Public Class Form1
                 If XInputGetState(ControllerNumber, ControllerPosition) = 0 Then
                     ' The function call was successful, so you can access the controller state now
 
-                    UpdateButtonPosition()
+                    UpdateButtonPosition(ControllerNumber)
 
                     DoButtonLogic(ControllerNumber)
 
@@ -259,7 +262,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateButtonPosition()
+    Private Sub UpdateButtonPosition(CID As Integer)
         'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
         If (ControllerPosition.Gamepad.wButtons And DPadUp) <> 0 Then
@@ -346,9 +349,25 @@ Public Class Form1
             YButtonPressed = False
         End If
 
-        'If ControllerPosition.Gamepad.wButtons = 0 Then
-        '    LabelButtons.Text = ""
-        'End If
+        ConButtons(CID) = ControllerPosition.Gamepad.wButtons
+
+        Dim ConSum As Integer
+
+        For Each Con In ConButtons
+
+            Dim Index As Integer = Array.IndexOf(ConButtons, Con)
+
+            ConSum += Con
+
+        Next
+
+        'Are all controllers buttons up?
+        If ConSum = 0 Then
+            'Yes, all controller buttons are up.
+
+            LabelButtons.Text = ""
+
+        End If
 
     End Sub
 
