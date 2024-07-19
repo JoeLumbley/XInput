@@ -107,8 +107,6 @@ Public Class Form1
 
     Private ReadOnly Connected(0 To 3) As Boolean 'True or False
 
-    'Private ControllerNumber As Integer = 0
-
     Private ControllerPosition As XINPUT_STATE
 
     Private vibration As XINPUT_VIBRATION
@@ -710,11 +708,9 @@ Public Class Form1
 
     Private Sub UpdateLeftVibrateTimer()
 
-        Dim CurrentTime As DateTime = Now
-
-        Dim ElapsedTime As TimeSpan = CurrentTime - LeftVibrateStart
-
         If IsLeftVibrating = True Then
+
+            Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart
 
             If ElapsedTime.Milliseconds >= 800 Then
 
@@ -733,11 +729,9 @@ Public Class Form1
 
     Private Sub UpdateRightVibrateTimer()
 
-        Dim CurrentTime As DateTime = Now
-
-        Dim ElapsedTime As TimeSpan = CurrentTime - RightVibrateStart
-
         If IsRightVibrating = True Then
+
+            Dim ElapsedTime As TimeSpan = Now - RightVibrateStart
 
             If ElapsedTime.Milliseconds >= 800 Then
 
