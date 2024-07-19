@@ -355,8 +355,6 @@ Public Class Form1
 
         For Each Con In ConButtons
 
-            Dim Index As Integer = Array.IndexOf(ConButtons, Con)
-
             ConSum += Con
 
         Next
