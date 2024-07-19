@@ -107,7 +107,7 @@ Public Class Form1
 
     Private ReadOnly Connected(0 To 3) As Boolean 'True or False
 
-    Private ControllerNumber As Integer = 0
+    'Private ControllerNumber As Integer = 0
 
     Private ControllerPosition As XINPUT_STATE
 
@@ -153,6 +153,14 @@ Public Class Form1
     Private XButtonPressed As Boolean = False
     Private YButtonPressed As Boolean = False
 
+    Private LeftVibrateStart As DateTime
+
+    Private RightVibrateStart As DateTime
+
+    Private IsLeftVibrating As Boolean = False
+
+    Private IsRightVibrating As Boolean = False
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Text = "XInput - Code with Joe"
@@ -185,7 +193,9 @@ Public Class Form1
 
         UpdateControllerPosition()
 
-        UpdateBatteryInfo()
+        UpdateVibrateTimer()
+
+        'UpdateBatteryInfo()
 
     End Sub
 
@@ -201,15 +211,15 @@ Public Class Form1
 
                     UpdateButtonPosition()
 
-                    DoButtonLogic()
+                    DoButtonLogic(ControllerNumber)
 
-                    UpdateLeftThumbstickPosition()
+                    UpdateLeftThumbstickPosition(ControllerNumber)
 
-                    UpdateRightThumbstickPosition()
+                    UpdateRightThumbstickPosition(ControllerNumber)
 
-                    UpdateLeftTriggerPosition()
+                    UpdateLeftTriggerPosition(ControllerNumber)
 
-                    UpdateRightTriggerPosition()
+                    UpdateRightTriggerPosition(ControllerNumber)
 
                     Connected(ControllerNumber) = True
 
@@ -327,21 +337,21 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoButtonLogic()
+    Private Sub DoButtonLogic(ControllerNumber As Integer)
 
-        DoDPadLogic()
+        DoDPadLogic(ControllerNumber)
 
-        DoLetterButtonLogic()
+        DoLetterButtonLogic(ControllerNumber)
 
-        DoStartBackLogic()
+        DoStartBackLogic(ControllerNumber)
 
-        DoBumperLogic()
+        DoBumperLogic(ControllerNumber)
 
-        DoStickLogic()
+        DoStickLogic(ControllerNumber)
 
     End Sub
 
-    Private Sub DoLetterButtonLogic()
+    Private Sub DoLetterButtonLogic(ControllerNumber As Integer)
 
         If AButtonPressed = True Then
             If BButtonPressed = True Then
@@ -405,7 +415,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoStartBackLogic()
+    Private Sub DoStartBackLogic(ControllerNumber As Integer)
 
         If StartButtonPressed = True Then
             If BackButtonPressed = True Then
@@ -421,7 +431,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoBumperLogic()
+    Private Sub DoBumperLogic(ControllerNumber As Integer)
 
         If LeftBumperButtonPressed = True Then
             If RightBumperButtonPressed = True Then
@@ -437,7 +447,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoStickLogic()
+    Private Sub DoStickLogic(ControllerNumber As Integer)
 
         If LeftStickButtonPressed = True Then
             If RightStickButtonPressed = True Then
@@ -453,7 +463,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoDPadLogic()
+    Private Sub DoDPadLogic(ControllerNumber As Integer)
 
         If DPadUpPressed = True Then
             If DPadLeftPressed = True Then
@@ -485,7 +495,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateLeftThumbstickPosition()
+    Private Sub UpdateLeftThumbstickPosition(ControllerNumber As Integer)
         'The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
         'The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
 
@@ -527,7 +537,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateRightThumbstickPosition()
+    Private Sub UpdateRightThumbstickPosition(ControllerNumber As Integer)
         'The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
         'The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
 
@@ -569,7 +579,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateRightTriggerPosition()
+    Private Sub UpdateRightTriggerPosition(ControllerNumber As Integer)
         'The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
         'The trigger position must be greater than the trigger threshold to register as pressed.
 
@@ -588,7 +598,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateLeftTriggerPosition()
+    Private Sub UpdateLeftTriggerPosition(ControllerNumber As Integer)
         'The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
         'The trigger position must be greater than the trigger threshold to register as pressed.
 
@@ -637,50 +647,59 @@ Public Class Form1
 
     End Sub
 
-    Private Sub VibrateLeft(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
+    Private Sub VibrateLeft(CID As Integer, Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The left motor is the low-frequency rumble motor.
 
         'Turn right motor off (set zero speed).
-        vibration.wRightMotorSpeed = 0
+        'vibration.wRightMotorSpeed = 0
 
         'Set left motor speed.
         vibration.wLeftMotorSpeed = Speed
 
-        Vibrate(ControllerNumber)
+        Vibrate(CID)
 
-        'Turn left motor off (set zero speed).
-        vibration.wLeftMotorSpeed = 0
+        LeftVibrateStart = Now
 
-        Vibrate(ControllerNumber)
+        IsLeftVibrating = True
+
+
+        ''Turn left motor off (set zero speed).
+        'vibration.wLeftMotorSpeed = 0
+
+        'Vibrate(ControllerNumber)
 
     End Sub
 
-    Private Sub VibrateRight(ByVal ControllerNumber As Integer, ByVal Speed As UShort)
+    Private Sub VibrateRight(CID As Integer, Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The right motor is the high-frequency rumble motor.
 
         'Turn left motor off (set zero speed).
-        vibration.wLeftMotorSpeed = 0
+        'vibration.wLeftMotorSpeed = 0
 
         'Set right motor speed.
         vibration.wRightMotorSpeed = Speed
 
-        Vibrate(ControllerNumber)
+        Vibrate(CID)
 
-        'Turn right motor off (set zero speed).
-        vibration.wRightMotorSpeed = 0
+        RightVibrateStart = Now
 
-        Vibrate(ControllerNumber)
+        IsRightVibrating = True
+
+        ''Turn right motor off (set zero speed).
+        'vibration.wRightMotorSpeed = 0
+
+        'Vibrate(ControllerNumber)
 
     End Sub
 
-    Private Sub Vibrate(ByVal ControllerNumber As Integer)
+    Private Sub Vibrate(CID As Integer)
 
         Try
 
             'Turn motor on.
-            If XInputSetState(ControllerNumber, vibration) = 0 Then
+            If XInputSetState(CID, vibration) = 0 Then
                 'Success
                 'Text = XInputSetState(ControllerNumber, vibration).ToString
             Else
@@ -697,6 +716,52 @@ Public Class Form1
         End Try
 
     End Sub
+
+
+
+    Private Sub UpdateVibrateTimer()
+
+        Dim CurrentTime As DateTime = Now
+
+        Dim ElapsedTime As TimeSpan = CurrentTime - LeftVibrateStart
+
+        If IsLeftVibrating = True Then
+
+            If ElapsedTime.Milliseconds >= 800 Then
+
+                IsLeftVibrating = False
+
+                'Turn left motor off (set zero speed).
+                vibration.wLeftMotorSpeed = 0
+                Vibrate(0)
+                Vibrate(1)
+
+            End If
+
+        End If
+
+        ElapsedTime = CurrentTime - RightVibrateStart
+
+        If IsRightVibrating = True Then
+
+            If ElapsedTime.Milliseconds >= 800 Then
+
+                IsRightVibrating = False
+
+                'Turn right motor off (set zero speed).
+                vibration.wRightMotorSpeed = 0
+                Vibrate(0)
+                Vibrate(1)
+
+            End If
+
+
+        End If
+
+    End Sub
+
+
+
 
     Private Sub UpdateBatteryInfo()
 
