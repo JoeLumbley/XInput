@@ -362,6 +362,13 @@ Public Class Form1
 
         ConButtons(CID) = ControllerPosition.Gamepad.wButtons
 
+        ClearButtonsLabel()
+
+    End Sub
+
+    Private Sub ClearButtonsLabel()
+        'Clears the buttons label when all controllers buttons are up.
+
         Dim ConSum As Integer
 
         For Each Con In ConButtons
