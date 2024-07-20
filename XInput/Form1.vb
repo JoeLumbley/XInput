@@ -562,29 +562,7 @@ Public Class Form1
 
         End If
 
-        Dim ConSum As Boolean = True 'Assume all controllers left thumbsticks are neutral initially.
-
-        'Search for a non-neutral thumbstick.
-        For i As Integer = 0 To 3
-            If Connected(i) Then
-                If Not IsConThumbLXNeutral(i) Then
-                    'A non-neutral thumbstick was found.
-
-                    ConSum = False 'Report the non-neutral thumbstick.
-
-                    Exit For 'No need to search further so stop the search.
-
-                End If
-            End If
-        Next
-
-        'Are all controllers left thumbsticks in the neutral position?
-        If ConSum = True Then
-            'Yes, all controllers left thumbsticks are in the neutral position.
-
-            LabelLeftThumbX.Text = String.Empty
-
-        End If
+        ClearLeftThumbstickXLabel()
 
         'What position is the left thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
@@ -608,9 +586,16 @@ Public Class Form1
 
         End If
 
-        ConSum = True 'Assume all controllers left thumbsticks are neutral initially.
+        ClearLeftThumbstickYLabel()
 
-        'Search for a non-neutral thumbstick.
+    End Sub
+
+    Private Sub ClearLeftThumbstickYLabel()
+        'Clears the left thumbstick Y-axis label when all controllers left thumbsticks on the Y-axis are neutral.
+
+        Dim ConSum As Boolean = True 'Assume all controllers left thumbsticks on the Y-axis are neutral initially.
+
+        'Search for a non-neutral left thumbstick on the Y-axis.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConThumbLYNeutral(i) Then
@@ -624,11 +609,40 @@ Public Class Form1
             End If
         Next
 
-        'Are all controllers left thumbsticks in the neutral position?
+        'Are all controllers left thumbsticks on the Y-axis in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers left thumbsticks are in the neutral position.
+            'Yes, all controllers left thumbsticks on the Y-axis are in the neutral position.
 
             LabelLeftThumbY.Text = String.Empty
+
+        End If
+
+    End Sub
+
+    Private Sub ClearLeftThumbstickXLabel()
+        'Clears the left thumbstick X-axis label when all controllers left thumbsticks on the X-axis are neutral.
+
+        Dim ConSum As Boolean = True 'Assume all controllers left thumbsticks on the X-axis are neutral initially.
+
+        'Search for a non-neutral left thumbstick on the X-axis.
+        For i As Integer = 0 To 3
+            If Connected(i) Then
+                If Not IsConThumbLXNeutral(i) Then
+                    'A non-neutral thumbstick was found.
+
+                    ConSum = False 'Report the non-neutral thumbstick.
+
+                    Exit For 'No need to search further so stop the search.
+
+                End If
+            End If
+        Next
+
+        'Are all controllers left thumbsticks on the X-axis in the neutral position?
+        If ConSum = True Then
+            'Yes, all controllers left thumbsticks on the X-axis are in the neutral position.
+
+            LabelLeftThumbX.Text = String.Empty
 
         End If
 
@@ -689,7 +703,7 @@ Public Class Form1
     End Sub
 
     Private Sub ClearRightThumbstickXLabel()
-        'Clears the right thumbstick label when all controllers right thumbsticks on the X-axis are neutral.
+        'Clears the right thumbstick X-axis label when all controllers right thumbsticks on the X-axis are neutral.
 
         Dim ConSum As Boolean = True 'Assume all controllers right thumbsticks on the X-axis are neutral initially.
 
@@ -718,7 +732,7 @@ Public Class Form1
     End Sub
 
     Private Sub ClearRightThumbstickYLabel()
-        'Clears the right thumbstick label when all controllers right thumbsticks on the Y-axis are neutral.
+        'Clears the right thumbstick Y-axis label when all controllers right thumbsticks on the Y-axis are neutral.
 
         Dim ConSum As Boolean = True 'Assume all controllers right thumbsticks on the Y-axis are neutral initially.
 
