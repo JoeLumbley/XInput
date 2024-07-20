@@ -61,6 +61,14 @@ Public Class Form1
 
     Private IsConRightTriggerNeutral(0 To 3) As Boolean
 
+    Private IsConThumbLXNeutral(0 To 3) As Boolean
+
+    Private IsConThumbLYNeutral(0 To 3) As Boolean
+
+    Private IsConThumbRXNeutral(0 To 3) As Boolean
+
+    Private IsConThumbRYNeutral(0 To 3) As Boolean
+
 
 
     Private ControllerPosition As XINPUT_STATE
@@ -584,17 +592,54 @@ Public Class Form1
 
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Left"
 
+            IsConThumbRXNeutral(ControllerNumber) = False
+
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
             'The right thumbstick is in the right position.
 
             LabelRightThumbX.Text = "Controller: " & ControllerNumber.ToString & " Right Thumbstick: Right"
 
+            IsConThumbRXNeutral(ControllerNumber) = False
+
         Else
             'The right thumbstick is in the neutral position.
+
+            IsConThumbRXNeutral(ControllerNumber) = True
+
+        End If
+
+        'Are all controllers right thumbsticks in the neutral position?
+        Dim ConSum As Boolean = True ' Assume all are neutral initially
+
+        For i As Integer = 0 To 3
+            If Connected(i) Then
+                If Not IsConThumbRXNeutral(i) Then
+                    ConSum = False
+                    Exit For ' Exit as soon as a non-neutral trigger is found
+                End If
+            End If
+        Next
+
+        If ConSum = True Then
 
             LabelRightThumbX.Text = String.Empty
 
         End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         'What position is the right thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
