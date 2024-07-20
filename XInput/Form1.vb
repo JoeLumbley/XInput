@@ -69,8 +69,6 @@ Public Class Form1
 
     Private IsConThumbRYNeutral(0 To 3) As Boolean
 
-
-
     Private ControllerPosition As XINPUT_STATE
 
     'Set the start of the thumbstick neutral zone to 1/2 over.
@@ -168,8 +166,6 @@ Public Class Form1
     End Enum
 
     Private batteryInfo As XINPUT_BATTERY_INFORMATION
-
-
 
     Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
 
@@ -773,7 +769,7 @@ Public Class Form1
 
         'Are all controllers right triggers in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers  right triggers are in the neutral position.
+            'Yes, all controllers right triggers are in the neutral position.
 
             LabelRightTrigger.Text = String.Empty
 
@@ -800,19 +796,25 @@ Public Class Form1
 
         End If
 
-        'Are all controllers left triggers in the neutral position?
-        Dim ConSum As Boolean = True ' Assume all are neutral initially
+        Dim ConSum As Boolean = True 'Assume all controllers left triggers are neutral initially.
 
+        'Search for a non-neutral trigger.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConLeftTriggerNeutral(i) Then
-                    ConSum = False
-                    Exit For ' Exit as soon as a non-neutral trigger is found
+                    'A non-neutral trigger was found.
+
+                    ConSum = False 'Report the non-neutral trigger.
+
+                    Exit For 'No need to search further so stop the search.
+
                 End If
             End If
         Next
 
+        'Are all controllers left triggers in the neutral position?
         If ConSum = True Then
+            'Yes, all controllers left triggers are in the neutral position.
 
             LabelLeftTrigger.Text = String.Empty
 
