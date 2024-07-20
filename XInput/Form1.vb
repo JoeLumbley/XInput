@@ -706,9 +706,16 @@ Public Class Form1
 
         End If
 
-        ConSum = True 'Assume all controllers right thumbsticks are neutral initially.
+        ClearRightThunbstickYLabel()
 
-        'Search for a non-neutral thumbstick.
+    End Sub
+
+    Private Sub ClearRightThunbstickYLabel()
+        'Clears the right thumbstick label when all controllers right thumbsticks  on the Y-axis are neutral.
+
+        Dim ConSum As Boolean = True 'Assume all controllers right thumbsticks on the Y-axis are neutral initially.
+
+        'Search for a non-neutral right thumbstick on the Y-axis.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConThumbRYNeutral(i) Then
@@ -722,9 +729,9 @@ Public Class Form1
             End If
         Next
 
-        'Are all controllers right thumbsticks in the neutral position?
+        'Are all controllers right thumbsticks on the Y-axis in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers right thumbsticks are in the neutral position.
+            'Yes, all controllers right thumbsticks on the Y-axis are in the neutral position.
 
             LabelRightThumbY.Text = String.Empty
 
