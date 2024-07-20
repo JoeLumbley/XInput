@@ -597,17 +597,45 @@ Public Class Form1
 
             LabelLeftThumbY.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Down"
 
+            IsConThumbLYNeutral(ControllerNumber) = False
+
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
             'The left thumbstick is in the up position.
 
             LabelLeftThumbY.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Up"
 
+            IsConThumbLYNeutral(ControllerNumber) = False
+
         Else
             'The left thumbstick is in the neutral position.
+
+            'LabelLeftThumbY.Text = String.Empty
+
+            IsConThumbLYNeutral(ControllerNumber) = True
+
+        End If
+
+
+        'Are all controllers right thumbsticks in the neutral position?
+        ConSum = True ' Assume all are neutral initially
+
+        For i As Integer = 0 To 3
+            If Connected(i) Then
+                If Not IsConThumbLYNeutral(i) Then
+                    ConSum = False
+                    Exit For ' Exit as soon as a non-neutral trigger is found
+                End If
+            End If
+        Next
+
+        If ConSum = True Then
 
             LabelLeftThumbY.Text = String.Empty
 
         End If
+
+
+
 
     End Sub
 
