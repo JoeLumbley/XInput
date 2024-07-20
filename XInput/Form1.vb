@@ -59,6 +59,9 @@ Public Class Form1
 
     Private IsConLeftTriggerNeutral(0 To 3) As Boolean
 
+    Private IsConRightTriggerNeutral(0 To 3) As Boolean
+
+
 
     Private ControllerPosition As XINPUT_STATE
 
@@ -623,8 +626,28 @@ Public Class Form1
 
             LabelRightTrigger.Text = "Controller: " & ControllerNumber.ToString & " Right Trigger"
 
+            IsConRightTriggerNeutral(ControllerNumber) = False
+
         Else
             'The right trigger is in the neutral position. Pre-Travel.
+
+            IsConRightTriggerNeutral(ControllerNumber) = True
+
+        End If
+
+        'Are all controllers right triggers in the neutral position?
+        Dim ConSum As Boolean = True ' Assume all are neutral initially
+
+        For i As Integer = 0 To 3
+            If Connected(i) Then
+                If Not IsConRightTriggerNeutral(i) Then
+                    ConSum = False
+                    Exit For ' Exit as soon as a non-neutral trigger is found
+                End If
+            End If
+        Next
+
+        If ConSum = True Then
 
             LabelRightTrigger.Text = String.Empty
 
@@ -649,10 +672,7 @@ Public Class Form1
 
             IsConLeftTriggerNeutral(ControllerNumber) = True
 
-            'LabelLeftTrigger.Text = String.Empty
-
         End If
-
 
         'Are all controllers left triggers in the neutral position?
         Dim ConSum As Boolean = True ' Assume all are neutral initially
