@@ -562,8 +562,6 @@ Public Class Form1
         Else
             'The left thumbstick is in the neutral position.
 
-            'LabelLeftThumbX.Text = String.Empty
-
             IsConThumbLXNeutral(ControllerNumber) = True
 
         End If
@@ -575,7 +573,7 @@ Public Class Form1
             If Connected(i) Then
                 If Not IsConThumbLXNeutral(i) Then
                     ConSum = False
-                    Exit For ' Exit as soon as a non-neutral trigger is found
+                    Exit For ' Exit as soon as a non-neutral thumbstick is found
                 End If
             End If
         Next
@@ -585,11 +583,6 @@ Public Class Form1
             LabelLeftThumbX.Text = String.Empty
 
         End If
-
-
-
-
-
 
         'What position is the left thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
@@ -609,12 +602,9 @@ Public Class Form1
         Else
             'The left thumbstick is in the neutral position.
 
-            'LabelLeftThumbY.Text = String.Empty
-
             IsConThumbLYNeutral(ControllerNumber) = True
 
         End If
-
 
         'Are all controllers right thumbsticks in the neutral position?
         ConSum = True ' Assume all are neutral initially
@@ -623,7 +613,7 @@ Public Class Form1
             If Connected(i) Then
                 If Not IsConThumbLYNeutral(i) Then
                     ConSum = False
-                    Exit For ' Exit as soon as a non-neutral trigger is found
+                    Exit For ' Exit as soon as a non-neutral thumbstick is found
                 End If
             End If
         Next
@@ -633,9 +623,6 @@ Public Class Form1
             LabelLeftThumbY.Text = String.Empty
 
         End If
-
-
-
 
     End Sub
 
@@ -672,7 +659,7 @@ Public Class Form1
             If Connected(i) Then
                 If Not IsConThumbRXNeutral(i) Then
                     ConSum = False
-                    Exit For ' Exit as soon as a non-neutral trigger is found
+                    Exit For ' Exit as soon as a non-neutral thumbstick is found
                 End If
             End If
         Next
@@ -701,8 +688,6 @@ Public Class Form1
         Else
             'The right thumbstick is in the neutral position.
 
-            'LabelRightThumbY.Text = String.Empty
-
             IsConThumbRYNeutral(ControllerNumber) = True
 
         End If
@@ -714,7 +699,7 @@ Public Class Form1
             If Connected(i) Then
                 If Not IsConThumbRYNeutral(i) Then
                     ConSum = False
-                    Exit For ' Exit as soon as a non-neutral trigger is found
+                    Exit For ' Exit as soon as a non-neutral thumbstick is found
                 End If
             End If
         Next
@@ -724,7 +709,6 @@ Public Class Form1
             LabelRightThumbY.Text = String.Empty
 
         End If
-
 
     End Sub
 
