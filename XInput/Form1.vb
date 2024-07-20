@@ -664,19 +664,25 @@ Public Class Form1
 
         End If
 
-        'Are all controllers right thumbsticks in the neutral position?
-        Dim ConSum As Boolean = True ' Assume all are neutral initially
+        Dim ConSum As Boolean = True 'Assume all controllers right thumbsticks are neutral initially.
 
+        'Search for a non-neutral thumbstick.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConThumbRXNeutral(i) Then
-                    ConSum = False
-                    Exit For ' Exit as soon as a non-neutral thumbstick is found
+                    'A non-neutral thumbstick was found.
+
+                    ConSum = False 'Report the non-neutral thumbstick.
+
+                    Exit For 'No need to search further so stop the search.
+
                 End If
             End If
         Next
 
+        'Are all controllers right thumbsticks in the neutral position?
         If ConSum = True Then
+            'Yes, all controllers right thumbsticks are in the neutral position.
 
             LabelRightThumbX.Text = String.Empty
 
@@ -704,19 +710,25 @@ Public Class Form1
 
         End If
 
-        'Are all controllers right thumbsticks in the neutral position?
-        ConSum = True ' Assume all are neutral initially
+        ConSum = True 'Assume all controllers right thumbsticks are neutral initially.
 
+        'Search for a non-neutral thumbstick.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConThumbRYNeutral(i) Then
-                    ConSum = False
-                    Exit For ' Exit as soon as a non-neutral thumbstick is found
+                    'A non-neutral thumbstick was found.
+
+                    ConSum = False 'Report the non-neutral thumbstick.
+
+                    Exit For 'No need to search further so stop the search.
+
                 End If
             End If
         Next
 
+        'Are all controllers right thumbsticks in the neutral position?
         If ConSum = True Then
+            'Yes, all controllers right thumbsticks are in the neutral position.
 
             LabelRightThumbY.Text = String.Empty
 
