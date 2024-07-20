@@ -381,7 +381,7 @@ Public Class Form1
         If ConSum = 0 Then
             'Yes, all controller buttons are up.
 
-            LabelButtons.Text = ""
+            LabelButtons.Text = String.Empty
 
         End If
 
