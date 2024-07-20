@@ -174,8 +174,6 @@ Public Class Form1
     Private Const DPadLeft As Integer = 4
     Private Const DPadRight As Integer = 8
 
-
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Text = "XInput - Code with Joe"
@@ -199,6 +197,10 @@ Public Class Form1
             IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
 
         Next
+
+        LabelBatteryLevel.Text = String.Empty
+
+        LabelBatteryType.Text = String.Empty
 
     End Sub
 
