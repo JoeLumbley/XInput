@@ -796,11 +796,11 @@ Public Class Form1
 
         End If
 
-        ClearLabelLeftTrigger()
+        ClearLeftTriggerLabel()
 
     End Sub
 
-    Private Sub ClearLabelLeftTrigger()
+    Private Sub ClearLeftTriggerLabel()
         'Clears the left trigger label when all controllers left triggers are neutral.
 
         Dim ConSum As Boolean = True 'Assume all controllers left triggers are neutral initially.
