@@ -875,19 +875,19 @@ Public Class Form1
 
     Private Sub ClearLabels()
 
-        LabelButtons.Text = ""
+        LabelButtons.Text = String.Empty
 
-        LabelLeftThumbX.Text = ""
+        LabelLeftThumbX.Text = String.Empty
 
-        LabelLeftThumbY.Text = ""
+        LabelLeftThumbY.Text = String.Empty
 
-        LabelLeftTrigger.Text = ""
+        LabelLeftTrigger.Text = String.Empty
 
-        LabelRightThumbX.Text = ""
+        LabelRightThumbX.Text = String.Empty
 
-        LabelRightThumbY.Text = ""
+        LabelRightThumbY.Text = String.Empty
 
-        LabelRightTrigger.Text = ""
+        LabelRightTrigger.Text = String.Empty
 
     End Sub
 
