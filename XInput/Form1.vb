@@ -751,15 +751,22 @@ Public Class Form1
 
         End If
 
+        ClearRightTriggerLabel()
+
+    End Sub
+
+    Private Sub ClearRightTriggerLabel()
+        'Clears the right trigger label when all controllers right triggers are neutral.
+
         Dim ConSum As Boolean = True 'Assume all controllers right triggers are neutral initially.
 
-        'Search for a non-neutral trigger.
+        'Search for a non-neutral right trigger.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConRightTriggerNeutral(i) Then
-                    'A non-neutral trigger was found.
+                    'A non-neutral right trigger was found.
 
-                    ConSum = False 'Report the non-neutral trigger.
+                    ConSum = False 'Report the non-neutral right trigger.
 
                     Exit For  'No need to search further so stop the search.
 
