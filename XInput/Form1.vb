@@ -206,13 +206,18 @@ Public Class Form1
 
     Private Sub InitializeTimer1()
 
-        Timer1.Interval = 15 'Polling frequency in milliseconds.
+        'The tick frequency in milliseconds.
+        'Also called the polling frequency.
+        Timer1.Interval = 15 '1000/60 = 16.67 ms
+        'To get 60 FPS (Frames Per Second) in milliseconds.
+        'We divide 1000 (the number of milliseconds in a second) by 60 the FPS.
 
         Timer1.Start()
 
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        'Every tick of the timer we update the controller data.
 
         UpdateControllerData()
 
@@ -363,27 +368,6 @@ Public Class Form1
         ConButtons(CID) = ControllerPosition.Gamepad.wButtons
 
         ClearButtonsLabel()
-
-    End Sub
-
-    Private Sub ClearButtonsLabel()
-        'Clears the buttons label when all controllers buttons are up.
-
-        Dim ConSum As Integer
-
-        For Each Con In ConButtons
-
-            ConSum += Con
-
-        Next
-
-        'Are all controllers buttons up?
-        If ConSum = 0 Then
-            'Yes, all controller buttons are up.
-
-            LabelButtons.Text = String.Empty
-
-        End If
 
     End Sub
 
@@ -599,6 +583,127 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateRightThumbstickPosition(ControllerNumber As Integer)
+        'The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        'The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+
+        'What position is the right thumbstick in on the X-axis?
+        If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
+            'The right thumbstick is in the left position.
+
+            LabelRightThumbX.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Left"
+
+            IsConThumbRXNeutral(ControllerNumber) = False
+
+        ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
+            'The right thumbstick is in the right position.
+
+            LabelRightThumbX.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Right"
+
+            IsConThumbRXNeutral(ControllerNumber) = False
+
+        Else
+            'The right thumbstick is in the neutral position.
+
+            IsConThumbRXNeutral(ControllerNumber) = True
+
+        End If
+
+        ClearRightThumbstickXLabel()
+
+        'What position is the right thumbstick in on the Y-axis?
+        If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
+            'The right thumbstick is in the up position.
+
+            LabelRightThumbY.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Down"
+
+            IsConThumbRYNeutral(ControllerNumber) = False
+
+        ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
+            'The right thumbstick is in the down position.
+
+            LabelRightThumbY.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Up"
+
+            IsConThumbRYNeutral(ControllerNumber) = False
+
+        Else
+            'The right thumbstick is in the neutral position.
+
+            IsConThumbRYNeutral(ControllerNumber) = True
+
+        End If
+
+        ClearRightThumbstickYLabel()
+
+    End Sub
+
+    Private Sub UpdateRightTriggerPosition(ControllerNumber As Integer)
+        'The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        'The trigger position must be greater than the trigger threshold to register as pressed.
+
+        'What position is the right trigger in?
+        If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
+            'The right trigger is in the down position. Trigger Break. Bang!
+
+            LabelRightTrigger.Text = "Controller " & ControllerNumber.ToString & " Right Trigger"
+
+            IsConRightTriggerNeutral(ControllerNumber) = False
+
+        Else
+            'The right trigger is in the neutral position. Pre-Travel.
+
+            IsConRightTriggerNeutral(ControllerNumber) = True
+
+        End If
+
+        ClearRightTriggerLabel()
+
+    End Sub
+
+    Private Sub UpdateLeftTriggerPosition(ControllerNumber As Integer)
+        'The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        'The trigger position must be greater than the trigger threshold to register as pressed.
+
+        'What position is the left trigger in?
+        If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
+            'The left trigger is in the down position. Trigger Break. Bang!
+
+            LabelLeftTrigger.Text = "Controller " & ControllerNumber.ToString & " Left Trigger"
+
+            IsConLeftTriggerNeutral(ControllerNumber) = False
+
+        Else
+            'The left trigger is in the neutral position. Pre-Travel.
+
+            IsConLeftTriggerNeutral(ControllerNumber) = True
+
+        End If
+
+        ClearLeftTriggerLabel()
+
+    End Sub
+
+    Private Sub ClearButtonsLabel()
+        'Clears the buttons label when all controllers buttons are up.
+
+        Dim ConSum As Integer
+
+        For Each Con In ConButtons
+
+            ConSum += Con
+
+        Next
+
+        'Are all controllers buttons up?
+        If ConSum = 0 Then
+            'Yes, all controller buttons are up.
+
+            LabelButtons.Text = String.Empty
+
+        End If
+
+    End Sub
+
     Private Sub ClearLeftThumbstickYLabel()
         'Clears the left thumbstick Y-axis label when all controllers left thumbsticks on the Y-axis are neutral.
 
@@ -654,60 +759,6 @@ Public Class Form1
             LabelLeftThumbX.Text = String.Empty
 
         End If
-
-    End Sub
-
-    Private Sub UpdateRightThumbstickPosition(ControllerNumber As Integer)
-        'The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
-        'The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
-
-        'What position is the right thumbstick in on the X-axis?
-        If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
-            'The right thumbstick is in the left position.
-
-            LabelRightThumbX.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Left"
-
-            IsConThumbRXNeutral(ControllerNumber) = False
-
-        ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
-            'The right thumbstick is in the right position.
-
-            LabelRightThumbX.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Right"
-
-            IsConThumbRXNeutral(ControllerNumber) = False
-
-        Else
-            'The right thumbstick is in the neutral position.
-
-            IsConThumbRXNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearRightThumbstickXLabel()
-
-        'What position is the right thumbstick in on the Y-axis?
-        If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
-            'The right thumbstick is in the up position.
-
-            LabelRightThumbY.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Down"
-
-            IsConThumbRYNeutral(ControllerNumber) = False
-
-        ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
-            'The right thumbstick is in the down position.
-
-            LabelRightThumbY.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Up"
-
-            IsConThumbRYNeutral(ControllerNumber) = False
-
-        Else
-            'The right thumbstick is in the neutral position.
-
-            IsConThumbRYNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearRightThumbstickYLabel()
 
     End Sub
 
@@ -769,29 +820,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateRightTriggerPosition(ControllerNumber As Integer)
-        'The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
-        'The trigger position must be greater than the trigger threshold to register as pressed.
-
-        'What position is the right trigger in?
-        If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
-            'The right trigger is in the down position. Trigger Break. Bang!
-
-            LabelRightTrigger.Text = "Controller " & ControllerNumber.ToString & " Right Trigger"
-
-            IsConRightTriggerNeutral(ControllerNumber) = False
-
-        Else
-            'The right trigger is in the neutral position. Pre-Travel.
-
-            IsConRightTriggerNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearRightTriggerLabel()
-
-    End Sub
-
     Private Sub ClearRightTriggerLabel()
         'Clears the right trigger label when all controllers right triggers are neutral.
 
@@ -818,29 +846,6 @@ Public Class Form1
             LabelRightTrigger.Text = String.Empty
 
         End If
-
-    End Sub
-
-    Private Sub UpdateLeftTriggerPosition(ControllerNumber As Integer)
-        'The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
-        'The trigger position must be greater than the trigger threshold to register as pressed.
-
-        'What position is the left trigger in?
-        If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
-            'The left trigger is in the down position. Trigger Break. Bang!
-
-            LabelLeftTrigger.Text = "Controller " & ControllerNumber.ToString & " Left Trigger"
-
-            IsConLeftTriggerNeutral(ControllerNumber) = False
-
-        Else
-            'The left trigger is in the neutral position. Pre-Travel.
-
-            IsConLeftTriggerNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearLeftTriggerLabel()
 
     End Sub
 
