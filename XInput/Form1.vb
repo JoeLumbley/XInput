@@ -239,9 +239,9 @@ Public Class Form1
 
             Try
 
-                ' Check if the function call was successful
+                'Check the state of the specified controller.
                 If XInputGetState(ControllerNumber, ControllerPosition) = 0 Then
-                    ' The function call was successful, so you can access the controller state now
+                    '0 means the controller is connected.
 
                     UpdateButtonPosition(ControllerNumber)
 
@@ -258,7 +258,7 @@ Public Class Form1
                     Connected(ControllerNumber) = True
 
                 Else
-                    ' The function call failed, so you cannot access the controller state
+                    'Anything else (a non-zero value) means the controller is not connected.
 
                     'Text = "Failed to get controller state. Error code: " & XInputGetState(ControllerNumber, ControllerPosition).ToString
 
@@ -267,10 +267,11 @@ Public Class Form1
                 End If
 
             Catch ex As Exception
+                'Something went wrong (An exception occured).
 
-                MsgBox(ex.ToString)
+                MsgBox(ex.ToString) 'Display the exception message in a message box.
 
-                Exit Sub
+                Exit Sub 'Exits the subroutine to prevent further execution.
 
             End Try
 
