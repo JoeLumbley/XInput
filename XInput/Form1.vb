@@ -260,7 +260,7 @@ Public Class Form1
                 Else
                     'Anything else (a non-zero value) means the controller is not connected.
 
-                    'Text = "Failed to get controller state. Error code: " & XInputGetState(ControllerNumber, ControllerPosition).ToString
+                    'Text = "Error code: " & XInputGetState(ControllerNumber, ControllerPosition).ToString
 
                     Connected(ControllerNumber) = False
 
