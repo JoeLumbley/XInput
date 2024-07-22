@@ -954,7 +954,7 @@ Public Class Form1
 
         Catch ex As Exception
 
-            MsgBox(ex.ToString)
+            DisplayError(ex)
 
             Exit Sub
 
