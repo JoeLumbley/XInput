@@ -224,6 +224,24 @@ Public Class Form1
 
     End Sub
 
+    Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
+
+        VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+
+    End Sub
+
+    Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
+
+        VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
+
+    End Sub
+
+    Private Sub TrackBarSpeed_Scroll(sender As Object, e As EventArgs) Handles TrackBarSpeed.Scroll
+
+        UpdateSpeedLabel()
+
+    End Sub
+
     Private Sub UpdateControllerData()
 
         For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
@@ -272,19 +290,6 @@ Public Class Form1
         UpdateRightTriggerPosition(controllerNumber)
 
     End Sub
-
-    Private Sub HandleError(ex As Exception)
-
-        MsgBox(ex.ToString()) ' Display the exception message in a message box.
-
-    End Sub
-
-    Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
-
-        Return XInputGetState(controllerNumber, ControllerPosition) = 0 '0 means the controller is connected.
-        'Anything else (a non-zero value) means the controller is not connected.
-
-    End Function
 
     Private Sub UpdateButtonPosition(CID As Integer)
         'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
@@ -904,18 +909,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
-
-        VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
-
-    End Sub
-
-    Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
-
-        VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
-
-    End Sub
-
     Private Sub VibrateLeft(CID As Integer, Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         'The left motor is the low-frequency rumble motor.
@@ -1101,15 +1094,22 @@ Public Class Form1
 
     End Sub
 
-    Private Sub TrackBarSpeed_Scroll(sender As Object, e As EventArgs) Handles TrackBarSpeed.Scroll
-
-        UpdateSpeedLabel()
-
-    End Sub
-
     Private Sub UpdateSpeedLabel()
 
         LabelSpeed.Text = "Vibration Speed: " & TrackBarSpeed.Value
+
+    End Sub
+
+    Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
+
+        Return XInputGetState(controllerNumber, ControllerPosition) = 0 '0 means the controller is connected.
+        'Anything else (a non-zero value) means the controller is not connected.
+
+    End Function
+
+    Private Sub HandleError(ex As Exception)
+
+        MsgBox(ex.ToString()) ' Display the exception message in a message box.
 
     End Sub
 
