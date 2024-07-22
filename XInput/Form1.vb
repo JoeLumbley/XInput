@@ -279,8 +279,6 @@ Public Class Form1
 
         UpdateButtonPosition(controllerNumber)
 
-        DoButtonLogic(controllerNumber)
-
         UpdateLeftThumbstickPosition(controllerNumber)
 
         UpdateRightThumbstickPosition(controllerNumber)
@@ -382,6 +380,8 @@ Public Class Form1
 
         ClearButtonsLabel()
 
+        DoButtonLogic(CID)
+
     End Sub
 
     Private Sub DoButtonLogic(ControllerNumber As Integer)
@@ -395,6 +395,38 @@ Public Class Form1
         DoBumperLogic(ControllerNumber)
 
         DoStickLogic(ControllerNumber)
+
+    End Sub
+
+    Private Sub DoDPadLogic(ControllerNumber As Integer)
+
+        If DPadUpPressed = True Then
+            If DPadLeftPressed = True Then
+                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left+Up"
+            ElseIf DPadRightPressed = True Then
+                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right+Up"
+            Else
+                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Up"
+            End If
+        End If
+
+        If DPadDownPressed = True Then
+            If DPadLeftPressed = True Then
+                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left+Down"
+            ElseIf DPadRightPressed = True Then
+                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right+Down"
+            Else
+                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Down"
+            End If
+        End If
+
+        If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
+            LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left"
+        End If
+
+        If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
+            LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right"
+        End If
 
     End Sub
 
@@ -506,38 +538,6 @@ Public Class Form1
             If RightStickButtonPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Right Stick"
             End If
-        End If
-
-    End Sub
-
-    Private Sub DoDPadLogic(ControllerNumber As Integer)
-
-        If DPadUpPressed = True Then
-            If DPadLeftPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left+Up"
-            ElseIf DPadRightPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right+Up"
-            Else
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Up"
-            End If
-        End If
-
-        If DPadDownPressed = True Then
-            If DPadLeftPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left+Down"
-            ElseIf DPadRightPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right+Down"
-            Else
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Down"
-            End If
-        End If
-
-        If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-            LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left"
-        End If
-
-        If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-            LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right"
         End If
 
     End Sub
