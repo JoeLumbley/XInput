@@ -263,7 +263,7 @@ Public Class Form1
             Catch ex As Exception
                 'Something went wrong (An exception occured).
 
-                HandleError(ex)
+                DisplayError(ex)
 
                 Exit Sub
 
@@ -1107,7 +1107,7 @@ Public Class Form1
 
     End Function
 
-    Private Sub HandleError(ex As Exception)
+    Private Sub DisplayError(ex As Exception)
 
         MsgBox(ex.ToString()) ' Display the exception message in a message box.
 
