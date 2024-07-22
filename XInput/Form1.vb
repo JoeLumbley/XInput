@@ -217,50 +217,26 @@ Public Class Form1
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        'Every tick of the timer we update the controller data.
 
         UpdateControllerData()
+
+        UpdateVibrateTimer()
 
     End Sub
 
     Private Sub UpdateControllerData()
 
-        UpdateControllerPosition()
-
-        UpdateVibrateTimer()
-
-        'UpdateBatteryInfo()
-
-    End Sub
-
-    Private Sub UpdateControllerPosition()
-
-        For ControllerNumber = 0 To 3 'Up to 4 controllers
+        For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
 
             Try
 
-                'Check the state of the specified controller.
-                If XInputGetState(ControllerNumber, ControllerPosition) = 0 Then
-                    '0 means the controller is connected.
+                If IsControllerConnected(ControllerNumber) = True Then
 
-                    UpdateButtonPosition(ControllerNumber)
-
-                    DoButtonLogic(ControllerNumber)
-
-                    UpdateLeftThumbstickPosition(ControllerNumber)
-
-                    UpdateRightThumbstickPosition(ControllerNumber)
-
-                    UpdateLeftTriggerPosition(ControllerNumber)
-
-                    UpdateRightTriggerPosition(ControllerNumber)
+                    UpdateControllerState(ControllerNumber)
 
                     Connected(ControllerNumber) = True
 
                 Else
-                    'Anything else (a non-zero value) means the controller is not connected.
-
-                    'Text = "Error code: " & XInputGetState(ControllerNumber, ControllerPosition).ToString
 
                     Connected(ControllerNumber) = False
 
@@ -269,15 +245,46 @@ Public Class Form1
             Catch ex As Exception
                 'Something went wrong (An exception occured).
 
-                MsgBox(ex.ToString) 'Display the exception message in a message box.
+                HandleError(ex)
 
-                Exit Sub 'Exits the subroutine to prevent further execution.
+                Exit Sub
 
             End Try
 
         Next
 
+        'UpdateBatteryInfo()
+
     End Sub
+
+    Private Sub UpdateControllerState(controllerNumber As Integer)
+
+        UpdateButtonPosition(controllerNumber)
+
+        DoButtonLogic(controllerNumber)
+
+        UpdateLeftThumbstickPosition(controllerNumber)
+
+        UpdateRightThumbstickPosition(controllerNumber)
+
+        UpdateLeftTriggerPosition(controllerNumber)
+
+        UpdateRightTriggerPosition(controllerNumber)
+
+    End Sub
+
+    Private Sub HandleError(ex As Exception)
+
+        MsgBox(ex.ToString()) ' Display the exception message in a message box.
+
+    End Sub
+
+    Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
+
+        Return XInputGetState(controllerNumber, ControllerPosition) = 0 '0 means the controller is connected.
+        'Anything else (a non-zero value) means the controller is not connected.
+
+    End Function
 
     Private Sub UpdateButtonPosition(CID As Integer)
         'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
