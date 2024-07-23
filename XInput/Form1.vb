@@ -711,7 +711,7 @@ Public Class Form1
         If ConSum = 0 Then
             'Yes, all controller buttons are up.
 
-            LabelButtons.Text = String.Empty
+            LabelButtons.Text = String.Empty 'Clear label.
 
         End If
 
@@ -740,7 +740,7 @@ Public Class Form1
         If ConSum = True Then
             'Yes, all controllers left thumbsticks on the Y-axis are in the neutral position.
 
-            LabelLeftThumbY.Text = String.Empty
+            LabelLeftThumbY.Text = String.Empty 'Clear label.
 
         End If
 
@@ -769,7 +769,7 @@ Public Class Form1
         If ConSum = True Then
             'Yes, all controllers left thumbsticks on the X-axis are in the neutral position.
 
-            LabelLeftThumbX.Text = String.Empty
+            LabelLeftThumbX.Text = String.Empty 'Clear label.
 
         End If
 
@@ -798,7 +798,7 @@ Public Class Form1
         If ConSum = True Then
             'Yes, all controllers right thumbsticks are in the neutral position.
 
-            LabelRightThumbX.Text = String.Empty
+            LabelRightThumbX.Text = String.Empty 'Clear label.
 
         End If
 
@@ -827,7 +827,7 @@ Public Class Form1
         If ConSum = True Then
             'Yes, all controllers right thumbsticks on the Y-axis are in the neutral position.
 
-            LabelRightThumbY.Text = String.Empty
+            LabelRightThumbY.Text = String.Empty 'Clear label.
 
         End If
 
@@ -856,7 +856,7 @@ Public Class Form1
         If ConSum = True Then
             'Yes, all controllers right triggers are in the neutral position.
 
-            LabelRightTrigger.Text = String.Empty
+            LabelRightTrigger.Text = String.Empty 'Clear label.
 
         End If
 
@@ -885,7 +885,7 @@ Public Class Form1
         If ConSum = True Then
             'Yes, all controllers left triggers are in the neutral position.
 
-            LabelLeftTrigger.Text = String.Empty
+            LabelLeftTrigger.Text = String.Empty 'Clear label. 
 
         End If
 
