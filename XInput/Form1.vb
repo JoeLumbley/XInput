@@ -176,31 +176,7 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Text = "XInput - Code with Joe"
-
-        InitializeTimer1()
-
-        ClearLabels()
-
-        TrackBarSpeed.Value = 32767
-
-        UpdateSpeedLabel()
-
-        For Each Con In IsLeftVibrating
-
-            IsLeftVibrating(Array.IndexOf(IsLeftVibrating, Con)) = False
-
-        Next
-
-        For Each Con In IsRightVibrating
-
-            IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
-
-        Next
-
-        LabelBatteryLevel.Text = String.Empty
-
-        LabelBatteryType.Text = String.Empty
+        InitializeApp()
 
     End Sub
 
@@ -1110,6 +1086,36 @@ Public Class Form1
     Private Sub DisplayError(ex As Exception)
 
         MsgBox(ex.ToString()) ' Display the exception message in a message box.
+
+    End Sub
+
+    Private Sub InitializeApp()
+
+        Text = "XInput - Code with Joe"
+
+        InitializeTimer1()
+
+        ClearLabels()
+
+        TrackBarSpeed.Value = 32767
+
+        UpdateSpeedLabel()
+
+        For Each Con In IsLeftVibrating
+
+            IsLeftVibrating(Array.IndexOf(IsLeftVibrating, Con)) = False
+
+        Next
+
+        For Each Con In IsRightVibrating
+
+            IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
+
+        Next
+
+        LabelBatteryLevel.Text = String.Empty
+
+        LabelBatteryType.Text = String.Empty
 
     End Sub
 
