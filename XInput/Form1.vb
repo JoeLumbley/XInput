@@ -892,7 +892,7 @@ Public Class Form1
         'Set left motor speed.
         Vibration.wLeftMotorSpeed = Speed
 
-        Vibrate(CID)
+        SendVibrationMotorCommand(CID)
 
         LeftVibrateStart(CID) = Now
 
@@ -907,7 +907,7 @@ Public Class Form1
         'Set right motor speed.
         Vibration.wRightMotorSpeed = Speed
 
-        Vibrate(CID)
+        SendVibrationMotorCommand(CID)
 
         RightVibrateStart(CID) = Now
 
@@ -915,7 +915,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Vibrate(CID As Integer)
+    Private Sub SendVibrationMotorCommand(CID As Integer)
 
         Try
 
@@ -963,7 +963,7 @@ Public Class Form1
                     ' Turn left motor off (set zero speed).
                     Vibration.wLeftMotorSpeed = 0
 
-                    Vibrate(Index)
+                    SendVibrationMotorCommand(Index)
 
                 End If
 
@@ -990,7 +990,7 @@ Public Class Form1
                     ' Turn right motor off (set zero speed).
                     Vibration.wRightMotorSpeed = 0
 
-                    Vibrate(Index)
+                    SendVibrationMotorCommand(Index)
 
                 End If
 
