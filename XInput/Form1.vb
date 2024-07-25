@@ -916,7 +916,7 @@ Public Class Form1
     End Sub
 
     Private Sub SendVibrationMotorCommand(ControllerID As Integer)
-        'Sets the vibration motor speed of the specified controller.
+        'Sends vibration motor speed command to the specified controller.
 
         Try
 
