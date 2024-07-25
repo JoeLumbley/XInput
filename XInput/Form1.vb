@@ -24,7 +24,6 @@
 'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 'SOFTWARE.
 
-Imports System.IO
 Imports System.Runtime.InteropServices
 
 Public Class Form1
