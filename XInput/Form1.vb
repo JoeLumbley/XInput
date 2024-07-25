@@ -915,16 +915,16 @@ Public Class Form1
 
     End Sub
 
-    Private Sub SendVibrationMotorCommand(CID As Integer)
+    Private Sub SendVibrationMotorCommand(ControllerID As Integer)
+        'Sets the vibration motor speed of the specified controller.
 
         Try
 
-            'Turn motor on.
-            If XInputSetState(CID, Vibration) = 0 Then
-                'Success
-                'Text = XInputSetState(ControllerNumber, vibration).ToString
+            'Send motor speed command to the specified controller.
+            If XInputSetState(ControllerID, Vibration) = 0 Then
+                'The motor speed was set. Success.
             Else
-                'Fail
+                'The motor speed was not set. Fail.
                 'Text = XInputSetState(ControllerNumber, vibration).ToString
             End If
 
