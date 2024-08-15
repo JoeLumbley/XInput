@@ -182,9 +182,9 @@ Partial Class Form1
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(10.0F, 25.0F)
+        AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 538)
+        ClientSize = New Size(800, 450)
         Controls.Add(LabelBatteryType)
         Controls.Add(Label1)
         Controls.Add(LabelSpeed)
