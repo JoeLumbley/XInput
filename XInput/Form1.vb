@@ -135,6 +135,7 @@ Public Class Form1
     Public Structure XINPUT_VIBRATION
         Public wLeftMotorSpeed As UShort
         Public wRightMotorSpeed As UShort
+
     End Structure
 
     Private Vibration As XINPUT_VIBRATION
@@ -243,7 +244,7 @@ Public Class Form1
 
                 DisplayError(ex)
 
-                Exit Sub
+                Exit Sub ' Exit the method on error
 
             End Try
 
@@ -268,7 +269,7 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateButtonPosition(CID As Integer)
-        'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
+        ' The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
         DPadUpPressed = (ControllerPosition.Gamepad.wButtons And DPadUp) <> 0
 
@@ -323,28 +324,38 @@ Public Class Form1
     Private Sub DoDPadLogic(ControllerNumber As Integer)
 
         If DPadUpPressed = True Then
+
             If DPadLeftPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left+Up"
             ElseIf DPadRightPressed = True Then
+
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right+Up"
             Else
+
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Up"
             End If
+
         End If
 
+
         If DPadDownPressed = True Then
+
             If DPadLeftPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left+Down"
             ElseIf DPadRightPressed = True Then
+
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right+Down"
             Else
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Down"
             End If
+
         End If
+
 
         If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
             LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left"
         End If
+
 
         If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
             LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right"
