@@ -268,17 +268,22 @@ Public Class Form1
     Private Sub UpdateButtonPosition(CID As Integer)
         'The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
-        If (ControllerPosition.Gamepad.wButtons And DPadUp) <> 0 Then
-            DPadUpPressed = True
-        Else
-            DPadUpPressed = False
-        End If
 
-        If (ControllerPosition.Gamepad.wButtons And DPadDown) <> 0 Then
-            DPadDownPressed = True
-        Else
-            DPadDownPressed = False
-        End If
+        DPadUpPressed = (ControllerPosition.Gamepad.wButtons And DPadUp) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And DPadUp) <> 0 Then
+        '    DPadUpPressed = True
+        'Else
+        '    DPadUpPressed = False
+        'End If
+
+        DPadDownPressed = (ControllerPosition.Gamepad.wButtons And DPadDown) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And DPadDown) <> 0 Then
+        '    DPadDownPressed = True
+        'Else
+        '    DPadDownPressed = False
+        'End If
 
         If (ControllerPosition.Gamepad.wButtons And DPadLeft) <> 0 Then
             DPadLeftPressed = True
