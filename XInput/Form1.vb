@@ -366,63 +366,96 @@ Public Class Form1
     Private Sub DoLetterButtonLogic(ControllerNumber As Integer)
 
         If AButtonPressed = True Then
+
             If BButtonPressed = True Then
+
                 If XButtonPressed = True Then
+
                     If YButtonPressed = True Then
+
                         LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+B+X+Y"
                     Else
+
                         LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+B+X"
                     End If
+
                 Else
                     If YButtonPressed = True Then
+
                         LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+B+Y"
                     Else
+
                         LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+B"
                     End If
+
                 End If
+
             Else
                 If XButtonPressed = True Then
+
                     If YButtonPressed = True Then
+
                         LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+X+Y"
                     Else
+
                         LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+X"
                     End If
                 Else
                     If YButtonPressed = True Then
+
                         LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+Y"
                     Else
+
                         LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A"
                     End If
+
                 End If
+
             End If
         End If
 
         If BButtonPressed = True AndAlso AButtonPressed = False Then
+
             If XButtonPressed = True Then
+
                 If YButtonPressed = True Then
+
                     LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: B+X+Y"
                 Else
+
                     LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: B+X"
                 End If
+
             Else
                 If YButtonPressed = True Then
+
                     LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: B+Y"
                 Else
+
                     LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: B"
                 End If
+
             End If
         End If
 
+
         If XButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
+
             If YButtonPressed = True Then
+
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: X+Y"
             Else
+
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: X"
             End If
+
         Else
+
             If YButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
+
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Y"
             End If
+
         End If
 
     End Sub
@@ -430,12 +463,15 @@ Public Class Form1
     Private Sub DoStartBackLogic(ControllerNumber As Integer)
 
         If StartButtonPressed = True Then
+
             If BackButtonPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Start+Back"
             Else
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Start"
             End If
+
         Else
+
             If BackButtonPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Back"
             End If
@@ -446,32 +482,38 @@ Public Class Form1
     Private Sub DoBumperLogic(ControllerNumber As Integer)
 
         If LeftBumperButtonPressed = True Then
+
             If RightBumperButtonPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Left Bumper+Right Bumper"
             Else
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Left Bumper"
             End If
         Else
+
             If RightBumperButtonPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Right Bumper"
             End If
         End If
+
 
     End Sub
 
     Private Sub DoStickLogic(ControllerNumber As Integer)
 
         If LeftStickButtonPressed = True Then
+
             If RightStickButtonPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Left Stick+Right Stick"
             Else
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Left Stick"
             End If
         Else
+
             If RightStickButtonPressed = True Then
                 LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Right Stick"
             End If
         End If
+
 
     End Sub
 
@@ -879,10 +921,14 @@ Public Class Form1
 
             'Send motor speed command to the specified controller.
             If XInputSetState(ControllerID, Vibration) = 0 Then
+
                 'The motor speed was set. Success.
+
             Else
                 'The motor speed was not set. Fail.
-                'Text = XInputSetState(ControllerNumber, vibration).ToString
+                ' You can log or handle the failure here if needed.
+                ' Example: Console.WriteLine(XInputSetState(ControllerID, Vibration).ToString())
+
             End If
 
         Catch ex As Exception
