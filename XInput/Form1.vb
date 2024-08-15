@@ -26,14 +26,15 @@
 
 Imports System.Runtime.InteropServices
 
+
 Public Class Form1
 
     <DllImport("XInput1_4.dll")>
     Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
     End Function
 
-    'XInput1_4.dll seems to be the current version
-    'XInput9_1_0.dll is maintained primarily for backward compatibility. 
+    ' XInput1_4.dll seems to be the current version
+    ' XInput9_1_0.dll is maintained primarily for backward compatibility. 
 
     <StructLayout(LayoutKind.Explicit)>
     Public Structure XINPUT_STATE
@@ -52,6 +53,7 @@ Public Class Form1
         Public sThumbLY As Short
         Public sThumbRX As Short
         Public sThumbRY As Short
+
     End Structure
 
     Private ConButtons(0 To 3) As UShort
