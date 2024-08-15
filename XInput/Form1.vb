@@ -285,77 +285,103 @@ Public Class Form1
         '    DPadDownPressed = False
         'End If
 
-        If (ControllerPosition.Gamepad.wButtons And DPadLeft) <> 0 Then
-            DPadLeftPressed = True
-        Else
-            DPadLeftPressed = False
-        End If
 
-        If (ControllerPosition.Gamepad.wButtons And DPadRight) <> 0 Then
-            DPadRightPressed = True
-        Else
-            DPadRightPressed = False
-        End If
+        DPadLeftPressed = (ControllerPosition.Gamepad.wButtons And DPadLeft) <> 0
 
-        If (ControllerPosition.Gamepad.wButtons And StartButton) <> 0 Then
-            StartButtonPressed = True
-        Else
-            StartButtonPressed = False
-        End If
 
-        If (ControllerPosition.Gamepad.wButtons And BackButton) <> 0 Then
-            BackButtonPressed = True
-        Else
-            BackButtonPressed = False
-        End If
+        'If (ControllerPosition.Gamepad.wButtons And DPadLeft) <> 0 Then
+        '    DPadLeftPressed = True
+        'Else
+        '    DPadLeftPressed = False
+        'End If
 
-        If (ControllerPosition.Gamepad.wButtons And LeftStickButton) <> 0 Then
-            LeftStickButtonPressed = True
-        Else
-            LeftStickButtonPressed = False
-        End If
+        DPadRightPressed = (ControllerPosition.Gamepad.wButtons And DPadRight) <> 0
 
-        If (ControllerPosition.Gamepad.wButtons And RightStickButton) <> 0 Then
-            RightStickButtonPressed = True
-        Else
-            RightStickButtonPressed = False
-        End If
+        'If (ControllerPosition.Gamepad.wButtons And DPadRight) <> 0 Then
+        '    DPadRightPressed = True
+        'Else
+        '    DPadRightPressed = False
+        'End If
 
-        If (ControllerPosition.Gamepad.wButtons And LeftBumperButton) <> 0 Then
-            LeftBumperButtonPressed = True
-        Else
-            LeftBumperButtonPressed = False
-        End If
+        StartButtonPressed = (ControllerPosition.Gamepad.wButtons And StartButton) <> 0
 
-        If (ControllerPosition.Gamepad.wButtons And RightBumperButton) <> 0 Then
-            RightBumperButtonPressed = True
-        Else
-            RightBumperButtonPressed = False
-        End If
+        'If (ControllerPosition.Gamepad.wButtons And StartButton) <> 0 Then
+        '    StartButtonPressed = True
+        'Else
+        '    StartButtonPressed = False
+        'End If
 
-        If (ControllerPosition.Gamepad.wButtons And AButton) <> 0 Then
-            AButtonPressed = True
-        Else
-            AButtonPressed = False
-        End If
+        BackButtonPressed = (ControllerPosition.Gamepad.wButtons And BackButton) <> 0
 
-        If (ControllerPosition.Gamepad.wButtons And BButton) <> 0 Then
-            BButtonPressed = True
-        Else
-            BButtonPressed = False
-        End If
+        'If (ControllerPosition.Gamepad.wButtons And BackButton) <> 0 Then
+        '    BackButtonPressed = True
+        'Else
+        '    BackButtonPressed = False
+        'End If
 
-        If (ControllerPosition.Gamepad.wButtons And XButton) <> 0 Then
-            XButtonPressed = True
-        Else
-            XButtonPressed = False
-        End If
+        LeftStickButtonPressed = (ControllerPosition.Gamepad.wButtons And LeftStickButton) <> 0
 
-        If (ControllerPosition.Gamepad.wButtons And YButton) <> 0 Then
-            YButtonPressed = True
-        Else
-            YButtonPressed = False
-        End If
+        'If (ControllerPosition.Gamepad.wButtons And LeftStickButton) <> 0 Then
+        '    LeftStickButtonPressed = True
+        'Else
+        '    LeftStickButtonPressed = False
+        'End If
+
+        RightStickButtonPressed = (ControllerPosition.Gamepad.wButtons And RightStickButton) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And RightStickButton) <> 0 Then
+        '    RightStickButtonPressed = True
+        'Else
+        '    RightStickButtonPressed = False
+        'End If
+
+        LeftBumperButtonPressed = (ControllerPosition.Gamepad.wButtons And LeftBumperButton) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And LeftBumperButton) <> 0 Then
+        '    LeftBumperButtonPressed = True
+        'Else
+        '    LeftBumperButtonPressed = False
+        'End If
+
+        RightBumperButtonPressed = (ControllerPosition.Gamepad.wButtons And RightBumperButton) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And RightBumperButton) <> 0 Then
+        '    RightBumperButtonPressed = True
+        'Else
+        '    RightBumperButtonPressed = False
+        'End If
+
+        AButtonPressed = (ControllerPosition.Gamepad.wButtons And AButton) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And AButton) <> 0 Then
+        '    AButtonPressed = True
+        'Else
+        '    AButtonPressed = False
+        'End If
+
+        BButtonPressed = (ControllerPosition.Gamepad.wButtons And BButton) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And BButton) <> 0 Then
+        '    BButtonPressed = True
+        'Else
+        '    BButtonPressed = False
+        'End If
+
+        XButtonPressed = (ControllerPosition.Gamepad.wButtons And XButton) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And XButton) <> 0 Then
+        '    XButtonPressed = True
+        'Else
+        '    XButtonPressed = False
+        'End If
+
+        YButtonPressed = (ControllerPosition.Gamepad.wButtons And YButton) <> 0
+
+        'If (ControllerPosition.Gamepad.wButtons And YButton) <> 0 Then
+        '    YButtonPressed = True
+        'Else
+        '    YButtonPressed = False
+        'End If
 
         ConButtons(CID) = ControllerPosition.Gamepad.wButtons
 
