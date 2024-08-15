@@ -463,26 +463,26 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateLeftThumbstickPosition(ControllerNumber As Integer)
-        'The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
-        'The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        ' The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        ' The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
 
-        'What position is the left thumbstick in on the X-axis?
+        ' What position is the left thumbstick in on the X-axis?
         If ControllerPosition.Gamepad.sThumbLX <= NeutralStart Then
-            'The left thumbstick is in the left position.
+            ' The left thumbstick is in the left position.
 
             LabelLeftThumbX.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Left"
 
             IsConThumbLXNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
-            'The left thumbstick is in the right position.
+            ' The left thumbstick is in the right position.
 
             LabelLeftThumbX.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Right"
 
             IsConThumbLXNeutral(ControllerNumber) = False
 
         Else
-            'The left thumbstick is in the neutral position.
+            ' The left thumbstick is in the neutral position.
 
             IsConThumbLXNeutral(ControllerNumber) = True
 
@@ -490,23 +490,23 @@ Public Class Form1
 
         ClearLeftThumbstickXLabel()
 
-        'What position is the left thumbstick in on the Y-axis?
+        ' What position is the left thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
-            'The left thumbstick is in the down position.
+            ' The left thumbstick is in the down position.
 
             LabelLeftThumbY.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Down"
 
             IsConThumbLYNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
-            'The left thumbstick is in the up position.
+            ' The left thumbstick is in the up position.
 
             LabelLeftThumbY.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Up"
 
             IsConThumbLYNeutral(ControllerNumber) = False
 
         Else
-            'The left thumbstick is in the neutral position.
+            ' The left thumbstick is in the neutral position.
 
             IsConThumbLYNeutral(ControllerNumber) = True
 
