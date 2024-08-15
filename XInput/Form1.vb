@@ -714,9 +714,9 @@ Public Class Form1
             End If
         Next
 
-        'Are all controllers right thumbsticks in the neutral position?
+        'Are all controllers right thumbsticks on the X-axis in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers right thumbsticks are in the neutral position.
+            'Yes, all controllers right thumbsticks on the X-axis are in the neutral position.
 
             LabelRightThumbX.Text = String.Empty 'Clear label.
 
