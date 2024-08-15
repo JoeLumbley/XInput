@@ -617,9 +617,9 @@ Public Class Form1
     End Sub
 
     Private Sub ClearButtonsLabel()
-        'Clears the buttons label when all controllers buttons are up.
+        ' Clears the buttons label when all controllers buttons are up.
 
-        Dim ConSum As Integer
+        Dim ConSum As Integer = 0
 
         For Each Con In ConButtons
 
@@ -627,9 +627,9 @@ Public Class Form1
 
         Next
 
-        'Are all controllers buttons up?
+        ' Are all controllers buttons up?
         If ConSum = 0 Then
-            'Yes, all controller buttons are up.
+            ' Yes, all controller buttons are up.
 
             LabelButtons.Text = String.Empty 'Clear label.
 
