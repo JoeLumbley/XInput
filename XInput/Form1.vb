@@ -1125,113 +1125,89 @@ Public Class Form1
 End Class
 
 
-'Consuming Unmanaged DLL Functions
+' Consuming Unmanaged DLL Functions
 
-'Consuming unmanaged DLL functions refers to the process of using functions that are defined in a DLL (Dynamic Link Library)
-'which is written in a language like C or C++.
+' Consuming unmanaged DLL functions refers to the process of using functions that are defined in a
+' DLL (Dynamic Link Library) which is written in a language like C or C++. This involves using
+' Platform Invocation Services (P/Invoke) to call functions in the unmanaged DLL from your managed
+' VB code. To consume unmanaged DLL functions use the DllImport attribute to declare the external
+' functions from the DLL.
 
-'This involves using Platform Invocation Services (P/Invoke) to call functions in the unmanaged DLL from your managed VB.NET
-'code.
-
-'To consume unmanaged DLL functions use the DllImport attribute to declare the external functions from the DLL.
-
-'https://learn.microsoft.com/en-us/dotnet/framework/interop/consuming-unmanaged-dll-functions
+' https://learn.microsoft.com/en-us/dotnet/framework/interop/consuming-unmanaged-dll-functions
 
 
-'Passing Structures
+' Passing Structures
 
-'Passing structures refers to the process of sending structured data as a parameter to a function or method.
+' Passing structures refers to the process of sending structured data as a parameter to a function
+' or method. Structures, also known as structs, allow you to group related data together under a
+' single name. When passing structures as parameters you are essentially sending a block of data
+' that contains multiple fields or members. This can be useful for organizing related data and
+' passing them around your program efficiently.
 
-'Structures, also known as structs, allow you to group related data together under a single name.
-
-'When passing structures as parameters you are essentially sending a block of data that contains multiple fields or members.
-
-'This can be useful for organizing related data and passing them around your program efficiently.
-
-'https://learn.microsoft.com/en-us/dotnet/framework/interop/passing-structures
+' https://learn.microsoft.com/en-us/dotnet/framework/interop/passing-structures
 
 
-'XInputGetState Function
+' XInputGetState Function
 
-'The XInputGetState function is used to retrieve the current state of a Xbox controller.
+' The XInputGetState function is used to retrieve the current state of a Xbox controller.
 
-'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate
-
-
-'XINPUT_STATE Structure
-
-'The XINPUT_STATE structure is used to hold the current state of an Xbox controller.
-
-'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state
+' https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate
 
 
-'XINPUT_GAMEPAD Structure
+' XINPUT_STATE Structure
 
-'The XINPUT_GAMEPAD structure represents the state of the gamepad (Xbox controller) input, including information about
-'button presses, trigger values, and thumbstick positions.
+' The XINPUT_STATE structure is used to hold the current state of an Xbox controller.
 
-'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad
-
-
-'XInputSetState Function
-'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate
+' https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state
 
 
-'XINPUT_VIBRATION Structure
-'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration
+' XINPUT_GAMEPAD Structure
+
+' The XINPUT_GAMEPAD structure represents the state of the gamepad (Xbox controller) input,
+' including information about button presses, trigger values, and thumbstick positions.
+
+' https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad
 
 
-'XInputGetBatteryInformation Function
-'https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation
+' XInputSetState Function
+' https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate
 
 
-'XINPUT_BATTERY_INFORMATION Structure
-'https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information
+' XINPUT_VIBRATION Structure
+' https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration
 
 
-'Getting Started with XInput in Windows Applications
-'https://learn.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput
+' XInputGetBatteryInformation Function
+' https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation
 
 
-'XInput Game Controller APIs
-'https://learn.microsoft.com/en-us/windows/win32/api/_xinput/
+' XINPUT_BATTERY_INFORMATION Structure
+' https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information
 
 
-'XInput Versions
-'https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-versions
+' Getting Started with XInput in Windows Applications
+' https://learn.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput
 
 
-'Comparison of XInput and DirectInput Features
-'https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-and-directinput
+' XInput Game Controller APIs
+' https://learn.microsoft.com/en-us/windows/win32/api/_xinput/
 
 
-'Short Data Type
-'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/short-data-type
+' XInput Versions
+' https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-versions
 
 
-'Byte Data Type
-'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/byte-data-type
+' Comparison of XInput and DirectInput Features
+' https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-and-directinput
 
 
-'UShort Data Type
-'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/ushort-data-type
+' Data Type Summary (Visual Basic)
+' https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/
 
 
-'UInteger Data Type
-'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/uinteger-data-type
+' Monica is our an AI assistant.
+' https://monica.im/
 
 
-'Boolean Data Type
-'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/boolean-data-type
-
-
-'Integer Data Type
-'https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/integer-data-type
-
-
-'Monica is our an AI assistant.
-'https://monica.im/
-
-
-'I also make coding videos on my YouTube channel.
-'https://www.youtube.com/@codewithjoe6074
+' I also make coding videos on my YouTube channel.
+' https://www.youtube.com/@codewithjoe6074
