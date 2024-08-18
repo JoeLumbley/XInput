@@ -402,16 +402,19 @@ Public Class Form1
         If StartButtonPressed = True Then
 
             If BackButtonPressed = True Then
+
                 LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Start+Back"
+
             Else
+
                 LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Start"
+
             End If
 
-        Else
+        ElseIf BackButtonPressed = True Then
 
-            If BackButtonPressed = True Then
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Back"
-            End If
+            LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Back"
+
         End If
 
     End Sub
@@ -421,17 +424,24 @@ Public Class Form1
         If LeftBumperButtonPressed = True Then
 
             If RightBumperButtonPressed = True Then
+
                 LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Bumper+Right Bumper"
+
             Else
+
                 LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Bumper"
+
             End If
+
         Else
 
             If RightBumperButtonPressed = True Then
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Bumper"
-            End If
-        End If
 
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Bumper"
+
+            End If
+
+        End If
 
     End Sub
 
@@ -440,17 +450,24 @@ Public Class Form1
         If LeftStickButtonPressed = True Then
 
             If RightStickButtonPressed = True Then
+
                 LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Stick+Right Stick"
+
             Else
+
                 LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Stick"
+
             End If
+
         Else
 
             If RightStickButtonPressed = True Then
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Stick"
-            End If
-        End If
 
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Stick"
+
+            End If
+
+        End If
 
     End Sub
 
