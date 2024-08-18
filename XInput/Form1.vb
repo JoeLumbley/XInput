@@ -363,68 +363,6 @@ Public Class Form1
 
     End Function
 
-
-
-
-
-
-
-
-    'Private Sub DoDPadLogic(ControllerNumber As Integer)
-
-    '    If DPadUpPressed = True Then
-
-    '        If DPadLeftPressed = True Then
-
-    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Left+Up"
-
-    '        ElseIf DPadRightPressed = True Then
-
-    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Right+Up"
-
-    '        Else
-
-    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Up"
-
-    '        End If
-
-    '    End If
-
-    '    If DPadDownPressed = True Then
-
-    '        If DPadLeftPressed = True Then
-
-    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Left+Down"
-
-    '        ElseIf DPadRightPressed = True Then
-
-    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Right+Down"
-
-    '        Else
-
-    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Down"
-
-    '        End If
-
-    '    End If
-
-    '    If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-
-    '        LabelButtons.Text = $"Controller {ControllerNumber} Button: Left"
-
-    '    End If
-
-    '    If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-
-    '        LabelButtons.Text = $"Controller {ControllerNumber} Button: Right"
-
-    '    End If
-
-    'End Sub
-
-
-
-
     Private Sub DoLetterButtonLogic(ControllerNumber As Integer)
 
         If AButtonPressed = True Then
