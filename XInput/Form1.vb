@@ -326,39 +326,49 @@ Public Class Form1
         If DPadUpPressed = True Then
 
             If DPadLeftPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left+Up"
+
+                LabelButtons.Text = $"Controller {ControllerNumber} Button: Left+Up"
+
             ElseIf DPadRightPressed = True Then
 
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right+Up"
+                LabelButtons.Text = $"Controller {ControllerNumber} Button: Right+Up"
+
             Else
 
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Up"
+                LabelButtons.Text = $"Controller {ControllerNumber} Button: Up"
+
             End If
 
         End If
-
 
         If DPadDownPressed = True Then
 
             If DPadLeftPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left+Down"
+
+                LabelButtons.Text = $"Controller {ControllerNumber} Button: Left+Down"
+
             ElseIf DPadRightPressed = True Then
 
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right+Down"
+                LabelButtons.Text = $"Controller {ControllerNumber} Button: Right+Down"
+
             Else
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Down"
+
+                LabelButtons.Text = $"Controller {ControllerNumber} Button: Down"
+
             End If
 
         End If
 
-
         If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-            LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Left"
+
+            LabelButtons.Text = $"Controller {ControllerNumber} Button: Left"
+
         End If
 
-
         If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-            LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Button: Right"
+
+            LabelButtons.Text = $"Controller {ControllerNumber} Button: Right"
+
         End If
 
     End Sub
@@ -373,19 +383,19 @@ Public Class Form1
 
                     If YButtonPressed = True Then
 
-                        LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+B+X+Y"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+X+Y"
                     Else
 
-                        LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+B+X"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+X"
                     End If
 
                 Else
                     If YButtonPressed = True Then
 
-                        LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+B+Y"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+Y"
                     Else
 
-                        LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+B"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B"
                     End If
 
                 End If
@@ -395,18 +405,18 @@ Public Class Form1
 
                     If YButtonPressed = True Then
 
-                        LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+X+Y"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+X+Y"
                     Else
 
-                        LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+X"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+X"
                     End If
                 Else
                     If YButtonPressed = True Then
 
-                        LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A+Y"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+Y"
                     Else
 
-                        LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: A"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A"
                     End If
 
                 End If
@@ -420,19 +430,19 @@ Public Class Form1
 
                 If YButtonPressed = True Then
 
-                    LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: B+X+Y"
+                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+X+Y"
                 Else
 
-                    LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: B+X"
+                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+X"
                 End If
 
             Else
                 If YButtonPressed = True Then
 
-                    LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: B+Y"
+                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+Y"
                 Else
 
-                    LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: B"
+                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B"
                 End If
 
             End If
@@ -443,17 +453,17 @@ Public Class Form1
 
             If YButtonPressed = True Then
 
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: X+Y"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: X+Y"
             Else
 
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: X"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: X"
             End If
 
         Else
 
             If YButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
 
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Y"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Y"
             End If
 
         End If
@@ -465,15 +475,15 @@ Public Class Form1
         If StartButtonPressed = True Then
 
             If BackButtonPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Start+Back"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Start+Back"
             Else
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Start"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Start"
             End If
 
         Else
 
             If BackButtonPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Back"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Back"
             End If
         End If
 
@@ -484,14 +494,14 @@ Public Class Form1
         If LeftBumperButtonPressed = True Then
 
             If RightBumperButtonPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Left Bumper+Right Bumper"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Bumper+Right Bumper"
             Else
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Left Bumper"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Bumper"
             End If
         Else
 
             If RightBumperButtonPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Right Bumper"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Bumper"
             End If
         End If
 
@@ -503,14 +513,14 @@ Public Class Form1
         If LeftStickButtonPressed = True Then
 
             If RightStickButtonPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Left Stick+Right Stick"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Stick+Right Stick"
             Else
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Left Stick"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Stick"
             End If
         Else
 
             If RightStickButtonPressed = True Then
-                LabelButtons.Text = "Controller " & ControllerNumber.ToString & " Buttons: Right Stick"
+                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Stick"
             End If
         End If
 
@@ -525,14 +535,14 @@ Public Class Form1
         If ControllerPosition.Gamepad.sThumbLX <= NeutralStart Then
             ' The left thumbstick is in the left position.
 
-            LabelLeftThumbX.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Left"
+            LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick: Left"
 
             IsConThumbLXNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
             ' The left thumbstick is in the right position.
 
-            LabelLeftThumbX.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Right"
+            LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick: Right"
 
             IsConThumbLXNeutral(ControllerNumber) = False
 
@@ -549,14 +559,14 @@ Public Class Form1
         If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
             ' The left thumbstick is in the down position.
 
-            LabelLeftThumbY.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Down"
+            LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick: Down"
 
             IsConThumbLYNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
             ' The left thumbstick is in the up position.
 
-            LabelLeftThumbY.Text = "Controller " & ControllerNumber.ToString & " Left Thumbstick: Up"
+            LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick: Up"
 
             IsConThumbLYNeutral(ControllerNumber) = False
 
@@ -579,14 +589,14 @@ Public Class Form1
         If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
             'The right thumbstick is in the left position.
 
-            LabelRightThumbX.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Left"
+            LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick: Left"
 
             IsConThumbRXNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
             'The right thumbstick is in the right position.
 
-            LabelRightThumbX.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Right"
+            LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick: Right"
 
             IsConThumbRXNeutral(ControllerNumber) = False
 
@@ -603,14 +613,14 @@ Public Class Form1
         If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
             'The right thumbstick is in the up position.
 
-            LabelRightThumbY.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Down"
+            LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick: Down"
 
             IsConThumbRYNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
             'The right thumbstick is in the down position.
 
-            LabelRightThumbY.Text = "Controller " & ControllerNumber.ToString & " Right Thumbstick: Up"
+            LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick: Up"
 
             IsConThumbRYNeutral(ControllerNumber) = False
 
@@ -633,7 +643,7 @@ Public Class Form1
         If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
             'The right trigger is in the down position. Trigger Break. Bang!
 
-            LabelRightTrigger.Text = "Controller " & ControllerNumber.ToString & " Right Trigger"
+            LabelRightTrigger.Text = $"Controller {ControllerNumber} Right Trigger"
 
             IsConRightTriggerNeutral(ControllerNumber) = False
 
@@ -656,7 +666,7 @@ Public Class Form1
         If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
             'The left trigger is in the down position. Trigger Break. Bang!
 
-            LabelLeftTrigger.Text = "Controller " & ControllerNumber.ToString & " Left Trigger"
+            LabelLeftTrigger.Text = $"Controller {ControllerNumber} Left Trigger"
 
             IsConLeftTriggerNeutral(ControllerNumber) = False
 
@@ -1075,7 +1085,7 @@ Public Class Form1
 
     Private Sub UpdateSpeedLabel()
 
-        LabelSpeed.Text = "Vibration Speed: " & TrackBarSpeed.Value
+        LabelSpeed.Text = $"Vibration Speed: {TrackBarSpeed.Value}"
 
     End Sub
 
