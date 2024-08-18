@@ -433,13 +433,9 @@ Public Class Form1
 
             End If
 
-        Else
+        ElseIf RightBumperButtonPressed = True Then
 
-            If RightBumperButtonPressed = True Then
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Bumper"
-
-            End If
+            LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Bumper"
 
         End If
 
@@ -459,13 +455,9 @@ Public Class Form1
 
             End If
 
-        Else
+        ElseIf RightStickButtonPressed = True Then
 
-            If RightStickButtonPressed = True Then
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Stick"
-
-            End If
+            LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Stick"
 
         End If
 
