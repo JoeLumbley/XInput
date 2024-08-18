@@ -321,57 +321,109 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoDPadLogic(ControllerNumber As Integer)
+    Private Sub DoDPadLogic(controllerNumber As Integer)
 
-        If DPadUpPressed = True Then
+        Dim direction As String = GetDPadDirection()
 
-            If DPadLeftPressed = True Then
+        If direction <> "NONE" Then
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Button: Left+Up"
-
-            ElseIf DPadRightPressed = True Then
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Button: Right+Up"
-
-            Else
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Button: Up"
-
-            End If
-
-        End If
-
-        If DPadDownPressed = True Then
-
-            If DPadLeftPressed = True Then
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Button: Left+Down"
-
-            ElseIf DPadRightPressed = True Then
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Button: Right+Down"
-
-            Else
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Button: Down"
-
-            End If
-
-        End If
-
-        If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-
-            LabelButtons.Text = $"Controller {ControllerNumber} Button: Left"
-
-        End If
-
-        If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
-
-            LabelButtons.Text = $"Controller {ControllerNumber} Button: Right"
+            LabelButtons.Text = $"Controller {controllerNumber} Button: {direction}"
 
         End If
 
     End Sub
+
+    Private Function GetDPadDirection() As String
+
+        If DPadUpPressed Then
+
+            If DPadLeftPressed Then Return "Left+Up"
+
+            If DPadRightPressed Then Return "Right+Up"
+
+            Return "Up"
+
+        End If
+
+        If DPadDownPressed Then
+
+            If DPadLeftPressed Then Return "Left+Down"
+
+            If DPadRightPressed Then Return "Right+Down"
+
+            Return "Down"
+
+        End If
+
+        If DPadLeftPressed Then Return "Left"
+
+        If DPadRightPressed Then Return "Right"
+
+        Return "NONE"
+
+    End Function
+
+
+
+
+
+
+
+
+    'Private Sub DoDPadLogic(ControllerNumber As Integer)
+
+    '    If DPadUpPressed = True Then
+
+    '        If DPadLeftPressed = True Then
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Left+Up"
+
+    '        ElseIf DPadRightPressed = True Then
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Right+Up"
+
+    '        Else
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Up"
+
+    '        End If
+
+    '    End If
+
+    '    If DPadDownPressed = True Then
+
+    '        If DPadLeftPressed = True Then
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Left+Down"
+
+    '        ElseIf DPadRightPressed = True Then
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Right+Down"
+
+    '        Else
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Down"
+
+    '        End If
+
+    '    End If
+
+    '    If DPadLeftPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
+
+    '        LabelButtons.Text = $"Controller {ControllerNumber} Button: Left"
+
+    '    End If
+
+    '    If DPadRightPressed = True AndAlso DPadDownPressed = False AndAlso DPadUpPressed = False Then
+
+    '        LabelButtons.Text = $"Controller {ControllerNumber} Button: Right"
+
+    '    End If
+
+    'End Sub
+
+
+
 
     Private Sub DoLetterButtonLogic(ControllerNumber As Integer)
 
@@ -384,18 +436,23 @@ Public Class Form1
                     If YButtonPressed = True Then
 
                         LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+X+Y"
+
                     Else
 
                         LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+X"
+
                     End If
 
                 Else
+
                     If YButtonPressed = True Then
 
                         LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+Y"
+
                     Else
 
                         LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B"
+
                     End If
 
                 End If
@@ -416,7 +473,7 @@ Public Class Form1
                         LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+Y"
                     Else
 
-                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A"
+                        LabelButtons.Text = $"Controller {ControllerNumber} Button: A"
                     End If
 
                 End If
@@ -442,7 +499,7 @@ Public Class Form1
                     LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+Y"
                 Else
 
-                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B"
+                    LabelButtons.Text = $"Controller {ControllerNumber} Button: B"
                 End If
 
             End If
@@ -456,14 +513,14 @@ Public Class Form1
                 LabelButtons.Text = $"Controller {ControllerNumber} Buttons: X+Y"
             Else
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: X"
+                LabelButtons.Text = $"Controller {ControllerNumber} Button: X"
             End If
 
         Else
 
             If YButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Y"
+                LabelButtons.Text = $"Controller {ControllerNumber} Button: Y"
             End If
 
         End If
