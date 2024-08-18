@@ -325,7 +325,9 @@ Public Class Form1
 
         Dim direction As String = GetDPadDirection()
 
+        ' Are any DPad buttons pressed?
         If Not String.IsNullOrEmpty(direction) Then
+            ' Yes, DPad buttons are pressed.
 
             LabelButtons.Text = $"Controller {controllerNumber} Button: {direction}"
 
@@ -359,7 +361,7 @@ Public Class Form1
 
         If DPadRightPressed Then Return "Right"
 
-        Return String.Empty ' Return an empty string if no buttons are pressed
+        Return String.Empty ' Return an empty string if no buttons are pressed.
 
     End Function
 
@@ -367,7 +369,9 @@ Public Class Form1
 
         Dim buttonText As String = GetButtonText(controllerNumber)
 
+        ' Are any letter buttons pressed?
         If Not String.IsNullOrEmpty(buttonText) Then
+            ' Yes, letter buttons are pressed.
 
             LabelButtons.Text = buttonText
 
