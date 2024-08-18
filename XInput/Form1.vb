@@ -363,107 +363,143 @@ Public Class Form1
 
     End Function
 
-    Private Sub DoLetterButtonLogic(ControllerNumber As Integer)
+    Private Sub DoLetterButtonLogic(controllerNumber As Integer)
 
-        If AButtonPressed = True Then
+        Dim buttonText As String = GetButtonText(controllerNumber)
 
-            If BButtonPressed = True Then
+        If Not String.IsNullOrEmpty(buttonText) Then
 
-                If XButtonPressed = True Then
-
-                    If YButtonPressed = True Then
-
-                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+X+Y"
-
-                    Else
-
-                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+X"
-
-                    End If
-
-                Else
-
-                    If YButtonPressed = True Then
-
-                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+Y"
-
-                    Else
-
-                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B"
-
-                    End If
-
-                End If
-
-            Else
-                If XButtonPressed = True Then
-
-                    If YButtonPressed = True Then
-
-                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+X+Y"
-                    Else
-
-                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+X"
-                    End If
-                Else
-                    If YButtonPressed = True Then
-
-                        LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+Y"
-                    Else
-
-                        LabelButtons.Text = $"Controller {ControllerNumber} Button: A"
-                    End If
-
-                End If
-
-            End If
-        End If
-
-        If BButtonPressed = True AndAlso AButtonPressed = False Then
-
-            If XButtonPressed = True Then
-
-                If YButtonPressed = True Then
-
-                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+X+Y"
-                Else
-
-                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+X"
-                End If
-
-            Else
-                If YButtonPressed = True Then
-
-                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+Y"
-                Else
-
-                    LabelButtons.Text = $"Controller {ControllerNumber} Button: B"
-                End If
-
-            End If
-        End If
-
-
-        If XButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
-
-            If YButtonPressed = True Then
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: X+Y"
-            Else
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Button: X"
-            End If
-
-        Else
-
-            If YButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
-
-                LabelButtons.Text = $"Controller {ControllerNumber} Button: Y"
-            End If
+            LabelButtons.Text = buttonText
 
         End If
 
     End Sub
+
+    Private Function GetButtonText(controllerNumber As Integer) As String
+
+        Dim buttons As New List(Of String)
+
+        If AButtonPressed Then buttons.Add("A")
+
+        If BButtonPressed Then buttons.Add("B")
+
+        If XButtonPressed Then buttons.Add("X")
+
+        If YButtonPressed Then buttons.Add("Y")
+
+        If buttons.Count > 0 Then
+
+            Return $"Controller {controllerNumber} Buttons: {String.Join("+", buttons)}"
+
+        End If
+
+        Return String.Empty ' Return an empty string if no buttons are pressed
+
+    End Function
+
+
+
+    'Private Sub DoLetterButtonLogic(ControllerNumber As Integer)
+
+    '    If AButtonPressed = True Then
+
+    '        If BButtonPressed = True Then
+
+    '            If XButtonPressed = True Then
+
+    '                If YButtonPressed = True Then
+
+    '                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+X+Y"
+
+    '                Else
+
+    '                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+X"
+
+    '                End If
+
+    '            Else
+
+    '                If YButtonPressed = True Then
+
+    '                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B+Y"
+
+    '                Else
+
+    '                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+B"
+
+    '                End If
+
+    '            End If
+
+    '        Else
+    '            If XButtonPressed = True Then
+
+    '                If YButtonPressed = True Then
+
+    '                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+X+Y"
+    '                Else
+
+    '                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+X"
+    '                End If
+    '            Else
+    '                If YButtonPressed = True Then
+
+    '                    LabelButtons.Text = $"Controller {ControllerNumber} Buttons: A+Y"
+    '                Else
+
+    '                    LabelButtons.Text = $"Controller {ControllerNumber} Button: A"
+    '                End If
+
+    '            End If
+
+    '        End If
+    '    End If
+
+    '    If BButtonPressed = True AndAlso AButtonPressed = False Then
+
+    '        If XButtonPressed = True Then
+
+    '            If YButtonPressed = True Then
+
+    '                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+X+Y"
+    '            Else
+
+    '                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+X"
+    '            End If
+
+    '        Else
+    '            If YButtonPressed = True Then
+
+    '                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: B+Y"
+    '            Else
+
+    '                LabelButtons.Text = $"Controller {ControllerNumber} Button: B"
+    '            End If
+
+    '        End If
+    '    End If
+
+
+    '    If XButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
+
+    '        If YButtonPressed = True Then
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Buttons: X+Y"
+    '        Else
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: X"
+    '        End If
+
+    '    Else
+
+    '        If YButtonPressed = True AndAlso AButtonPressed = False AndAlso BButtonPressed = False Then
+
+    '            LabelButtons.Text = $"Controller {ControllerNumber} Button: Y"
+    '        End If
+
+    '    End If
+
+    'End Sub
 
     Private Sub DoStartBackLogic(ControllerNumber As Integer)
 
