@@ -278,6 +278,9 @@ Public Class Form1
             UpdateRightTriggerPosition(controllerNumber)
 
         Catch ex As Exception
+            ' Something went wrong (An exception occurred).
+
+            DisplayError(ex)
 
         End Try
 
