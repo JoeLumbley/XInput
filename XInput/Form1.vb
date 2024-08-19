@@ -233,26 +233,15 @@ Public Class Form1
 
             For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
 
-                Try
+                If IsControllerConnected(ControllerNumber) = True Then
 
-                    If IsControllerConnected(ControllerNumber) = True Then
+                    Connected(ControllerNumber) = True
 
-                        Connected(ControllerNumber) = True
+                Else
 
-                    Else
+                    Connected(ControllerNumber) = False
 
-                        Connected(ControllerNumber) = False
-
-                    End If
-
-                Catch ex As Exception
-                    'Something went wrong (An exception occured).
-
-                    DisplayError(ex)
-
-                    Exit Sub ' Exit the method on error
-
-                End Try
+                End If
 
             Next
 
@@ -271,35 +260,6 @@ Public Class Form1
             End If
 
         Next
-
-        'For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
-
-        '    Try
-
-        '        If IsControllerConnected(ControllerNumber) = True Then
-
-        '            UpdateControllerState(ControllerNumber)
-
-        '            Connected(ControllerNumber) = True
-
-        '        Else
-
-        '            Connected(ControllerNumber) = False
-
-        '        End If
-
-        '    Catch ex As Exception
-        '        'Something went wrong (An exception occured).
-
-        '        DisplayError(ex)
-
-        '        Exit Sub ' Exit the method on error
-
-        '    End Try
-
-        'Next
-
-        'UpdateBatteryInfo()
 
     End Sub
 
@@ -1080,8 +1040,19 @@ Public Class Form1
 
     Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
 
-        Return XInputGetState(controllerNumber, ControllerPosition) = 0 '0 means the controller is connected.
-        'Anything else (a non-zero value) means the controller is not connected.
+        Try
+
+            Return XInputGetState(controllerNumber, ControllerPosition) = 0 '0 means the controller is connected.
+            ' Anything else (a non-zero value) means the controller is not connected.
+
+        Catch ex As Exception
+            ' Something went wrong (An exception occured).
+
+            DisplayError(ex)
+
+            Return False
+
+        End Try
 
     End Function
 
