@@ -89,6 +89,8 @@ Public Class Form1
 
     Private ReadOnly Connected(0 To 3) As Boolean
 
+    Private ConnectionStart As Date = Now
+
     Private Const DPadUp As Integer = 1
     Private Const DPadDown As Integer = 2
 
@@ -223,32 +225,79 @@ Public Class Form1
 
     Private Sub UpdateControllerData()
 
+        Dim ElapsedTime As TimeSpan = Now - ConnectionStart
+
+        'Every second
+        If ElapsedTime.TotalSeconds >= 1 Then
+            ' Check for connected controllers.
+
+            For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
+
+                Try
+
+                    If IsControllerConnected(ControllerNumber) = True Then
+
+                        Connected(ControllerNumber) = True
+
+                    Else
+
+                        Connected(ControllerNumber) = False
+
+                    End If
+
+                Catch ex As Exception
+                    'Something went wrong (An exception occured).
+
+                    DisplayError(ex)
+
+                    Exit Sub ' Exit the method on error
+
+                End Try
+
+            Next
+
+            ConnectionStart = Now
+
+        End If
+
         For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
 
-            Try
+            If Connected(ControllerNumber) = True Then
 
-                If IsControllerConnected(ControllerNumber) = True Then
+                IsControllerConnected(ControllerNumber)
 
-                    UpdateControllerState(ControllerNumber)
+                UpdateControllerState(ControllerNumber)
 
-                    Connected(ControllerNumber) = True
-
-                Else
-
-                    Connected(ControllerNumber) = False
-
-                End If
-
-            Catch ex As Exception
-                'Something went wrong (An exception occured).
-
-                DisplayError(ex)
-
-                Exit Sub ' Exit the method on error
-
-            End Try
+            End If
 
         Next
+
+        'For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
+
+        '    Try
+
+        '        If IsControllerConnected(ControllerNumber) = True Then
+
+        '            UpdateControllerState(ControllerNumber)
+
+        '            Connected(ControllerNumber) = True
+
+        '        Else
+
+        '            Connected(ControllerNumber) = False
+
+        '        End If
+
+        '    Catch ex As Exception
+        '        'Something went wrong (An exception occured).
+
+        '        DisplayError(ex)
+
+        '        Exit Sub ' Exit the method on error
+
+        '    End Try
+
+        'Next
 
         'UpdateBatteryInfo()
 
