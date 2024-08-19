@@ -962,6 +962,66 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateSpeedLabel()
+
+        LabelSpeed.Text = $"Vibration Speed: {TrackBarSpeed.Value}"
+
+    End Sub
+
+    Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
+
+        Try
+
+            Return XInputGetState(controllerNumber, ControllerPosition) = 0 '0 means the controller is connected.
+            ' Anything else (a non-zero value) means the controller is not connected.
+
+        Catch ex As Exception
+            ' Something went wrong (An exception occured).
+
+            DisplayError(ex)
+
+            Return False
+
+        End Try
+
+    End Function
+
+    Private Sub DisplayError(ex As Exception)
+
+        MsgBox(ex.ToString()) ' Display the exception message in a message box.
+
+    End Sub
+
+    Private Sub InitializeApp()
+
+        Text = "XInput - Code with Joe"
+
+        InitializeTimer1()
+
+        ClearLabels()
+
+        TrackBarSpeed.Value = 32767
+
+        UpdateSpeedLabel()
+
+        For Each Con In IsLeftVibrating
+
+            IsLeftVibrating(Array.IndexOf(IsLeftVibrating, Con)) = False
+
+        Next
+
+        For Each Con In IsRightVibrating
+
+            IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
+
+        Next
+
+        LabelBatteryLevel.Text = String.Empty
+
+        LabelBatteryType.Text = String.Empty
+
+    End Sub
+
     Private Sub UpdateBatteryInfo()
 
         'Get battery level
@@ -1029,66 +1089,6 @@ Public Class Form1
         LabelBatteryLevel.Text = ""
 
         LabelBatteryType.Text = ""
-
-    End Sub
-
-    Private Sub UpdateSpeedLabel()
-
-        LabelSpeed.Text = $"Vibration Speed: {TrackBarSpeed.Value}"
-
-    End Sub
-
-    Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
-
-        Try
-
-            Return XInputGetState(controllerNumber, ControllerPosition) = 0 '0 means the controller is connected.
-            ' Anything else (a non-zero value) means the controller is not connected.
-
-        Catch ex As Exception
-            ' Something went wrong (An exception occured).
-
-            DisplayError(ex)
-
-            Return False
-
-        End Try
-
-    End Function
-
-    Private Sub DisplayError(ex As Exception)
-
-        MsgBox(ex.ToString()) ' Display the exception message in a message box.
-
-    End Sub
-
-    Private Sub InitializeApp()
-
-        Text = "XInput - Code with Joe"
-
-        InitializeTimer1()
-
-        ClearLabels()
-
-        TrackBarSpeed.Value = 32767
-
-        UpdateSpeedLabel()
-
-        For Each Con In IsLeftVibrating
-
-            IsLeftVibrating(Array.IndexOf(IsLeftVibrating, Con)) = False
-
-        Next
-
-        For Each Con In IsRightVibrating
-
-            IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
-
-        Next
-
-        LabelBatteryLevel.Text = String.Empty
-
-        LabelBatteryType.Text = String.Empty
 
     End Sub
 
