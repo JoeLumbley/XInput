@@ -253,8 +253,6 @@ Public Class Form1
 
             If Connected(ControllerNumber) = True Then
 
-                IsControllerConnected(ControllerNumber)
-
                 UpdateControllerState(ControllerNumber)
 
             End If
@@ -265,15 +263,23 @@ Public Class Form1
 
     Private Sub UpdateControllerState(controllerNumber As Integer)
 
-        UpdateButtonPosition(controllerNumber)
+        Try
 
-        UpdateLeftThumbstickPosition(controllerNumber)
+            XInputGetState(controllerNumber, ControllerPosition)
 
-        UpdateRightThumbstickPosition(controllerNumber)
+            UpdateButtonPosition(controllerNumber)
 
-        UpdateLeftTriggerPosition(controllerNumber)
+            UpdateLeftThumbstickPosition(controllerNumber)
 
-        UpdateRightTriggerPosition(controllerNumber)
+            UpdateRightThumbstickPosition(controllerNumber)
+
+            UpdateLeftTriggerPosition(controllerNumber)
+
+            UpdateRightTriggerPosition(controllerNumber)
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
