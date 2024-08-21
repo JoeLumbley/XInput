@@ -39,8 +39,10 @@ Partial Class Form1
         LabelSpeed = New Label()
         Label1 = New Label()
         LabelBatteryType = New Label()
+        GroupBox1 = New GroupBox()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
+        GroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
         ' Timer1
@@ -111,7 +113,7 @@ Partial Class Form1
         ' 
         ' ButtonVibrateLeft
         ' 
-        ButtonVibrateLeft.Location = New Point(14, 194)
+        ButtonVibrateLeft.Location = New Point(16, 80)
         ButtonVibrateLeft.Name = "ButtonVibrateLeft"
         ButtonVibrateLeft.Size = New Size(138, 34)
         ButtonVibrateLeft.TabIndex = 7
@@ -120,7 +122,7 @@ Partial Class Form1
         ' 
         ' ButtonVibrateRight
         ' 
-        ButtonVibrateRight.Location = New Point(389, 194)
+        ButtonVibrateRight.Location = New Point(440, 80)
         ButtonVibrateRight.Name = "ButtonVibrateRight"
         ButtonVibrateRight.Size = New Size(138, 34)
         ButtonVibrateRight.TabIndex = 8
@@ -129,7 +131,7 @@ Partial Class Form1
         ' 
         ' NumControllerToVib
         ' 
-        NumControllerToVib.Location = New Point(197, 147)
+        NumControllerToVib.Location = New Point(119, 35)
         NumControllerToVib.Maximum = New Decimal(New Integer() {3, 0, 0, 0})
         NumControllerToVib.Name = "NumControllerToVib"
         NumControllerToVib.Size = New Size(138, 31)
@@ -138,7 +140,7 @@ Partial Class Form1
         ' LabelBatteryLevel
         ' 
         LabelBatteryLevel.AutoSize = True
-        LabelBatteryLevel.Location = New Point(341, 149)
+        LabelBatteryLevel.Location = New Point(223, 540)
         LabelBatteryLevel.Name = "LabelBatteryLevel"
         LabelBatteryLevel.Size = New Size(147, 25)
         LabelBatteryLevel.TabIndex = 10
@@ -146,17 +148,19 @@ Partial Class Form1
         ' 
         ' TrackBarSpeed
         ' 
-        TrackBarSpeed.Location = New Point(172, 194)
+        TrackBarSpeed.LargeChange = 16384
+        TrackBarSpeed.Location = New Point(173, 83)
         TrackBarSpeed.Maximum = 65535
         TrackBarSpeed.Name = "TrackBarSpeed"
-        TrackBarSpeed.Size = New Size(180, 69)
+        TrackBarSpeed.Size = New Size(250, 69)
+        TrackBarSpeed.SmallChange = 8192
         TrackBarSpeed.TabIndex = 11
-        TrackBarSpeed.TickFrequency = 5555
+        TrackBarSpeed.TickFrequency = 16384
         ' 
         ' LabelSpeed
         ' 
         LabelSpeed.AutoSize = True
-        LabelSpeed.Location = New Point(182, 238)
+        LabelSpeed.Location = New Point(238, 121)
         LabelSpeed.Name = "LabelSpeed"
         LabelSpeed.Size = New Size(103, 25)
         LabelSpeed.TabIndex = 12
@@ -165,34 +169,44 @@ Partial Class Form1
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(14, 149)
+        Label1.Location = New Point(16, 37)
         Label1.Name = "Label1"
-        Label1.Size = New Size(177, 25)
+        Label1.Size = New Size(90, 25)
         Label1.TabIndex = 13
-        Label1.Text = "Controller to Vibrate:"
+        Label1.Text = "Controller"
         ' 
         ' LabelBatteryType
         ' 
         LabelBatteryType.AutoSize = True
-        LabelBatteryType.Location = New Point(14, 281)
+        LabelBatteryType.Location = New Point(42, 529)
         LabelBatteryType.Name = "LabelBatteryType"
         LabelBatteryType.Size = New Size(145, 25)
         LabelBatteryType.TabIndex = 14
         LabelBatteryType.Text = "LabelBatteryType"
+        ' 
+        ' GroupBox1
+        ' 
+        GroupBox1.Controls.Add(Label1)
+        GroupBox1.Controls.Add(NumControllerToVib)
+        GroupBox1.Controls.Add(LabelSpeed)
+        GroupBox1.Controls.Add(ButtonVibrateRight)
+        GroupBox1.Controls.Add(ButtonVibrateLeft)
+        GroupBox1.Controls.Add(TrackBarSpeed)
+        GroupBox1.Location = New Point(17, 218)
+        GroupBox1.Name = "GroupBox1"
+        GroupBox1.Size = New Size(607, 163)
+        GroupBox1.TabIndex = 15
+        GroupBox1.TabStop = False
+        GroupBox1.Text = "Rumble"
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(980, 398)
+        Controls.Add(GroupBox1)
         Controls.Add(LabelBatteryType)
-        Controls.Add(Label1)
-        Controls.Add(LabelSpeed)
-        Controls.Add(TrackBarSpeed)
         Controls.Add(LabelBatteryLevel)
-        Controls.Add(NumControllerToVib)
-        Controls.Add(ButtonVibrateRight)
-        Controls.Add(ButtonVibrateLeft)
         Controls.Add(LabelRightThumbX)
         Controls.Add(LabelRightThumbY)
         Controls.Add(LabelLeftThumbY)
@@ -201,9 +215,12 @@ Partial Class Form1
         Controls.Add(LabelLeftTrigger)
         Controls.Add(LabelButtons)
         Name = "Form1"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).EndInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).EndInit()
+        GroupBox1.ResumeLayout(False)
+        GroupBox1.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -224,4 +241,5 @@ Partial Class Form1
     Friend WithEvents LabelSpeed As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents LabelBatteryType As Label
+    Friend WithEvents GroupBox1 As GroupBox
 End Class
