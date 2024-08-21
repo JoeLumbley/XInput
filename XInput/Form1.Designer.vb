@@ -40,9 +40,11 @@ Partial Class Form1
         Label1 = New Label()
         LabelBatteryType = New Label()
         GroupBox1 = New GroupBox()
+        GroupBox2 = New GroupBox()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
+        GroupBox2.SuspendLayout()
         SuspendLayout()
         ' 
         ' Timer1
@@ -51,7 +53,7 @@ Partial Class Form1
         ' LabelButtons
         ' 
         LabelButtons.AutoSize = True
-        LabelButtons.Location = New Point(365, 49)
+        LabelButtons.Location = New Point(162, 57)
         LabelButtons.Name = "LabelButtons"
         LabelButtons.Size = New Size(114, 25)
         LabelButtons.TabIndex = 0
@@ -60,7 +62,7 @@ Partial Class Form1
         ' LabelLeftTrigger
         ' 
         LabelLeftTrigger.AutoSize = True
-        LabelLeftTrigger.Location = New Point(12, 9)
+        LabelLeftTrigger.Location = New Point(6, 32)
         LabelLeftTrigger.Name = "LabelLeftTrigger"
         LabelLeftTrigger.Size = New Size(136, 25)
         LabelLeftTrigger.TabIndex = 1
@@ -69,7 +71,7 @@ Partial Class Form1
         ' LabelRightTrigger
         ' 
         LabelRightTrigger.AutoSize = True
-        LabelRightTrigger.Location = New Point(365, 9)
+        LabelRightTrigger.Location = New Point(162, 32)
         LabelRightTrigger.Name = "LabelRightTrigger"
         LabelRightTrigger.Size = New Size(149, 25)
         LabelRightTrigger.TabIndex = 2
@@ -78,7 +80,7 @@ Partial Class Form1
         ' LabelLeftThumbX
         ' 
         LabelLeftThumbX.AutoSize = True
-        LabelLeftThumbX.Location = New Point(14, 68)
+        LabelLeftThumbX.Location = New Point(6, 64)
         LabelLeftThumbX.Name = "LabelLeftThumbX"
         LabelLeftThumbX.Size = New Size(149, 25)
         LabelLeftThumbX.TabIndex = 3
@@ -87,7 +89,7 @@ Partial Class Form1
         ' LabelLeftThumbY
         ' 
         LabelLeftThumbY.AutoSize = True
-        LabelLeftThumbY.Location = New Point(15, 93)
+        LabelLeftThumbY.Location = New Point(6, 89)
         LabelLeftThumbY.Name = "LabelLeftThumbY"
         LabelLeftThumbY.Size = New Size(148, 25)
         LabelLeftThumbY.TabIndex = 4
@@ -96,7 +98,7 @@ Partial Class Form1
         ' LabelRightThumbY
         ' 
         LabelRightThumbY.AutoSize = True
-        LabelRightThumbY.Location = New Point(366, 120)
+        LabelRightThumbY.Location = New Point(162, 106)
         LabelRightThumbY.Name = "LabelRightThumbY"
         LabelRightThumbY.Size = New Size(161, 25)
         LabelRightThumbY.TabIndex = 5
@@ -105,7 +107,7 @@ Partial Class Form1
         ' LabelRightThumbX
         ' 
         LabelRightThumbX.AutoSize = True
-        LabelRightThumbX.Location = New Point(365, 95)
+        LabelRightThumbX.Location = New Point(161, 81)
         LabelRightThumbX.Name = "LabelRightThumbX"
         LabelRightThumbX.Size = New Size(162, 25)
         LabelRightThumbX.TabIndex = 6
@@ -199,21 +201,31 @@ Partial Class Form1
         GroupBox1.TabStop = False
         GroupBox1.Text = "Rumble"
         ' 
+        ' GroupBox2
+        ' 
+        GroupBox2.Controls.Add(LabelLeftTrigger)
+        GroupBox2.Controls.Add(LabelRightTrigger)
+        GroupBox2.Controls.Add(LabelLeftThumbX)
+        GroupBox2.Controls.Add(LabelLeftThumbY)
+        GroupBox2.Controls.Add(LabelRightThumbY)
+        GroupBox2.Controls.Add(LabelRightThumbX)
+        GroupBox2.Controls.Add(LabelButtons)
+        GroupBox2.Location = New Point(17, 8)
+        GroupBox2.Name = "GroupBox2"
+        GroupBox2.Size = New Size(943, 203)
+        GroupBox2.TabIndex = 16
+        GroupBox2.TabStop = False
+        GroupBox2.Text = "Monitor - Press any button on your controller"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(980, 398)
+        Controls.Add(GroupBox2)
         Controls.Add(GroupBox1)
         Controls.Add(LabelBatteryType)
         Controls.Add(LabelBatteryLevel)
-        Controls.Add(LabelRightThumbX)
-        Controls.Add(LabelRightThumbY)
-        Controls.Add(LabelLeftThumbY)
-        Controls.Add(LabelLeftThumbX)
-        Controls.Add(LabelRightTrigger)
-        Controls.Add(LabelLeftTrigger)
-        Controls.Add(LabelButtons)
         Name = "Form1"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
@@ -221,6 +233,8 @@ Partial Class Form1
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
+        GroupBox2.ResumeLayout(False)
+        GroupBox2.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -242,4 +256,5 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents LabelBatteryType As Label
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GroupBox2 As GroupBox
 End Class
