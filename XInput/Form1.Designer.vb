@@ -41,10 +41,16 @@ Partial Class Form1
         LabelBatteryType = New Label()
         GroupBox1 = New GroupBox()
         GroupBox2 = New GroupBox()
+        GroupBox3 = New GroupBox()
+        LabelController0Status = New Label()
+        LabelController1Status = New Label()
+        LabelController2Status = New Label()
+        LabelController3Status = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         GroupBox2.SuspendLayout()
+        GroupBox3.SuspendLayout()
         SuspendLayout()
         ' 
         ' Timer1
@@ -217,11 +223,61 @@ Partial Class Form1
         GroupBox2.TabStop = False
         GroupBox2.Text = "Monitor - Press any button on your controller"
         ' 
+        ' GroupBox3
+        ' 
+        GroupBox3.Controls.Add(LabelController3Status)
+        GroupBox3.Controls.Add(LabelController2Status)
+        GroupBox3.Controls.Add(LabelController1Status)
+        GroupBox3.Controls.Add(LabelController0Status)
+        GroupBox3.Location = New Point(648, 219)
+        GroupBox3.Name = "GroupBox3"
+        GroupBox3.Size = New Size(312, 162)
+        GroupBox3.TabIndex = 17
+        GroupBox3.TabStop = False
+        GroupBox3.Text = "Status"
+        ' 
+        ' LabelController0Status
+        ' 
+        LabelController0Status.AutoSize = True
+        LabelController0Status.Location = New Point(23, 36)
+        LabelController0Status.Name = "LabelController0Status"
+        LabelController0Status.Size = New Size(189, 25)
+        LabelController0Status.TabIndex = 0
+        LabelController0Status.Text = "LabelController0Status"
+        ' 
+        ' LabelController1Status
+        ' 
+        LabelController1Status.AutoSize = True
+        LabelController1Status.Location = New Point(23, 61)
+        LabelController1Status.Name = "LabelController1Status"
+        LabelController1Status.Size = New Size(189, 25)
+        LabelController1Status.TabIndex = 1
+        LabelController1Status.Text = "LabelController1Status"
+        ' 
+        ' LabelController2Status
+        ' 
+        LabelController2Status.AutoSize = True
+        LabelController2Status.Location = New Point(23, 88)
+        LabelController2Status.Name = "LabelController2Status"
+        LabelController2Status.Size = New Size(189, 25)
+        LabelController2Status.TabIndex = 2
+        LabelController2Status.Text = "LabelController2Status"
+        ' 
+        ' LabelController3Status
+        ' 
+        LabelController3Status.AutoSize = True
+        LabelController3Status.Location = New Point(23, 113)
+        LabelController3Status.Name = "LabelController3Status"
+        LabelController3Status.Size = New Size(189, 25)
+        LabelController3Status.TabIndex = 3
+        LabelController3Status.Text = "LabelController3Status"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(980, 398)
+        Controls.Add(GroupBox3)
         Controls.Add(GroupBox2)
         Controls.Add(GroupBox1)
         Controls.Add(LabelBatteryType)
@@ -235,6 +291,8 @@ Partial Class Form1
         GroupBox1.PerformLayout()
         GroupBox2.ResumeLayout(False)
         GroupBox2.PerformLayout()
+        GroupBox3.ResumeLayout(False)
+        GroupBox3.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -257,4 +315,9 @@ Partial Class Form1
     Friend WithEvents LabelBatteryType As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents LabelController0Status As Label
+    Friend WithEvents LabelController3Status As Label
+    Friend WithEvents LabelController2Status As Label
+    Friend WithEvents LabelController1Status As Label
 End Class
