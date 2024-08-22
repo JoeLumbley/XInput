@@ -1,28 +1,28 @@
-﻿'XInput
+﻿' XInput
 
-'This is an example application that demonstrates the use of Xbox controllers,
-'including the vibration effect (rumble).
+' This is an example application that demonstrates the use of Xbox controllers,
+' including the vibration effect (rumble).
 
-'MIT License
-'Copyright(c) 2023 Joseph W. Lumbley
+' MIT License
+' Copyright(c) 2023 Joseph W. Lumbley
 
-'Permission Is hereby granted, free Of charge, to any person obtaining a copy
-'of this software And associated documentation files (the "Software"), to deal
-'in the Software without restriction, including without limitation the rights
-'to use, copy, modify, merge, publish, distribute, sublicense, And/Or sell
-'copies of the Software, And to permit persons to whom the Software Is
-'furnished to do so, subject to the following conditions:
+' Permission Is hereby granted, free Of charge, to any person obtaining a copy
+' of this software And associated documentation files (the "Software"), to deal
+' in the Software without restriction, including without limitation the rights
+' to use, copy, modify, merge, publish, distribute, sublicense, And/Or sell
+' copies of the Software, And to permit persons to whom the Software Is
+' furnished to do so, subject to the following conditions:
 
-'The above copyright notice And this permission notice shall be included In all
-'copies Or substantial portions of the Software.
+' The above copyright notice And this permission notice shall be included In all
+' copies Or substantial portions of the Software.
 
-'THE SOFTWARE Is PROVIDED "AS IS", WITHOUT WARRANTY Of ANY KIND, EXPRESS Or
-'IMPLIED, INCLUDING BUT Not LIMITED To THE WARRANTIES Of MERCHANTABILITY,
-'FITNESS FOR A PARTICULAR PURPOSE And NONINFRINGEMENT. IN NO EVENT SHALL THE
-'AUTHORS Or COPYRIGHT HOLDERS BE LIABLE For ANY CLAIM, DAMAGES Or OTHER
-'LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or OTHERWISE, ARISING FROM,
-'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
-'SOFTWARE.
+' THE SOFTWARE Is PROVIDED "AS IS", WITHOUT WARRANTY Of ANY KIND, EXPRESS Or
+' IMPLIED, INCLUDING BUT Not LIMITED To THE WARRANTIES Of MERCHANTABILITY,
+' FITNESS FOR A PARTICULAR PURPOSE And NONINFRINGEMENT. IN NO EVENT SHALL THE
+' AUTHORS Or COPYRIGHT HOLDERS BE LIABLE For ANY CLAIM, DAMAGES Or OTHER
+' LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or OTHERWISE, ARISING FROM,
+' OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
+' SOFTWARE.
 
 Imports System.Runtime.InteropServices
 
@@ -39,17 +39,17 @@ Public Class Form1
     <StructLayout(LayoutKind.Explicit)>
     Public Structure XINPUT_STATE
         <FieldOffset(0)>
-        Public dwPacketNumber As UInteger 'Unsigned 32-bit (4-byte) integer range 0 through 4,294,967,295.
+        Public dwPacketNumber As UInteger ' Unsigned 32-bit (4-byte) integer range 0 through 4,294,967,295.
         <FieldOffset(4)>
         Public Gamepad As XINPUT_GAMEPAD
     End Structure
 
     <StructLayout(LayoutKind.Sequential)>
     Public Structure XINPUT_GAMEPAD
-        Public wButtons As UShort 'Unsigned 16-bit (2-byte) integer range 0 through 65,535.
-        Public bLeftTrigger As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+        Public wButtons As UShort ' Unsigned 16-bit (2-byte) integer range 0 through 65,535.
+        Public bLeftTrigger As Byte ' Unsigned 8-bit (1-byte) integer range 0 through 255.
         Public bRightTrigger As Byte
-        Public sThumbLX As Short 'Signed 16-bit (2-byte) integer range -32,768 through 32,767.
+        Public sThumbLX As Short ' Signed 16-bit (2-byte) integer range -32,768 through 32,767.
         Public sThumbLY As Short
         Public sThumbRX As Short
         Public sThumbRY As Short
@@ -59,7 +59,7 @@ Public Class Form1
     Private ConButtons(0 To 3) As UShort
 
     Private IsConLeftTriggerNeutral(0 To 3) As Boolean
-    'A boolean is a logical value that is either true or false.
+    ' A boolean is a logical value that is either true or false.
 
     Private IsConRightTriggerNeutral(0 To 3) As Boolean
 
@@ -89,19 +89,19 @@ Public Class Form1
 
     Private ControllerPosition As XINPUT_STATE
 
-    'Set the start of the thumbstick neutral zone to 1/2 over.
+    ' Set the start of the thumbstick neutral zone to 1/2 over.
     Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
-    'The thumbstick position must be more than 1/2 over the neutral start to register as moved.
-    'A short is a signed 16-bit (2-byte) integer range -32,768 through 32,767. This gives us 65,536 values.
+    ' The thumbstick position must be more than 1/2 over the neutral start to register as moved.
+    ' A short is a signed 16-bit (2-byte) integer range -32,768 through 32,767. This gives us 65,536 values.
 
-    'Set the end of the thumbstick neutral zone to 1/2 over.
+    ' Set the end of the thumbstick neutral zone to 1/2 over.
     Private Const NeutralEnd As Short = 16384 '16,383.5 = 32,767 / 2
-    'The thumbstick position must be more than 1/2 over the neutral end to register as moved.
+    ' The thumbstick position must be more than 1/2 over the neutral end to register as moved.
 
-    'Set the trigger threshold to 1/4 pull.
+    ' Set the trigger threshold to 1/4 pull.
     Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
-    'The trigger position must be greater than the trigger threshold to register as pulled.
-    'A byte is a unsigned 8-bit (1-byte) integer range 0 through 255. This gives us 256 values.
+    ' The trigger position must be greater than the trigger threshold to register as pulled.
+    ' A byte is a unsigned 8-bit (1-byte) integer range 0 through 255. This gives us 256 values.
 
     Private ReadOnly Connected(0 To 3) As Boolean
 
@@ -183,7 +183,7 @@ Public Class Form1
         UNKNOWN = 4
     End Enum
 
-    Public Enum BatteryLevel As Byte 'Unsigned 8-bit (1-byte) integer range 0 through 255.
+    Public Enum BatteryLevel As Byte ' Unsigned 8-bit (1-byte) integer range 0 through 255.
         EMPTY = 0
         LOW = 1
         MEDIUM = 2
@@ -202,11 +202,11 @@ Public Class Form1
 
     Private Sub InitializeTimer1()
 
-        'The tick frequency in milliseconds.
-        'Also called the polling frequency.
+        ' The tick frequency in milliseconds.
+        ' Also called the polling frequency.
         Timer1.Interval = 15 '1000/60 = 16.67 ms
-        'To get 60 FPS (Frames Per Second) in milliseconds.
-        'We divide 1000 (the number of milliseconds in a second) by 60 the FPS.
+        ' To get 60 FPS (Frames Per Second) in milliseconds.
+        ' We divide 1000 (the number of milliseconds in a second) by 60 the FPS.
 
         Timer1.Start()
 
@@ -242,11 +242,11 @@ Public Class Form1
 
         Dim ElapsedTime As TimeSpan = Now - ConnectionStart
 
-        'Every second
+        ' Every second
         If ElapsedTime.TotalSeconds >= 1 Then
             ' Check for connected controllers.
 
-            For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
+            For ControllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
                 If IsControllerConnected(ControllerNumber) = True Then
 
@@ -304,7 +304,7 @@ Public Class Form1
 
         End If
 
-        For ControllerNumber As Integer = 0 To 3 'Up to 4 controllers
+        For ControllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
             If Connected(ControllerNumber) = True Then
 
@@ -543,26 +543,26 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateRightThumbstickPosition(ControllerNumber As Integer)
-        'The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
-        'The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        ' The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        ' The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
 
-        'What position is the right thumbstick in on the X-axis?
+        ' What position is the right thumbstick in on the X-axis?
         If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
-            'The right thumbstick is in the left position.
+            ' The right thumbstick is in the left position.
 
             LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick: Left"
 
             IsConThumbRXNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
-            'The right thumbstick is in the right position.
+            ' The right thumbstick is in the right position.
 
             LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick: Right"
 
             IsConThumbRXNeutral(ControllerNumber) = False
 
         Else
-            'The right thumbstick is in the neutral position.
+            ' The right thumbstick is in the neutral position.
 
             IsConThumbRXNeutral(ControllerNumber) = True
 
@@ -570,23 +570,23 @@ Public Class Form1
 
         ClearRightThumbstickXLabel()
 
-        'What position is the right thumbstick in on the Y-axis?
+        ' What position is the right thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
-            'The right thumbstick is in the up position.
+            ' The right thumbstick is in the up position.
 
             LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick: Down"
 
             IsConThumbRYNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
-            'The right thumbstick is in the down position.
+            ' The right thumbstick is in the down position.
 
             LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick: Up"
 
             IsConThumbRYNeutral(ControllerNumber) = False
 
         Else
-            'The right thumbstick is in the neutral position.
+            ' The right thumbstick is in the neutral position.
 
             IsConThumbRYNeutral(ControllerNumber) = True
 
@@ -597,19 +597,19 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateRightTriggerPosition(ControllerNumber As Integer)
-        'The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
-        'The trigger position must be greater than the trigger threshold to register as pressed.
+        ' The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        ' The trigger position must be greater than the trigger threshold to register as pressed.
 
-        'What position is the right trigger in?
+        ' What position is the right trigger in?
         If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
-            'The right trigger is in the down position. Trigger Break. Bang!
+            ' The right trigger is in the down position. Trigger Break. Bang!
 
             LabelRightTrigger.Text = $"Controller {ControllerNumber} Right Trigger"
 
             IsConRightTriggerNeutral(ControllerNumber) = False
 
         Else
-            'The right trigger is in the neutral position. Pre-Travel.
+            ' The right trigger is in the neutral position. Pre-Travel.
 
             IsConRightTriggerNeutral(ControllerNumber) = True
 
@@ -620,19 +620,19 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateLeftTriggerPosition(ControllerNumber As Integer)
-        'The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
-        'The trigger position must be greater than the trigger threshold to register as pressed.
+        ' The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        ' The trigger position must be greater than the trigger threshold to register as pressed.
 
-        'What position is the left trigger in?
+        ' What position is the left trigger in?
         If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
-            'The left trigger is in the down position. Trigger Break. Bang!
+            ' The left trigger is in the down position. Trigger Break. Bang!
 
             LabelLeftTrigger.Text = $"Controller {ControllerNumber} Left Trigger"
 
             IsConLeftTriggerNeutral(ControllerNumber) = False
 
         Else
-            'The left trigger is in the neutral position. Pre-Travel.
+            ' The left trigger is in the neutral position. Pre-Travel.
 
             IsConLeftTriggerNeutral(ControllerNumber) = True
 
@@ -657,123 +657,123 @@ Public Class Form1
         If ConSum = 0 Then
             ' Yes, all controller buttons are up.
 
-            LabelButtons.Text = String.Empty 'Clear label.
+            LabelButtons.Text = String.Empty ' Clear label.
 
         End If
 
     End Sub
 
     Private Sub ClearLeftThumbstickYLabel()
-        'Clears the left thumbstick Y-axis label when all controllers left thumbsticks on the Y-axis are neutral.
+        ' Clears the left thumbstick Y-axis label when all controllers left thumbsticks on the Y-axis are neutral.
 
-        Dim ConSum As Boolean = True 'Assume all controllers left thumbsticks on the Y-axis are neutral initially.
+        Dim ConSum As Boolean = True ' Assume all controllers left thumbsticks on the Y-axis are neutral initially.
 
-        'Search for a non-neutral left thumbstick on the Y-axis.
+        ' Search for a non-neutral left thumbstick on the Y-axis.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConThumbLYNeutral(i) Then
-                    'A non-neutral thumbstick was found.
+                    ' A non-neutral thumbstick was found.
 
-                    ConSum = False 'Report the non-neutral thumbstick.
+                    ConSum = False ' Report the non-neutral thumbstick.
 
-                    Exit For 'No need to search further so stop the search.
+                    Exit For ' No need to search further so stop the search.
 
                 End If
             End If
         Next
 
-        'Are all controllers left thumbsticks on the Y-axis in the neutral position?
+        ' Are all controllers left thumbsticks on the Y-axis in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers left thumbsticks on the Y-axis are in the neutral position.
+            ' Yes, all controllers left thumbsticks on the Y-axis are in the neutral position.
 
-            LabelLeftThumbY.Text = String.Empty 'Clear label.
+            LabelLeftThumbY.Text = String.Empty ' Clear label.
 
         End If
 
     End Sub
 
     Private Sub ClearLeftThumbstickXLabel()
-        'Clears the left thumbstick X-axis label when all controllers left thumbsticks on the X-axis are neutral.
+        ' Clears the left thumbstick X-axis label when all controllers left thumbsticks on the X-axis are neutral.
 
-        Dim ConSum As Boolean = True 'Assume all controllers left thumbsticks on the X-axis are neutral initially.
+        Dim ConSum As Boolean = True ' Assume all controllers left thumbsticks on the X-axis are neutral initially.
 
-        'Search for a non-neutral left thumbstick on the X-axis.
+        ' Search for a non-neutral left thumbstick on the X-axis.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConThumbLXNeutral(i) Then
-                    'A non-neutral thumbstick was found.
+                    ' A non-neutral thumbstick was found.
 
-                    ConSum = False 'Report the non-neutral thumbstick.
+                    ConSum = False ' Report the non-neutral thumbstick.
 
-                    Exit For 'No need to search further so stop the search.
+                    Exit For ' No need to search further so stop the search.
 
                 End If
             End If
         Next
 
-        'Are all controllers left thumbsticks on the X-axis in the neutral position?
+        ' Are all controllers left thumbsticks on the X-axis in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers left thumbsticks on the X-axis are in the neutral position.
+            ' Yes, all controllers left thumbsticks on the X-axis are in the neutral position.
 
-            LabelLeftThumbX.Text = String.Empty 'Clear label.
+            LabelLeftThumbX.Text = String.Empty ' Clear label.
 
         End If
 
     End Sub
 
     Private Sub ClearRightThumbstickXLabel()
-        'Clears the right thumbstick X-axis label when all controllers right thumbsticks on the X-axis are neutral.
+        ' Clears the right thumbstick X-axis label when all controllers right thumbsticks on the X-axis are neutral.
 
-        Dim ConSum As Boolean = True 'Assume all controllers right thumbsticks on the X-axis are neutral initially.
+        Dim ConSum As Boolean = True ' Assume all controllers right thumbsticks on the X-axis are neutral initially.
 
-        'Search for a non-neutral right thumbstick on the X-axis.
+        ' Search for a non-neutral right thumbstick on the X-axis.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConThumbRXNeutral(i) Then
-                    'A non-neutral thumbstick was found.
+                    ' A non-neutral thumbstick was found.
 
-                    ConSum = False 'Report the non-neutral thumbstick.
+                    ConSum = False ' Report the non-neutral thumbstick.
 
-                    Exit For 'No need to search further so stop the search.
+                    Exit For ' No need to search further so stop the search.
 
                 End If
             End If
         Next
 
-        'Are all controllers right thumbsticks on the X-axis in the neutral position?
+        ' Are all controllers right thumbsticks on the X-axis in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers right thumbsticks on the X-axis are in the neutral position.
+            ' Yes, all controllers right thumbsticks on the X-axis are in the neutral position.
 
-            LabelRightThumbX.Text = String.Empty 'Clear label.
+            LabelRightThumbX.Text = String.Empty ' Clear label.
 
         End If
 
     End Sub
 
     Private Sub ClearRightThumbstickYLabel()
-        'Clears the right thumbstick Y-axis label when all controllers right thumbsticks on the Y-axis are neutral.
+        ' Clears the right thumbstick Y-axis label when all controllers right thumbsticks on the Y-axis are neutral.
 
-        Dim ConSum As Boolean = True 'Assume all controllers right thumbsticks on the Y-axis are neutral initially.
+        Dim ConSum As Boolean = True ' Assume all controllers right thumbsticks on the Y-axis are neutral initially.
 
-        'Search for a non-neutral right thumbstick on the Y-axis.
+        ' Search for a non-neutral right thumbstick on the Y-axis.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConThumbRYNeutral(i) Then
-                    'A non-neutral thumbstick was found.
+                    ' A non-neutral thumbstick was found.
 
-                    ConSum = False 'Report the non-neutral thumbstick.
+                    ConSum = False ' Report the non-neutral thumbstick.
 
-                    Exit For 'No need to search further so stop the search.
+                    Exit For ' No need to search further so stop the search.
 
                 End If
             End If
         Next
 
-        'Are all controllers right thumbsticks on the Y-axis in the neutral position?
+        ' Are all controllers right thumbsticks on the Y-axis in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers right thumbsticks on the Y-axis are in the neutral position.
+            ' Yes, all controllers right thumbsticks on the Y-axis are in the neutral position.
 
-            LabelRightThumbY.Text = String.Empty 'Clear label.
+            LabelRightThumbY.Text = String.Empty ' Clear label.
 
         End If
 
@@ -809,29 +809,29 @@ Public Class Form1
     End Sub
 
     Private Sub ClearLeftTriggerLabel()
-        'Clears the left trigger label when all controllers left triggers are neutral.
+        ' Clears the left trigger label when all controllers left triggers are neutral.
 
-        Dim ConSum As Boolean = True 'Assume all controllers left triggers are neutral initially.
+        Dim ConSum As Boolean = True ' Assume all controllers left triggers are neutral initially.
 
-        'Search for a non-neutral left trigger.
+        ' Search for a non-neutral left trigger.
         For i As Integer = 0 To 3
             If Connected(i) Then
                 If Not IsConLeftTriggerNeutral(i) Then
-                    'A non-neutral left trigger was found.
+                    ' A non-neutral left trigger was found.
 
-                    ConSum = False 'Report the non-neutral left trigger.
+                    ConSum = False ' Report the non-neutral left trigger.
 
-                    Exit For 'No need to search further so stop the search.
+                    Exit For ' No need to search further so stop the search.
 
                 End If
             End If
         Next
 
-        'Are all controllers left triggers in the neutral position?
+        ' Are all controllers left triggers in the neutral position?
         If ConSum = True Then
-            'Yes, all controllers left triggers are in the neutral position.
+            ' Yes, all controllers left triggers are in the neutral position.
 
-            LabelLeftTrigger.Text = String.Empty 'Clear label. 
+            LabelLeftTrigger.Text = String.Empty ' Clear label. 
 
         End If
 
@@ -910,10 +910,10 @@ Public Class Form1
 
 
     Private Sub VibrateLeft(CID As Integer, Speed As UShort)
-        'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
-        'The left motor is the low-frequency rumble motor.
+        ' The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
+        ' The left motor is the low-frequency rumble motor.
 
-        'Set left motor speed.
+        ' Set left motor speed.
         Vibration.wLeftMotorSpeed = Speed
 
         SendVibrationMotorCommand(CID)
@@ -925,10 +925,10 @@ Public Class Form1
     End Sub
 
     Private Sub VibrateRight(CID As Integer, Speed As UShort)
-        'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
-        'The right motor is the high-frequency rumble motor.
+        ' The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
+        ' The right motor is the high-frequency rumble motor.
 
-        'Set right motor speed.
+        ' Set right motor speed.
         Vibration.wRightMotorSpeed = Speed
 
         SendVibrationMotorCommand(CID)
@@ -940,17 +940,17 @@ Public Class Form1
     End Sub
 
     Private Sub SendVibrationMotorCommand(ControllerID As Integer)
-        'Sends vibration motor speed command to the specified controller.
+        ' Sends vibration motor speed command to the specified controller.
 
         Try
 
-            'Send motor speed command to the specified controller.
+            ' Send motor speed command to the specified controller.
             If XInputSetState(ControllerID, Vibration) = 0 Then
 
-                'The motor speed was set. Success.
+                ' The motor speed was set. Success.
 
             Else
-                'The motor speed was not set. Fail.
+                ' The motor speed was not set. Fail.
                 ' You can log or handle the failure here if needed.
                 ' Example: Console.WriteLine(XInputSetState(ControllerID, Vibration).ToString())
 
@@ -1038,7 +1038,7 @@ Public Class Form1
 
         Try
 
-            Return XInputGetState(controllerNumber, ControllerPosition) = 0 '0 means the controller is connected.
+            Return XInputGetState(controllerNumber, ControllerPosition) = 0 ' 0 means the controller is connected.
             ' Anything else (a non-zero value) means the controller is not connected.
 
         Catch ex As Exception
@@ -1090,16 +1090,16 @@ Public Class Form1
 
     Private Sub UpdateBatteryInfo()
 
-        'Get battery level
+        ' Get battery level
         If XInputGetBatteryInformation(NumControllerToVib.Value, BATTERY_DEVTYPE_GAMEPAD, batteryInfo) = 0 Then
-            'Success
+            ' Success
 
             UpdateBatteryLevel()
 
             UpdateBatteryType()
 
         Else
-            'Fail
+            ' Fail
 
             ClearBatteryLabels()
 
@@ -1128,9 +1128,9 @@ Public Class Form1
 
         With batteryInfo
 
-            'This value is only valid for wireless controllers with a known battery type.
+            ' This value is only valid for wireless controllers with a known battery type.
             If .BatteryType = BATTERY_TYPE.ALKALINE Or .BatteryType = BATTERY_TYPE.NIMH Then
-                'Valid
+                ' Valid
                 Select Case .BatteryLevel
                     Case BatteryLevel.EMPTY
                         LabelBatteryLevel.Text = "Battery Level: EMPTY"
@@ -1142,7 +1142,7 @@ Public Class Form1
                         LabelBatteryLevel.Text = "Battery Level: FULL"
                 End Select
             Else
-                'Invalid
+                ' Invalid
                 LabelBatteryLevel.Text = ""
             End If
 
