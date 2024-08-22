@@ -353,36 +353,6 @@ Public Class Form1
 
     End Sub
 
-    Private Function GetDPadDirection() As String
-
-        If DPadUpPressed Then
-
-            If DPadLeftPressed Then Return "Left+Up"
-
-            If DPadRightPressed Then Return "Right+Up"
-
-            Return "Up"
-
-        End If
-
-        If DPadDownPressed Then
-
-            If DPadLeftPressed Then Return "Left+Down"
-
-            If DPadRightPressed Then Return "Right+Down"
-
-            Return "Down"
-
-        End If
-
-        If DPadLeftPressed Then Return "Left"
-
-        If DPadRightPressed Then Return "Right"
-
-        Return String.Empty ' Return an empty string if no buttons are pressed.
-
-    End Function
-
     Private Sub DoLetterButtonLogic(controllerNumber As Integer)
 
         Dim buttonText As String = GetButtonText(controllerNumber)
@@ -396,28 +366,6 @@ Public Class Form1
         End If
 
     End Sub
-
-    Private Function GetButtonText(controllerNumber As Integer) As String
-
-        Dim buttons As New List(Of String)
-
-        If AButtonPressed Then buttons.Add("A")
-
-        If BButtonPressed Then buttons.Add("B")
-
-        If XButtonPressed Then buttons.Add("X")
-
-        If YButtonPressed Then buttons.Add("Y")
-
-        If buttons.Count > 0 Then
-
-            Return $"Controller {controllerNumber} Buttons: {String.Join("+", buttons)}"
-
-        End If
-
-        Return String.Empty ' Return an empty string if no buttons are pressed
-
-    End Function
 
     Private Sub DoStartBackLogic(ControllerNumber As Integer)
 
@@ -851,6 +799,60 @@ Public Class Form1
         LabelRightTrigger.Text = String.Empty
 
     End Sub
+
+    Private Function GetDPadDirection() As String
+
+        If DPadUpPressed Then
+
+            If DPadLeftPressed Then Return "Left+Up"
+
+            If DPadRightPressed Then Return "Right+Up"
+
+            Return "Up"
+
+        End If
+
+        If DPadDownPressed Then
+
+            If DPadLeftPressed Then Return "Left+Down"
+
+            If DPadRightPressed Then Return "Right+Down"
+
+            Return "Down"
+
+        End If
+
+        If DPadLeftPressed Then Return "Left"
+
+        If DPadRightPressed Then Return "Right"
+
+        Return String.Empty ' Return an empty string if no buttons are pressed.
+
+    End Function
+
+    Private Function GetButtonText(controllerNumber As Integer) As String
+
+        Dim buttons As New List(Of String)
+
+        If AButtonPressed Then buttons.Add("A")
+
+        If BButtonPressed Then buttons.Add("B")
+
+        If XButtonPressed Then buttons.Add("X")
+
+        If YButtonPressed Then buttons.Add("Y")
+
+        If buttons.Count > 0 Then
+
+            Return $"Controller {controllerNumber} Buttons: {String.Join("+", buttons)}"
+
+        End If
+
+        Return String.Empty ' Return an empty string if no buttons are pressed
+
+    End Function
+
+
 
     Private Sub VibrateLeft(CID As Integer, Speed As UShort)
         'The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
