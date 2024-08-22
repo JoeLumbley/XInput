@@ -53,7 +53,7 @@ Partial Class Form1
         ' LabelButtons
         ' 
         LabelButtons.AutoSize = True
-        LabelButtons.Location = New Point(162, 57)
+        LabelButtons.Location = New Point(620, 86)
         LabelButtons.Name = "LabelButtons"
         LabelButtons.Size = New Size(114, 25)
         LabelButtons.TabIndex = 0
@@ -62,7 +62,7 @@ Partial Class Form1
         ' LabelLeftTrigger
         ' 
         LabelLeftTrigger.AutoSize = True
-        LabelLeftTrigger.Location = New Point(6, 32)
+        LabelLeftTrigger.Location = New Point(16, 38)
         LabelLeftTrigger.Name = "LabelLeftTrigger"
         LabelLeftTrigger.Size = New Size(136, 25)
         LabelLeftTrigger.TabIndex = 1
@@ -71,7 +71,7 @@ Partial Class Form1
         ' LabelRightTrigger
         ' 
         LabelRightTrigger.AutoSize = True
-        LabelRightTrigger.Location = New Point(162, 32)
+        LabelRightTrigger.Location = New Point(620, 38)
         LabelRightTrigger.Name = "LabelRightTrigger"
         LabelRightTrigger.Size = New Size(149, 25)
         LabelRightTrigger.TabIndex = 2
@@ -80,7 +80,7 @@ Partial Class Form1
         ' LabelLeftThumbX
         ' 
         LabelLeftThumbX.AutoSize = True
-        LabelLeftThumbX.Location = New Point(6, 64)
+        LabelLeftThumbX.Location = New Point(16, 86)
         LabelLeftThumbX.Name = "LabelLeftThumbX"
         LabelLeftThumbX.Size = New Size(149, 25)
         LabelLeftThumbX.TabIndex = 3
@@ -89,7 +89,7 @@ Partial Class Form1
         ' LabelLeftThumbY
         ' 
         LabelLeftThumbY.AutoSize = True
-        LabelLeftThumbY.Location = New Point(6, 89)
+        LabelLeftThumbY.Location = New Point(16, 111)
         LabelLeftThumbY.Name = "LabelLeftThumbY"
         LabelLeftThumbY.Size = New Size(148, 25)
         LabelLeftThumbY.TabIndex = 4
@@ -98,7 +98,7 @@ Partial Class Form1
         ' LabelRightThumbY
         ' 
         LabelRightThumbY.AutoSize = True
-        LabelRightThumbY.Location = New Point(162, 106)
+        LabelRightThumbY.Location = New Point(620, 136)
         LabelRightThumbY.Name = "LabelRightThumbY"
         LabelRightThumbY.Size = New Size(161, 25)
         LabelRightThumbY.TabIndex = 5
@@ -107,7 +107,7 @@ Partial Class Form1
         ' LabelRightThumbX
         ' 
         LabelRightThumbX.AutoSize = True
-        LabelRightThumbX.Location = New Point(161, 81)
+        LabelRightThumbX.Location = New Point(620, 111)
         LabelRightThumbX.Name = "LabelRightThumbX"
         LabelRightThumbX.Size = New Size(162, 25)
         LabelRightThumbX.TabIndex = 6
