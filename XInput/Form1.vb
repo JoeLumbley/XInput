@@ -276,6 +276,26 @@ Public Class Form1
 
                     Connected(ControllerNumber) = False
 
+                    If ControllerNumber = 0 Then
+
+                        LabelController0Status.Text = $"Controller {ControllerNumber} Not Connected"
+                    End If
+
+                    If ControllerNumber = 1 Then
+
+                        LabelController1Status.Text = $"Controller {ControllerNumber} Not Connected"
+                    End If
+
+                    If ControllerNumber = 2 Then
+
+                        LabelController2Status.Text = $"Controller {ControllerNumber} Not Connected"
+                    End If
+
+                    If ControllerNumber = 3 Then
+
+                        LabelController3Status.Text = $"Controller {ControllerNumber} Not Connected"
+                    End If
+
                 End If
 
             Next
