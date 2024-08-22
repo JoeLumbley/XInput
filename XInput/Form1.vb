@@ -1030,7 +1030,7 @@ Public Class Form1
 
     Private Sub UpdateSpeedLabel()
 
-        LabelSpeed.Text = $"Vibration Speed: {TrackBarSpeed.Value}"
+        LabelSpeed.Text = $"Speed: {TrackBarSpeed.Value}"
 
     End Sub
 
