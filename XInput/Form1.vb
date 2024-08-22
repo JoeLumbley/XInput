@@ -71,6 +71,22 @@ Public Class Form1
 
     Private IsConThumbRYNeutral(0 To 3) As Boolean
 
+    Private IsDPadNeutral(0 To 3) As Boolean
+
+    Private IsLeftBumperNeutral(0 To 3) As Boolean
+
+    Private IsRightBumperNeutral(0 To 3) As Boolean
+
+    Private IsLetterButtonsNeutral(0 To 3) As Boolean
+
+    Private IsStartButtonsNeutral(0 To 3) As Boolean
+
+    Private IsBackButtonsNeutral(0 To 3) As Boolean
+
+    Private IsLeftStickButtonsNeutral(0 To 3) As Boolean
+
+    Private IsRightStickButtonsNeutral(0 To 3) As Boolean
+
     Private ControllerPosition As XINPUT_STATE
 
     'Set the start of the thumbstick neutral zone to 1/2 over.
@@ -137,7 +153,6 @@ Public Class Form1
     Public Structure XINPUT_VIBRATION
         Public wLeftMotorSpeed As UShort
         Public wRightMotorSpeed As UShort
-
     End Structure
 
     Private Vibration As XINPUT_VIBRATION
@@ -236,6 +251,26 @@ Public Class Form1
                 If IsControllerConnected(ControllerNumber) = True Then
 
                     Connected(ControllerNumber) = True
+
+                    If ControllerNumber = 0 Then
+
+                        LabelController0Status.Text = $"Controller {ControllerNumber} Connected"
+                    End If
+
+                    If ControllerNumber = 1 Then
+
+                        LabelController1Status.Text = $"Controller {ControllerNumber} Connected"
+                    End If
+
+                    If ControllerNumber = 2 Then
+
+                        LabelController2Status.Text = $"Controller {ControllerNumber} Connected"
+                    End If
+
+                    If ControllerNumber = 3 Then
+
+                        LabelController3Status.Text = $"Controller {ControllerNumber} Connected"
+                    End If
 
                 Else
 
