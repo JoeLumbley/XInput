@@ -42,10 +42,11 @@ Partial Class Form1
         GroupBox1 = New GroupBox()
         GroupBox2 = New GroupBox()
         GroupBox3 = New GroupBox()
-        LabelController0Status = New Label()
-        LabelController1Status = New Label()
-        LabelController2Status = New Label()
         LabelController3Status = New Label()
+        LabelController2Status = New Label()
+        LabelController1Status = New Label()
+        LabelController0Status = New Label()
+        LabelDPad = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
@@ -209,6 +210,7 @@ Partial Class Form1
         ' 
         ' GroupBox2
         ' 
+        GroupBox2.Controls.Add(LabelDPad)
         GroupBox2.Controls.Add(LabelLeftTrigger)
         GroupBox2.Controls.Add(LabelRightTrigger)
         GroupBox2.Controls.Add(LabelLeftThumbX)
@@ -236,23 +238,14 @@ Partial Class Form1
         GroupBox3.TabStop = False
         GroupBox3.Text = "Status"
         ' 
-        ' LabelController0Status
+        ' LabelController3Status
         ' 
-        LabelController0Status.AutoSize = True
-        LabelController0Status.Location = New Point(23, 36)
-        LabelController0Status.Name = "LabelController0Status"
-        LabelController0Status.Size = New Size(189, 25)
-        LabelController0Status.TabIndex = 0
-        LabelController0Status.Text = "LabelController0Status"
-        ' 
-        ' LabelController1Status
-        ' 
-        LabelController1Status.AutoSize = True
-        LabelController1Status.Location = New Point(23, 61)
-        LabelController1Status.Name = "LabelController1Status"
-        LabelController1Status.Size = New Size(189, 25)
-        LabelController1Status.TabIndex = 1
-        LabelController1Status.Text = "LabelController1Status"
+        LabelController3Status.AutoSize = True
+        LabelController3Status.Location = New Point(23, 113)
+        LabelController3Status.Name = "LabelController3Status"
+        LabelController3Status.Size = New Size(189, 25)
+        LabelController3Status.TabIndex = 3
+        LabelController3Status.Text = "LabelController3Status"
         ' 
         ' LabelController2Status
         ' 
@@ -263,14 +256,32 @@ Partial Class Form1
         LabelController2Status.TabIndex = 2
         LabelController2Status.Text = "LabelController2Status"
         ' 
-        ' LabelController3Status
+        ' LabelController1Status
         ' 
-        LabelController3Status.AutoSize = True
-        LabelController3Status.Location = New Point(23, 113)
-        LabelController3Status.Name = "LabelController3Status"
-        LabelController3Status.Size = New Size(189, 25)
-        LabelController3Status.TabIndex = 3
-        LabelController3Status.Text = "LabelController3Status"
+        LabelController1Status.AutoSize = True
+        LabelController1Status.Location = New Point(23, 61)
+        LabelController1Status.Name = "LabelController1Status"
+        LabelController1Status.Size = New Size(189, 25)
+        LabelController1Status.TabIndex = 1
+        LabelController1Status.Text = "LabelController1Status"
+        ' 
+        ' LabelController0Status
+        ' 
+        LabelController0Status.AutoSize = True
+        LabelController0Status.Location = New Point(23, 36)
+        LabelController0Status.Name = "LabelController0Status"
+        LabelController0Status.Size = New Size(189, 25)
+        LabelController0Status.TabIndex = 0
+        LabelController0Status.Text = "LabelController0Status"
+        ' 
+        ' LabelDPad
+        ' 
+        LabelDPad.AutoSize = True
+        LabelDPad.Location = New Point(453, 94)
+        LabelDPad.Name = "LabelDPad"
+        LabelDPad.Size = New Size(95, 25)
+        LabelDPad.TabIndex = 7
+        LabelDPad.Text = "LabelDPad"
         ' 
         ' Form1
         ' 
@@ -320,4 +331,5 @@ Partial Class Form1
     Friend WithEvents LabelController3Status As Label
     Friend WithEvents LabelController2Status As Label
     Friend WithEvents LabelController1Status As Label
+    Friend WithEvents LabelDPad As Label
 End Class

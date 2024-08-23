@@ -398,11 +398,43 @@ Public Class Form1
 
         Dim direction As String = GetDPadDirection()
 
-        ' Are any DPad buttons pressed?
+        ' Are all DPad buttons up?
         If Not String.IsNullOrEmpty(direction) Then
-            ' Yes, DPad buttons are pressed.
+            ' No, all DPad buttons are not up.
 
-            LabelButtons.Text = $"Controller {controllerNumber} Button: {direction}"
+            LabelDPad.Text = $"Controller {controllerNumber} DPad {direction}"
+
+            IsDPadNeutral(controllerNumber) = False
+
+        Else
+            ' Yes, all DPad buttons are up.
+
+            IsDPadNeutral(controllerNumber) = True
+
+        End If
+
+        ClearDPadLabel()
+
+    End Sub
+
+    Private Sub ClearDPadLabel()
+        ' Clears the DPad label when all controllers' DPad are neutral.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' DPad are neutral initially.
+
+        ' Search for a non-neutral DPad.
+        For i As Integer = 0 To 3
+            If Connected(i) AndAlso Not IsDPadNeutral(i) Then
+                ' A non-neutral DPad was found.
+                ConSum = False ' Report the non-neutral DPad.
+                Exit For ' No need to search further, so stop the search.
+            End If
+        Next
+
+        ' Are all controllers' DPad in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' DPad are in the neutral position.
+            LabelDPad.Text = String.Empty ' Clear label.
 
         End If
 
