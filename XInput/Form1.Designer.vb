@@ -41,12 +41,14 @@ Partial Class Form1
         LabelBatteryType = New Label()
         GroupBox1 = New GroupBox()
         GroupBox2 = New GroupBox()
+        LabelDPad = New Label()
         GroupBox3 = New GroupBox()
         LabelController3Status = New Label()
         LabelController2Status = New Label()
         LabelController1Status = New Label()
         LabelController0Status = New Label()
-        LabelDPad = New Label()
+        LabelStart = New Label()
+        LabelBack = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
@@ -210,6 +212,8 @@ Partial Class Form1
         ' 
         ' GroupBox2
         ' 
+        GroupBox2.Controls.Add(LabelBack)
+        GroupBox2.Controls.Add(LabelStart)
         GroupBox2.Controls.Add(LabelDPad)
         GroupBox2.Controls.Add(LabelLeftTrigger)
         GroupBox2.Controls.Add(LabelRightTrigger)
@@ -224,6 +228,15 @@ Partial Class Form1
         GroupBox2.TabIndex = 16
         GroupBox2.TabStop = False
         GroupBox2.Text = "Monitor - Press any button on your controller"
+        ' 
+        ' LabelDPad
+        ' 
+        LabelDPad.AutoSize = True
+        LabelDPad.Location = New Point(453, 94)
+        LabelDPad.Name = "LabelDPad"
+        LabelDPad.Size = New Size(95, 25)
+        LabelDPad.TabIndex = 7
+        LabelDPad.Text = "LabelDPad"
         ' 
         ' GroupBox3
         ' 
@@ -274,14 +287,23 @@ Partial Class Form1
         LabelController0Status.TabIndex = 0
         LabelController0Status.Text = "LabelController0Status"
         ' 
-        ' LabelDPad
+        ' LabelStart
         ' 
-        LabelDPad.AutoSize = True
-        LabelDPad.Location = New Point(453, 94)
-        LabelDPad.Name = "LabelDPad"
-        LabelDPad.Size = New Size(95, 25)
-        LabelDPad.TabIndex = 7
-        LabelDPad.Text = "LabelDPad"
+        LabelStart.AutoSize = True
+        LabelStart.Location = New Point(316, 90)
+        LabelStart.Name = "LabelStart"
+        LabelStart.Size = New Size(89, 25)
+        LabelStart.TabIndex = 8
+        LabelStart.Text = "LabelStart"
+        ' 
+        ' LabelBack
+        ' 
+        LabelBack.AutoSize = True
+        LabelBack.Location = New Point(452, 132)
+        LabelBack.Name = "LabelBack"
+        LabelBack.Size = New Size(89, 25)
+        LabelBack.TabIndex = 9
+        LabelBack.Text = "LabelBack"
         ' 
         ' Form1
         ' 
@@ -332,4 +354,6 @@ Partial Class Form1
     Friend WithEvents LabelController2Status As Label
     Friend WithEvents LabelController1Status As Label
     Friend WithEvents LabelDPad As Label
+    Friend WithEvents LabelStart As Label
+    Friend WithEvents LabelBack As Label
 End Class

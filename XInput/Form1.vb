@@ -417,29 +417,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ClearDPadLabel()
-        ' Clears the DPad label when all controllers' DPad are neutral.
-
-        Dim ConSum As Boolean = True ' Assume all controllers' DPad are neutral initially.
-
-        ' Search for a non-neutral DPad.
-        For i As Integer = 0 To 3
-            If Connected(i) AndAlso Not IsDPadNeutral(i) Then
-                ' A non-neutral DPad was found.
-                ConSum = False ' Report the non-neutral DPad.
-                Exit For ' No need to search further, so stop the search.
-            End If
-        Next
-
-        ' Are all controllers' DPad in the neutral position?
-        If ConSum Then
-            ' Yes, all controllers' DPad are in the neutral position.
-            LabelDPad.Text = String.Empty ' Clear label.
-
-        End If
-
-    End Sub
-
     Private Sub DoLetterButtonLogic(controllerNumber As Integer)
 
         Dim buttonText As String = GetButtonText(controllerNumber)
@@ -450,29 +427,48 @@ Public Class Form1
 
             LabelButtons.Text = buttonText
 
+            IsLetterButtonsNeutral(controllerNumber) = False
+
+        Else
+            ' No, letter buttons are Not pressed.
+
+            IsLetterButtonsNeutral(controllerNumber) = True
+
         End If
+
+        ClearLetterButtonsLabel()
 
     End Sub
 
     Private Sub DoStartBackLogic(ControllerNumber As Integer)
 
-        If StartButtonPressed = True Then
+        If StartButtonPressed Then
 
-            If BackButtonPressed = True Then
+            LabelStart.Text = $"Controller {ControllerNumber} Start"
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Start+Back"
+            IsStartButtonsNeutral(ControllerNumber) = False
 
-            Else
+        Else
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Start"
-
-            End If
-
-        ElseIf BackButtonPressed = True Then
-
-            LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Back"
+            IsStartButtonsNeutral(ControllerNumber) = True
 
         End If
+
+        ClearStartLabel()
+
+        If BackButtonPressed Then
+
+            LabelBack.Text = $"Controller {ControllerNumber} Back"
+
+            IsBackButtonsNeutral(ControllerNumber) = False
+
+        Else
+
+            IsBackButtonsNeutral(ControllerNumber) = True
+
+        End If
+
+        ClearBackLabel()
 
     End Sub
 
@@ -671,6 +667,35 @@ Public Class Form1
         End If
 
         ClearLeftTriggerLabel()
+
+    End Sub
+
+    Private Sub ClearLetterButtonsLabel()
+        ' Clears the letter buttons label when all controllers' letter buttons are up.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' letter buttons are neutral initially.
+
+        ' Search for a non-neutral letter button.
+        For i As Integer = 0 To 3
+
+            If Connected(i) AndAlso Not IsLetterButtonsNeutral(i) Then
+                ' A non-neutral letter button was found.
+
+                ConSum = False ' Report the non-neutral letter button.
+
+                Exit For ' No need to search further, so stop the search.
+
+            End If
+
+        Next
+
+        ' Are all controllers' letter buttons in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' letter buttons are in the neutral position.
+
+            LabelButtons.Text = String.Empty ' Clear label.
+
+        End If
 
     End Sub
 
@@ -884,6 +909,87 @@ Public Class Form1
         LabelRightThumbY.Text = String.Empty
 
         LabelRightTrigger.Text = String.Empty
+
+    End Sub
+
+    Private Sub ClearDPadLabel()
+        ' Clears the DPad label when all controllers' DPad are neutral.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' DPad are neutral initially.
+
+        ' Search for a non-neutral DPad.
+        For i As Integer = 0 To 3
+            If Connected(i) AndAlso Not IsDPadNeutral(i) Then
+                ' A non-neutral DPad was found.
+                ConSum = False ' Report the non-neutral DPad.
+                Exit For ' No need to search further, so stop the search.
+            End If
+        Next
+
+        ' Are all controllers' DPad in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' DPad are in the neutral position.
+            LabelDPad.Text = String.Empty ' Clear label.
+
+        End If
+
+    End Sub
+
+    Private Sub ClearStartLabel()
+        ' Clears the start label when all controllers' start buttons are neutral.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' start buttons are neutral initially.
+
+        ' Search for a non-neutral start button.
+        For i As Integer = 0 To 3
+
+            If Connected(i) AndAlso Not IsStartButtonsNeutral(i) Then
+                ' A non-neutral start button was found.
+
+                ConSum = False ' Report the non-neutral start button.
+
+                Exit For ' No need to search further, so stop the search.
+
+            End If
+
+        Next
+
+        ' Are all controllers' start buttons in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' start buttons are in the neutral position.
+
+            LabelStart.Text = String.Empty ' Clear label.
+
+        End If
+
+    End Sub
+
+    Private Sub ClearBackLabel()
+        ' Clears the back label when all controllers' back buttons are neutral.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' back buttons are neutral initially.
+
+        ' Search for a non-neutral back button.
+        For i As Integer = 0 To 3
+
+            If Connected(i) AndAlso Not IsBackButtonsNeutral(i) Then
+                ' A non-neutral back button was found.
+
+                ConSum = False ' Report the non-neutral back button.
+
+                Exit For ' No need to search further, so stop the search.
+
+            End If
+
+        Next
+
+        ' Are all controllers' back buttons in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' back buttons are in the neutral position.
+
+            LabelBack.Text = String.Empty ' Clear label.
+
+        End If
 
     End Sub
 
