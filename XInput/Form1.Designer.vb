@@ -41,6 +41,8 @@ Partial Class Form1
         LabelBatteryType = New Label()
         GroupBox1 = New GroupBox()
         GroupBox2 = New GroupBox()
+        LabelRightBumper = New Label()
+        LabelLeftBumper = New Label()
         LabelBack = New Label()
         LabelStart = New Label()
         LabelDPad = New Label()
@@ -49,8 +51,8 @@ Partial Class Form1
         LabelController2Status = New Label()
         LabelController1Status = New Label()
         LabelController0Status = New Label()
-        LabelLeftBumper = New Label()
-        LabelRightBumper = New Label()
+        LabelLeftThumbButton = New Label()
+        LabelRightThumbButton = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
@@ -214,6 +216,8 @@ Partial Class Form1
         ' 
         ' GroupBox2
         ' 
+        GroupBox2.Controls.Add(LabelRightThumbButton)
+        GroupBox2.Controls.Add(LabelLeftThumbButton)
         GroupBox2.Controls.Add(LabelRightBumper)
         GroupBox2.Controls.Add(LabelLeftBumper)
         GroupBox2.Controls.Add(LabelBack)
@@ -233,10 +237,28 @@ Partial Class Form1
         GroupBox2.TabStop = False
         GroupBox2.Text = "Monitor - Press any button on your controller"
         ' 
+        ' LabelRightBumper
+        ' 
+        LabelRightBumper.AutoSize = True
+        LabelRightBumper.Location = New Point(620, 61)
+        LabelRightBumper.Name = "LabelRightBumper"
+        LabelRightBumper.Size = New Size(157, 25)
+        LabelRightBumper.TabIndex = 11
+        LabelRightBumper.Text = "LabelRightBumper"
+        ' 
+        ' LabelLeftBumper
+        ' 
+        LabelLeftBumper.AutoSize = True
+        LabelLeftBumper.Location = New Point(16, 61)
+        LabelLeftBumper.Name = "LabelLeftBumper"
+        LabelLeftBumper.Size = New Size(144, 25)
+        LabelLeftBumper.TabIndex = 10
+        LabelLeftBumper.Text = "LabelLeftBumper"
+        ' 
         ' LabelBack
         ' 
         LabelBack.AutoSize = True
-        LabelBack.Location = New Point(452, 132)
+        LabelBack.Location = New Point(465, 86)
         LabelBack.Name = "LabelBack"
         LabelBack.Size = New Size(89, 25)
         LabelBack.TabIndex = 9
@@ -245,7 +267,7 @@ Partial Class Form1
         ' LabelStart
         ' 
         LabelStart.AutoSize = True
-        LabelStart.Location = New Point(316, 90)
+        LabelStart.Location = New Point(284, 86)
         LabelStart.Name = "LabelStart"
         LabelStart.Size = New Size(89, 25)
         LabelStart.TabIndex = 8
@@ -254,7 +276,7 @@ Partial Class Form1
         ' LabelDPad
         ' 
         LabelDPad.AutoSize = True
-        LabelDPad.Location = New Point(453, 94)
+        LabelDPad.Location = New Point(16, 157)
         LabelDPad.Name = "LabelDPad"
         LabelDPad.Size = New Size(95, 25)
         LabelDPad.TabIndex = 7
@@ -309,23 +331,23 @@ Partial Class Form1
         LabelController0Status.TabIndex = 0
         LabelController0Status.Text = "LabelController0Status"
         ' 
-        ' LabelLeftBumper
+        ' LabelLeftThumbButton
         ' 
-        LabelLeftBumper.AutoSize = True
-        LabelLeftBumper.Location = New Point(147, 166)
-        LabelLeftBumper.Name = "LabelLeftBumper"
-        LabelLeftBumper.Size = New Size(144, 25)
-        LabelLeftBumper.TabIndex = 10
-        LabelLeftBumper.Text = "LabelLeftBumper"
+        LabelLeftThumbButton.AutoSize = True
+        LabelLeftThumbButton.Location = New Point(16, 132)
+        LabelLeftThumbButton.Name = "LabelLeftThumbButton"
+        LabelLeftThumbButton.Size = New Size(191, 25)
+        LabelLeftThumbButton.TabIndex = 12
+        LabelLeftThumbButton.Text = "LabelLeftThumbButton"
         ' 
-        ' LabelRightBumper
+        ' LabelRightThumbButton
         ' 
-        LabelRightBumper.AutoSize = True
-        LabelRightBumper.Location = New Point(314, 43)
-        LabelRightBumper.Name = "LabelRightBumper"
-        LabelRightBumper.Size = New Size(157, 25)
-        LabelRightBumper.TabIndex = 11
-        LabelRightBumper.Text = "LabelRightBumper"
+        LabelRightThumbButton.AutoSize = True
+        LabelRightThumbButton.Location = New Point(620, 157)
+        LabelRightThumbButton.Name = "LabelRightThumbButton"
+        LabelRightThumbButton.Size = New Size(204, 25)
+        LabelRightThumbButton.TabIndex = 13
+        LabelRightThumbButton.Text = "LabelRightThumbButton"
         ' 
         ' Form1
         ' 
@@ -380,4 +402,6 @@ Partial Class Form1
     Friend WithEvents LabelBack As Label
     Friend WithEvents LabelLeftBumper As Label
     Friend WithEvents LabelRightBumper As Label
+    Friend WithEvents LabelLeftThumbButton As Label
+    Friend WithEvents LabelRightThumbButton As Label
 End Class

@@ -506,23 +506,33 @@ Public Class Form1
 
     Private Sub DoStickLogic(ControllerNumber As Integer)
 
-        If LeftStickButtonPressed = True Then
+        If LeftStickButtonPressed Then
 
-            If RightStickButtonPressed = True Then
+            LabelLeftThumbButton.Text = $"Controller {ControllerNumber} Left Thumbstick Button"
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Stick+Right Stick"
+            IsLeftStickButtonsNeutral(ControllerNumber) = False
 
-            Else
+        Else
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Stick"
-
-            End If
-
-        ElseIf RightStickButtonPressed = True Then
-
-            LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Stick"
+            IsLeftStickButtonsNeutral(ControllerNumber) = True
 
         End If
+
+        ClearLeftThumbButtonLabel()
+
+        If RightStickButtonPressed Then
+
+            LabelRightThumbButton.Text = $"Controller {ControllerNumber} Right Thumbstick Button"
+
+            IsRightStickButtonsNeutral(ControllerNumber) = False
+
+        Else
+
+            IsRightStickButtonsNeutral(ControllerNumber) = True
+
+        End If
+
+        ClearRightThumbButtonLabel()
 
     End Sub
 
@@ -702,27 +712,6 @@ Public Class Form1
         ' Are all controllers' letter buttons in the neutral position?
         If ConSum Then
             ' Yes, all controllers' letter buttons are in the neutral position.
-
-            LabelButtons.Text = String.Empty ' Clear label.
-
-        End If
-
-    End Sub
-
-    Private Sub ClearButtonsLabel()
-        ' Clears the buttons label when all controllers buttons are up.
-
-        Dim ConSum As Integer = 0
-
-        For Each Con In ConButtons
-
-            ConSum += Con
-
-        Next
-
-        ' Are all controllers buttons up?
-        If ConSum = 0 Then
-            ' Yes, all controller buttons are up.
 
             LabelButtons.Text = String.Empty ' Clear label.
 
@@ -929,16 +918,22 @@ Public Class Form1
 
         ' Search for a non-neutral DPad.
         For i As Integer = 0 To 3
+
             If Connected(i) AndAlso Not IsDPadNeutral(i) Then
                 ' A non-neutral DPad was found.
+
                 ConSum = False ' Report the non-neutral DPad.
+
                 Exit For ' No need to search further, so stop the search.
+
             End If
+
         Next
 
         ' Are all controllers' DPad in the neutral position?
         If ConSum Then
             ' Yes, all controllers' DPad are in the neutral position.
+
             LabelDPad.Text = String.Empty ' Clear label.
 
         End If
@@ -1061,6 +1056,64 @@ Public Class Form1
 
     End Sub
 
+    Private Sub ClearLeftThumbButtonLabel()
+        ' Clears the left thumb button label when all controllers' left thumb buttons are neutral.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' left thumb buttons are neutral initially.
+
+        ' Search for a non-neutral left thumb button.
+        For i As Integer = 0 To 3
+
+            If Connected(i) AndAlso Not IsLeftStickButtonsNeutral(i) Then
+                ' A non-neutral left thumb button was found.
+
+                ConSum = False ' Report the non-neutral left thumb button.
+
+                Exit For ' No need to search further, so stop the search.
+
+            End If
+
+        Next
+
+        ' Are all controllers' left thumb buttons in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' left thumb buttons are in the neutral position.
+
+            LabelLeftThumbButton.Text = String.Empty ' Clear label.
+
+        End If
+
+    End Sub
+
+    Private Sub ClearRightThumbButtonLabel()
+        ' Clears the right thumb button label when all controllers' right thumb buttons are neutral.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' right thumb buttons are neutral initially.
+
+        ' Search for a non-neutral right thumb button.
+        For i As Integer = 0 To 3
+
+            If Connected(i) AndAlso Not IsRightStickButtonsNeutral(i) Then
+                ' A non-neutral right thumb button was found.
+
+                ConSum = False ' Report the non-neutral right thumb button.
+
+                Exit For ' No need to search further, so stop the search.
+
+            End If
+
+        Next
+
+        ' Are all controllers' right thumb buttons in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' right thumb buttons are in the neutral position.
+
+            LabelRightThumbButton.Text = String.Empty ' Clear label.
+
+        End If
+
+    End Sub
+
     Private Function GetDPadDirection() As String
 
         If DPadUpPressed Then
@@ -1113,8 +1166,6 @@ Public Class Form1
 
     End Function
 
-
-
     Private Sub VibrateLeft(CID As Integer, Speed As UShort)
         ' The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         ' The left motor is the low-frequency rumble motor.
@@ -1152,7 +1203,6 @@ Public Class Form1
 
             ' Send motor speed command to the specified controller.
             If XInputSetState(ControllerID, Vibration) = 0 Then
-
                 ' The motor speed was set. Success.
 
             Else
@@ -1291,6 +1341,27 @@ Public Class Form1
         LabelBatteryLevel.Text = String.Empty
 
         LabelBatteryType.Text = String.Empty
+
+    End Sub
+
+    Private Sub ClearButtonsLabel()
+        ' Clears the buttons label when all controllers buttons are up.
+
+        Dim ConSum As Integer = 0
+
+        For Each Con In ConButtons
+
+            ConSum += Con
+
+        Next
+
+        ' Are all controllers buttons up?
+        If ConSum = 0 Then
+            ' Yes, all controller buttons are up.
+
+            LabelButtons.Text = String.Empty ' Clear label.
+
+        End If
 
     End Sub
 
