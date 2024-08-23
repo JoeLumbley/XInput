@@ -374,7 +374,7 @@ Public Class Form1
 
         ConButtons(CID) = ControllerPosition.Gamepad.wButtons
 
-        ClearButtonsLabel()
+        ClearLetterButtonsLabel()
 
         DoButtonLogic(CID)
 
