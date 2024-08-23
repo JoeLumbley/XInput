@@ -244,75 +244,139 @@ Public Class Form1
 
         ' Every second
         If ElapsedTime.TotalSeconds >= 1 Then
-            ' Check for connected controllers.
 
-            For ControllerNumber As Integer = 0 To 3 ' Up to 4 controllers
+            For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
-                If IsControllerConnected(ControllerNumber) = True Then
+                Dim isConnected As Boolean = IsControllerConnected(controllerNumber)
 
-                    Connected(ControllerNumber) = True
+                Connected(controllerNumber) = isConnected
 
-                    If ControllerNumber = 0 Then
-
-                        LabelController0Status.Text = $"Controller {ControllerNumber} Connected"
-                    End If
-
-                    If ControllerNumber = 1 Then
-
-                        LabelController1Status.Text = $"Controller {ControllerNumber} Connected"
-                    End If
-
-                    If ControllerNumber = 2 Then
-
-                        LabelController2Status.Text = $"Controller {ControllerNumber} Connected"
-                    End If
-
-                    If ControllerNumber = 3 Then
-
-                        LabelController3Status.Text = $"Controller {ControllerNumber} Connected"
-                    End If
-
-                Else
-
-                    Connected(ControllerNumber) = False
-
-                    If ControllerNumber = 0 Then
-
-                        LabelController0Status.Text = $"Controller {ControllerNumber} Not Connected"
-                    End If
-
-                    If ControllerNumber = 1 Then
-
-                        LabelController1Status.Text = $"Controller {ControllerNumber} Not Connected"
-                    End If
-
-                    If ControllerNumber = 2 Then
-
-                        LabelController2Status.Text = $"Controller {ControllerNumber} Not Connected"
-                    End If
-
-                    If ControllerNumber = 3 Then
-
-                        LabelController3Status.Text = $"Controller {ControllerNumber} Not Connected"
-                    End If
-
-                End If
+                ' Update the status label based on connection state
+                UpdateControllerStatusLabel(controllerNumber, isConnected)
 
             Next
 
-            ConnectionStart = Now
+            ConnectionStart = DateTime.Now
 
         End If
 
-        For ControllerNumber As Integer = 0 To 3 ' Up to 4 controllers
+        For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
-            If Connected(ControllerNumber) = True Then
+            If Connected(controllerNumber) Then
 
-                UpdateControllerState(ControllerNumber)
+                UpdateControllerState(controllerNumber)
 
             End If
 
         Next
+
+        '' Every second
+        'If ElapsedTime.TotalSeconds >= 1 Then
+        '    ' Check for connected controllers.
+
+        '    For ControllerNumber As Integer = 0 To 3 ' Up to 4 controllers
+
+        '        If IsControllerConnected(ControllerNumber) = True Then
+
+        '            Connected(ControllerNumber) = True
+
+        '            If ControllerNumber = 0 Then
+
+        '                LabelController0Status.Text = $"Controller {ControllerNumber} Connected"
+        '            End If
+
+        '            If ControllerNumber = 1 Then
+
+        '                LabelController1Status.Text = $"Controller {ControllerNumber} Connected"
+        '            End If
+
+        '            If ControllerNumber = 2 Then
+
+        '                LabelController2Status.Text = $"Controller {ControllerNumber} Connected"
+        '            End If
+
+        '            If ControllerNumber = 3 Then
+
+        '                LabelController3Status.Text = $"Controller {ControllerNumber} Connected"
+        '            End If
+
+        '        Else
+
+        '            Connected(ControllerNumber) = False
+
+        '            If ControllerNumber = 0 Then
+
+        '                LabelController0Status.Text = $"Controller {ControllerNumber} Not Connected"
+        '            End If
+
+        '            If ControllerNumber = 1 Then
+
+        '                LabelController1Status.Text = $"Controller {ControllerNumber} Not Connected"
+        '            End If
+
+        '            If ControllerNumber = 2 Then
+
+        '                LabelController2Status.Text = $"Controller {ControllerNumber} Not Connected"
+        '            End If
+
+        '            If ControllerNumber = 3 Then
+
+        '                LabelController3Status.Text = $"Controller {ControllerNumber} Not Connected"
+        '            End If
+
+        '        End If
+
+        '    Next
+
+        '    ConnectionStart = Now
+
+        'End If
+
+        'For ControllerNumber As Integer = 0 To 3 ' Up to 4 controllers
+
+        '    If Connected(ControllerNumber) = True Then
+
+        '        UpdateControllerState(ControllerNumber)
+
+        '    End If
+
+        'Next
+
+    End Sub
+
+    Private Sub UpdateControllerStatusLabel(controllerNumber As Integer, isConnected As Boolean)
+
+        Dim status As String = If(isConnected, "Connected", "Not Connected")
+
+        Dim labelText As String = $"Controller {controllerNumber} {status}"
+
+        Select Case controllerNumber
+
+            Case 0
+
+                LabelController0Status.Text = labelText
+
+
+
+            Case 1
+
+                LabelController1Status.Text = labelText
+
+
+
+            Case 2
+
+                LabelController2Status.Text = labelText
+
+
+
+            Case 3
+
+                LabelController3Status.Text = labelText
+
+
+
+        End Select
 
     End Sub
 
