@@ -41,14 +41,16 @@ Partial Class Form1
         LabelBatteryType = New Label()
         GroupBox1 = New GroupBox()
         GroupBox2 = New GroupBox()
+        LabelBack = New Label()
+        LabelStart = New Label()
         LabelDPad = New Label()
         GroupBox3 = New GroupBox()
         LabelController3Status = New Label()
         LabelController2Status = New Label()
         LabelController1Status = New Label()
         LabelController0Status = New Label()
-        LabelStart = New Label()
-        LabelBack = New Label()
+        LabelLeftBumper = New Label()
+        LabelRightBumper = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
@@ -212,6 +214,8 @@ Partial Class Form1
         ' 
         ' GroupBox2
         ' 
+        GroupBox2.Controls.Add(LabelRightBumper)
+        GroupBox2.Controls.Add(LabelLeftBumper)
         GroupBox2.Controls.Add(LabelBack)
         GroupBox2.Controls.Add(LabelStart)
         GroupBox2.Controls.Add(LabelDPad)
@@ -228,6 +232,24 @@ Partial Class Form1
         GroupBox2.TabIndex = 16
         GroupBox2.TabStop = False
         GroupBox2.Text = "Monitor - Press any button on your controller"
+        ' 
+        ' LabelBack
+        ' 
+        LabelBack.AutoSize = True
+        LabelBack.Location = New Point(452, 132)
+        LabelBack.Name = "LabelBack"
+        LabelBack.Size = New Size(89, 25)
+        LabelBack.TabIndex = 9
+        LabelBack.Text = "LabelBack"
+        ' 
+        ' LabelStart
+        ' 
+        LabelStart.AutoSize = True
+        LabelStart.Location = New Point(316, 90)
+        LabelStart.Name = "LabelStart"
+        LabelStart.Size = New Size(89, 25)
+        LabelStart.TabIndex = 8
+        LabelStart.Text = "LabelStart"
         ' 
         ' LabelDPad
         ' 
@@ -287,23 +309,23 @@ Partial Class Form1
         LabelController0Status.TabIndex = 0
         LabelController0Status.Text = "LabelController0Status"
         ' 
-        ' LabelStart
+        ' LabelLeftBumper
         ' 
-        LabelStart.AutoSize = True
-        LabelStart.Location = New Point(316, 90)
-        LabelStart.Name = "LabelStart"
-        LabelStart.Size = New Size(89, 25)
-        LabelStart.TabIndex = 8
-        LabelStart.Text = "LabelStart"
+        LabelLeftBumper.AutoSize = True
+        LabelLeftBumper.Location = New Point(147, 166)
+        LabelLeftBumper.Name = "LabelLeftBumper"
+        LabelLeftBumper.Size = New Size(144, 25)
+        LabelLeftBumper.TabIndex = 10
+        LabelLeftBumper.Text = "LabelLeftBumper"
         ' 
-        ' LabelBack
+        ' LabelRightBumper
         ' 
-        LabelBack.AutoSize = True
-        LabelBack.Location = New Point(452, 132)
-        LabelBack.Name = "LabelBack"
-        LabelBack.Size = New Size(89, 25)
-        LabelBack.TabIndex = 9
-        LabelBack.Text = "LabelBack"
+        LabelRightBumper.AutoSize = True
+        LabelRightBumper.Location = New Point(314, 43)
+        LabelRightBumper.Name = "LabelRightBumper"
+        LabelRightBumper.Size = New Size(157, 25)
+        LabelRightBumper.TabIndex = 11
+        LabelRightBumper.Text = "LabelRightBumper"
         ' 
         ' Form1
         ' 
@@ -356,4 +378,6 @@ Partial Class Form1
     Friend WithEvents LabelDPad As Label
     Friend WithEvents LabelStart As Label
     Friend WithEvents LabelBack As Label
+    Friend WithEvents LabelLeftBumper As Label
+    Friend WithEvents LabelRightBumper As Label
 End Class

@@ -474,23 +474,33 @@ Public Class Form1
 
     Private Sub DoBumperLogic(ControllerNumber As Integer)
 
-        If LeftBumperButtonPressed = True Then
+        If LeftBumperButtonPressed Then
 
-            If RightBumperButtonPressed = True Then
+            LabelLeftBumper.Text = $"Controller {ControllerNumber} Left Bumper"
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Bumper+Right Bumper"
+            IsLeftBumperNeutral(ControllerNumber) = False
 
-            Else
+        Else
 
-                LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Left Bumper"
-
-            End If
-
-        ElseIf RightBumperButtonPressed = True Then
-
-            LabelButtons.Text = $"Controller {ControllerNumber} Buttons: Right Bumper"
+            IsLeftBumperNeutral(ControllerNumber) = True
 
         End If
+
+        ClearLeftBumperLabel()
+
+        If RightBumperButtonPressed Then
+
+            LabelRightBumper.Text = $"Controller {ControllerNumber} Right Bumper"
+
+            IsRightBumperNeutral(ControllerNumber) = False
+
+        Else
+
+            IsRightBumperNeutral(ControllerNumber) = True
+
+        End If
+
+        ClearRightBumperLabel()
 
     End Sub
 
@@ -988,6 +998,64 @@ Public Class Form1
             ' Yes, all controllers' back buttons are in the neutral position.
 
             LabelBack.Text = String.Empty ' Clear label.
+
+        End If
+
+    End Sub
+
+    Private Sub ClearLeftBumperLabel()
+        ' Clears the left bumper label when all controllers' left bumpers are neutral.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' left bumpers are neutral initially.
+
+        ' Search for a non-neutral left bumper.
+        For i As Integer = 0 To 3
+
+            If Connected(i) AndAlso Not IsLeftBumperNeutral(i) Then
+                ' A non-neutral left bumper was found.
+
+                ConSum = False ' Report the non-neutral left bumper.
+
+                Exit For ' No need to search further, so stop the search.
+
+            End If
+
+        Next
+
+        ' Are all controllers' left bumpers in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' left bumpers are in the neutral position.
+
+            LabelLeftBumper.Text = String.Empty ' Clear label.
+
+        End If
+
+    End Sub
+
+    Private Sub ClearRightBumperLabel()
+        ' Clears the right bumper label when all controllers' right bumpers are neutral.
+
+        Dim ConSum As Boolean = True ' Assume all controllers' right bumpers are neutral initially.
+
+        ' Search for a non-neutral right bumper.
+        For i As Integer = 0 To 3
+
+            If Connected(i) AndAlso Not IsRightBumperNeutral(i) Then
+                ' A non-neutral right bumper was found.
+
+                ConSum = False ' Report the non-neutral right bumper.
+
+                Exit For ' No need to search further, so stop the search.
+
+            End If
+
+        Next
+
+        ' Are all controllers' right bumpers in the neutral position?
+        If ConSum Then
+            ' Yes, all controllers' right bumpers are in the neutral position.
+
+            LabelRightBumper.Text = String.Empty ' Clear label.
 
         End If
 
