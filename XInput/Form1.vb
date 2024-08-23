@@ -242,17 +242,16 @@ Public Class Form1
 
         Dim ElapsedTime As TimeSpan = Now - ConnectionStart
 
-        ' Every second
+        ' Every second check for connected controllers.
         If ElapsedTime.TotalSeconds >= 1 Then
 
             For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
-                Dim isConnected As Boolean = IsControllerConnected(controllerNumber)
+                'Dim isConnected As Boolean = IsControllerConnected(controllerNumber)
 
-                Connected(controllerNumber) = isConnected
+                Connected(controllerNumber) = IsControllerConnected(controllerNumber)
 
-                ' Update the status label based on connection state
-                UpdateControllerStatusLabel(controllerNumber, isConnected)
+                UpdateControllerStatusLabel(controllerNumber)
 
             Next
 
@@ -260,7 +259,7 @@ Public Class Form1
 
         End If
 
-        For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
+        For controllerNumber As Integer = 0 To 3
 
             If Connected(controllerNumber) Then
 
@@ -344,9 +343,10 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateControllerStatusLabel(controllerNumber As Integer, isConnected As Boolean)
+    Private Sub UpdateControllerStatusLabel(controllerNumber As Integer)
+        ' Update the status label based on connection state
 
-        Dim status As String = If(isConnected, "Connected", "Not Connected")
+        Dim status As String = If(Connected(controllerNumber), "Connected", "Not Connected")
 
         Dim labelText As String = $"Controller {controllerNumber} {status}"
 
