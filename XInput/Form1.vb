@@ -1332,6 +1332,16 @@ Public Class Form1
 
         LabelBatteryType.Text = String.Empty
 
+        Dim ToolTipTimeToVib As New ToolTip With {
+            .AutoPopDelay = 5000,
+            .InitialDelay = 1000,
+            .ReshowDelay = 500
+        }
+
+        Dim TipText As String = "Enter a value between 1 and 5000 milliseconds." & vbCrLf & "1 second = 1000 milliseconds"
+
+        ToolTipTimeToVib.SetToolTip(NumericUpDownTimeToVib, TipText)
+
     End Sub
 
     Private Sub ClearButtonsLabel()

@@ -40,6 +40,7 @@ Partial Class Form1
         Label1 = New Label()
         LabelBatteryType = New Label()
         GroupBox1 = New GroupBox()
+        Label2 = New Label()
         NumericUpDownTimeToVib = New NumericUpDown()
         GroupBox2 = New GroupBox()
         LabelRightThumbButton = New Label()
@@ -54,7 +55,6 @@ Partial Class Form1
         LabelController2Status = New Label()
         LabelController1Status = New Label()
         LabelController0Status = New Label()
-        Label2 = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
@@ -219,8 +219,18 @@ Partial Class Form1
         GroupBox1.TabStop = False
         GroupBox1.Text = "Rumble"
         ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Location = New Point(306, 37)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(79, 25)
+        Label2.TabIndex = 15
+        Label2.Text = "Time ms"
+        ' 
         ' NumericUpDownTimeToVib
         ' 
+        NumericUpDownTimeToVib.Increment = New Decimal(New Integer() {25, 0, 0, 0})
         NumericUpDownTimeToVib.Location = New Point(398, 35)
         NumericUpDownTimeToVib.Maximum = New Decimal(New Integer() {4000, 0, 0, 0})
         NumericUpDownTimeToVib.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -363,15 +373,6 @@ Partial Class Form1
         LabelController0Status.Size = New Size(189, 25)
         LabelController0Status.TabIndex = 0
         LabelController0Status.Text = "LabelController0Status"
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Location = New Point(306, 37)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(79, 25)
-        Label2.TabIndex = 15
-        Label2.Text = "Time ms"
         ' 
         ' Form1
         ' 
