@@ -716,16 +716,16 @@ Public Class Form1
 
         ' Search for a non-neutral left thumbstick on the Y-axis.
         For i As Integer = 0 To 3
-            If Connected(i) Then
-                If Not IsConThumbLYNeutral(i) Then
-                    ' A non-neutral thumbstick was found.
 
-                    ConSum = False ' Report the non-neutral thumbstick.
+            If Connected(i) AndAlso Not IsConThumbLYNeutral(i) Then
+                ' A non-neutral thumbstick was found.
 
-                    Exit For ' No need to search further so stop the search.
+                ConSum = False ' Report the non-neutral thumbstick.
 
-                End If
+                Exit For ' No need to search further so stop the search.
+
             End If
+
         Next
 
         ' Are all controllers left thumbsticks on the Y-axis in the neutral position?
@@ -745,16 +745,16 @@ Public Class Form1
 
         ' Search for a non-neutral left thumbstick on the X-axis.
         For i As Integer = 0 To 3
-            If Connected(i) Then
-                If Not IsConThumbLXNeutral(i) Then
-                    ' A non-neutral thumbstick was found.
 
-                    ConSum = False ' Report the non-neutral thumbstick.
+            If Connected(i) AndAlso Not IsConThumbLXNeutral(i) Then
+                ' A non-neutral thumbstick was found.
 
-                    Exit For ' No need to search further so stop the search.
+                ConSum = False ' Report the non-neutral thumbstick.
 
-                End If
+                Exit For ' No need to search further so stop the search.
+
             End If
+
         Next
 
         ' Are all controllers left thumbsticks on the X-axis in the neutral position?
@@ -774,16 +774,16 @@ Public Class Form1
 
         ' Search for a non-neutral right thumbstick on the X-axis.
         For i As Integer = 0 To 3
-            If Connected(i) Then
-                If Not IsConThumbRXNeutral(i) Then
-                    ' A non-neutral thumbstick was found.
 
-                    ConSum = False ' Report the non-neutral thumbstick.
+            If Connected(i) AndAlso Not IsConThumbRXNeutral(i) Then
+                ' A non-neutral thumbstick was found.
 
-                    Exit For ' No need to search further so stop the search.
+                ConSum = False ' Report the non-neutral thumbstick.
 
-                End If
+                Exit For ' No need to search further so stop the search.
+
             End If
+
         Next
 
         ' Are all controllers right thumbsticks on the X-axis in the neutral position?
@@ -803,16 +803,16 @@ Public Class Form1
 
         ' Search for a non-neutral right thumbstick on the Y-axis.
         For i As Integer = 0 To 3
-            If Connected(i) Then
-                If Not IsConThumbRYNeutral(i) Then
-                    ' A non-neutral thumbstick was found.
 
-                    ConSum = False ' Report the non-neutral thumbstick.
+            If Connected(i) AndAlso Not IsConThumbRYNeutral(i) Then
+                ' A non-neutral thumbstick was found.
 
-                    Exit For ' No need to search further so stop the search.
+                ConSum = False ' Report the non-neutral thumbstick.
 
-                End If
+                Exit For ' No need to search further so stop the search.
+
             End If
+
         Next
 
         ' Are all controllers right thumbsticks on the Y-axis in the neutral position?
@@ -832,16 +832,16 @@ Public Class Form1
 
         ' Search for a non-neutral right trigger.
         For i As Integer = 0 To 3
-            If Connected(i) Then
-                If Not IsConRightTriggerNeutral(i) Then
-                    ' A non-neutral right trigger was found.
 
-                    ConSum = False ' Report the non-neutral right trigger.
+            If Connected(i) AndAlso Not IsConRightTriggerNeutral(i) Then
+                ' A non-neutral right trigger was found.
 
-                    Exit For  ' No need to search further, so stop the search.
+                ConSum = False ' Report the non-neutral right trigger.
 
-                End If
+                Exit For  ' No need to search further, so stop the search.
+
             End If
+
         Next
 
         ' Are all controllers right triggers in the neutral position?
@@ -861,16 +861,16 @@ Public Class Form1
 
         ' Search for a non-neutral left trigger.
         For i As Integer = 0 To 3
-            If Connected(i) Then
-                If Not IsConLeftTriggerNeutral(i) Then
-                    ' A non-neutral left trigger was found.
 
-                    ConSum = False ' Report the non-neutral left trigger.
+            If Connected(i) AndAlso Not IsConLeftTriggerNeutral(i) Then
+                ' A non-neutral left trigger was found.
 
-                    Exit For ' No need to search further so stop the search.
+                ConSum = False ' Report the non-neutral left trigger.
 
-                End If
+                Exit For ' No need to search further so stop the search.
+
             End If
+
         Next
 
         ' Are all controllers left triggers in the neutral position?
