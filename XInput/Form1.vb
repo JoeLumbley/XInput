@@ -247,8 +247,6 @@ Public Class Form1
 
             For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
-                'Dim isConnected As Boolean = IsControllerConnected(controllerNumber)
-
                 Connected(controllerNumber) = IsControllerConnected(controllerNumber)
 
                 UpdateControllerStatusLabel(controllerNumber)
