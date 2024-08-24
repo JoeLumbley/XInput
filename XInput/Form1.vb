@@ -534,14 +534,14 @@ Public Class Form1
         If ControllerPosition.Gamepad.sThumbLX <= NeutralStart Then
             ' The left thumbstick is in the left position.
 
-            LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick: Left"
+            LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick Left"
 
             IsConThumbLXNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
             ' The left thumbstick is in the right position.
 
-            LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick: Right"
+            LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick Right"
 
             IsConThumbLXNeutral(ControllerNumber) = False
 
@@ -558,14 +558,14 @@ Public Class Form1
         If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
             ' The left thumbstick is in the down position.
 
-            LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick: Down"
+            LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick Down"
 
             IsConThumbLYNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
             ' The left thumbstick is in the up position.
 
-            LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick: Up"
+            LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick Up"
 
             IsConThumbLYNeutral(ControllerNumber) = False
 
@@ -588,14 +588,14 @@ Public Class Form1
         If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
             ' The right thumbstick is in the left position.
 
-            LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick: Left"
+            LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick Left"
 
             IsConThumbRXNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
             ' The right thumbstick is in the right position.
 
-            LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick: Right"
+            LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick Right"
 
             IsConThumbRXNeutral(ControllerNumber) = False
 
@@ -612,14 +612,14 @@ Public Class Form1
         If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
             ' The right thumbstick is in the up position.
 
-            LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick: Down"
+            LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Down"
 
             IsConThumbRYNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
             ' The right thumbstick is in the down position.
 
-            LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick: Up"
+            LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Up"
 
             IsConThumbRYNeutral(ControllerNumber) = False
 
@@ -1230,7 +1230,7 @@ Public Class Form1
 
                 Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
 
-                If ElapsedTime.TotalSeconds >= 1 Then
+                If ElapsedTime.TotalMilliseconds >= NumericUpDownTimeToVib.Value Then
 
                     IsLeftVibrating(Index) = False
 
@@ -1257,7 +1257,7 @@ Public Class Form1
 
                 Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Index)
 
-                If ElapsedTime.TotalSeconds >= 1 Then
+                If ElapsedTime.TotalMilliseconds >= NumericUpDownTimeToVib.Value Then
 
                     IsRightVibrating(Index) = False
 
