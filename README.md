@@ -78,17 +78,65 @@ The article provides references to the relevant Microsoft documentation for the 
 
 The application detects and updates the connection status of the controllers using the following approach:
 
-Polling Mechanism: The application uses a timer to periodically check the connection status of each controller. This is typically done every second.
+**Polling Mechanism:** The application uses a timer to periodically check the connection status of each controller. This is typically done every second.
 
-XInputGetState Function: For each controller (up to 4), the application calls the XInputGetState function. This function retrieves the current state of the specified controller, including whether it is connected.
+``` VB
+Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-Connection Check: The return value of XInputGetState is checked:
+  UpdateControllerData()
+
+  UpdateVibrateTimer()
+
+End Sub
+
+```
+
+**XInputGetState Function:** For each controller (up to 4), the application calls the XInputGetState function. This function retrieves the current state of the specified controller, including whether it is connected.
+
+
+``` VB
+Private Sub UpdateControllerData()
+
+  Dim ElapsedTime As TimeSpan = Now - ConnectionStart
+
+  ' Every second check for connected controllers.
+  If ElapsedTime.TotalSeconds >= 1 Then
+
+    For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
+
+      Connected(controllerNumber) = IsControllerConnected(controllerNumber)
+
+      UpdateControllerStatusLabel(controllerNumber)
+
+    Next
+
+    ConnectionStart = DateTime.Now
+
+  End If
+
+  For controllerNumber As Integer = 0 To 3
+
+    If Connected(controllerNumber) Then
+
+      UpdateControllerState(controllerNumber)
+
+    End If
+
+  Next
+
+End Sub
+    
+```
+
+**Connection Check:** The return value of XInputGetState is checked:
 
 A return value of 0 indicates that the controller is connected.
 Any non-zero return value indicates that the controller is not connected.
-Updating UI: Based on the connection status retrieved, the application updates the corresponding UI elements (e.g., status labels) to reflect whether each controller is connected or not.
 
-Storing State: The connection status for each controller is stored in a boolean array, which is updated during each polling cycle.
+
+**Updating UI:** Based on the connection status retrieved, the application updates the corresponding UI elements (e.g., status labels) to reflect whether each controller is connected or not.
+
+**Storing State:** The connection status for each controller is stored in a boolean array, which is updated during each polling cycle.
 
 This method ensures that the application can dynamically reflect the current connection status of the Xbox controllers in real-time.
 
