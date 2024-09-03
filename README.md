@@ -8,3 +8,13 @@
 
 With a clean and well-commented codebase, this project serves as an invaluable resource for developers looking to harness the power of XInput in their Windows applications. Whether you're a seasoned developer or just getting started, the XInput app provides a solid foundation for building immersive gaming experiences and beyond.
 
+
+
+
+
+
+![063](https://github.com/user-attachments/assets/42017bca-10fc-4792-a0e2-005893763b00)
+
+
+
+
