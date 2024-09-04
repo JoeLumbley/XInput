@@ -133,6 +133,27 @@ End Sub
 A return value of 0 indicates that the controller is connected.
 Any non-zero return value indicates that the controller is not connected.
 
+``` VB
+    Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
+
+        Try
+
+            Return XInputGetState(controllerNumber, ControllerPosition) = 0 ' 0 means the controller is connected.
+            ' Anything else (a non-zero value) means the controller is not connected.
+
+        Catch ex As Exception
+            ' Something went wrong (An exception occured).
+
+            DisplayError(ex)
+
+            Return False
+
+        End Try
+
+    End Function
+
+```
+
 
 **Updating UI:** Based on the connection status retrieved, the application updates the corresponding UI elements (e.g., status labels) to reflect whether each controller is connected or not.
 
