@@ -102,7 +102,8 @@ End Sub
 
 **Timer1.Start():** This starts the timer, which will call the ```Timer1_Tick``` method repeatedly.
 
-5. Updating Controller Data
+### Updating Controller Data
+
 In the timer's tick event, we update the controller data.
 
 ``` vbnet
