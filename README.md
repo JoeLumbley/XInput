@@ -18,155 +18,159 @@ With a clean and well-commented codebase, this project serves as an invaluable r
 
 
 
-This application demonstrates the use of Xbox controllers and their vibration effect (rumble). It includes the implementation of the XInput API to retrieve the current state of the controllers, process button and thumbstick input, and control the vibration motors.
 
-The application uses the XInput1_4.dll library to interact with Xbox controllers. 
 
-``` VB
+
+
+# Code Walkthrough
+### Imports and DLL Function Declarations
+At the beginning of the ```Form1.vb``` file, we import necessary libraries and declare functions from the XInput DLL.
+
+``` vbnet
+Imports System.Runtime.InteropServices
+
 <DllImport("XInput1_4.dll")>
 Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
 End Function
-
 ```
 
-It defines various structures and constants to represent the controller state, including the XINPUT_STATE and XINPUT_GAMEPAD structures.
+**Imports System.Runtime.InteropServices:** This line allows us to use features that let managed code (like our VB.NET code) interact with unmanaged code (like the XInput DLL).
 
-``` VB
+**DllImport:** This attribute tells the program that we want to use a function from an external library (the XInput DLL) to get the state of the Xbox controller.
+
+
+
+### Defining Structures
+
+Next, we define structures that represent the controller's state and input.
+
+``` vbnet
 <StructLayout(LayoutKind.Explicit)>
 Public Structure XINPUT_STATE
-  <FieldOffset(0)>
-  Public dwPacketNumber As UInteger 
-  <FieldOffset(4)>
-  Public Gamepad As XINPUT_GAMEPAD
+    <FieldOffset(0)>
+    Public dwPacketNumber As UInteger
+    <FieldOffset(4)>
+    Public Gamepad As XINPUT_GAMEPAD
 End Structure
+```
+**StructLayout:** This attribute specifies how the fields of the structure are laid out in memory.
 
+**XINPUT_STATE:** This structure holds the state of the controller, including a packet number (used to track changes) and the gamepad data.
+
+``` vbnet
 <StructLayout(LayoutKind.Sequential)>
 Public Structure XINPUT_GAMEPAD
-  Public wButtons As UShort 
-  Public bLeftTrigger As Byte 
-  Public bRightTrigger As Byte
-  Public sThumbLX As Short 
-  Public sThumbLY As Short
-  Public sThumbRX As Short
-  Public sThumbRY As Short
+    Public wButtons As UShort
+    Public bLeftTrigger As Byte
+    Public bRightTrigger As Byte
+    Public sThumbLX As Short
+    Public sThumbLY As Short
+    Public sThumbRX As Short
+    Public sThumbRY As Short
 End Structure
-
 ```
 
+**XINPUT_GAMEPAD:** This structure contains information about the buttons pressed and the positions of the thumbsticks and triggers.
 
 
+### Initializing the Application
 
 
-The application can detect the connection status of up to 4 controllers and update the UI accordingly. 
+When the form loads, we initialize the application.
+
+``` vbnet
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    InitializeApp()
+End Sub
+```
+
+**Form1_Load:** This is an event handler that runs when the form is loaded. It calls the ```InitializeApp()``` method, which sets up the application.
 
 
-It can process various input from the controllers, such as button presses, thumbstick positions, and trigger levels, and update the UI to display the corresponding information.
+### Timer for Polling Controller State
 
-The application includes functionality to control the vibration motors of the controllers, allowing the user to vibrate the left and right motors independently. 
+We use a timer to regularly check the controller's state.
 
+``` vbnet
+Private Sub InitializeTimer1()
+    Timer1.Interval = 15 ' Set the timer to tick every 15 milliseconds
+    Timer1.Start()       ' Start the timer
+End Sub
+```
 
+**Timer1.Interval:** This sets how often the timer will trigger (every 15 milliseconds).
 
-It also includes logic to manage the vibration timers and turn off the motors when the specified vibration duration is reached. 
+**Timer1.Start():** This starts the timer, which will call the ```Timer1_Tick``` method repeatedly.
 
+5. Updating Controller Data
+In the timer's tick event, we update the controller data.
 
-
-
-
-The article provides references to the relevant Microsoft documentation for the XInput API and data types used in the application.
-
-
-
-The application detects and updates the connection status of the controllers using the following approach:
-
-**Polling Mechanism:** The application uses a timer to periodically check the connection status of each controller. This is typically done every second.
-
-``` VB
+``` vbnet
 Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-
-  UpdateControllerData()
-
-  UpdateVibrateTimer()
-
+    UpdateControllerData()
 End Sub
-
 ```
 
-**XInputGetState Function:** For each controller (up to 4), the application calls the XInputGetState function. This function retrieves the current state of the specified controller, including whether it is connected.
+**UpdateControllerData():** This method checks the state of the controllers and updates the UI accordingly.
 
+### Getting Controller State
 
-``` VB
-Private Sub UpdateControllerData()
+Inside ```UpdateControllerData```, we retrieve the current state of each connected controller.
 
-  Dim ElapsedTime As TimeSpan = Now - ConnectionStart
-
-  ' Every second check for connected controllers.
-  If ElapsedTime.TotalSeconds >= 1 Then
-
-    For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
-
-      Connected(controllerNumber) = IsControllerConnected(controllerNumber)
-
-      UpdateControllerStatusLabel(controllerNumber)
-
-    Next
-
-    ConnectionStart = DateTime.Now
-
-  End If
-
-  For controllerNumber As Integer = 0 To 3
-
+``` vbnet
+For controllerNumber As Integer = 0 To 3
+    Connected(controllerNumber) = IsControllerConnected(controllerNumber)
     If Connected(controllerNumber) Then
-
-      UpdateControllerState(controllerNumber)
-
+        UpdateControllerState(controllerNumber)
     End If
+Next
+```
 
-  Next
+**For loop:** This loop checks up to four controllers (0 to 3).
 
+**IsControllerConnected(controllerNumber):** This function checks if a controller is connected and returns true or false.
+
+**UpdateControllerState(controllerNumber):** If the controller is connected, this method retrieves its current state.
+
+
+### Updating Button States
+
+
+
+When we retrieve the controller state, we check which buttons are pressed.
+
+``` vbnet
+Private Sub UpdateButtonPosition(CID As Integer)
+    DPadUpPressed = (ControllerPosition.Gamepad.wButtons And DPadUp) <> 0
+    ' Similar checks for other buttons...
 End Sub
-    
 ```
 
-**Connection Check:** The return value of XInputGetState is checked:
+**wButtons:** This field contains the state of all buttons as a number.
 
-A return value of 0 indicates that the controller is connected.
-Any non-zero return value indicates that the controller is not connected.
+**Bitwise AND operator (```And```):** This checks if a specific button is pressed by comparing it to a constant (like ```DPadUp```).
 
-``` VB
-    Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
+### Vibration Control
 
-        Try
 
-            Return XInputGetState(controllerNumber, ControllerPosition) = 0 ' 0 means the controller is connected.
-            ' Anything else (a non-zero value) means the controller is not connected.
+To control the vibration of the controller, we have buttons in the UI.
 
-        Catch ex As Exception
-            ' Something went wrong (An exception occured).
-
-            DisplayError(ex)
-
-            Return False
-
-        End Try
-
-    End Function
-
+``` vbnet
+Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
+    VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+End Sub
 ```
 
+**ButtonVibrateLeft_Click:** This event runs when the "Vibrate Left" button is clicked.
 
-**Updating UI:** Based on the connection status retrieved, the application updates the corresponding UI elements (e.g., status labels) to reflect whether each controller is connected or not.
-
-**Storing State:** The connection status for each controller is stored in a boolean array, which is updated during each polling cycle.
-
-This method ensures that the application can dynamically reflect the current connection status of the Xbox controllers in real-time.
+**VibrateLeft():** This method triggers vibration on the specified controller with the desired intensity.
 
 
 
 
+This application provides a hands-on way to interact with Xbox controllers using VB.NET. By understanding each section of the code, you can see how the application retrieves controller states, manages input, and provides feedback through vibration.
 
-
-
+Feel free to experiment with the code, modify it, and add new features as you learn more about programming! If you have any questions, don’t hesitate to ask.
 
 
 
