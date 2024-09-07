@@ -1332,13 +1332,16 @@ Public Class Form1
 
         LabelBatteryType.Text = String.Empty
 
+
         Dim ToolTipTimeToVib As New ToolTip With {
             .AutoPopDelay = 8000,
             .InitialDelay = 1000,
             .ReshowDelay = 500
         }
 
-        Dim TipText As String = "Time to Vibrate " & vbCrLf & "Enter a value between 1 and 5000 milliseconds" & vbCrLf & "1 second = 1000 milliseconds"
+        Dim TipText As String = "Time to Vibrate " & vbCrLf &
+                                "Enter a value between 1 and 5000 milliseconds" & vbCrLf &
+                                "1 second = 1000 milliseconds"
 
         ToolTipTimeToVib.SetToolTip(NumericUpDownTimeToVib, TipText)
 
@@ -1349,10 +1352,11 @@ Public Class Form1
             .ReshowDelay = 500
         }
 
-        TipText = "Controller to Vibrate " & vbCrLf & "Enter a value between 0 and 3" & vbCrLf & "Supports up to 4 controllers"
+        TipText = "Controller to Vibrate " & vbCrLf &
+                  "Enter a value between 0 and 3" & vbCrLf &
+                  "Supports up to 4 controllers"
 
         ToolTipConToVib.SetToolTip(NumControllerToVib, TipText)
-
 
     End Sub
 
