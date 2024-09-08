@@ -1366,9 +1366,9 @@ Public Class Form1
         }
 
         TipText = "Vibration Speed " & Environment.NewLine &
-                   "Enter a value between 1 and 65,535" & Environment.NewLine &
-                                "Higher speeds can create stronger feedback" & Environment.NewLine &
-                                "while lower speeds produce a more subtle effect"
+                  "Enter a value between 1 and 65,535" & Environment.NewLine &
+                  "Higher speeds can create stronger feedback" & Environment.NewLine &
+                  "while lower speeds produce a more subtle effect"
 
         ToolTipVibSpeed.SetToolTip(TrackBarSpeed, TipText)
 
@@ -1381,7 +1381,7 @@ Public Class Form1
 
         TipText = "The vibration motors in controllers " & Environment.NewLine &
                   "provide haptic feedback during gameplay" & Environment.NewLine &
-                  "enhancing the immersive experience" & Environment.NewLine & "     "
+                  "enhancing the immersive experience"
 
         ToolTipRumbleGroup.SetToolTip(GroupBox1, TipText)
 
