@@ -3,7 +3,7 @@
 🎮 Welcome to XInput, your go-to solution for integrating Xbox controller support into your applications! This feature-rich application showcases the seamless integration of Xbox controllers, complete with vibration effects and real-time controller state monitoring. 
 
 
-![024](https://github.com/user-attachments/assets/bef33051-0d5d-4248-9afc-68a9d0fc3e5d)
+![030](https://github.com/user-attachments/assets/9908bb44-b9ce-4bf1-b292-a8c8eb28124e)
 
 
 With a clean and well-commented codebase, this project serves as an invaluable resource for developers looking to harness the power of XInput in their Windows applications. Whether you're a seasoned developer or just getting started, the XInput app provides a solid foundation for building immersive gaming experiences and beyond.
@@ -23,7 +23,11 @@ With a clean and well-commented codebase, this project serves as an invaluable r
 
 
 # Code Walkthrough
+
+XInput is a Windows application that allows you to use Xbox controllers. It can read button presses, thumbstick movements, and make the controllers vibrate. The application uses a library called **XInput** to communicate with the controllers.
+
 ### Imports and DLL Function Declarations
+
 At the beginning of the ```Form1.vb``` file, we import necessary libraries and declare functions from the XInput DLL.
 
 ``` vbnet
@@ -88,8 +92,7 @@ End Sub
 
 
 ### Timer for Polling Controller State
-
-We use a timer to regularly check the controller's state.
+A timer is set to check the controller state every 15 milliseconds.
 
 ``` vbnet
 Private Sub InitializeTimer1()
