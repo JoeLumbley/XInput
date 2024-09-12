@@ -1332,6 +1332,11 @@ Public Class Form1
 
         LabelBatteryType.Text = String.Empty
 
+        InitializeToolTips()
+
+    End Sub
+
+    Private Sub InitializeToolTips()
 
         Dim ToolTipTimeToVib As New ToolTip With {
             .AutoPopDelay = 8000,
@@ -1339,9 +1344,7 @@ Public Class Form1
             .ReshowDelay = 500
         }
 
-        Dim TipText As String = "Time to Vibrate " & vbCrLf &
-                                "Enter a value between 1 and 5000 milliseconds" & vbCrLf &
-                                "1 second = 1000 milliseconds"
+        Dim TipText As String = $"Time to Vibrate {vbCrLf}Enter a value between 1 and 5000 milliseconds{vbCrLf}1 second = 1000 milliseconds"
 
         ToolTipTimeToVib.SetToolTip(NumericUpDownTimeToVib, TipText)
 
@@ -1352,9 +1355,7 @@ Public Class Form1
             .ReshowDelay = 500
         }
 
-        TipText = "Controller to Vibrate " & vbCrLf &
-                  "Enter a value between 0 and 3" & vbCrLf &
-                  "Supports up to 4 controllers"
+        TipText = $"Controller to Vibrate {vbCrLf}Enter a value between 0 and 3 {vbCrLf}Supports up to 4 controllers"
 
         ToolTipConToVib.SetToolTip(NumControllerToVib, TipText)
 
@@ -1365,10 +1366,7 @@ Public Class Form1
             .ReshowDelay = 500
         }
 
-        TipText = "Vibration Speed " & Environment.NewLine &
-                  "Enter a value between 1 and 65,535" & Environment.NewLine &
-                  "Higher speeds can create stronger feedback" & Environment.NewLine &
-                  "while lower speeds produce a more subtle effect"
+        TipText = $"Vibration Speed {Environment.NewLine}Enter a value between 1 and 65,535 {Environment.NewLine}Higher speeds can create stronger feedback {Environment.NewLine}while lower speeds produce a more subtle effect"
 
         ToolTipVibSpeed.SetToolTip(TrackBarSpeed, TipText)
 
@@ -1379,9 +1377,7 @@ Public Class Form1
             .ReshowDelay = 500
         }
 
-        TipText = "The vibration motors in controllers " & Environment.NewLine &
-                  "provide haptic feedback during gameplay" & Environment.NewLine &
-                  "enhancing the immersive experience"
+        TipText = $"The vibration motors in controllers {Environment.NewLine}provide haptic feedback during gameplay {Environment.NewLine}enhancing the immersive experience"
 
         ToolTipRumbleGroup.SetToolTip(GroupBox1, TipText)
 
