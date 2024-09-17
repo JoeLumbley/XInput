@@ -663,7 +663,7 @@ Public Class Form1
 
         ' What position is the left trigger in?
         If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
-            ' The left trigger is in the down position. Trigger Break. Bang!
+            ' The left trigger is in the fire position. Trigger Break. Bang!
 
             LabelLeftTrigger.Text = $"Controller {ControllerNumber} Left Trigger"
 
