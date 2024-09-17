@@ -206,7 +206,7 @@ The trigger threshold helps filter out minor or unintentional movements. It ensu
 For example, in a typical game controller, the trigger may have a range of values from 0 to 255 (for an 8-bit input). A threshold might be set at 64, meaning the trigger must be pulled beyond this value to register as "pressed." Values below 64 would be considered inactive.
 
 
-![007](https://github.com/user-attachments/assets/57e59449-9085-48f3-a226-9e6701a8a897)
+![008](https://github.com/user-attachments/assets/0fbbfbc2-efb9-4729-b14e-fe36d2ed2c89)
 
 
 Reduces accidental inputs during gameplay, especially in fast-paced scenarios where slight movements could lead to unintended actions.
