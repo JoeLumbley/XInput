@@ -610,14 +610,14 @@ Public Class Form1
 
         ' What position is the right thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
-            ' The right thumbstick is in the up position.
+            ' The right thumbstick is in the down position.
 
             LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Down"
 
             IsConThumbRYNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
-            ' The right thumbstick is in the down position.
+            ' The right thumbstick is in the up position.
 
             LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Up"
 
