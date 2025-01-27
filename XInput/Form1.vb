@@ -56,19 +56,19 @@ Public Structure XboxControllers
         Public sThumbRY As Short
     End Structure
 
-    Public ConButtons() As UShort
+    Public Buttons() As UShort
 
     Public LeftTriggerNeutral() As Boolean
 
-    Public ConRightTriggerNeutral() As Boolean
+    Public RightTriggerNeutral() As Boolean
 
-    Public ThumbLXNeutral() As Boolean
+    Public LeftThumbstickXaxisNeutral() As Boolean
 
-    Public ThumbLYNeutral() As Boolean
+    Public LeftThumbstickYaxisNeutral() As Boolean
 
-    Public ThumbRXNeutral() As Boolean
+    Public RightThumbstickXaxisNeutral() As Boolean
 
-    Public ThumbRYNeutral() As Boolean
+    Public RightThumbstickYaxisNeutral() As Boolean
 
     Public DPadNeutral() As Boolean
 
@@ -76,7 +76,7 @@ Public Structure XboxControllers
 
     Public RightBumperNeutral() As Boolean
 
-    Public IsLetterButtonsNeutral() As Boolean
+    Public LetterButtonsNeutral() As Boolean
 
     Public StartButtonsNeutral() As Boolean
 
@@ -115,38 +115,38 @@ Public Structure XboxControllers
     Private Const DPadLeftConst As Integer = 4
     Private Const DPadRightConst As Integer = 8
 
-    Private Const StartButton As Integer = 16
-    Private Const BackButton As Integer = 32
+    Private Const StartButtonConst As Integer = 16
+    Private Const BackButtonConst As Integer = 32
 
-    Private Const LeftStickButton As Integer = 64
-    Private Const RightStickButton As Integer = 128
+    Private Const LeftStickButtonConst As Integer = 64
+    Private Const RightStickButtonConst As Integer = 128
 
-    Private Const LeftBumperButton As Integer = 256
-    Private Const RightBumperButton As Integer = 512
+    Private Const LeftBumperConst As Integer = 256
+    Private Const RightBumperConst As Integer = 512
 
-    Private Const AButton As Integer = 4096
-    Private Const BButton As Integer = 8192
-    Private Const XButton As Integer = 16384
-    Private Const YButton As Integer = 32768
+    Private Const AButtonConst As Integer = 4096
+    Private Const BButtonConst As Integer = 8192
+    Private Const XButtonConst As Integer = 16384
+    Private Const YButtonConst As Integer = 32768
 
     Public DPadUp As Boolean
     Public DPadDown As Boolean
-    Public DPadLeftPressed As Boolean
-    Public DPadRightPressed As Boolean
+    Public DPadLeft As Boolean
+    Public DPadRight As Boolean
 
-    Public StartButtonPressed As Boolean
-    Public BackButtonPressed As Boolean
+    Public StartButton As Boolean
+    Public BackButton As Boolean
 
-    Public LeftStickButtonPressed As Boolean
-    Public RightStickButtonPressed As Boolean
+    Public LeftStickButton As Boolean
+    Public RightStickButton As Boolean
 
-    Public LeftBumperButtonPressed As Boolean
-    Public RightBumperButtonPressed As Boolean
+    Public LeftBumperButton As Boolean
+    Public RightBumperButton As Boolean
 
-    Public AButtonPressed As Boolean
-    Public BButtonPressed As Boolean
-    Public XButtonPressed As Boolean
-    Public YButtonPressed As Boolean
+    Public AButton As Boolean
+    Public BButton As Boolean
+    Public XButton As Boolean
+    Public YButton As Boolean
 
     Public RightThumbstickUp() As Boolean
     Public RightThumbstickDown() As Boolean
@@ -169,28 +169,28 @@ Public Structure XboxControllers
 
         IsConnected = New Boolean(0 To 3) {}
 
-        ConButtons = New UShort(0 To 3) {}
+        Buttons = New UShort(0 To 3) {}
 
 
-        ThumbLXNeutral = New Boolean(0 To 3) {}
+        LeftThumbstickXaxisNeutral = New Boolean(0 To 3) {}
 
-        ThumbLYNeutral = New Boolean(0 To 3) {}
+        LeftThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 
 
-        ThumbRXNeutral = New Boolean(0 To 3) {}
+        RightThumbstickXaxisNeutral = New Boolean(0 To 3) {}
 
-        ThumbRYNeutral = New Boolean(0 To 3) {}
+        RightThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 
 
         LeftTriggerNeutral = New Boolean(0 To 3) {}
 
-        ConRightTriggerNeutral = New Boolean(0 To 3) {}
+        RightTriggerNeutral = New Boolean(0 To 3) {}
 
 
         DPadNeutral = New Boolean(0 To 3) {}
 
 
-        IsLetterButtonsNeutral = New Boolean(0 To 3) {}
+        LetterButtonsNeutral = New Boolean(0 To 3) {}
 
 
         StartButtonsNeutral = New Boolean(0 To 3) {}
@@ -315,43 +315,43 @@ Public Structure XboxControllers
         DPadDown =
             (ControllerPosition.Gamepad.wButtons And DPadDownConst) <> 0
 
-        DPadLeftPressed =
+        DPadLeft =
             (ControllerPosition.Gamepad.wButtons And DPadLeftConst) <> 0
 
-        DPadRightPressed =
+        DPadRight =
             (ControllerPosition.Gamepad.wButtons And DPadRightConst) <> 0
 
-        StartButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And StartButton) <> 0
+        StartButton =
+            (ControllerPosition.Gamepad.wButtons And StartButtonConst) <> 0
 
-        BackButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And BackButton) <> 0
+        BackButton =
+            (ControllerPosition.Gamepad.wButtons And BackButtonConst) <> 0
 
-        LeftStickButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And LeftStickButton) <> 0
+        LeftStickButton =
+            (ControllerPosition.Gamepad.wButtons And LeftStickButtonConst) <> 0
 
-        RightStickButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And RightStickButton) <> 0
+        RightStickButton =
+            (ControllerPosition.Gamepad.wButtons And RightStickButtonConst) <> 0
 
-        LeftBumperButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And LeftBumperButton) <> 0
+        LeftBumperButton =
+            (ControllerPosition.Gamepad.wButtons And LeftBumperConst) <> 0
 
-        RightBumperButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And RightBumperButton) <> 0
+        RightBumperButton =
+            (ControllerPosition.Gamepad.wButtons And RightBumperConst) <> 0
 
-        AButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And AButton) <> 0
+        AButton =
+            (ControllerPosition.Gamepad.wButtons And AButtonConst) <> 0
 
-        BButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And BButton) <> 0
+        BButton =
+            (ControllerPosition.Gamepad.wButtons And BButtonConst) <> 0
 
-        XButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And XButton) <> 0
+        XButton =
+            (ControllerPosition.Gamepad.wButtons And XButtonConst) <> 0
 
-        YButtonPressed =
-            (ControllerPosition.Gamepad.wButtons And YButton) <> 0
+        YButton =
+            (ControllerPosition.Gamepad.wButtons And YButtonConst) <> 0
 
-        ConButtons(CID) =
+        Buttons(CID) =
             ControllerPosition.Gamepad.wButtons
 
     End Sub
@@ -371,7 +371,7 @@ Public Structure XboxControllers
 
             LeftThumbstickRight(ControllerNumber) = False
 
-            ThumbLXNeutral(ControllerNumber) = False
+            LeftThumbstickXaxisNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
             ' The left thumbstick is in the right position.
@@ -380,7 +380,7 @@ Public Structure XboxControllers
 
             LeftThumbstickLeft(ControllerNumber) = False
 
-            ThumbLXNeutral(ControllerNumber) = False
+            LeftThumbstickXaxisNeutral(ControllerNumber) = False
 
         Else
             ' The left thumbstick is in the neutral position.
@@ -389,7 +389,7 @@ Public Structure XboxControllers
 
             LeftThumbstickLeft(ControllerNumber) = False
 
-            ThumbLXNeutral(ControllerNumber) = True
+            LeftThumbstickXaxisNeutral(ControllerNumber) = True
 
         End If
 
@@ -401,7 +401,7 @@ Public Structure XboxControllers
 
             LeftThumbstickUp(ControllerNumber) = False
 
-            ThumbLYNeutral(ControllerNumber) = False
+            LeftThumbstickYaxisNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
             ' The left thumbstick is in the up position.
@@ -410,12 +410,12 @@ Public Structure XboxControllers
 
             LeftThumbstickDown(ControllerNumber) = False
 
-            ThumbLYNeutral(ControllerNumber) = False
+            LeftThumbstickYaxisNeutral(ControllerNumber) = False
 
         Else
             ' The left thumbstick is in the neutral position.
 
-            ThumbLYNeutral(ControllerNumber) = True
+            LeftThumbstickYaxisNeutral(ControllerNumber) = True
 
         End If
 
@@ -435,7 +435,7 @@ Public Structure XboxControllers
 
             RightThumbstickRight(ControllerNumber) = False
 
-            ThumbRXNeutral(ControllerNumber) = False
+            RightThumbstickXaxisNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
             ' The right thumbstick is in the right position.
@@ -444,12 +444,12 @@ Public Structure XboxControllers
 
             RightThumbstickLeft(ControllerNumber) = False
 
-            ThumbRXNeutral(ControllerNumber) = False
+            RightThumbstickXaxisNeutral(ControllerNumber) = False
 
         Else
             ' The right thumbstick is in the neutral position.
 
-            ThumbRXNeutral(ControllerNumber) = True
+            RightThumbstickXaxisNeutral(ControllerNumber) = True
 
             RightThumbstickLeft(ControllerNumber) = False
 
@@ -465,7 +465,7 @@ Public Structure XboxControllers
 
             RightThumbstickUp(ControllerNumber) = False
 
-            ThumbRYNeutral(ControllerNumber) = False
+            RightThumbstickYaxisNeutral(ControllerNumber) = False
 
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
             ' The right thumbstick is in the up position.
@@ -474,7 +474,7 @@ Public Structure XboxControllers
 
             RightThumbstickDown(ControllerNumber) = False
 
-            ThumbRYNeutral(ControllerNumber) = False
+            RightThumbstickYaxisNeutral(ControllerNumber) = False
 
         Else
             ' The right thumbstick is in the neutral position.
@@ -483,7 +483,7 @@ Public Structure XboxControllers
 
             RightThumbstickDown(ControllerNumber) = False
 
-            ThumbRYNeutral(ControllerNumber) = True
+            RightThumbstickYaxisNeutral(ControllerNumber) = True
 
         End If
 
@@ -500,14 +500,14 @@ Public Structure XboxControllers
 
             RightTrigger(ControllerNumber) = True
 
-            ConRightTriggerNeutral(ControllerNumber) = False
+            RightTriggerNeutral(ControllerNumber) = False
 
         Else
             ' The right trigger is in the neutral position. Pre-Travel.
 
             RightTrigger(ControllerNumber) = False
 
-            ConRightTriggerNeutral(ControllerNumber) = True
+            RightTriggerNeutral(ControllerNumber) = True
 
         End If
 
@@ -803,12 +803,12 @@ Public Class Form1
 
             LabelButtons.Text = buttonText
 
-            Controllers.IsLetterButtonsNeutral(controllerNumber) = False
+            Controllers.LetterButtonsNeutral(controllerNumber) = False
 
         Else
             ' No, letter buttons are Not pressed.
 
-            Controllers.IsLetterButtonsNeutral(controllerNumber) = True
+            Controllers.LetterButtonsNeutral(controllerNumber) = True
 
         End If
 
@@ -818,7 +818,7 @@ Public Class Form1
 
     Private Sub DoStartBackLogic(ControllerNumber As Integer)
 
-        If Controllers.StartButtonPressed Then
+        If Controllers.StartButton Then
 
             LabelStart.Text = $"Controller {ControllerNumber} Start"
 
@@ -832,7 +832,7 @@ Public Class Form1
 
         ClearStartLabel()
 
-        If Controllers.BackButtonPressed Then
+        If Controllers.BackButton Then
 
             LabelBack.Text = $"Controller {ControllerNumber} Back"
 
@@ -850,7 +850,7 @@ Public Class Form1
 
     Private Sub DoBumperLogic(ControllerNumber As Integer)
 
-        If Controllers.LeftBumperButtonPressed Then
+        If Controllers.LeftBumperButton Then
 
             LabelLeftBumper.Text =
                 $"Controller {ControllerNumber} Left Bumper"
@@ -865,7 +865,7 @@ Public Class Form1
 
         ClearLeftBumperLabel()
 
-        If Controllers.RightBumperButtonPressed Then
+        If Controllers.RightBumperButton Then
 
             LabelRightBumper.Text =
                 $"Controller {ControllerNumber} Right Bumper"
@@ -884,7 +884,7 @@ Public Class Form1
 
     Private Sub DoStickLogic(ControllerNumber As Integer)
 
-        If Controllers.LeftStickButtonPressed Then
+        If Controllers.LeftStickButton Then
 
             LabelLeftThumbButton.Text =
                 $"Controller {ControllerNumber} Left Thumbstick Button"
@@ -899,7 +899,7 @@ Public Class Form1
 
         ClearLeftThumbButtonLabel()
 
-        If Controllers.RightStickButtonPressed Then
+        If Controllers.RightStickButton Then
 
             LabelRightThumbButton.Text =
                 $"Controller {ControllerNumber} Right Thumbstick Button"
@@ -927,7 +927,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.IsLetterButtonsNeutral(i) Then
+               Not Controllers.LetterButtonsNeutral(i) Then
                 ' A non-neutral letter button was found.
 
                 ConSum = False ' Report the non-neutral letter button.
@@ -959,7 +959,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.ThumbLYNeutral(i) Then
+               Not Controllers.LeftThumbstickYaxisNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
                 ConSum = False ' Report the non-neutral thumbstick.
@@ -993,7 +993,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.ThumbLXNeutral(i) Then
+               Not Controllers.LeftThumbstickXaxisNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
                 ConSum = False ' Report the non-neutral thumbstick.
@@ -1027,7 +1027,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.ThumbRXNeutral(i) Then
+               Not Controllers.RightThumbstickXaxisNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
                 ConSum = False ' Report the non-neutral thumbstick.
@@ -1061,7 +1061,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.ThumbRYNeutral(i) Then
+               Not Controllers.RightThumbstickYaxisNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
                 ConSum = False ' Report the non-neutral thumbstick.
@@ -1095,7 +1095,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-                Not Controllers.ConRightTriggerNeutral(i) Then
+                Not Controllers.RightTriggerNeutral(i) Then
                 ' A non-neutral right trigger was found.
 
                 ConSum = False ' Report the non-neutral right trigger.
@@ -1393,9 +1393,9 @@ Public Class Form1
 
         If Controllers.DPadUp Then
 
-            If Controllers.DPadLeftPressed Then Return "Left+Up"
+            If Controllers.DPadLeft Then Return "Left+Up"
 
-            If Controllers.DPadRightPressed Then Return "Right+Up"
+            If Controllers.DPadRight Then Return "Right+Up"
 
             Return "Up"
 
@@ -1403,17 +1403,17 @@ Public Class Form1
 
         If Controllers.DPadDown Then
 
-            If Controllers.DPadLeftPressed Then Return "Left+Down"
+            If Controllers.DPadLeft Then Return "Left+Down"
 
-            If Controllers.DPadRightPressed Then Return "Right+Down"
+            If Controllers.DPadRight Then Return "Right+Down"
 
             Return "Down"
 
         End If
 
-        If Controllers.DPadLeftPressed Then Return "Left"
+        If Controllers.DPadLeft Then Return "Left"
 
-        If Controllers.DPadRightPressed Then Return "Right"
+        If Controllers.DPadRight Then Return "Right"
 
         Return String.Empty ' Return an empty string if no buttons are pressed.
 
@@ -1423,13 +1423,13 @@ Public Class Form1
 
         Dim buttons As New List(Of String)
 
-        If Controllers.AButtonPressed Then buttons.Add("A")
+        If Controllers.AButton Then buttons.Add("A")
 
-        If Controllers.BButtonPressed Then buttons.Add("B")
+        If Controllers.BButton Then buttons.Add("B")
 
-        If Controllers.XButtonPressed Then buttons.Add("X")
+        If Controllers.XButton Then buttons.Add("X")
 
-        If Controllers.YButtonPressed Then buttons.Add("Y")
+        If Controllers.YButton Then buttons.Add("Y")
 
         If buttons.Count > 0 Then
 
@@ -1653,7 +1653,7 @@ Public Class Form1
 
         Dim ConSum As Integer = 0
 
-        For Each Con In Controllers.ConButtons
+        For Each Con In Controllers.Buttons
 
             ConSum += Con
 
