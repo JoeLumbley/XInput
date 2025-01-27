@@ -543,34 +543,6 @@ Public Class Form1
 
     Private IsRightVibrating(0 To 3) As Boolean
 
-    <DllImport("xinput1_4.dll")>
-    Private Shared Function XInputGetBatteryInformation(ByVal playerIndex As Integer, ByVal devType As Byte,
-                                                        ByRef batteryInfo As XINPUT_BATTERY_INFORMATION) As Integer
-    End Function
-
-    Public Structure XINPUT_BATTERY_INFORMATION
-        Public BatteryType As Byte
-        Public BatteryLevel As Byte
-    End Structure
-
-    Public Enum BATTERY_TYPE As Byte
-        DISCONNECTED = 0
-        WIRED = 1
-        ALKALINE = 2
-        NIMH = 3 ' Nickel metal hydride battery.
-        UNKNOWN = 4
-    End Enum
-
-    Public Enum BatteryLevel As Byte ' Unsigned 8-bit (1-byte) integer range 0 through 255.
-        EMPTY = 0
-        LOW = 1
-        MEDIUM = 2
-        FULL = 3
-    End Enum
-
-    Private batteryInfo As XINPUT_BATTERY_INFORMATION
-
-    Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -1242,7 +1214,8 @@ Public Class Form1
     Private Sub ClearRightBumperLabel()
         ' Clears the right bumper label when all controllers' right bumpers are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers' right bumpers are neutral initially.
+        ' Assume all controllers' right bumpers are neutral initially.
+        Dim ConSum As Boolean = True
 
         ' Search for a non-neutral right bumper.
         For i As Integer = 0 To 3
@@ -1535,9 +1508,6 @@ Public Class Form1
 
         Next
 
-        LabelBatteryLevel.Text = String.Empty
-
-        LabelBatteryType.Text = String.Empty
 
         InitializeToolTips()
 
@@ -1611,75 +1581,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateBatteryInfo()
 
-        ' Get battery level
-        If XInputGetBatteryInformation(NumControllerToVib.Value, BATTERY_DEVTYPE_GAMEPAD, batteryInfo) = 0 Then
-            ' Success
-
-            UpdateBatteryLevel()
-
-            UpdateBatteryType()
-
-        Else
-            ' Fail
-
-            ClearBatteryLabels()
-
-        End If
-
-    End Sub
-
-    Private Sub UpdateBatteryType()
-
-        Select Case batteryInfo.BatteryType
-            Case BATTERY_TYPE.DISCONNECTED
-                LabelBatteryType.Text = "Controller is not connected"
-            Case BATTERY_TYPE.WIRED
-                LabelBatteryType.Text = "Controller is connected by a wired connection"
-            Case BATTERY_TYPE.ALKALINE
-                LabelBatteryType.Text = "Controller is connected wirelessly and is using alkaline batteries"
-            Case BATTERY_TYPE.NIMH
-                LabelBatteryType.Text = "Controller is connected wirelessly and is using rechargeable NiMH batteries"
-            Case BATTERY_TYPE.UNKNOWN
-                LabelBatteryType.Text = "Controller is connected wirelessly and is using unknown battery type."
-        End Select
-
-    End Sub
-
-    Private Sub UpdateBatteryLevel()
-
-        With batteryInfo
-
-            ' This value is only valid for wireless controllers with a known battery type.
-            If .BatteryType = BATTERY_TYPE.ALKALINE Or .BatteryType = BATTERY_TYPE.NIMH Then
-                ' Valid
-                Select Case .BatteryLevel
-                    Case BatteryLevel.EMPTY
-                        LabelBatteryLevel.Text = "Battery Level: EMPTY"
-                    Case BatteryLevel.LOW
-                        LabelBatteryLevel.Text = "Battery Level: LOW"
-                    Case BatteryLevel.MEDIUM
-                        LabelBatteryLevel.Text = "Battery Level: MEDIUM"
-                    Case BatteryLevel.FULL
-                        LabelBatteryLevel.Text = "Battery Level: FULL"
-                End Select
-            Else
-                ' Invalid
-                LabelBatteryLevel.Text = ""
-            End If
-
-        End With
-
-    End Sub
-
-    Private Sub ClearBatteryLabels()
-
-        LabelBatteryLevel.Text = ""
-
-        LabelBatteryType.Text = ""
-
-    End Sub
 
 End Class
 
