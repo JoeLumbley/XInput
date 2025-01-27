@@ -1,6 +1,6 @@
-# XInput
+# XInput 🎮
 
-🎮 Welcome to XInput, your go-to solution for integrating Xbox controller support into your applications! This feature-rich application showcases the seamless integration of Xbox controllers, complete with vibration effects and real-time controller state monitoring. 
+ Welcome to XInput, your go-to solution for integrating Xbox controller support into your applications! This feature-rich application showcases the seamless integration of Xbox controllers, complete with vibration effects and real-time controller state monitoring. 
 
 
 ![034](https://github.com/user-attachments/assets/2040a843-7998-4a55-a763-9ccee8803cf3)
