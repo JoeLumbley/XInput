@@ -40,8 +40,6 @@ Public Structure XboxControllers
         Public Gamepad As XINPUT_GAMEPAD
     End Structure
 
-    'Public IsConnected() As Boolean
-
     Private State As XINPUT_STATE
 
 
@@ -166,8 +164,6 @@ Public Structure XboxControllers
         ConnectionStart = DateTime.Now
 
         Connected = New Boolean(0 To 3) {}
-
-        'IsConnected = New Boolean(0 To 3) {}
 
         Buttons = New UShort(0 To 3) {}
 
