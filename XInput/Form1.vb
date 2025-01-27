@@ -1185,7 +1185,8 @@ Public Class Form1
     Private Sub ClearLeftBumperLabel()
         ' Clears the left bumper label when all controllers' left bumpers are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers' left bumpers are neutral initially.
+        ' Assume all controllers' left bumpers are neutral initially.
+        Dim ConSum As Boolean = True
 
         ' Search for a non-neutral left bumper.
         For i As Integer = 0 To 3
