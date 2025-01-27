@@ -415,6 +415,10 @@ Public Structure XboxControllers
         Else
             ' The left thumbstick is in the neutral position.
 
+            LeftThumbstickUp(ControllerNumber) = False
+
+            LeftThumbstickDown(ControllerNumber) = False
+
             LeftThumbstickYaxisNeutral(ControllerNumber) = True
 
         End If
