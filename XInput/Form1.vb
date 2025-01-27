@@ -59,7 +59,6 @@ Public Structure XboxControllers
     Public ConButtons() As UShort
 
     Public IsConLeftTriggerNeutral() As Boolean
-    ' A boolean is a logical value that is either true or false.
 
     Public IsConRightTriggerNeutral() As Boolean
 
@@ -86,8 +85,6 @@ Public Structure XboxControllers
     Public IsLeftStickButtonsNeutral() As Boolean
 
     Public IsRightStickButtonsNeutral() As Boolean
-
-    'Private ControllerPosition As XINPUT_STATE
 
     ' Set the start of the thumbstick neutral zone to 1/2 over.
     Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
@@ -146,8 +143,6 @@ Public Structure XboxControllers
     Public XButtonPressed As Boolean
     Public YButtonPressed As Boolean
 
-
-
     Public RightThumbstickUp() As Boolean
     Public RightThumbstickDown() As Boolean
     Public RightThumbstickLeft() As Boolean
@@ -192,19 +187,24 @@ Public Structure XboxControllers
 
         IsDPadNeutral = New Boolean(0 To 3) {}
 
+
         IsLetterButtonsNeutral = New Boolean(0 To 3) {}
+
 
         IsStartButtonsNeutral = New Boolean(0 To 3) {}
 
         IsBackButtonsNeutral = New Boolean(0 To 3) {}
 
+
         IsLeftBumperNeutral = New Boolean(0 To 3) {}
 
         IsRightBumperNeutral = New Boolean(0 To 3) {}
 
+
         IsLeftStickButtonsNeutral = New Boolean(0 To 3) {}
 
         IsRightStickButtonsNeutral = New Boolean(0 To 3) {}
+
 
         RightThumbstickLeft = New Boolean(0 To 3) {}
 
@@ -213,8 +213,6 @@ Public Structure XboxControllers
         RightThumbstickDown = New Boolean(0 To 3) {}
 
         RightThumbstickUp = New Boolean(0 To 3) {}
-
-
 
 
         LeftThumbstickLeft = New Boolean(0 To 3) {}
@@ -226,26 +224,11 @@ Public Structure XboxControllers
         LeftThumbstickUp = New Boolean(0 To 3) {}
 
 
-
-
-
-
-
         LeftTrigger = New Boolean(0 To 3) {}
 
         RightTrigger = New Boolean(0 To 3) {}
 
-
-
-
-
-
-
     End Sub
-
-
-
-
 
     Public Sub UpdateControllerData()
 
@@ -277,11 +260,6 @@ Public Structure XboxControllers
         Next
 
     End Sub
-
-
-
-
-
 
     Public Function IsControllerConnected(controllerNumber As Integer) As Boolean
 
