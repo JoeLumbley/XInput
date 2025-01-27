@@ -153,11 +153,8 @@ Public Structure XboxControllers
     Public LeftThumbstickLeft() As Boolean
     Public LeftThumbstickRight() As Boolean
 
-
     Public LeftTrigger() As Boolean
     Public RightTrigger() As Boolean
-
-
 
     Public Sub Init()
 
@@ -240,8 +237,6 @@ Public Structure XboxControllers
             For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
                 Connected(controllerNumber) = IsControllerConnected(controllerNumber)
-
-                'UpdateControllerStatusLabel(controllerNumber)
 
             Next
 
