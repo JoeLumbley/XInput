@@ -356,7 +356,6 @@ Public Structure XboxControllers
 
     End Sub
 
-
     Private Sub UpdateLeftThumbstickPosition(ControllerNumber As Integer)
         ' The range on the X-axis is -32,768 through 32,767.
         ' Signed 16-bit (2-byte) integer.
@@ -541,7 +540,6 @@ Public Structure XboxControllers
 
     End Sub
 
-
     Private Sub DisplayError(ex As Exception)
 
         MsgBox(ex.ToString()) ' Display the exception message in a message box.
@@ -572,7 +570,6 @@ Public Class Form1
     Private IsLeftVibrating(0 To 3) As Boolean
 
     Private IsRightVibrating(0 To 3) As Boolean
-
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
