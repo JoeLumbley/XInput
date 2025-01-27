@@ -359,10 +359,6 @@ Public Structure XboxControllers
 
         ConButtons(CID) = ControllerPosition.Gamepad.wButtons
 
-        'ClearLetterButtonsLabel()
-
-        'DoButtonLogic(CID)
-
     End Sub
 
 
