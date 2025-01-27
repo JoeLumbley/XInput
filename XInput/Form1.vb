@@ -385,8 +385,6 @@ Public Structure XboxControllers
         ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
             ' The left thumbstick is in the right position.
 
-            'LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick Right"
-
             LeftThumbstickRight(ControllerNumber) = True
 
             LeftThumbstickLeft(ControllerNumber) = False
@@ -404,13 +402,9 @@ Public Structure XboxControllers
 
         End If
 
-        'ClearLeftThumbstickXLabel()
-
         ' What position is the left thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
             ' The left thumbstick is in the down position.
-
-            'LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick Down"
 
             LeftThumbstickDown(ControllerNumber) = True
 
@@ -420,8 +414,6 @@ Public Structure XboxControllers
 
         ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
             ' The left thumbstick is in the up position.
-
-            'LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick Up"
 
             LeftThumbstickUp(ControllerNumber) = True
 
@@ -436,8 +428,6 @@ Public Structure XboxControllers
 
         End If
 
-        'ClearLeftThumbstickYLabel()
-
     End Sub
 
     Private Sub UpdateRightThumbstickPosition(ControllerNumber As Integer)
@@ -448,8 +438,6 @@ Public Structure XboxControllers
         If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
             ' The right thumbstick is in the left position.
 
-            'LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick Left"
-
             RightThumbstickLeft(ControllerNumber) = True
 
             RightThumbstickRight(ControllerNumber) = False
@@ -458,8 +446,6 @@ Public Structure XboxControllers
 
         ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
             ' The right thumbstick is in the right position.
-
-            'LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick Right"
 
             RightThumbstickRight(ControllerNumber) = True
 
@@ -478,13 +464,9 @@ Public Structure XboxControllers
 
         End If
 
-        'ClearRightThumbstickXLabel()
-
         ' What position is the right thumbstick in on the Y-axis?
         If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
             ' The right thumbstick is in the down position.
-
-            'LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Down"
 
             RightThumbstickDown(ControllerNumber) = True
 
@@ -494,8 +476,6 @@ Public Structure XboxControllers
 
         ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
             ' The right thumbstick is in the up position.
-
-            'LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Up"
 
             RightThumbstickUp(ControllerNumber) = True
 
@@ -513,8 +493,6 @@ Public Structure XboxControllers
             IsConThumbRYNeutral(ControllerNumber) = True
 
         End If
-
-        'ClearRightThumbstickYLabel()
 
     End Sub
 
