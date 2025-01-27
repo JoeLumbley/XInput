@@ -155,69 +155,54 @@ Public Structure XboxControllers
 
     Public Sub Init()
 
-        ConnectionStart = DateTime.Now
-
         Connected = New Boolean(0 To 3) {}
+
+        ConnectionStart = DateTime.Now
 
         Buttons = New UShort(0 To 3) {}
 
-
         LeftThumbstickXaxisNeutral = New Boolean(0 To 3) {}
-
         LeftThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 
 
         RightThumbstickXaxisNeutral = New Boolean(0 To 3) {}
-
         RightThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 
 
         LeftTriggerNeutral = New Boolean(0 To 3) {}
-
         RightTriggerNeutral = New Boolean(0 To 3) {}
 
 
         DPadNeutral = New Boolean(0 To 3) {}
 
-
         LetterButtonsNeutral = New Boolean(0 To 3) {}
 
 
         StartButtonsNeutral = New Boolean(0 To 3) {}
-
         BackButtonsNeutral = New Boolean(0 To 3) {}
 
 
         LeftBumperNeutral = New Boolean(0 To 3) {}
-
         RightBumperNeutral = New Boolean(0 To 3) {}
 
 
         LeftStickButtonsNeutral = New Boolean(0 To 3) {}
-
         RightStickButtonsNeutral = New Boolean(0 To 3) {}
 
 
         RightThumbstickLeft = New Boolean(0 To 3) {}
-
         RightThumbstickRight = New Boolean(0 To 3) {}
-
         RightThumbstickDown = New Boolean(0 To 3) {}
-
         RightThumbstickUp = New Boolean(0 To 3) {}
 
 
         LeftThumbstickLeft = New Boolean(0 To 3) {}
-
         LeftThumbstickRight = New Boolean(0 To 3) {}
-
         LeftThumbstickDown = New Boolean(0 To 3) {}
-
         LeftThumbstickUp = New Boolean(0 To 3) {}
 
 
         LeftTrigger = New Boolean(0 To 3) {}
-
         RightTrigger = New Boolean(0 To 3) {}
 
 
