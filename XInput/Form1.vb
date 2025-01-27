@@ -1291,7 +1291,8 @@ Public Class Form1
     End Sub
 
     Private Sub ClearRightBumperLabel()
-        ' Clears the right bumper label when all controllers' right bumpers are neutral.
+        ' Clears the right bumper label when all controllers' right bumpers are
+        ' neutral.
 
         ' Assume all controllers' right bumpers are neutral initially.
         Dim ConSum As Boolean = True
@@ -1299,7 +1300,8 @@ Public Class Form1
         ' Search for a non-neutral right bumper.
         For i As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso Not Controllers.IsRightBumperNeutral(i) Then
+            If Controllers.Connected(i) AndAlso
+               Not Controllers.IsRightBumperNeutral(i) Then
                 ' A non-neutral right bumper was found.
 
                 ConSum = False ' Report the non-neutral right bumper.
@@ -1321,14 +1323,17 @@ Public Class Form1
     End Sub
 
     Private Sub ClearLeftThumbButtonLabel()
-        ' Clears the left thumb button label when all controllers' left thumb buttons are neutral.
+        ' Clears the left thumb button label when all controllers' left thumb
+        ' buttons are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers' left thumb buttons are neutral initially.
+        Dim ConSum As Boolean = True ' Assume all controllers' left thumb
+        ' buttons are neutral initially.
 
         ' Search for a non-neutral left thumb button.
         For i As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso Not Controllers.IsLeftStickButtonsNeutral(i) Then
+            If Controllers.Connected(i) AndAlso
+               Not Controllers.IsLeftStickButtonsNeutral(i) Then
                 ' A non-neutral left thumb button was found.
 
                 ConSum = False ' Report the non-neutral left thumb button.
@@ -1341,7 +1346,8 @@ Public Class Form1
 
         ' Are all controllers' left thumb buttons in the neutral position?
         If ConSum Then
-            ' Yes, all controllers' left thumb buttons are in the neutral position.
+            ' Yes, all controllers' left thumb buttons are in the neutral
+            ' position.
 
             LabelLeftThumbButton.Text = String.Empty ' Clear label.
 
@@ -1350,14 +1356,17 @@ Public Class Form1
     End Sub
 
     Private Sub ClearRightThumbButtonLabel()
-        ' Clears the right thumb button label when all controllers' right thumb buttons are neutral.
+        ' Clears the right thumb button label when all controllers' right thumb
+        ' buttons are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers' right thumb buttons are neutral initially.
+        Dim ConSum As Boolean = True ' Assume all controllers' right thumb
+        ' buttons are neutral initially.
 
         ' Search for a non-neutral right thumb button.
         For i As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso Not Controllers.IsRightStickButtonsNeutral(i) Then
+            If Controllers.Connected(i) AndAlso
+               Not Controllers.IsRightStickButtonsNeutral(i) Then
                 ' A non-neutral right thumb button was found.
 
                 ConSum = False ' Report the non-neutral right thumb button.
@@ -1370,7 +1379,8 @@ Public Class Form1
 
         ' Are all controllers' right thumb buttons in the neutral position?
         If ConSum Then
-            ' Yes, all controllers' right thumb buttons are in the neutral position.
+            ' Yes, all controllers' right thumb buttons are in the neutral
+            ' position.
 
             LabelRightThumbButton.Text = String.Empty ' Clear label.
 
@@ -1500,7 +1510,8 @@ Public Class Form1
 
         For Each IsConVibrating In IsLeftVibrating
 
-            Dim Index As Integer = Array.IndexOf(IsLeftVibrating, IsConVibrating)
+            Dim Index As Integer =
+                Array.IndexOf(IsLeftVibrating, IsConVibrating)
 
             If Index <> -1 AndAlso IsConVibrating = True Then
 
@@ -1527,7 +1538,8 @@ Public Class Form1
 
         For Each IsConVibrating In IsRightVibrating
 
-            Dim Index As Integer = Array.IndexOf(IsRightVibrating, IsConVibrating)
+            Dim Index As Integer =
+                Array.IndexOf(IsRightVibrating, IsConVibrating)
 
             If Index <> -1 AndAlso IsConVibrating = True Then
 
