@@ -54,35 +54,25 @@ Public Structure XboxControllers
         Public sThumbRY As Short
     End Structure
 
-    Public Buttons() As UShort
+    Private Const DPadUpConst As Integer = 1
+    Private Const DPadDownConst As Integer = 2
 
-    Public LeftTriggerNeutral() As Boolean
+    Private Const DPadLeftConst As Integer = 4
+    Private Const DPadRightConst As Integer = 8
 
-    Public RightTriggerNeutral() As Boolean
+    Private Const StartButtonConst As Integer = 16
+    Private Const BackButtonConst As Integer = 32
 
-    Public LeftThumbstickXaxisNeutral() As Boolean
+    Private Const LeftStickButtonConst As Integer = 64
+    Private Const RightStickButtonConst As Integer = 128
 
-    Public LeftThumbstickYaxisNeutral() As Boolean
+    Private Const LeftBumperConst As Integer = 256
+    Private Const RightBumperConst As Integer = 512
 
-    Public RightThumbstickXaxisNeutral() As Boolean
-
-    Public RightThumbstickYaxisNeutral() As Boolean
-
-    Public DPadNeutral() As Boolean
-
-    Public LeftBumperNeutral() As Boolean
-
-    Public RightBumperNeutral() As Boolean
-
-    Public LetterButtonsNeutral() As Boolean
-
-    Public StartButtonsNeutral() As Boolean
-
-    Public BackButtonsNeutral() As Boolean
-
-    Public LeftStickButtonsNeutral() As Boolean
-
-    Public RightStickButtonsNeutral() As Boolean
+    Private Const AButtonConst As Integer = 4096
+    Private Const BButtonConst As Integer = 8192
+    Private Const XButtonConst As Integer = 16384
+    Private Const YButtonConst As Integer = 32768
 
     ' Set the start of the thumbstick neutral zone to 1/2 over.
     Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
@@ -107,25 +97,29 @@ Public Structure XboxControllers
 
     Private ConnectionStart As Date
 
-    Private Const DPadUpConst As Integer = 1
-    Private Const DPadDownConst As Integer = 2
+    Public Buttons() As UShort
 
-    Private Const DPadLeftConst As Integer = 4
-    Private Const DPadRightConst As Integer = 8
+    Public LeftTriggerNeutral() As Boolean
+    Public RightTriggerNeutral() As Boolean
 
-    Private Const StartButtonConst As Integer = 16
-    Private Const BackButtonConst As Integer = 32
+    Public LeftThumbstickXaxisNeutral() As Boolean
+    Public LeftThumbstickYaxisNeutral() As Boolean
 
-    Private Const LeftStickButtonConst As Integer = 64
-    Private Const RightStickButtonConst As Integer = 128
+    Public RightThumbstickXaxisNeutral() As Boolean
+    Public RightThumbstickYaxisNeutral() As Boolean
 
-    Private Const LeftBumperConst As Integer = 256
-    Private Const RightBumperConst As Integer = 512
+    Public DPadNeutral() As Boolean
 
-    Private Const AButtonConst As Integer = 4096
-    Private Const BButtonConst As Integer = 8192
-    Private Const XButtonConst As Integer = 16384
-    Private Const YButtonConst As Integer = 32768
+    Public LeftBumperNeutral() As Boolean
+    Public RightBumperNeutral() As Boolean
+
+    Public LetterButtonsNeutral() As Boolean
+
+    Public StartButtonsNeutral() As Boolean
+    Public BackButtonsNeutral() As Boolean
+
+    Public LeftStickButtonsNeutral() As Boolean
+    Public RightStickButtonsNeutral() As Boolean
 
     Public DPadUp() As Boolean
     Public DPadDown() As Boolean
