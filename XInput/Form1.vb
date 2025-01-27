@@ -40,7 +40,7 @@ Public Structure XboxControllers
         Public Gamepad As XINPUT_GAMEPAD
     End Structure
 
-    Public IsConnected() As Boolean
+    'Public IsConnected() As Boolean
 
     Private State As XINPUT_STATE
 
@@ -167,7 +167,7 @@ Public Structure XboxControllers
 
         Connected = New Boolean(0 To 3) {}
 
-        IsConnected = New Boolean(0 To 3) {}
+        'IsConnected = New Boolean(0 To 3) {}
 
         Buttons = New UShort(0 To 3) {}
 
@@ -242,7 +242,7 @@ Public Structure XboxControllers
             For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
                 Connected(controllerNumber) =
-                    IsControllerConnected(controllerNumber)
+                    IsConnected(controllerNumber)
 
             Next
 
@@ -262,9 +262,10 @@ Public Structure XboxControllers
 
     End Sub
 
-    Public Function IsControllerConnected(controllerNumber As Integer) As Boolean
+    Public Function IsConnected(controllerNumber As Integer) As Boolean
 
         Try
+
             Return XInputGetState(controllerNumber, State) = 0
             ' 0 means the controller is connected.
             ' Anything else (a non-zero value) means the controller is not
