@@ -504,8 +504,6 @@ Public Structure XboxControllers
         If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
             ' The right trigger is in the down position. Trigger Break. Bang!
 
-            'LabelRightTrigger.Text = $"Controller {ControllerNumber} Right Trigger"
-
             RightTrigger(ControllerNumber) = True
 
             IsConRightTriggerNeutral(ControllerNumber) = False
@@ -519,8 +517,6 @@ Public Structure XboxControllers
 
         End If
 
-        'ClearRightTriggerLabel()
-
     End Sub
 
     Private Sub UpdateLeftTriggerPosition(ControllerNumber As Integer)
@@ -530,8 +526,6 @@ Public Structure XboxControllers
         ' What position is the left trigger in?
         If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
             ' The left trigger is in the fire position. Trigger Break. Bang!
-
-            'LabelLeftTrigger.Text = $"Controller {ControllerNumber} Left Trigger"
 
             LeftTrigger(ControllerNumber) = True
 
@@ -546,8 +540,6 @@ Public Structure XboxControllers
 
         End If
 
-        'ClearLeftTriggerLabel()
-
     End Sub
 
 
@@ -559,16 +551,9 @@ Public Structure XboxControllers
 
 End Structure
 
-
-
-
-
 Public Class Form1
 
     Private Controllers As XboxControllers
-
-
-
 
     <DllImport("XInput1_4.dll")>
     Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
@@ -711,7 +696,6 @@ Public Class Form1
 
                 ClearLeftThumbstickYLabel()
 
-
                 ' Left Trigger
                 If Controllers.LeftTrigger(controllerNumber) Then
 
@@ -729,7 +713,6 @@ Public Class Form1
                 End If
 
                 ClearRightTriggerLabel()
-
 
             End If
 
@@ -757,7 +740,6 @@ Public Class Form1
 
     End Sub
 
-    'TODO
     Private Sub UpdateControllerStatusLabel(controllerNumber As Integer)
         ' Update the status label based on connection state
 
@@ -771,31 +753,21 @@ Public Class Form1
 
                 LabelController0Status.Text = labelText
 
-
-
             Case 1
 
                 LabelController1Status.Text = labelText
-
-
 
             Case 2
 
                 LabelController2Status.Text = labelText
 
-
-
             Case 3
 
                 LabelController3Status.Text = labelText
 
-
-
         End Select
 
     End Sub
-
-
 
     Private Sub DoButtonLogic()
 
@@ -960,7 +932,6 @@ Public Class Form1
         ClearRightThumbButtonLabel()
 
     End Sub
-
 
     Private Sub ClearLetterButtonsLabel()
         ' Clears the letter buttons label when all controllers' letter buttons are up.
