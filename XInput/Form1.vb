@@ -1599,7 +1599,6 @@ Public Class Form1
 
         Next
 
-
         InitializeToolTips()
 
     End Sub
@@ -1616,7 +1615,6 @@ Public Class Form1
 
         ToolTipTimeToVib.SetToolTip(NumericUpDownTimeToVib, TipText)
 
-
         Dim ToolTipConToVib As New ToolTip With {
             .AutoPopDelay = 8000,
             .InitialDelay = 1000,
@@ -1627,7 +1625,6 @@ Public Class Form1
 
         ToolTipConToVib.SetToolTip(NumControllerToVib, TipText)
 
-
         Dim ToolTipVibSpeed As New ToolTip() With {
             .AutoPopDelay = 10000,
             .InitialDelay = 1000,
@@ -1637,7 +1634,6 @@ Public Class Form1
         TipText = $"Vibration Speed {Environment.NewLine}Enter a value between 1 and 65,535 {Environment.NewLine}Higher speeds can create stronger feedback {Environment.NewLine}while lower speeds produce a more subtle effect"
 
         ToolTipVibSpeed.SetToolTip(TrackBarSpeed, TipText)
-
 
         Dim ToolTipRumbleGroup As New ToolTip() With {
             .AutoPopDelay = 10000,
