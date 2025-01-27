@@ -1679,11 +1679,12 @@ End Class
 
 ' Consuming Unmanaged DLL Functions
 
-' Consuming unmanaged DLL functions refers to the process of using functions that are defined in a
-' DLL (Dynamic Link Library) which is written in a language like C or C++. This involves using
-' Platform Invocation Services (P/Invoke) to call functions in the unmanaged DLL from your managed
-' VB code. To consume unmanaged DLL functions use the DllImport attribute to declare the external
-' functions from the DLL.
+' Consuming unmanaged DLL functions refers to the process of using functions
+' that are defined in a DLL (Dynamic Link Library) which is written in a
+' language like C or C++. This involves using Platform Invocation Services
+' (P/Invoke) to call functions in the unmanaged DLL from your managed VB code.
+' To consume unmanaged DLL functions use the DllImport attribute to declare the
+' external functions from the DLL.
 
 ' https://learn.microsoft.com/en-us/dotnet/framework/interop/consuming-unmanaged-dll-functions
 
