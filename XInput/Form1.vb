@@ -603,7 +603,6 @@ Public Class Form1
 
             If Controllers.Connected(controllerNumber) Then
 
-
                 ' Right Thumbstick X Axis
                 If Controllers.RightThumbstickLeft(controllerNumber) Then
 
