@@ -42,7 +42,7 @@ Public Structure XboxControllers
 
     Public IsConnected() As Boolean
 
-    Private ControllerPosition As XINPUT_STATE
+    Private State As XINPUT_STATE
 
 
     <StructLayout(LayoutKind.Sequential)>
@@ -265,7 +265,7 @@ Public Structure XboxControllers
     Public Function IsControllerConnected(controllerNumber As Integer) As Boolean
 
         Try
-            Return XInputGetState(controllerNumber, ControllerPosition) = 0
+            Return XInputGetState(controllerNumber, State) = 0
             ' 0 means the controller is connected.
             ' Anything else (a non-zero value) means the controller is not
             ' connected.
@@ -285,7 +285,7 @@ Public Structure XboxControllers
 
         Try
 
-            XInputGetState(controllerNumber, ControllerPosition)
+            XInputGetState(controllerNumber, State)
 
             UpdateButtonPosition(controllerNumber)
 
@@ -310,49 +310,49 @@ Public Structure XboxControllers
         ' The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
         DPadUp =
-            (ControllerPosition.Gamepad.wButtons And DPadUpConst) <> 0
+            (State.Gamepad.wButtons And DPadUpConst) <> 0
 
         DPadDown =
-            (ControllerPosition.Gamepad.wButtons And DPadDownConst) <> 0
+            (State.Gamepad.wButtons And DPadDownConst) <> 0
 
         DPadLeft =
-            (ControllerPosition.Gamepad.wButtons And DPadLeftConst) <> 0
+            (State.Gamepad.wButtons And DPadLeftConst) <> 0
 
         DPadRight =
-            (ControllerPosition.Gamepad.wButtons And DPadRightConst) <> 0
+            (State.Gamepad.wButtons And DPadRightConst) <> 0
 
         StartButton =
-            (ControllerPosition.Gamepad.wButtons And StartButtonConst) <> 0
+            (State.Gamepad.wButtons And StartButtonConst) <> 0
 
         BackButton =
-            (ControllerPosition.Gamepad.wButtons And BackButtonConst) <> 0
+            (State.Gamepad.wButtons And BackButtonConst) <> 0
 
         LeftStickButton =
-            (ControllerPosition.Gamepad.wButtons And LeftStickButtonConst) <> 0
+            (State.Gamepad.wButtons And LeftStickButtonConst) <> 0
 
         RightStickButton =
-            (ControllerPosition.Gamepad.wButtons And RightStickButtonConst) <> 0
+            (State.Gamepad.wButtons And RightStickButtonConst) <> 0
 
         LeftBumperButton =
-            (ControllerPosition.Gamepad.wButtons And LeftBumperConst) <> 0
+            (State.Gamepad.wButtons And LeftBumperConst) <> 0
 
         RightBumperButton =
-            (ControllerPosition.Gamepad.wButtons And RightBumperConst) <> 0
+            (State.Gamepad.wButtons And RightBumperConst) <> 0
 
         AButton =
-            (ControllerPosition.Gamepad.wButtons And AButtonConst) <> 0
+            (State.Gamepad.wButtons And AButtonConst) <> 0
 
         BButton =
-            (ControllerPosition.Gamepad.wButtons And BButtonConst) <> 0
+            (State.Gamepad.wButtons And BButtonConst) <> 0
 
         XButton =
-            (ControllerPosition.Gamepad.wButtons And XButtonConst) <> 0
+            (State.Gamepad.wButtons And XButtonConst) <> 0
 
         YButton =
-            (ControllerPosition.Gamepad.wButtons And YButtonConst) <> 0
+            (State.Gamepad.wButtons And YButtonConst) <> 0
 
         Buttons(CID) =
-            ControllerPosition.Gamepad.wButtons
+            State.Gamepad.wButtons
 
     End Sub
 
@@ -364,7 +364,7 @@ Public Structure XboxControllers
         ' Signed 16-bit (2-byte) integer.
 
         ' What position is the left thumbstick in on the X-axis?
-        If ControllerPosition.Gamepad.sThumbLX <= NeutralStart Then
+        If State.Gamepad.sThumbLX <= NeutralStart Then
             ' The left thumbstick is in the left position.
 
             LeftThumbstickLeft(ControllerNumber) = True
@@ -373,7 +373,7 @@ Public Structure XboxControllers
 
             LeftThumbstickXaxisNeutral(ControllerNumber) = False
 
-        ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
+        ElseIf State.Gamepad.sThumbLX >= NeutralEnd Then
             ' The left thumbstick is in the right position.
 
             LeftThumbstickRight(ControllerNumber) = True
@@ -394,7 +394,7 @@ Public Structure XboxControllers
         End If
 
         ' What position is the left thumbstick in on the Y-axis?
-        If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
+        If State.Gamepad.sThumbLY <= NeutralStart Then
             ' The left thumbstick is in the down position.
 
             LeftThumbstickDown(ControllerNumber) = True
@@ -403,7 +403,7 @@ Public Structure XboxControllers
 
             LeftThumbstickYaxisNeutral(ControllerNumber) = False
 
-        ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
+        ElseIf State.Gamepad.sThumbLY >= NeutralEnd Then
             ' The left thumbstick is in the up position.
 
             LeftThumbstickUp(ControllerNumber) = True
@@ -428,7 +428,7 @@ Public Structure XboxControllers
         ' Signed 16-bit (2-byte) integer.
 
         ' What position is the right thumbstick in on the X-axis?
-        If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
+        If State.Gamepad.sThumbRX <= NeutralStart Then
             ' The right thumbstick is in the left position.
 
             RightThumbstickLeft(ControllerNumber) = True
@@ -437,7 +437,7 @@ Public Structure XboxControllers
 
             RightThumbstickXaxisNeutral(ControllerNumber) = False
 
-        ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
+        ElseIf State.Gamepad.sThumbRX >= NeutralEnd Then
             ' The right thumbstick is in the right position.
 
             RightThumbstickRight(ControllerNumber) = True
@@ -458,7 +458,7 @@ Public Structure XboxControllers
         End If
 
         ' What position is the right thumbstick in on the Y-axis?
-        If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
+        If State.Gamepad.sThumbRY <= NeutralStart Then
             ' The right thumbstick is in the down position.
 
             RightThumbstickDown(ControllerNumber) = True
@@ -467,7 +467,7 @@ Public Structure XboxControllers
 
             RightThumbstickYaxisNeutral(ControllerNumber) = False
 
-        ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
+        ElseIf State.Gamepad.sThumbRY >= NeutralEnd Then
             ' The right thumbstick is in the up position.
 
             RightThumbstickUp(ControllerNumber) = True
@@ -495,7 +495,7 @@ Public Structure XboxControllers
         ' register as pressed.
 
         ' What position is the right trigger in?
-        If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
+        If State.Gamepad.bRightTrigger > TriggerThreshold Then
             ' The right trigger is in the down position. Trigger Break. Bang!
 
             RightTrigger(ControllerNumber) = True
@@ -519,7 +519,7 @@ Public Structure XboxControllers
         ' register as pressed.
 
         ' What position is the left trigger in?
-        If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
+        If State.Gamepad.bLeftTrigger > TriggerThreshold Then
             ' The left trigger is in the fire position. Trigger Break. Bang!
 
             LeftTrigger(ControllerNumber) = True
