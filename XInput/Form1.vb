@@ -287,15 +287,15 @@ Public Structure XboxControllers
 
             XInputGetState(controllerNumber, State)
 
-            UpdateButtonPosition(controllerNumber)
+            UpdateButtons(controllerNumber)
 
-            UpdateLeftThumbstickPosition(controllerNumber)
+            UpdateLeftThumbstick(controllerNumber)
 
-            UpdateRightThumbstickPosition(controllerNumber)
+            UpdateRightThumbstick(controllerNumber)
 
-            UpdateLeftTriggerPosition(controllerNumber)
+            UpdateLeftTrigger(controllerNumber)
 
-            UpdateRightTriggerPosition(controllerNumber)
+            UpdateRightTrigger(controllerNumber)
 
         Catch ex As Exception
             ' Something went wrong (An exception occurred).
@@ -306,7 +306,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Private Sub UpdateButtonPosition(CID As Integer)
+    Private Sub UpdateButtons(CID As Integer)
         ' The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
         DPadUp =
@@ -356,7 +356,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Private Sub UpdateLeftThumbstickPosition(ControllerNumber As Integer)
+    Private Sub UpdateLeftThumbstick(ControllerNumber As Integer)
         ' The range on the X-axis is -32,768 through 32,767.
         ' Signed 16-bit (2-byte) integer.
         ' The range on the Y-axis is -32,768 through 32,767.
@@ -424,7 +424,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Private Sub UpdateRightThumbstickPosition(ControllerNumber As Integer)
+    Private Sub UpdateRightThumbstick(ControllerNumber As Integer)
         ' The range on the X-axis is -32,768 through 32,767.
         ' Signed 16-bit (2-byte) integer.
         ' The range on the Y-axis is -32,768 through 32,767.
@@ -492,7 +492,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Private Sub UpdateRightTriggerPosition(ControllerNumber As Integer)
+    Private Sub UpdateRightTrigger(ControllerNumber As Integer)
         ' The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
         ' The trigger position must be greater than the trigger threshold to
         ' register as pressed.
@@ -516,7 +516,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Private Sub UpdateLeftTriggerPosition(ControllerNumber As Integer)
+    Private Sub UpdateLeftTrigger(ControllerNumber As Integer)
         ' The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
         ' The trigger position must be greater than the trigger threshold to
         ' register as pressed.
