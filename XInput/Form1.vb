@@ -232,7 +232,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Public Sub UpdateControllerData()
+    Public Sub Update()
 
         Dim ElapsedTime As TimeSpan = Now - ConnectionStart
 
@@ -254,7 +254,7 @@ Public Structure XboxControllers
 
             If Connected(controllerNumber) Then
 
-                UpdateControllerState(controllerNumber)
+                UpdateState(controllerNumber)
 
             End If
 
@@ -281,7 +281,7 @@ Public Structure XboxControllers
 
     End Function
 
-    Public Sub UpdateControllerState(controllerNumber As Integer)
+    Public Sub UpdateState(controllerNumber As Integer)
 
         Try
 
@@ -593,7 +593,7 @@ Public Class Form1
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-        Controllers.UpdateControllerData()
+        Controllers.Update()
 
         DoButtonLogic()
 
