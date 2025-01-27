@@ -26,15 +26,11 @@
 
 Imports System.Runtime.InteropServices
 
-
-Public Class Form1
+Public Structure XboxControllers
 
     <DllImport("XInput1_4.dll")>
     Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
     End Function
-
-    ' XInput1_4.dll seems to be the current version
-    ' XInput9_1_0.dll is maintained primarily for backward compatibility. 
 
     <StructLayout(LayoutKind.Explicit)>
     Public Structure XINPUT_STATE
@@ -43,6 +39,11 @@ Public Class Form1
         <FieldOffset(4)>
         Public Gamepad As XINPUT_GAMEPAD
     End Structure
+
+    Public IsConnected() As Boolean
+
+    Private ControllerPosition As XINPUT_STATE
+
 
     <StructLayout(LayoutKind.Sequential)>
     Public Structure XINPUT_GAMEPAD
@@ -53,41 +54,40 @@ Public Class Form1
         Public sThumbLY As Short
         Public sThumbRX As Short
         Public sThumbRY As Short
-
     End Structure
 
-    Private ConButtons(0 To 3) As UShort
+    Public ConButtons() As UShort
 
-    Private IsConLeftTriggerNeutral(0 To 3) As Boolean
+    Public IsConLeftTriggerNeutral() As Boolean
     ' A boolean is a logical value that is either true or false.
 
-    Private IsConRightTriggerNeutral(0 To 3) As Boolean
+    Public IsConRightTriggerNeutral() As Boolean
 
-    Private IsConThumbLXNeutral(0 To 3) As Boolean
+    Public IsConThumbLXNeutral() As Boolean
 
-    Private IsConThumbLYNeutral(0 To 3) As Boolean
+    Public IsConThumbLYNeutral() As Boolean
 
-    Private IsConThumbRXNeutral(0 To 3) As Boolean
+    Public IsConThumbRXNeutral() As Boolean
 
-    Private IsConThumbRYNeutral(0 To 3) As Boolean
+    Public IsConThumbRYNeutral() As Boolean
 
-    Private IsDPadNeutral(0 To 3) As Boolean
+    Public IsDPadNeutral() As Boolean
 
-    Private IsLeftBumperNeutral(0 To 3) As Boolean
+    Public IsLeftBumperNeutral() As Boolean
 
-    Private IsRightBumperNeutral(0 To 3) As Boolean
+    Public IsRightBumperNeutral() As Boolean
 
-    Private IsLetterButtonsNeutral(0 To 3) As Boolean
+    Public IsLetterButtonsNeutral() As Boolean
 
-    Private IsStartButtonsNeutral(0 To 3) As Boolean
+    Public IsStartButtonsNeutral() As Boolean
 
-    Private IsBackButtonsNeutral(0 To 3) As Boolean
+    Public IsBackButtonsNeutral() As Boolean
 
-    Private IsLeftStickButtonsNeutral(0 To 3) As Boolean
+    Public IsLeftStickButtonsNeutral() As Boolean
 
-    Private IsRightStickButtonsNeutral(0 To 3) As Boolean
+    Public IsRightStickButtonsNeutral() As Boolean
 
-    Private ControllerPosition As XINPUT_STATE
+    'Private ControllerPosition As XINPUT_STATE
 
     ' Set the start of the thumbstick neutral zone to 1/2 over.
     Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
@@ -103,9 +103,9 @@ Public Class Form1
     ' The trigger position must be greater than the trigger threshold to register as pulled.
     ' A byte is a unsigned 8-bit (1-byte) integer range 0 through 255. This gives us 256 values.
 
-    Private ReadOnly Connected(0 To 3) As Boolean
+    Public Connected() As Boolean
 
-    Private ConnectionStart As Date = Now
+    Private ConnectionStart As Date
 
     Private Const DPadUp As Integer = 1
     Private Const DPadDown As Integer = 2
@@ -127,118 +127,127 @@ Public Class Form1
     Private Const XButton As Integer = 16384
     Private Const YButton As Integer = 32768
 
-    Private DPadUpPressed As Boolean = False
-    Private DPadDownPressed As Boolean = False
-    Private DPadLeftPressed As Boolean = False
-    Private DPadRightPressed As Boolean = False
+    Public DPadUpPressed As Boolean
+    Public DPadDownPressed As Boolean
+    Public DPadLeftPressed As Boolean
+    Public DPadRightPressed As Boolean
 
-    Private StartButtonPressed As Boolean = False
-    Private BackButtonPressed As Boolean = False
+    Public StartButtonPressed As Boolean
+    Public BackButtonPressed As Boolean
 
-    Private LeftStickButtonPressed As Boolean = False
-    Private RightStickButtonPressed As Boolean = False
+    Public LeftStickButtonPressed As Boolean
+    Public RightStickButtonPressed As Boolean
 
-    Private LeftBumperButtonPressed As Boolean = False
-    Private RightBumperButtonPressed As Boolean = False
+    Public LeftBumperButtonPressed As Boolean
+    Public RightBumperButtonPressed As Boolean
 
-    Private AButtonPressed As Boolean = False
-    Private BButtonPressed As Boolean = False
-    Private XButtonPressed As Boolean = False
-    Private YButtonPressed As Boolean = False
+    Public AButtonPressed As Boolean
+    Public BButtonPressed As Boolean
+    Public XButtonPressed As Boolean
+    Public YButtonPressed As Boolean
 
-    <DllImport("XInput1_4.dll")>
-    Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
-    End Function
 
-    Public Structure XINPUT_VIBRATION
-        Public wLeftMotorSpeed As UShort
-        Public wRightMotorSpeed As UShort
-    End Structure
 
-    Private Vibration As XINPUT_VIBRATION
+    Public RightThumbstickUp() As Boolean
+    Public RightThumbstickDown() As Boolean
+    Public RightThumbstickLeft() As Boolean
+    Public RightThumbstickRight() As Boolean
 
-    Private LeftVibrateStart(0 To 3) As Date
+    Public LeftThumbstickUp() As Boolean
+    Public LeftThumbstickDown() As Boolean
+    Public LeftThumbstickLeft() As Boolean
+    Public LeftThumbstickRight() As Boolean
 
-    Private RightVibrateStart(0 To 3) As Date
 
-    Private IsLeftVibrating(0 To 3) As Boolean
+    Public LeftTrigger() As Boolean
+    Public RightTrigger() As Boolean
 
-    Private IsRightVibrating(0 To 3) As Boolean
 
-    <DllImport("xinput1_4.dll")>
-    Private Shared Function XInputGetBatteryInformation(ByVal playerIndex As Integer, ByVal devType As Byte,
-                                                        ByRef batteryInfo As XINPUT_BATTERY_INFORMATION) As Integer
-    End Function
 
-    Public Structure XINPUT_BATTERY_INFORMATION
-        Public BatteryType As Byte
-        Public BatteryLevel As Byte
-    End Structure
+    Public Sub Init()
 
-    Public Enum BATTERY_TYPE As Byte
-        DISCONNECTED = 0
-        WIRED = 1
-        ALKALINE = 2
-        NIMH = 3 ' Nickel metal hydride battery.
-        UNKNOWN = 4
-    End Enum
+        ConnectionStart = DateTime.Now
 
-    Public Enum BatteryLevel As Byte ' Unsigned 8-bit (1-byte) integer range 0 through 255.
-        EMPTY = 0
-        LOW = 1
-        MEDIUM = 2
-        FULL = 3
-    End Enum
+        Connected = New Boolean(0 To 3) {}
 
-    Private batteryInfo As XINPUT_BATTERY_INFORMATION
+        IsConnected = New Boolean(0 To 3) {}
 
-    Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
+        ConButtons = New UShort(0 To 3) {}
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        InitializeApp()
+        IsConThumbLXNeutral = New Boolean(0 To 3) {}
+
+        IsConThumbLYNeutral = New Boolean(0 To 3) {}
+
+
+        IsConThumbRXNeutral = New Boolean(0 To 3) {}
+
+        IsConThumbRYNeutral = New Boolean(0 To 3) {}
+
+
+        IsConLeftTriggerNeutral = New Boolean(0 To 3) {}
+
+        IsConRightTriggerNeutral = New Boolean(0 To 3) {}
+
+
+        IsDPadNeutral = New Boolean(0 To 3) {}
+
+        IsLetterButtonsNeutral = New Boolean(0 To 3) {}
+
+        IsStartButtonsNeutral = New Boolean(0 To 3) {}
+
+        IsBackButtonsNeutral = New Boolean(0 To 3) {}
+
+        IsLeftBumperNeutral = New Boolean(0 To 3) {}
+
+        IsRightBumperNeutral = New Boolean(0 To 3) {}
+
+        IsLeftStickButtonsNeutral = New Boolean(0 To 3) {}
+
+        IsRightStickButtonsNeutral = New Boolean(0 To 3) {}
+
+        RightThumbstickLeft = New Boolean(0 To 3) {}
+
+        RightThumbstickRight = New Boolean(0 To 3) {}
+
+        RightThumbstickDown = New Boolean(0 To 3) {}
+
+        RightThumbstickUp = New Boolean(0 To 3) {}
+
+
+
+
+        LeftThumbstickLeft = New Boolean(0 To 3) {}
+
+        LeftThumbstickRight = New Boolean(0 To 3) {}
+
+        LeftThumbstickDown = New Boolean(0 To 3) {}
+
+        LeftThumbstickUp = New Boolean(0 To 3) {}
+
+
+
+
+
+
+
+        LeftTrigger = New Boolean(0 To 3) {}
+
+        RightTrigger = New Boolean(0 To 3) {}
+
+
+
+
+
+
 
     End Sub
 
-    Private Sub InitializeTimer1()
 
-        ' The tick frequency in milliseconds.
-        ' Also called the polling frequency.
-        Timer1.Interval = 15 '1000/60 = 16.67 ms
-        ' To get 60 FPS (Frames Per Second) in milliseconds.
-        ' We divide 1000 (the number of milliseconds in a second) by 60 the FPS.
 
-        Timer1.Start()
 
-    End Sub
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-
-        UpdateControllerData()
-
-        UpdateVibrateTimer()
-
-    End Sub
-
-    Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
-
-        VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
-
-    End Sub
-
-    Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
-
-        VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
-
-    End Sub
-
-    Private Sub TrackBarSpeed_Scroll(sender As Object, e As EventArgs) Handles TrackBarSpeed.Scroll
-
-        UpdateSpeedLabel()
-
-    End Sub
-
-    Private Sub UpdateControllerData()
+    Public Sub UpdateControllerData()
 
         Dim ElapsedTime As TimeSpan = Now - ConnectionStart
 
@@ -249,7 +258,7 @@ Public Class Form1
 
                 Connected(controllerNumber) = IsControllerConnected(controllerNumber)
 
-                UpdateControllerStatusLabel(controllerNumber)
+                'UpdateControllerStatusLabel(controllerNumber)
 
             Next
 
@@ -269,44 +278,30 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateControllerStatusLabel(controllerNumber As Integer)
-        ' Update the status label based on connection state
-
-        Dim status As String = If(Connected(controllerNumber), "Connected", "Not Connected")
-
-        Dim labelText As String = $"Controller {controllerNumber} {status}"
-
-        Select Case controllerNumber
-
-            Case 0
-
-                LabelController0Status.Text = labelText
 
 
 
-            Case 1
-
-                LabelController1Status.Text = labelText
 
 
+    Public Function IsControllerConnected(controllerNumber As Integer) As Boolean
 
-            Case 2
+        Try
 
-                LabelController2Status.Text = labelText
+            Return XInputGetState(controllerNumber, ControllerPosition) = 0 ' 0 means the controller is connected.
+            ' Anything else (a non-zero value) means the controller is not connected.
 
+        Catch ex As Exception
+            ' Something went wrong (An exception occured).
 
+            DisplayError(ex)
 
-            Case 3
+            Return False
 
-                LabelController3Status.Text = labelText
+        End Try
 
+    End Function
 
-
-        End Select
-
-    End Sub
-
-    Private Sub UpdateControllerState(controllerNumber As Integer)
+    Public Sub UpdateControllerState(controllerNumber As Integer)
 
         Try
 
@@ -364,23 +359,485 @@ Public Class Form1
 
         ConButtons(CID) = ControllerPosition.Gamepad.wButtons
 
-        ClearLetterButtonsLabel()
+        'ClearLetterButtonsLabel()
 
-        DoButtonLogic(CID)
+        'DoButtonLogic(CID)
 
     End Sub
 
-    Private Sub DoButtonLogic(ControllerNumber As Integer)
 
-        DoDPadLogic(ControllerNumber)
+    Private Sub UpdateLeftThumbstickPosition(ControllerNumber As Integer)
+        ' The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        ' The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
 
-        DoLetterButtonLogic(ControllerNumber)
+        ' What position is the left thumbstick in on the X-axis?
+        If ControllerPosition.Gamepad.sThumbLX <= NeutralStart Then
+            ' The left thumbstick is in the left position.
 
-        DoStartBackLogic(ControllerNumber)
+            'LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick Left"
 
-        DoBumperLogic(ControllerNumber)
+            LeftThumbstickLeft(ControllerNumber) = True
 
-        DoStickLogic(ControllerNumber)
+            LeftThumbstickRight(ControllerNumber) = False
+
+            IsConThumbLXNeutral(ControllerNumber) = False
+
+        ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
+            ' The left thumbstick is in the right position.
+
+            'LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick Right"
+
+            LeftThumbstickRight(ControllerNumber) = True
+
+            LeftThumbstickLeft(ControllerNumber) = False
+
+            IsConThumbLXNeutral(ControllerNumber) = False
+
+        Else
+            ' The left thumbstick is in the neutral position.
+
+            LeftThumbstickRight(ControllerNumber) = False
+
+            LeftThumbstickLeft(ControllerNumber) = False
+
+            IsConThumbLXNeutral(ControllerNumber) = True
+
+        End If
+
+        'ClearLeftThumbstickXLabel()
+
+        ' What position is the left thumbstick in on the Y-axis?
+        If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
+            ' The left thumbstick is in the down position.
+
+            'LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick Down"
+
+            LeftThumbstickDown(ControllerNumber) = True
+
+            LeftThumbstickUp(ControllerNumber) = False
+
+            IsConThumbLYNeutral(ControllerNumber) = False
+
+        ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
+            ' The left thumbstick is in the up position.
+
+            'LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick Up"
+
+            LeftThumbstickUp(ControllerNumber) = True
+
+            LeftThumbstickDown(ControllerNumber) = False
+
+            IsConThumbLYNeutral(ControllerNumber) = False
+
+        Else
+            ' The left thumbstick is in the neutral position.
+
+            IsConThumbLYNeutral(ControllerNumber) = True
+
+        End If
+
+        'ClearLeftThumbstickYLabel()
+
+    End Sub
+
+    Private Sub UpdateRightThumbstickPosition(ControllerNumber As Integer)
+        ' The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+        ' The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
+
+        ' What position is the right thumbstick in on the X-axis?
+        If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
+            ' The right thumbstick is in the left position.
+
+            'LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick Left"
+
+            RightThumbstickLeft(ControllerNumber) = True
+
+            RightThumbstickRight(ControllerNumber) = False
+
+            IsConThumbRXNeutral(ControllerNumber) = False
+
+        ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
+            ' The right thumbstick is in the right position.
+
+            'LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick Right"
+
+            RightThumbstickRight(ControllerNumber) = True
+
+            RightThumbstickLeft(ControllerNumber) = False
+
+            IsConThumbRXNeutral(ControllerNumber) = False
+
+        Else
+            ' The right thumbstick is in the neutral position.
+
+            IsConThumbRXNeutral(ControllerNumber) = True
+
+            RightThumbstickLeft(ControllerNumber) = False
+
+            RightThumbstickRight(ControllerNumber) = False
+
+        End If
+
+        'ClearRightThumbstickXLabel()
+
+        ' What position is the right thumbstick in on the Y-axis?
+        If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
+            ' The right thumbstick is in the down position.
+
+            'LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Down"
+
+            RightThumbstickDown(ControllerNumber) = True
+
+            RightThumbstickUp(ControllerNumber) = False
+
+            IsConThumbRYNeutral(ControllerNumber) = False
+
+        ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
+            ' The right thumbstick is in the up position.
+
+            'LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Up"
+
+            RightThumbstickUp(ControllerNumber) = True
+
+            RightThumbstickDown(ControllerNumber) = False
+
+            IsConThumbRYNeutral(ControllerNumber) = False
+
+        Else
+            ' The right thumbstick is in the neutral position.
+
+            RightThumbstickUp(ControllerNumber) = False
+
+            RightThumbstickDown(ControllerNumber) = False
+
+            IsConThumbRYNeutral(ControllerNumber) = True
+
+        End If
+
+        'ClearRightThumbstickYLabel()
+
+    End Sub
+
+    Private Sub UpdateRightTriggerPosition(ControllerNumber As Integer)
+        ' The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        ' The trigger position must be greater than the trigger threshold to register as pressed.
+
+        ' What position is the right trigger in?
+        If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
+            ' The right trigger is in the down position. Trigger Break. Bang!
+
+            'LabelRightTrigger.Text = $"Controller {ControllerNumber} Right Trigger"
+
+            RightTrigger(ControllerNumber) = True
+
+            IsConRightTriggerNeutral(ControllerNumber) = False
+
+        Else
+            ' The right trigger is in the neutral position. Pre-Travel.
+
+            RightTrigger(ControllerNumber) = False
+
+            IsConRightTriggerNeutral(ControllerNumber) = True
+
+        End If
+
+        'ClearRightTriggerLabel()
+
+    End Sub
+
+    Private Sub UpdateLeftTriggerPosition(ControllerNumber As Integer)
+        ' The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
+        ' The trigger position must be greater than the trigger threshold to register as pressed.
+
+        ' What position is the left trigger in?
+        If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
+            ' The left trigger is in the fire position. Trigger Break. Bang!
+
+            'LabelLeftTrigger.Text = $"Controller {ControllerNumber} Left Trigger"
+
+            LeftTrigger(ControllerNumber) = True
+
+            IsConLeftTriggerNeutral(ControllerNumber) = False
+
+        Else
+            ' The left trigger is in the neutral position. Pre-Travel.
+
+            LeftTrigger(ControllerNumber) = False
+
+            IsConLeftTriggerNeutral(ControllerNumber) = True
+
+        End If
+
+        'ClearLeftTriggerLabel()
+
+    End Sub
+
+
+    Private Sub DisplayError(ex As Exception)
+
+        MsgBox(ex.ToString()) ' Display the exception message in a message box.
+
+    End Sub
+
+End Structure
+
+
+
+
+
+Public Class Form1
+
+    Private Controllers As XboxControllers
+
+
+
+
+    <DllImport("XInput1_4.dll")>
+    Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
+    End Function
+
+    Public Structure XINPUT_VIBRATION
+        Public wLeftMotorSpeed As UShort
+        Public wRightMotorSpeed As UShort
+    End Structure
+
+    Private Vibration As XINPUT_VIBRATION
+
+    Private LeftVibrateStart(0 To 3) As Date
+
+    Private RightVibrateStart(0 To 3) As Date
+
+    Private IsLeftVibrating(0 To 3) As Boolean
+
+    Private IsRightVibrating(0 To 3) As Boolean
+
+    <DllImport("xinput1_4.dll")>
+    Private Shared Function XInputGetBatteryInformation(ByVal playerIndex As Integer, ByVal devType As Byte,
+                                                        ByRef batteryInfo As XINPUT_BATTERY_INFORMATION) As Integer
+    End Function
+
+    Public Structure XINPUT_BATTERY_INFORMATION
+        Public BatteryType As Byte
+        Public BatteryLevel As Byte
+    End Structure
+
+    Public Enum BATTERY_TYPE As Byte
+        DISCONNECTED = 0
+        WIRED = 1
+        ALKALINE = 2
+        NIMH = 3 ' Nickel metal hydride battery.
+        UNKNOWN = 4
+    End Enum
+
+    Public Enum BatteryLevel As Byte ' Unsigned 8-bit (1-byte) integer range 0 through 255.
+        EMPTY = 0
+        LOW = 1
+        MEDIUM = 2
+        FULL = 3
+    End Enum
+
+    Private batteryInfo As XINPUT_BATTERY_INFORMATION
+
+    Private Const BATTERY_DEVTYPE_GAMEPAD As Integer = 0
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        InitializeApp()
+
+        Controllers.Init()
+
+    End Sub
+
+    Private Sub InitializeTimer1()
+
+        ' The tick frequency in milliseconds.
+        ' Also called the polling frequency.
+        Timer1.Interval = 15 '1000/60 = 16.67 ms
+        ' To get 60 FPS (Frames Per Second) in milliseconds.
+        ' We divide 1000 (the number of milliseconds in a second) by 60 the FPS.
+
+        Timer1.Start()
+
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        Controllers.UpdateControllerData()
+
+        DoButtonLogic()
+
+        For controllerNumber As Integer = 0 To 3
+
+            UpdateControllerStatusLabel(controllerNumber)
+
+            If Controllers.Connected(controllerNumber) Then
+
+
+                ' Right Thumbstick X Axis
+                If Controllers.RightThumbstickLeft(controllerNumber) Then
+
+                    LabelRightThumbX.Text = $"Controller {controllerNumber} Right Thumbstick Left"
+
+                End If
+
+                If Controllers.RightThumbstickRight(controllerNumber) Then
+
+                    LabelRightThumbX.Text = $"Controller {controllerNumber} Right Thumbstick Right"
+
+                End If
+
+                ClearRightThumbstickXLabel()
+
+                ' Right Thumbstick Y Axis
+                If Controllers.RightThumbstickUp(controllerNumber) Then
+
+                    LabelRightThumbY.Text = $"Controller {controllerNumber} Right Thumbstick Up"
+
+                End If
+
+                If Controllers.RightThumbstickDown(controllerNumber) Then
+
+                    LabelRightThumbY.Text = $"Controller {controllerNumber} Right Thumbstick Down"
+
+                End If
+
+                ClearRightThumbstickYLabel()
+
+                ' Left Thumbstick X Axis
+                If Controllers.LeftThumbstickLeft(controllerNumber) Then
+
+                    LabelLeftThumbX.Text = $"Controller {controllerNumber} Left Thumbstick Left"
+
+                End If
+
+                If Controllers.LeftThumbstickRight(controllerNumber) Then
+
+                    LabelLeftThumbX.Text = $"Controller {controllerNumber} Left Thumbstick Right"
+
+                End If
+
+                ClearLeftThumbstickXLabel()
+
+                ' Left Thumbstick Y Axis
+                If Controllers.LeftThumbstickUp(controllerNumber) Then
+
+                    LabelLeftThumbY.Text = $"Controller {controllerNumber} Left Thumbstick Up"
+
+                End If
+
+                If Controllers.LeftThumbstickDown(controllerNumber) Then
+
+                    LabelLeftThumbY.Text = $"Controller {controllerNumber} Left Thumbstick Down"
+
+                End If
+
+                ClearLeftThumbstickYLabel()
+
+
+                ' Left Trigger
+                If Controllers.LeftTrigger(controllerNumber) Then
+
+                    LabelLeftTrigger.Text = $"Controller {controllerNumber} Left Trigger"
+
+                End If
+
+                ClearLeftTriggerLabel()
+
+                ' Right Trigger
+                If Controllers.RightTrigger(controllerNumber) Then
+
+                    LabelRightTrigger.Text = $"Controller {controllerNumber} Right Trigger"
+
+                End If
+
+                ClearRightTriggerLabel()
+
+
+            End If
+
+        Next
+
+        UpdateVibrateTimer()
+
+    End Sub
+
+    Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
+
+        VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+
+    End Sub
+
+    Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
+
+        VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
+
+    End Sub
+
+    Private Sub TrackBarSpeed_Scroll(sender As Object, e As EventArgs) Handles TrackBarSpeed.Scroll
+
+        UpdateSpeedLabel()
+
+    End Sub
+
+    'TODO
+    Private Sub UpdateControllerStatusLabel(controllerNumber As Integer)
+        ' Update the status label based on connection state
+
+        Dim status As String = If(Controllers.Connected(controllerNumber), "Connected", "Not Connected")
+
+        Dim labelText As String = $"Controller {controllerNumber} {status}"
+
+        Select Case controllerNumber
+
+            Case 0
+
+                LabelController0Status.Text = labelText
+
+
+
+            Case 1
+
+                LabelController1Status.Text = labelText
+
+
+
+            Case 2
+
+                LabelController2Status.Text = labelText
+
+
+
+            Case 3
+
+                LabelController3Status.Text = labelText
+
+
+
+        End Select
+
+    End Sub
+
+
+
+    Private Sub DoButtonLogic()
+
+        For controllerNumber As Integer = 0 To 3
+
+            If Controllers.Connected(controllerNumber) Then
+
+                DoDPadLogic(controllerNumber)
+
+                DoLetterButtonLogic(controllerNumber)
+
+                DoStartBackLogic(controllerNumber)
+
+                DoBumperLogic(controllerNumber)
+
+                DoStickLogic(controllerNumber)
+
+            End If
+
+        Next
 
     End Sub
 
@@ -394,12 +851,12 @@ Public Class Form1
 
             LabelDPad.Text = $"Controller {controllerNumber} DPad {direction}"
 
-            IsDPadNeutral(controllerNumber) = False
+            Controllers.IsDPadNeutral(controllerNumber) = False
 
         Else
             ' Yes, all DPad buttons are up.
 
-            IsDPadNeutral(controllerNumber) = True
+            Controllers.IsDPadNeutral(controllerNumber) = True
 
         End If
 
@@ -417,12 +874,12 @@ Public Class Form1
 
             LabelButtons.Text = buttonText
 
-            IsLetterButtonsNeutral(controllerNumber) = False
+            Controllers.IsLetterButtonsNeutral(controllerNumber) = False
 
         Else
             ' No, letter buttons are Not pressed.
 
-            IsLetterButtonsNeutral(controllerNumber) = True
+            Controllers.IsLetterButtonsNeutral(controllerNumber) = True
 
         End If
 
@@ -432,29 +889,29 @@ Public Class Form1
 
     Private Sub DoStartBackLogic(ControllerNumber As Integer)
 
-        If StartButtonPressed Then
+        If Controllers.StartButtonPressed Then
 
             LabelStart.Text = $"Controller {ControllerNumber} Start"
 
-            IsStartButtonsNeutral(ControllerNumber) = False
+            Controllers.IsStartButtonsNeutral(ControllerNumber) = False
 
         Else
 
-            IsStartButtonsNeutral(ControllerNumber) = True
+            Controllers.IsStartButtonsNeutral(ControllerNumber) = True
 
         End If
 
         ClearStartLabel()
 
-        If BackButtonPressed Then
+        If Controllers.BackButtonPressed Then
 
             LabelBack.Text = $"Controller {ControllerNumber} Back"
 
-            IsBackButtonsNeutral(ControllerNumber) = False
+            Controllers.IsBackButtonsNeutral(ControllerNumber) = False
 
         Else
 
-            IsBackButtonsNeutral(ControllerNumber) = True
+            Controllers.IsBackButtonsNeutral(ControllerNumber) = True
 
         End If
 
@@ -464,29 +921,29 @@ Public Class Form1
 
     Private Sub DoBumperLogic(ControllerNumber As Integer)
 
-        If LeftBumperButtonPressed Then
+        If Controllers.LeftBumperButtonPressed Then
 
             LabelLeftBumper.Text = $"Controller {ControllerNumber} Left Bumper"
 
-            IsLeftBumperNeutral(ControllerNumber) = False
+            Controllers.IsLeftBumperNeutral(ControllerNumber) = False
 
         Else
 
-            IsLeftBumperNeutral(ControllerNumber) = True
+            Controllers.IsLeftBumperNeutral(ControllerNumber) = True
 
         End If
 
         ClearLeftBumperLabel()
 
-        If RightBumperButtonPressed Then
+        If Controllers.RightBumperButtonPressed Then
 
             LabelRightBumper.Text = $"Controller {ControllerNumber} Right Bumper"
 
-            IsRightBumperNeutral(ControllerNumber) = False
+            Controllers.IsRightBumperNeutral(ControllerNumber) = False
 
         Else
 
-            IsRightBumperNeutral(ControllerNumber) = True
+            Controllers.IsRightBumperNeutral(ControllerNumber) = True
 
         End If
 
@@ -496,29 +953,29 @@ Public Class Form1
 
     Private Sub DoStickLogic(ControllerNumber As Integer)
 
-        If LeftStickButtonPressed Then
+        If Controllers.LeftStickButtonPressed Then
 
             LabelLeftThumbButton.Text = $"Controller {ControllerNumber} Left Thumbstick Button"
 
-            IsLeftStickButtonsNeutral(ControllerNumber) = False
+            Controllers.IsLeftStickButtonsNeutral(ControllerNumber) = False
 
         Else
 
-            IsLeftStickButtonsNeutral(ControllerNumber) = True
+            Controllers.IsLeftStickButtonsNeutral(ControllerNumber) = True
 
         End If
 
         ClearLeftThumbButtonLabel()
 
-        If RightStickButtonPressed Then
+        If Controllers.RightStickButtonPressed Then
 
             LabelRightThumbButton.Text = $"Controller {ControllerNumber} Right Thumbstick Button"
 
-            IsRightStickButtonsNeutral(ControllerNumber) = False
+            Controllers.IsRightStickButtonsNeutral(ControllerNumber) = False
 
         Else
 
-            IsRightStickButtonsNeutral(ControllerNumber) = True
+            Controllers.IsRightStickButtonsNeutral(ControllerNumber) = True
 
         End If
 
@@ -526,159 +983,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateLeftThumbstickPosition(ControllerNumber As Integer)
-        ' The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
-        ' The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
-
-        ' What position is the left thumbstick in on the X-axis?
-        If ControllerPosition.Gamepad.sThumbLX <= NeutralStart Then
-            ' The left thumbstick is in the left position.
-
-            LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick Left"
-
-            IsConThumbLXNeutral(ControllerNumber) = False
-
-        ElseIf ControllerPosition.Gamepad.sThumbLX >= NeutralEnd Then
-            ' The left thumbstick is in the right position.
-
-            LabelLeftThumbX.Text = $"Controller {ControllerNumber} Left Thumbstick Right"
-
-            IsConThumbLXNeutral(ControllerNumber) = False
-
-        Else
-            ' The left thumbstick is in the neutral position.
-
-            IsConThumbLXNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearLeftThumbstickXLabel()
-
-        ' What position is the left thumbstick in on the Y-axis?
-        If ControllerPosition.Gamepad.sThumbLY <= NeutralStart Then
-            ' The left thumbstick is in the down position.
-
-            LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick Down"
-
-            IsConThumbLYNeutral(ControllerNumber) = False
-
-        ElseIf ControllerPosition.Gamepad.sThumbLY >= NeutralEnd Then
-            ' The left thumbstick is in the up position.
-
-            LabelLeftThumbY.Text = $"Controller {ControllerNumber} Left Thumbstick Up"
-
-            IsConThumbLYNeutral(ControllerNumber) = False
-
-        Else
-            ' The left thumbstick is in the neutral position.
-
-            IsConThumbLYNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearLeftThumbstickYLabel()
-
-    End Sub
-
-    Private Sub UpdateRightThumbstickPosition(ControllerNumber As Integer)
-        ' The range on the X-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
-        ' The range on the Y-axis is -32,768 through 32,767. Signed 16-bit (2-byte) integer.
-
-        ' What position is the right thumbstick in on the X-axis?
-        If ControllerPosition.Gamepad.sThumbRX <= NeutralStart Then
-            ' The right thumbstick is in the left position.
-
-            LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick Left"
-
-            IsConThumbRXNeutral(ControllerNumber) = False
-
-        ElseIf ControllerPosition.Gamepad.sThumbRX >= NeutralEnd Then
-            ' The right thumbstick is in the right position.
-
-            LabelRightThumbX.Text = $"Controller {ControllerNumber} Right Thumbstick Right"
-
-            IsConThumbRXNeutral(ControllerNumber) = False
-
-        Else
-            ' The right thumbstick is in the neutral position.
-
-            IsConThumbRXNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearRightThumbstickXLabel()
-
-        ' What position is the right thumbstick in on the Y-axis?
-        If ControllerPosition.Gamepad.sThumbRY <= NeutralStart Then
-            ' The right thumbstick is in the down position.
-
-            LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Down"
-
-            IsConThumbRYNeutral(ControllerNumber) = False
-
-        ElseIf ControllerPosition.Gamepad.sThumbRY >= NeutralEnd Then
-            ' The right thumbstick is in the up position.
-
-            LabelRightThumbY.Text = $"Controller {ControllerNumber} Right Thumbstick Up"
-
-            IsConThumbRYNeutral(ControllerNumber) = False
-
-        Else
-            ' The right thumbstick is in the neutral position.
-
-            IsConThumbRYNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearRightThumbstickYLabel()
-
-    End Sub
-
-    Private Sub UpdateRightTriggerPosition(ControllerNumber As Integer)
-        ' The range of right trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
-        ' The trigger position must be greater than the trigger threshold to register as pressed.
-
-        ' What position is the right trigger in?
-        If ControllerPosition.Gamepad.bRightTrigger > TriggerThreshold Then
-            ' The right trigger is in the down position. Trigger Break. Bang!
-
-            LabelRightTrigger.Text = $"Controller {ControllerNumber} Right Trigger"
-
-            IsConRightTriggerNeutral(ControllerNumber) = False
-
-        Else
-            ' The right trigger is in the neutral position. Pre-Travel.
-
-            IsConRightTriggerNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearRightTriggerLabel()
-
-    End Sub
-
-    Private Sub UpdateLeftTriggerPosition(ControllerNumber As Integer)
-        ' The range of left trigger is 0 to 255. Unsigned 8-bit (1-byte) integer.
-        ' The trigger position must be greater than the trigger threshold to register as pressed.
-
-        ' What position is the left trigger in?
-        If ControllerPosition.Gamepad.bLeftTrigger > TriggerThreshold Then
-            ' The left trigger is in the fire position. Trigger Break. Bang!
-
-            LabelLeftTrigger.Text = $"Controller {ControllerNumber} Left Trigger"
-
-            IsConLeftTriggerNeutral(ControllerNumber) = False
-
-        Else
-            ' The left trigger is in the neutral position. Pre-Travel.
-
-            IsConLeftTriggerNeutral(ControllerNumber) = True
-
-        End If
-
-        ClearLeftTriggerLabel()
-
-    End Sub
 
     Private Sub ClearLetterButtonsLabel()
         ' Clears the letter buttons label when all controllers' letter buttons are up.
@@ -688,7 +992,7 @@ Public Class Form1
         ' Search for a non-neutral letter button.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsLetterButtonsNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsLetterButtonsNeutral(i) Then
                 ' A non-neutral letter button was found.
 
                 ConSum = False ' Report the non-neutral letter button.
@@ -717,7 +1021,7 @@ Public Class Form1
         ' Search for a non-neutral left thumbstick on the Y-axis.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsConThumbLYNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsConThumbLYNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
                 ConSum = False ' Report the non-neutral thumbstick.
@@ -746,7 +1050,7 @@ Public Class Form1
         ' Search for a non-neutral left thumbstick on the X-axis.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsConThumbLXNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsConThumbLXNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
                 ConSum = False ' Report the non-neutral thumbstick.
@@ -775,7 +1079,7 @@ Public Class Form1
         ' Search for a non-neutral right thumbstick on the X-axis.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsConThumbRXNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsConThumbRXNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
                 ConSum = False ' Report the non-neutral thumbstick.
@@ -804,7 +1108,7 @@ Public Class Form1
         ' Search for a non-neutral right thumbstick on the Y-axis.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsConThumbRYNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsConThumbRYNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
                 ConSum = False ' Report the non-neutral thumbstick.
@@ -833,7 +1137,7 @@ Public Class Form1
         ' Search for a non-neutral right trigger.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsConRightTriggerNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsConRightTriggerNeutral(i) Then
                 ' A non-neutral right trigger was found.
 
                 ConSum = False ' Report the non-neutral right trigger.
@@ -862,7 +1166,7 @@ Public Class Form1
         ' Search for a non-neutral left trigger.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsConLeftTriggerNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsConLeftTriggerNeutral(i) Then
                 ' A non-neutral left trigger was found.
 
                 ConSum = False ' Report the non-neutral left trigger.
@@ -909,7 +1213,7 @@ Public Class Form1
         ' Search for a non-neutral DPad.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsDPadNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsDPadNeutral(i) Then
                 ' A non-neutral DPad was found.
 
                 ConSum = False ' Report the non-neutral DPad.
@@ -938,7 +1242,7 @@ Public Class Form1
         ' Search for a non-neutral start button.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsStartButtonsNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsStartButtonsNeutral(i) Then
                 ' A non-neutral start button was found.
 
                 ConSum = False ' Report the non-neutral start button.
@@ -967,7 +1271,7 @@ Public Class Form1
         ' Search for a non-neutral back button.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsBackButtonsNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsBackButtonsNeutral(i) Then
                 ' A non-neutral back button was found.
 
                 ConSum = False ' Report the non-neutral back button.
@@ -996,7 +1300,7 @@ Public Class Form1
         ' Search for a non-neutral left bumper.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsLeftBumperNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsLeftBumperNeutral(i) Then
                 ' A non-neutral left bumper was found.
 
                 ConSum = False ' Report the non-neutral left bumper.
@@ -1025,7 +1329,7 @@ Public Class Form1
         ' Search for a non-neutral right bumper.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsRightBumperNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsRightBumperNeutral(i) Then
                 ' A non-neutral right bumper was found.
 
                 ConSum = False ' Report the non-neutral right bumper.
@@ -1054,7 +1358,7 @@ Public Class Form1
         ' Search for a non-neutral left thumb button.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsLeftStickButtonsNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsLeftStickButtonsNeutral(i) Then
                 ' A non-neutral left thumb button was found.
 
                 ConSum = False ' Report the non-neutral left thumb button.
@@ -1083,7 +1387,7 @@ Public Class Form1
         ' Search for a non-neutral right thumb button.
         For i As Integer = 0 To 3
 
-            If Connected(i) AndAlso Not IsRightStickButtonsNeutral(i) Then
+            If Controllers.Connected(i) AndAlso Not Controllers.IsRightStickButtonsNeutral(i) Then
                 ' A non-neutral right thumb button was found.
 
                 ConSum = False ' Report the non-neutral right thumb button.
@@ -1106,29 +1410,29 @@ Public Class Form1
 
     Private Function GetDPadDirection() As String
 
-        If DPadUpPressed Then
+        If Controllers.DPadUpPressed Then
 
-            If DPadLeftPressed Then Return "Left+Up"
+            If Controllers.DPadLeftPressed Then Return "Left+Up"
 
-            If DPadRightPressed Then Return "Right+Up"
+            If Controllers.DPadRightPressed Then Return "Right+Up"
 
             Return "Up"
 
         End If
 
-        If DPadDownPressed Then
+        If Controllers.DPadDownPressed Then
 
-            If DPadLeftPressed Then Return "Left+Down"
+            If Controllers.DPadLeftPressed Then Return "Left+Down"
 
-            If DPadRightPressed Then Return "Right+Down"
+            If Controllers.DPadRightPressed Then Return "Right+Down"
 
             Return "Down"
 
         End If
 
-        If DPadLeftPressed Then Return "Left"
+        If Controllers.DPadLeftPressed Then Return "Left"
 
-        If DPadRightPressed Then Return "Right"
+        If Controllers.DPadRightPressed Then Return "Right"
 
         Return String.Empty ' Return an empty string if no buttons are pressed.
 
@@ -1138,13 +1442,13 @@ Public Class Form1
 
         Dim buttons As New List(Of String)
 
-        If AButtonPressed Then buttons.Add("A")
+        If Controllers.AButtonPressed Then buttons.Add("A")
 
-        If BButtonPressed Then buttons.Add("B")
+        If Controllers.BButtonPressed Then buttons.Add("B")
 
-        If XButtonPressed Then buttons.Add("X")
+        If Controllers.XButtonPressed Then buttons.Add("X")
 
-        If YButtonPressed Then buttons.Add("Y")
+        If Controllers.YButtonPressed Then buttons.Add("Y")
 
         If buttons.Count > 0 Then
 
@@ -1199,6 +1503,8 @@ Public Class Form1
                 ' The motor speed was not set. Fail.
                 ' You can log or handle the failure here if needed.
                 ' Example: Console.WriteLine(XInputSetState(ControllerID, Vibration).ToString())
+
+                Debug.Print($"{ControllerID} did not vibrate.")
 
             End If
 
@@ -1280,23 +1586,6 @@ Public Class Form1
 
     End Sub
 
-    Private Function IsControllerConnected(controllerNumber As Integer) As Boolean
-
-        Try
-
-            Return XInputGetState(controllerNumber, ControllerPosition) = 0 ' 0 means the controller is connected.
-            ' Anything else (a non-zero value) means the controller is not connected.
-
-        Catch ex As Exception
-            ' Something went wrong (An exception occured).
-
-            DisplayError(ex)
-
-            Return False
-
-        End Try
-
-    End Function
 
     Private Sub DisplayError(ex As Exception)
 
@@ -1388,7 +1677,7 @@ Public Class Form1
 
         Dim ConSum As Integer = 0
 
-        For Each Con In ConButtons
+        For Each Con In Controllers.ConButtons
 
             ConSum += Con
 
