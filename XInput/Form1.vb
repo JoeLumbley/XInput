@@ -127,24 +127,24 @@ Public Structure XboxControllers
     Private Const XButtonConst As Integer = 16384
     Private Const YButtonConst As Integer = 32768
 
-    Public DPadUp As Boolean
-    Public DPadDown As Boolean
-    Public DPadLeft As Boolean
-    Public DPadRight As Boolean
+    Public DPadUp() As Boolean
+    Public DPadDown() As Boolean
+    Public DPadLeft() As Boolean
+    Public DPadRight() As Boolean
 
-    Public StartButton As Boolean
-    Public BackButton As Boolean
+    Public StartButton() As Boolean
+    Public BackButton() As Boolean
 
-    Public LeftStickButton As Boolean
-    Public RightStickButton As Boolean
+    Public LeftStickButton() As Boolean
+    Public RightStickButton() As Boolean
 
-    Public LeftBumperButton As Boolean
-    Public RightBumperButton As Boolean
+    Public LeftBumperButton() As Boolean
+    Public RightBumperButton() As Boolean
 
-    Public AButton As Boolean
-    Public BButton As Boolean
-    Public XButton As Boolean
-    Public YButton As Boolean
+    Public AButton() As Boolean
+    Public BButton() As Boolean
+    Public XButton() As Boolean
+    Public YButton() As Boolean
 
     Public RightThumbstickUp() As Boolean
     Public RightThumbstickDown() As Boolean
@@ -226,6 +226,33 @@ Public Structure XboxControllers
 
         RightTrigger = New Boolean(0 To 3) {}
 
+
+        AButton = New Boolean(0 To 3) {}
+        BButton = New Boolean(0 To 3) {}
+        XButton = New Boolean(0 To 3) {}
+        YButton = New Boolean(0 To 3) {}
+
+        LeftBumperButton = New Boolean(0 To 3) {}
+        RightBumperButton = New Boolean(0 To 3) {}
+
+
+        DPadUp = New Boolean(0 To 3) {}
+        DPadDown = New Boolean(0 To 3) {}
+        DPadLeft = New Boolean(0 To 3) {}
+        DPadRight = New Boolean(0 To 3) {}
+
+
+        StartButton = New Boolean(0 To 3) {}
+        BackButton = New Boolean(0 To 3) {}
+
+
+
+        LeftStickButton = New Boolean(0 To 3) {}
+        RightStickButton = New Boolean(0 To 3) {}
+
+
+
+
     End Sub
 
     Public Sub Update()
@@ -270,7 +297,7 @@ Public Structure XboxControllers
         Catch ex As Exception
             ' Something went wrong (An exception occured).
 
-            Debug.Print($"Error getting state: {controllerNumber} | {ex.Message}")
+            DisplayError(ex)
 
             Return False
 
@@ -297,66 +324,116 @@ Public Structure XboxControllers
         Catch ex As Exception
             ' Something went wrong (An exception occurred).
 
-            Debug.Print($"Error updating state: {controllerNumber} | {ex.Message}")
+            DisplayError(ex)
 
         End Try
 
     End Sub
 
+    'Private Sub UpdateButtons(CID As Integer)
+    '    ' The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
+
+    '    DPadUp =
+    '        (State.Gamepad.wButtons And DPadUpConst) <> 0
+
+    '    DPadDown =
+    '        (State.Gamepad.wButtons And DPadDownConst) <> 0
+
+    '    DPadLeft =
+    '        (State.Gamepad.wButtons And DPadLeftConst) <> 0
+
+    '    DPadRight =
+    '        (State.Gamepad.wButtons And DPadRightConst) <> 0
+
+    '    StartButton =
+    '        (State.Gamepad.wButtons And StartButtonConst) <> 0
+
+    '    BackButton =
+    '        (State.Gamepad.wButtons And BackButtonConst) <> 0
+
+    '    LeftStickButton =
+    '        (State.Gamepad.wButtons And LeftStickButtonConst) <> 0
+
+    '    RightStickButton =
+    '        (State.Gamepad.wButtons And RightStickButtonConst) <> 0
+
+    '    LeftBumperButton =
+    '        (State.Gamepad.wButtons And LeftBumperConst) <> 0
+
+    '    RightBumperButton =
+    '        (State.Gamepad.wButtons And RightBumperConst) <> 0
+
+    '    AButton =
+    '        (State.Gamepad.wButtons And AButtonConst) <> 0
+
+    '    BButton =
+    '        (State.Gamepad.wButtons And BButtonConst) <> 0
+
+    '    XButton =
+    '        (State.Gamepad.wButtons And XButtonConst) <> 0
+
+    '    YButton =
+    '        (State.Gamepad.wButtons And YButtonConst) <> 0
+
+    '    Buttons(CID) =
+    '        State.Gamepad.wButtons
+
+    'End Sub
+
     Private Sub UpdateButtons(CID As Integer)
         ' The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
-        UpdateDPadButtons()
+        UpdateDPadButtons(CID)
 
-        UpdateLetterButtons()
+        UpdateLetterButtons(CID)
 
-        UpdateBumperButtons()
+        UpdateBumperButtons(CID)
 
-        UpdateStickButtons()
+        UpdateStickButtons(CID)
 
-        UpdateStartBackButtons()
+        UpdateStartBackButtons(CID)
 
         ' Store the button states for the current controller ID
         Buttons(CID) = State.Gamepad.wButtons
 
     End Sub
 
-    Private Sub UpdateDPadButtons()
+    Private Sub UpdateDPadButtons(CID As Integer)
 
-        DPadUp = (State.Gamepad.wButtons And DPadUpConst) <> 0
-        DPadDown = (State.Gamepad.wButtons And DPadDownConst) <> 0
-        DPadLeft = (State.Gamepad.wButtons And DPadLeftConst) <> 0
-        DPadRight = (State.Gamepad.wButtons And DPadRightConst) <> 0
-
-    End Sub
-
-    Private Sub UpdateLetterButtons()
-
-        AButton = (State.Gamepad.wButtons And AButtonConst) <> 0
-        BButton = (State.Gamepad.wButtons And BButtonConst) <> 0
-        XButton = (State.Gamepad.wButtons And XButtonConst) <> 0
-        YButton = (State.Gamepad.wButtons And YButtonConst) <> 0
+        DPadUp(CID) = (State.Gamepad.wButtons And DPadUpConst) <> 0
+        DPadDown(CID) = (State.Gamepad.wButtons And DPadDownConst) <> 0
+        DPadLeft(CID) = (State.Gamepad.wButtons And DPadLeftConst) <> 0
+        DPadRight(CID) = (State.Gamepad.wButtons And DPadRightConst) <> 0
 
     End Sub
 
-    Private Sub UpdateBumperButtons()
+    Private Sub UpdateLetterButtons(CID As Integer)
 
-        LeftBumperButton = (State.Gamepad.wButtons And LeftBumperConst) <> 0
-        RightBumperButton = (State.Gamepad.wButtons And RightBumperConst) <> 0
-
-    End Sub
-
-    Private Sub UpdateStickButtons()
-
-        LeftStickButton = (State.Gamepad.wButtons And LeftStickButtonConst) <> 0
-        RightStickButton = (State.Gamepad.wButtons And RightStickButtonConst) <> 0
+        AButton(CID) = (State.Gamepad.wButtons And AButtonConst) <> 0
+        BButton(CID) = (State.Gamepad.wButtons And BButtonConst) <> 0
+        XButton(CID) = (State.Gamepad.wButtons And XButtonConst) <> 0
+        YButton(CID) = (State.Gamepad.wButtons And YButtonConst) <> 0
 
     End Sub
 
-    Private Sub UpdateStartBackButtons()
+    Private Sub UpdateBumperButtons(CID As Integer)
 
-        StartButton = (State.Gamepad.wButtons And StartButtonConst) <> 0
-        BackButton = (State.Gamepad.wButtons And BackButtonConst) <> 0
+        LeftBumperButton(CID) = (State.Gamepad.wButtons And LeftBumperConst) <> 0
+        RightBumperButton(CID) = (State.Gamepad.wButtons And RightBumperConst) <> 0
+
+    End Sub
+
+    Private Sub UpdateStickButtons(CID As Integer)
+
+        LeftStickButton(CID) = (State.Gamepad.wButtons And LeftStickButtonConst) <> 0
+        RightStickButton(CID) = (State.Gamepad.wButtons And RightStickButtonConst) <> 0
+
+    End Sub
+
+    Private Sub UpdateStartBackButtons(CID As Integer)
+
+        StartButton(CID) = (State.Gamepad.wButtons And StartButtonConst) <> 0
+        BackButton(CID) = (State.Gamepad.wButtons And BackButtonConst) <> 0
 
     End Sub
 
@@ -776,7 +853,7 @@ Public Class Form1
 
     Private Sub DoDPadLogic(controllerNumber As Integer)
 
-        Dim direction As String = GetDPadDirection()
+        Dim direction As String = GetDPadDirection(controllerNumber)
 
         ' Are all DPad buttons up?
         If Not String.IsNullOrEmpty(direction) Then
@@ -822,7 +899,7 @@ Public Class Form1
 
     Private Sub DoStartBackLogic(ControllerNumber As Integer)
 
-        If Controllers.StartButton Then
+        If Controllers.StartButton(ControllerNumber) Then
 
             LabelStart.Text = $"Controller {ControllerNumber} Start"
 
@@ -836,7 +913,7 @@ Public Class Form1
 
         ClearStartLabel()
 
-        If Controllers.BackButton Then
+        If Controllers.BackButton(ControllerNumber) Then
 
             LabelBack.Text = $"Controller {ControllerNumber} Back"
 
@@ -854,7 +931,7 @@ Public Class Form1
 
     Private Sub DoBumperLogic(ControllerNumber As Integer)
 
-        If Controllers.LeftBumperButton Then
+        If Controllers.LeftBumperButton(ControllerNumber) Then
 
             LabelLeftBumper.Text =
                 $"Controller {ControllerNumber} Left Bumper"
@@ -869,7 +946,7 @@ Public Class Form1
 
         ClearLeftBumperLabel()
 
-        If Controllers.RightBumperButton Then
+        If Controllers.RightBumperButton(ControllerNumber) Then
 
             LabelRightBumper.Text =
                 $"Controller {ControllerNumber} Right Bumper"
@@ -888,7 +965,7 @@ Public Class Form1
 
     Private Sub DoStickLogic(ControllerNumber As Integer)
 
-        If Controllers.LeftStickButton Then
+        If Controllers.LeftStickButton(ControllerNumber) Then
 
             LabelLeftThumbButton.Text =
                 $"Controller {ControllerNumber} Left Thumbstick Button"
@@ -903,7 +980,7 @@ Public Class Form1
 
         ClearLeftThumbButtonLabel()
 
-        If Controllers.RightStickButton Then
+        If Controllers.RightStickButton(ControllerNumber) Then
 
             LabelRightThumbButton.Text =
                 $"Controller {ControllerNumber} Right Thumbstick Button"
@@ -1393,31 +1470,31 @@ Public Class Form1
 
     End Sub
 
-    Private Function GetDPadDirection() As String
+    Private Function GetDPadDirection(controllerNumber As Integer) As String
 
-        If Controllers.DPadUp Then
+        If Controllers.DPadUp(controllerNumber) Then
 
-            If Controllers.DPadLeft Then Return "Left+Up"
+            If Controllers.DPadLeft(controllerNumber) Then Return "Left+Up"
 
-            If Controllers.DPadRight Then Return "Right+Up"
+            If Controllers.DPadRight(controllerNumber) Then Return "Right+Up"
 
             Return "Up"
 
         End If
 
-        If Controllers.DPadDown Then
+        If Controllers.DPadDown(controllerNumber) Then
 
-            If Controllers.DPadLeft Then Return "Left+Down"
+            If Controllers.DPadLeft(controllerNumber) Then Return "Left+Down"
 
-            If Controllers.DPadRight Then Return "Right+Down"
+            If Controllers.DPadRight(controllerNumber) Then Return "Right+Down"
 
             Return "Down"
 
         End If
 
-        If Controllers.DPadLeft Then Return "Left"
+        If Controllers.DPadLeft(controllerNumber) Then Return "Left"
 
-        If Controllers.DPadRight Then Return "Right"
+        If Controllers.DPadRight(controllerNumber) Then Return "Right"
 
         Return String.Empty ' Return an empty string if no buttons are pressed.
 
@@ -1427,13 +1504,13 @@ Public Class Form1
 
         Dim buttons As New List(Of String)
 
-        If Controllers.AButton Then buttons.Add("A")
+        If Controllers.AButton(controllerNumber) Then buttons.Add("A")
 
-        If Controllers.BButton Then buttons.Add("B")
+        If Controllers.BButton(controllerNumber) Then buttons.Add("B")
 
-        If Controllers.XButton Then buttons.Add("X")
+        If Controllers.XButton(controllerNumber) Then buttons.Add("X")
 
-        If Controllers.YButton Then buttons.Add("Y")
+        If Controllers.YButton(controllerNumber) Then buttons.Add("Y")
 
         If buttons.Count > 0 Then
 
