@@ -54,25 +54,42 @@ Public Structure XboxControllers
         Public sThumbRY As Short
     End Structure
 
-    Private Const DPadUpConst As Integer = 1
-    Private Const DPadDownConst As Integer = 2
+    Private Enum Button
+        DPadUp = 1
+        DPadDown = 2
+        DPadLeft = 4
+        DPadRight = 8
+        Start = 16
+        Back = 32
+        LeftStick = 64
+        RightStick = 128
+        LeftBumper = 256
+        RightBumper = 512
+        A = 4096
+        B = 8192
+        X = 16384
+        Y = 32768
+    End Enum
 
-    Private Const DPadLeftConst As Integer = 4
-    Private Const DPadRightConst As Integer = 8
+    'Private Const DPadUpConst As Integer = 1
+    'Private Const DPadDownConst As Integer = 2
 
-    Private Const StartButtonConst As Integer = 16
-    Private Const BackButtonConst As Integer = 32
+    'Private Const DPadLeftConst As Integer = 4
+    'Private Const DPadRightConst As Integer = 8
 
-    Private Const LeftStickButtonConst As Integer = 64
-    Private Const RightStickButtonConst As Integer = 128
+    'Private Const StartButtonConst As Integer = 16
+    'Private Const BackButtonConst As Integer = 32
 
-    Private Const LeftBumperConst As Integer = 256
-    Private Const RightBumperConst As Integer = 512
+    'Private Const LeftStickButtonConst As Integer = 64
+    'Private Const RightStickButtonConst As Integer = 128
 
-    Private Const AButtonConst As Integer = 4096
-    Private Const BButtonConst As Integer = 8192
-    Private Const XButtonConst As Integer = 16384
-    Private Const YButtonConst As Integer = 32768
+    'Private Const LeftBumperConst As Integer = 256
+    'Private Const RightBumperConst As Integer = 512
+
+    'Private Const AButtonConst As Integer = 4096
+    'Private Const BButtonConst As Integer = 8192
+    'Private Const XButtonConst As Integer = 16384
+    'Private Const YButtonConst As Integer = 32768
 
     ' Set the start of the thumbstick neutral zone to 1/2 over.
     Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
@@ -447,40 +464,40 @@ Public Structure XboxControllers
 
     Private Sub UpdateDPadButtons(CID As Integer)
 
-        DPadUp(CID) = (State.Gamepad.wButtons And DPadUpConst) <> 0
-        DPadDown(CID) = (State.Gamepad.wButtons And DPadDownConst) <> 0
-        DPadLeft(CID) = (State.Gamepad.wButtons And DPadLeftConst) <> 0
-        DPadRight(CID) = (State.Gamepad.wButtons And DPadRightConst) <> 0
+        DPadUp(CID) = (State.Gamepad.wButtons And Button.DPadUp) <> 0
+        DPadDown(CID) = (State.Gamepad.wButtons And Button.DPadDown) <> 0
+        DPadLeft(CID) = (State.Gamepad.wButtons And Button.DPadLeft) <> 0
+        DPadRight(CID) = (State.Gamepad.wButtons And Button.DPadRight) <> 0
 
     End Sub
 
     Private Sub UpdateLetterButtons(CID As Integer)
 
-        AButton(CID) = (State.Gamepad.wButtons And AButtonConst) <> 0
-        BButton(CID) = (State.Gamepad.wButtons And BButtonConst) <> 0
-        XButton(CID) = (State.Gamepad.wButtons And XButtonConst) <> 0
-        YButton(CID) = (State.Gamepad.wButtons And YButtonConst) <> 0
+        AButton(CID) = (State.Gamepad.wButtons And Button.A) <> 0
+        BButton(CID) = (State.Gamepad.wButtons And Button.B) <> 0
+        XButton(CID) = (State.Gamepad.wButtons And Button.X) <> 0
+        YButton(CID) = (State.Gamepad.wButtons And Button.Y) <> 0
 
     End Sub
 
     Private Sub UpdateBumperButtons(CID As Integer)
 
-        LeftBumperButton(CID) = (State.Gamepad.wButtons And LeftBumperConst) <> 0
-        RightBumperButton(CID) = (State.Gamepad.wButtons And RightBumperConst) <> 0
+        LeftBumperButton(CID) = (State.Gamepad.wButtons And Button.LeftBumper) <> 0
+        RightBumperButton(CID) = (State.Gamepad.wButtons And Button.RightBumper) <> 0
 
     End Sub
 
     Private Sub UpdateStickButtons(CID As Integer)
 
-        LeftStickButton(CID) = (State.Gamepad.wButtons And LeftStickButtonConst) <> 0
-        RightStickButton(CID) = (State.Gamepad.wButtons And RightStickButtonConst) <> 0
+        LeftStickButton(CID) = (State.Gamepad.wButtons And Button.LeftStick) <> 0
+        RightStickButton(CID) = (State.Gamepad.wButtons And Button.RightStick) <> 0
 
     End Sub
 
     Private Sub UpdateStartBackButtons(CID As Integer)
 
-        StartButton(CID) = (State.Gamepad.wButtons And StartButtonConst) <> 0
-        BackButton(CID) = (State.Gamepad.wButtons And BackButtonConst) <> 0
+        StartButton(CID) = (State.Gamepad.wButtons And Button.Start) <> 0
+        BackButton(CID) = (State.Gamepad.wButtons And Button.Back) <> 0
 
     End Sub
 
