@@ -24,10 +24,7 @@
 ' OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 ' SOFTWARE.
 
-Imports System.Buffers
 Imports System.Runtime.InteropServices
-Imports NUnit.Framework
-
 
 Public Structure XboxControllers
 
@@ -173,15 +170,6 @@ Public Structure XboxControllers
         RightThumbstickXaxisNeutral = New Boolean(0 To 3) {}
         RightThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 
-        For i As Integer = 0 To 3
-
-            LeftThumbstickXaxisNeutral(i) = True
-            LeftThumbstickYaxisNeutral(i) = True
-
-            RightThumbstickXaxisNeutral(i) = True
-            RightThumbstickYaxisNeutral(i) = True
-
-        Next
 
         LeftTriggerNeutral = New Boolean(0 To 3) {}
         RightTriggerNeutral = New Boolean(0 To 3) {}
@@ -200,6 +188,23 @@ Public Structure XboxControllers
         RightStickButtonsNeutral = New Boolean(0 To 3) {}
 
 
+        For i As Integer = 0 To 3
+
+            LeftThumbstickXaxisNeutral(i) = True
+            LeftThumbstickYaxisNeutral(i) = True
+
+            RightThumbstickXaxisNeutral(i) = True
+            RightThumbstickYaxisNeutral(i) = True
+
+            LeftTriggerNeutral(i) = True
+            RightTriggerNeutral(i) = True
+
+            DPadNeutral(i) = True
+
+            LetterButtonsNeutral(i) = True
+
+
+        Next
 
         RightThumbstickLeft = New Boolean(0 To 3) {}
         RightThumbstickRight = New Boolean(0 To 3) {}
