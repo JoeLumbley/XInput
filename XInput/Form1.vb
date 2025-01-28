@@ -350,8 +350,6 @@ Public Structure XboxControllers
 
     End Sub
 
-
-
     Public Sub Update()
 
         Dim ElapsedTime As TimeSpan = Now - ConnectionStart
