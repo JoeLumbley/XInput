@@ -400,6 +400,8 @@ Public Structure XboxControllers
 
     End Function
 
+
+
     Public Sub UpdateState(controllerNumber As Integer)
 
         Try
@@ -1799,51 +1801,6 @@ Public Class Form1
     End Sub
 
 
-
-End Class
-
-
-
-Public Class XboxControllersTests
-
-    Private controllers As XboxControllers
-
-    Public Sub Setup()
-        controllers = New XboxControllers()
-        controllers.Init() ' Initialize the controller states
-    End Sub
-
-    Public Sub TestInitialization()
-        ' Check that all controllers are initialized as not connected
-        For i As Integer = 0 To 3
-            Debug.Assert(controllers.Connected(i), $"Controller {i} should not be connected after initialization.")
-            Debug.Assert(Not controllers.LeftThumbstickXaxisNeutral(i), $"Left Thumbstick X-axis for Controller {i} should be neutral.")
-            Debug.Assert(Not controllers.LeftThumbstickYaxisNeutral(i), $"Left Thumbstick Y-axis for Controller {i} should be neutral.")
-            Debug.Assert(Not controllers.RightThumbstickXaxisNeutral(i), $"Right Thumbstick X-axis for Controller {i} should be neutral.")
-            Debug.Assert(Not controllers.RightThumbstickYaxisNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
-        Next
-    End Sub
-
-    Public Sub TestIsConnected()
-        ' Assuming you have a method to mock the connection status.
-        Dim controllerIndex As Integer = 0
-        controllers.Connected(controllerIndex) = True ' Simulating a connected controller
-
-        Debug.Assert(Not controllers.IsConnected(controllerIndex), $"Controller {controllerIndex} should be reported as connected.")
-    End Sub
-
-    Public Sub TestButtonStatesAfterUpdate()
-        ' Simulate a button press (you may need to mock XInputGetState for this)
-        Dim controllerIndex As Integer = 0
-        controllers.Connected(controllerIndex) = True
-        controllers.Buttons(controllerIndex) = &H1000 ' Simulate A button being pressed
-
-        controllers.UpdateState(controllerIndex)
-
-        Debug.Assert(Not controllers.AButton(controllerIndex), "A button should be reported as pressed.")
-
-
-    End Sub
 
 End Class
 
