@@ -71,26 +71,6 @@ Public Structure XboxControllers
         Y = 32768
     End Enum
 
-    'Private Const DPadUpConst As Integer = 1
-    'Private Const DPadDownConst As Integer = 2
-
-    'Private Const DPadLeftConst As Integer = 4
-    'Private Const DPadRightConst As Integer = 8
-
-    'Private Const StartButtonConst As Integer = 16
-    'Private Const BackButtonConst As Integer = 32
-
-    'Private Const LeftStickButtonConst As Integer = 64
-    'Private Const RightStickButtonConst As Integer = 128
-
-    'Private Const LeftBumperConst As Integer = 256
-    'Private Const RightBumperConst As Integer = 512
-
-    'Private Const AButtonConst As Integer = 4096
-    'Private Const BButtonConst As Integer = 8192
-    'Private Const XButtonConst As Integer = 16384
-    'Private Const YButtonConst As Integer = 32768
-
     ' Set the start of the thumbstick neutral zone to 1/2 over.
     Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
     ' The thumbstick position must be more than 1/2 over the neutral start to
@@ -280,13 +260,12 @@ Public Structure XboxControllers
     End Sub
 
     Public Sub TestInitialization()
-        ' For Lex
 
-        ' Assert that ConnectionStart is not Nothing (initialization was successful)
-        Debug.Assert(Not ConnectionStart = Nothing)
+        ' Check that ConnectionStart is not Nothing (initialization was successful)
+        Debug.Assert(Not ConnectionStart = Nothing, $"Connection Start should not be Nothing.")
 
-        ' Assert that Buttons array is initialized
-        Debug.Assert(Buttons IsNot Nothing)
+        ' Check that Buttons array is initialized
+        Debug.Assert(Buttons IsNot Nothing, $"Buttons should not be Nothing.")
 
         For i As Integer = 0 To 3
 
@@ -364,6 +343,8 @@ Public Structure XboxControllers
             Debug.Assert(Not RightStickButton(i), $"Right Stick Button for Controller {i} should not be true.")
 
         Next
+
+        ' For Lex
 
     End Sub
 

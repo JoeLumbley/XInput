@@ -197,7 +197,7 @@ Partial Class Form1
         GroupBox1.Size = New Size(607, 163)
         GroupBox1.TabIndex = 15
         GroupBox1.TabStop = False
-        GroupBox1.Text = "Rumble"
+        GroupBox1.Text = " Rumble "
         ' 
         ' Label2
         ' 
@@ -240,7 +240,7 @@ Partial Class Form1
         GroupBox2.Size = New Size(943, 203)
         GroupBox2.TabIndex = 16
         GroupBox2.TabStop = False
-        GroupBox2.Text = "Monitor - Press any button on your controller"
+        GroupBox2.Text = " Monitor - Press any button on your controller "
         ' 
         ' LabelRightThumbButton
         ' 
@@ -316,7 +316,7 @@ Partial Class Form1
         GroupBox3.Size = New Size(312, 162)
         GroupBox3.TabIndex = 17
         GroupBox3.TabStop = False
-        GroupBox3.Text = "Status"
+        GroupBox3.Text = " Status "
         ' 
         ' LabelController3Status
         ' 
