@@ -212,7 +212,7 @@ Partial Class Form1
         ' 
         NumericUpDownTimeToVib.Increment = New Decimal(New Integer() {25, 0, 0, 0})
         NumericUpDownTimeToVib.Location = New Point(398, 35)
-        NumericUpDownTimeToVib.Maximum = New Decimal(New Integer() {4000, 0, 0, 0})
+        NumericUpDownTimeToVib.Maximum = New Decimal(New Integer() {5000, 0, 0, 0})
         NumericUpDownTimeToVib.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         NumericUpDownTimeToVib.Name = "NumericUpDownTimeToVib"
         NumericUpDownTimeToVib.Size = New Size(180, 31)
