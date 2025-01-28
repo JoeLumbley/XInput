@@ -164,47 +164,37 @@ Public Structure XboxControllers
         LeftThumbstickXaxisNeutral = New Boolean(0 To 3) {}
         LeftThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 
-
         RightThumbstickXaxisNeutral = New Boolean(0 To 3) {}
         RightThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 
-
         LeftTriggerNeutral = New Boolean(0 To 3) {}
         RightTriggerNeutral = New Boolean(0 To 3) {}
-
 
         DPadNeutral = New Boolean(0 To 3) {}
 
         LetterButtonsNeutral = New Boolean(0 To 3) {}
 
-
         StartButtonsNeutral = New Boolean(0 To 3) {}
         BackButtonsNeutral = New Boolean(0 To 3) {}
-
 
         LeftBumperNeutral = New Boolean(0 To 3) {}
         RightBumperNeutral = New Boolean(0 To 3) {}
 
-
         LeftStickButtonsNeutral = New Boolean(0 To 3) {}
         RightStickButtonsNeutral = New Boolean(0 To 3) {}
-
 
         RightThumbstickLeft = New Boolean(0 To 3) {}
         RightThumbstickRight = New Boolean(0 To 3) {}
         RightThumbstickDown = New Boolean(0 To 3) {}
         RightThumbstickUp = New Boolean(0 To 3) {}
 
-
         LeftThumbstickLeft = New Boolean(0 To 3) {}
         LeftThumbstickRight = New Boolean(0 To 3) {}
         LeftThumbstickDown = New Boolean(0 To 3) {}
         LeftThumbstickUp = New Boolean(0 To 3) {}
 
-
         LeftTrigger = New Boolean(0 To 3) {}
         RightTrigger = New Boolean(0 To 3) {}
-
 
         AButton = New Boolean(0 To 3) {}
         BButton = New Boolean(0 To 3) {}
@@ -214,23 +204,16 @@ Public Structure XboxControllers
         LeftBumperButton = New Boolean(0 To 3) {}
         RightBumperButton = New Boolean(0 To 3) {}
 
-
         DPadUp = New Boolean(0 To 3) {}
         DPadDown = New Boolean(0 To 3) {}
         DPadLeft = New Boolean(0 To 3) {}
         DPadRight = New Boolean(0 To 3) {}
 
-
         StartButton = New Boolean(0 To 3) {}
         BackButton = New Boolean(0 To 3) {}
 
-
-
         LeftStickButton = New Boolean(0 To 3) {}
         RightStickButton = New Boolean(0 To 3) {}
-
-
-
 
     End Sub
 
