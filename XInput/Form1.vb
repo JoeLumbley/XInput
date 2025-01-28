@@ -292,56 +292,6 @@ Public Structure XboxControllers
 
     End Sub
 
-    'Private Sub UpdateButtons(CID As Integer)
-    '    ' The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
-
-    '    DPadUp =
-    '        (State.Gamepad.wButtons And DPadUpConst) <> 0
-
-    '    DPadDown =
-    '        (State.Gamepad.wButtons And DPadDownConst) <> 0
-
-    '    DPadLeft =
-    '        (State.Gamepad.wButtons And DPadLeftConst) <> 0
-
-    '    DPadRight =
-    '        (State.Gamepad.wButtons And DPadRightConst) <> 0
-
-    '    StartButton =
-    '        (State.Gamepad.wButtons And StartButtonConst) <> 0
-
-    '    BackButton =
-    '        (State.Gamepad.wButtons And BackButtonConst) <> 0
-
-    '    LeftStickButton =
-    '        (State.Gamepad.wButtons And LeftStickButtonConst) <> 0
-
-    '    RightStickButton =
-    '        (State.Gamepad.wButtons And RightStickButtonConst) <> 0
-
-    '    LeftBumperButton =
-    '        (State.Gamepad.wButtons And LeftBumperConst) <> 0
-
-    '    RightBumperButton =
-    '        (State.Gamepad.wButtons And RightBumperConst) <> 0
-
-    '    AButton =
-    '        (State.Gamepad.wButtons And AButtonConst) <> 0
-
-    '    BButton =
-    '        (State.Gamepad.wButtons And BButtonConst) <> 0
-
-    '    XButton =
-    '        (State.Gamepad.wButtons And XButtonConst) <> 0
-
-    '    YButton =
-    '        (State.Gamepad.wButtons And YButtonConst) <> 0
-
-    '    Buttons(CID) =
-    '        State.Gamepad.wButtons
-
-    'End Sub
-
     Private Sub UpdateButtons(CID As Integer)
         ' The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
 
