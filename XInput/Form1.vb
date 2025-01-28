@@ -24,7 +24,10 @@
 ' OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 ' SOFTWARE.
 
+Imports System.Buffers
 Imports System.Runtime.InteropServices
+Imports NUnit.Framework
+
 
 Public Structure XboxControllers
 
@@ -153,6 +156,9 @@ Public Structure XboxControllers
     Public LeftTrigger() As Boolean
     Public RightTrigger() As Boolean
 
+    'Private Tests As XboxControllersTests
+    'Public Shared TestControllers = New XboxControllers
+
     Public Sub Init()
 
         Connected = New Boolean(0 To 3) {}
@@ -166,6 +172,16 @@ Public Structure XboxControllers
 
         RightThumbstickXaxisNeutral = New Boolean(0 To 3) {}
         RightThumbstickYaxisNeutral = New Boolean(0 To 3) {}
+
+        For i As Integer = 0 To 3
+
+            LeftThumbstickXaxisNeutral(i) = True
+            LeftThumbstickYaxisNeutral(i) = True
+
+            RightThumbstickXaxisNeutral(i) = True
+            RightThumbstickYaxisNeutral(i) = True
+
+        Next
 
         LeftTriggerNeutral = New Boolean(0 To 3) {}
         RightTriggerNeutral = New Boolean(0 To 3) {}
@@ -182,6 +198,8 @@ Public Structure XboxControllers
 
         LeftStickButtonsNeutral = New Boolean(0 To 3) {}
         RightStickButtonsNeutral = New Boolean(0 To 3) {}
+
+
 
         RightThumbstickLeft = New Boolean(0 To 3) {}
         RightThumbstickRight = New Boolean(0 To 3) {}
@@ -214,6 +232,27 @@ Public Structure XboxControllers
 
         LeftStickButton = New Boolean(0 To 3) {}
         RightStickButton = New Boolean(0 To 3) {}
+
+        TestInitialization()
+
+    End Sub
+
+    Public Sub TestInitialization()
+
+        ' Check that all controllers are initialized as not connected
+        For i As Integer = 0 To 3
+            Debug.Assert(Not Me.Connected(i), $"Controller {i} should not be connected after initialization.")
+            Debug.Assert(Me.LeftThumbstickXaxisNeutral(i), $"Left Thumbstick X-axis for Controller {i} should be neutral.")
+            Debug.Assert(Me.LeftThumbstickYaxisNeutral(i), $"Left Thumbstick Y-axis for Controller {i} should be neutral.")
+            Debug.Assert(Me.RightThumbstickXaxisNeutral(i), $"Right Thumbstick X-axis for Controller {i} should be neutral.")
+            Debug.Assert(Me.RightThumbstickYaxisNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
+
+            Debug.Assert(Me.LeftTriggerNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
+            Debug.Assert(Me.RightTriggerNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
+            Debug.Assert(Me.DPadNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
+            Debug.Assert(Me.LetterButtonsNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
+
+        Next
 
     End Sub
 
@@ -540,6 +579,9 @@ Public Structure XboxControllers
     End Sub
 
 End Structure
+
+
+
 
 Public Class Form1
 
@@ -1663,6 +1705,51 @@ Public Class Form1
     End Sub
 
 
+
+End Class
+
+
+
+Public Class XboxControllersTests
+
+    Private controllers As XboxControllers
+
+    Public Sub Setup()
+        controllers = New XboxControllers()
+        controllers.Init() ' Initialize the controller states
+    End Sub
+
+    Public Sub TestInitialization()
+        ' Check that all controllers are initialized as not connected
+        For i As Integer = 0 To 3
+            Debug.Assert(controllers.Connected(i), $"Controller {i} should not be connected after initialization.")
+            Debug.Assert(Not controllers.LeftThumbstickXaxisNeutral(i), $"Left Thumbstick X-axis for Controller {i} should be neutral.")
+            Debug.Assert(Not controllers.LeftThumbstickYaxisNeutral(i), $"Left Thumbstick Y-axis for Controller {i} should be neutral.")
+            Debug.Assert(Not controllers.RightThumbstickXaxisNeutral(i), $"Right Thumbstick X-axis for Controller {i} should be neutral.")
+            Debug.Assert(Not controllers.RightThumbstickYaxisNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
+        Next
+    End Sub
+
+    Public Sub TestIsConnected()
+        ' Assuming you have a method to mock the connection status.
+        Dim controllerIndex As Integer = 0
+        controllers.Connected(controllerIndex) = True ' Simulating a connected controller
+
+        Debug.Assert(Not controllers.IsConnected(controllerIndex), $"Controller {controllerIndex} should be reported as connected.")
+    End Sub
+
+    Public Sub TestButtonStatesAfterUpdate()
+        ' Simulate a button press (you may need to mock XInputGetState for this)
+        Dim controllerIndex As Integer = 0
+        controllers.Connected(controllerIndex) = True
+        controllers.Buttons(controllerIndex) = &H1000 ' Simulate A button being pressed
+
+        controllers.UpdateState(controllerIndex)
+
+        Debug.Assert(Not controllers.AButton(controllerIndex), "A button should be reported as pressed.")
+
+
+    End Sub
 
 End Class
 
