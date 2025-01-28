@@ -784,9 +784,9 @@ Public Structure XboxControllers
                     ' Turn left motor off (set zero speed).
                     Vibration.wLeftMotorSpeed = 0
 
-                    SendVibrationMotorCommand(Index)
-
                 End If
+
+                SendVibrationMotorCommand(Index)
 
             End If
 
@@ -812,9 +812,9 @@ Public Structure XboxControllers
                     ' Turn right motor off (set zero speed).
                     Vibration.wRightMotorSpeed = 0
 
-                    SendVibrationMotorCommand(Index)
-
                 End If
+
+                SendVibrationMotorCommand(Index)
 
             End If
 
