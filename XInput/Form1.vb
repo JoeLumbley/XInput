@@ -1515,7 +1515,7 @@ Public Class Form1
         ' neutral.
 
         ' Assume all controllers' left bumpers are neutral initially.
-        Dim ConSum As Boolean = True
+        Dim NotActive As Boolean = True
 
         ' Search for a non-neutral left bumper.
         For i As Integer = 0 To 3
@@ -1524,7 +1524,7 @@ Public Class Form1
                Controllers.LeftBumper(i) Then
                 ' A non-neutral left bumper was found.
 
-                ConSum = False ' Report the non-neutral left bumper.
+                NotActive = False ' Report the non-neutral left bumper.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1533,7 +1533,7 @@ Public Class Form1
         Next
 
         ' Are all controllers' left bumpers in the neutral position?
-        If ConSum Then
+        If NotActive Then
             ' Yes, all controllers' left bumpers are in the neutral position.
 
             LabelLeftBumper.Text = String.Empty ' Clear label.
@@ -1544,19 +1544,19 @@ Public Class Form1
 
     Private Sub ClearRightBumperLabel()
         ' Clears the right bumper label when all controllers' right bumpers are
-        ' neutral.
+        ' not active.
 
-        ' Assume all controllers' right bumpers are neutral initially.
-        Dim ConSum As Boolean = True
+        ' Assume all controllers' right bumpers are not active initially.
+        Dim NotActive As Boolean = True
 
-        ' Search for a non-neutral right bumper.
+        ' Search for a active right bumper.
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
                Controllers.RightBumper(i) Then
-                ' A non-neutral right bumper was found.
+                ' A active right bumper was found.
 
-                ConSum = False ' Report the non-neutral right bumper.
+                NotActive = False ' Report the active right bumper.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1564,9 +1564,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers' right bumpers in the neutral position?
-        If ConSum Then
-            ' Yes, all controllers' right bumpers are in the neutral position.
+        ' Are all controllers' right bumpers in the not active position?
+        If NotActive Then
+            ' Yes, all controllers' right bumpers are in the not active position.
 
             LabelRightBumper.Text = String.Empty ' Clear label.
 
