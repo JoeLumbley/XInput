@@ -1575,20 +1575,20 @@ Public Class Form1
     End Sub
 
     Private Sub ClearLeftThumbButtonLabel()
-        ' Clears the left thumb button label when all controllers' left thumb
-        ' buttons are neutral.
+        ' Clears the left thumbstick button label when all controllers' left thumbstick
+        ' buttons are not active.
 
-        Dim ConSum As Boolean = True ' Assume all controllers' left thumb
-        ' buttons are neutral initially.
+        Dim NotActive As Boolean = True ' Assume all controllers' left thumbstick
+        ' buttons are not active initially.
 
-        ' Search for a non-neutral left thumb button.
+        ' Search for a active left thumbstick button.
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
                Controllers.LeftStick(i) Then
-                ' A non-neutral left thumb button was found.
+                ' A active left thumbstick button was found.
 
-                ConSum = False ' Report the non-neutral left thumb button.
+                NotActive = False ' Report the active left thumbstick button.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1596,10 +1596,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers' left thumb buttons in the neutral position?
-        If ConSum Then
-            ' Yes, all controllers' left thumb buttons are in the neutral
-            ' position.
+        ' Are all controllers' left thumbstick buttons not active?
+        If NotActive Then
+            ' Yes, all controllers' left thumbstick buttons are not active.
 
             LabelLeftThumbButton.Text = String.Empty ' Clear label.
 
@@ -1608,20 +1607,20 @@ Public Class Form1
     End Sub
 
     Private Sub ClearRightThumbButtonLabel()
-        ' Clears the right thumb button label when all controllers' right thumb
+        ' Clears the right thumbstick button label when all controllers' right thumbstick
         ' buttons are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers' right thumb
+        Dim ConSum As Boolean = True ' Assume all controllers' right thumbstick
         ' buttons are neutral initially.
 
-        ' Search for a non-neutral right thumb button.
+        ' Search for a non-neutral right thumbstick button.
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
                Controllers.RightStick(i) Then
-                ' A non-neutral right thumb button was found.
+                ' A non-neutral right thumbstick button was found.
 
-                ConSum = False ' Report the non-neutral right thumb button.
+                ConSum = False ' Report the non-neutral right thumbstick button.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1629,9 +1628,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers' right thumb buttons in the neutral position?
+        ' Are all controllers' right thumbstick buttons in the neutral position?
         If ConSum Then
-            ' Yes, all controllers' right thumb buttons are in the neutral
+            ' Yes, all controllers' right thumbstick buttons are in the neutral
             ' position.
 
             LabelRightThumbButton.Text = String.Empty ' Clear label.
@@ -1698,12 +1697,6 @@ Public Class Form1
 
     End Sub
 
-    'Private Sub DisplayError(ex As Exception)
-
-    '    MsgBox(ex.ToString()) ' Display the exception message in a message box.
-
-    'End Sub
-
     Private Sub InitializeApp()
 
         Text = "XInput - Code with Joe"
@@ -1763,29 +1756,6 @@ Public Class Form1
         ToolTipRumbleGroup.SetToolTip(GroupBox1, TipText)
 
     End Sub
-
-    'Private Sub ClearButtonsLabel()
-    '    ' Clears the buttons label when all controllers buttons are up.
-
-    '    Dim ConSum As Integer = 0
-
-    '    For Each Con In Controllers.Buttons
-
-    '        ConSum += Con
-
-    '    Next
-
-    '    ' Are all controllers buttons up?
-    '    If ConSum = 0 Then
-    '        ' Yes, all controller buttons are up.
-
-    '        LabelButtons.Text = String.Empty ' Clear label.
-
-    '    End If
-
-    'End Sub
-
-
 
 End Class
 
