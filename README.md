@@ -25,9 +25,9 @@ With a clean and well-commented codebase, this project serves as an invaluable r
 # Code Walkthrough
 
 
-# Xbox Controller Code Walkthrough
 
-Welcome to this detailed walkthrough of a code structure designed for Xbox controller input handling using Visual Basic .NET (VB.NET). This document will guide you through each line of the code, explaining its purpose and functionality in a beginner-friendly manner.
+
+Welcome to this detailed walkthrough of a code structure designed for Xbox controller input handling using Visual Basic .NET (VB.NET). This document will guide you through each line of the code, explaining its purpose and functionality.
 
 ## Table of Contents
 - [Imports and Structure Definitions](#imports-and-structure-definitions)
