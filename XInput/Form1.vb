@@ -852,18 +852,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub InitializeTimer1()
-
-        ' The tick frequency in milliseconds.
-        ' Also called the polling frequency.
-        Timer1.Interval = 15 '1000/60 = 16.67 ms
-        ' To get 60 FPS (Frames Per Second) in milliseconds.
-        ' We divide 1000 (the number of milliseconds in a second) by 60 the FPS.
-
-        Timer1.Start()
-
-    End Sub
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
         Controllers.Update()
@@ -988,6 +976,24 @@ Public Class Form1
 
     End Sub
 
+    Private Sub NumericUpDownTimeToVib_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDownTimeToVib.ValueChanged
+
+        Controllers.TimeToVibe = NumericUpDownTimeToVib.Value
+
+    End Sub
+
+    Private Sub InitializeTimer1()
+
+        ' The tick frequency in milliseconds.
+        ' Also called the polling frequency.
+        Timer1.Interval = 15 '1000/60 = 16.67 ms
+        ' To get 60 FPS (Frames Per Second) in milliseconds.
+        ' We divide 1000 (the number of milliseconds in a second) by 60 the FPS.
+
+        Timer1.Start()
+
+    End Sub
+
     Private Sub UpdateControllerStatusLabel(controllerNumber As Integer)
         ' Update the status label based on connection state
 
@@ -1093,12 +1099,6 @@ Public Class Form1
 
             LabelStart.Text = $"Controller {ControllerNumber} Start"
 
-            'Controllers.StartNeutral(ControllerNumber) = False
-
-        Else
-
-            'Controllers.StartNeutral(ControllerNumber) = True
-
         End If
 
         ClearStartLabel()
@@ -1106,12 +1106,6 @@ Public Class Form1
         If Controllers.Back(ControllerNumber) Then
 
             LabelBack.Text = $"Controller {ControllerNumber} Back"
-
-            'Controllers.BackNeutral(ControllerNumber) = False
-
-        Else
-
-            'Controllers.BackNeutral(ControllerNumber) = True
 
         End If
 
@@ -1126,12 +1120,6 @@ Public Class Form1
             LabelLeftBumper.Text =
                 $"Controller {ControllerNumber} Left Bumper"
 
-            'Controllers.LeftBumperNeutral(ControllerNumber) = False
-
-        Else
-
-            'Controllers.LeftBumperNeutral(ControllerNumber) = True
-
         End If
 
         ClearLeftBumperLabel()
@@ -1140,12 +1128,6 @@ Public Class Form1
 
             LabelRightBumper.Text =
                 $"Controller {ControllerNumber} Right Bumper"
-
-            'Controllers.RightBumperNeutral(ControllerNumber) = False
-
-        Else
-
-            'Controllers.RightBumperNeutral(ControllerNumber) = True
 
         End If
 
@@ -1160,12 +1142,6 @@ Public Class Form1
             LabelLeftThumbButton.Text =
                 $"Controller {ControllerNumber} Left Thumbstick Button"
 
-            'Controllers.LeftStickNeutral(ControllerNumber) = False
-
-        Else
-
-            'Controllers.LeftStickNeutral(ControllerNumber) = True
-
         End If
 
         ClearLeftThumbButtonLabel()
@@ -1174,12 +1150,6 @@ Public Class Form1
 
             LabelRightThumbButton.Text =
                 $"Controller {ControllerNumber} Right Thumbstick Button"
-
-            'Controllers.RightStickNeutral(ControllerNumber) = False
-
-        Else
-
-            'Controllers.RightStickNeutral(ControllerNumber) = True
 
         End If
 
@@ -1728,11 +1698,11 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DisplayError(ex As Exception)
+    'Private Sub DisplayError(ex As Exception)
 
-        MsgBox(ex.ToString()) ' Display the exception message in a message box.
+    '    MsgBox(ex.ToString()) ' Display the exception message in a message box.
 
-    End Sub
+    'End Sub
 
     Private Sub InitializeApp()
 
@@ -1794,32 +1764,27 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ClearButtonsLabel()
-        ' Clears the buttons label when all controllers buttons are up.
+    'Private Sub ClearButtonsLabel()
+    '    ' Clears the buttons label when all controllers buttons are up.
 
-        Dim ConSum As Integer = 0
+    '    Dim ConSum As Integer = 0
 
-        For Each Con In Controllers.Buttons
+    '    For Each Con In Controllers.Buttons
 
-            ConSum += Con
+    '        ConSum += Con
 
-        Next
+    '    Next
 
-        ' Are all controllers buttons up?
-        If ConSum = 0 Then
-            ' Yes, all controller buttons are up.
+    '    ' Are all controllers buttons up?
+    '    If ConSum = 0 Then
+    '        ' Yes, all controller buttons are up.
 
-            LabelButtons.Text = String.Empty ' Clear label.
+    '        LabelButtons.Text = String.Empty ' Clear label.
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
-    Private Sub NumericUpDownTimeToVib_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDownTimeToVib.ValueChanged
-
-        Controllers.TimeToVibe = NumericUpDownTimeToVib.Value
-
-    End Sub
 
 
 End Class
