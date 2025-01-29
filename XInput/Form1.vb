@@ -816,8 +816,6 @@ Public Structure XboxControllers
 
     End Sub
 
-
-
     Private Sub DisplayError(ex As Exception)
 
         MsgBox(ex.ToString()) ' Display the exception message in a message box.
@@ -826,31 +824,9 @@ Public Structure XboxControllers
 
 End Structure
 
-
-
-
 Public Class Form1
 
     Private Controllers As XboxControllers
-
-    '<DllImport("XInput1_4.dll")>
-    'Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
-    'End Function
-
-    'Public Structure XINPUT_VIBRATION
-    '    Public wLeftMotorSpeed As UShort
-    '    Public wRightMotorSpeed As UShort
-    'End Structure
-
-    'Private Vibration As XINPUT_VIBRATION
-
-    'Private LeftVibrateStart(0 To 3) As Date
-
-    'Private RightVibrateStart(0 To 3) As Date
-
-    'Private IsLeftVibrating(0 To 3) As Boolean
-
-    'Private IsRightVibrating(0 To 3) As Boolean
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -975,8 +951,6 @@ Public Class Form1
             End If
 
         Next
-
-        'Controllers.UpdateVibrateTimer()
 
     End Sub
 
@@ -1722,134 +1696,11 @@ Public Class Form1
 
     End Function
 
-    'Private Sub VibrateLeft(CID As Integer, Speed As UShort)
-    '    ' The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
-    '    ' The left motor is the low-frequency rumble motor.
-
-    '    ' Set left motor speed.
-    '    Vibration.wLeftMotorSpeed = Speed
-
-    '    SendVibrationMotorCommand(CID)
-
-    '    LeftVibrateStart(CID) = Now
-
-    '    IsLeftVibrating(CID) = True
-
-    'End Sub
-
-    'Private Sub VibrateRight(CID As Integer, Speed As UShort)
-    '    ' The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
-    '    ' The right motor is the high-frequency rumble motor.
-
-    '    ' Set right motor speed.
-    '    Vibration.wRightMotorSpeed = Speed
-
-    '    SendVibrationMotorCommand(CID)
-
-    '    RightVibrateStart(CID) = Now
-
-    '    IsRightVibrating(CID) = True
-
-    'End Sub
-
-    'Private Sub SendVibrationMotorCommand(ControllerID As Integer)
-    '    ' Sends vibration motor speed command to the specified controller.
-
-    '    Try
-
-    '        ' Send motor speed command to the specified controller.
-    '        If XInputSetState(ControllerID, Vibration) = 0 Then
-    '            ' The motor speed was set. Success.
-
-    '        Else
-    '            ' The motor speed was not set. Fail.
-    '            ' You can log or handle the failure here if needed.
-    '            ' Example: Console.WriteLine(XInputSetState(ControllerID, Vibration).ToString())
-
-    '            Debug.Print($"{ControllerID} did not vibrate.")
-
-    '        End If
-
-    '    Catch ex As Exception
-
-    '        DisplayError(ex)
-
-    '        Exit Sub
-
-    '    End Try
-
-    'End Sub
-
-    'Private Sub UpdateVibrateTimer()
-
-    '    UpdateLeftVibrateTimer()
-
-    '    UpdateRightVibrateTimer()
-
-    'End Sub
-
-    'Private Sub UpdateLeftVibrateTimer()
-
-    '    For Each IsConVibrating In IsLeftVibrating
-
-    '        Dim Index As Integer =
-    '            Array.IndexOf(IsLeftVibrating, IsConVibrating)
-
-    '        If Index <> -1 AndAlso IsConVibrating = True Then
-
-    '            Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
-
-    '            If ElapsedTime.TotalMilliseconds >= NumericUpDownTimeToVib.Value Then
-
-    '                IsLeftVibrating(Index) = False
-
-    '                ' Turn left motor off (set zero speed).
-    '                Vibration.wLeftMotorSpeed = 0
-
-    '                SendVibrationMotorCommand(Index)
-
-    '            End If
-
-    '        End If
-
-    '    Next
-
-    'End Sub
-
-    'Private Sub UpdateRightVibrateTimer()
-
-    '    For Each IsConVibrating In IsRightVibrating
-
-    '        Dim Index As Integer =
-    '            Array.IndexOf(IsRightVibrating, IsConVibrating)
-
-    '        If Index <> -1 AndAlso IsConVibrating = True Then
-
-    '            Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Index)
-
-    '            If ElapsedTime.TotalMilliseconds >= NumericUpDownTimeToVib.Value Then
-
-    '                IsRightVibrating(Index) = False
-
-    '                ' Turn right motor off (set zero speed).
-    '                Vibration.wRightMotorSpeed = 0
-
-    '                SendVibrationMotorCommand(Index)
-
-    '            End If
-
-    '        End If
-
-    '    Next
-
-    'End Sub
-
     Private Sub UpdateSpeedLabel()
 
         LabelSpeed.Text = $"Speed: {TrackBarSpeed.Value}"
 
     End Sub
-
 
     Private Sub DisplayError(ex As Exception)
 
@@ -1868,18 +1719,6 @@ Public Class Form1
         TrackBarSpeed.Value = 32767
 
         UpdateSpeedLabel()
-
-        'For Each Con In IsLeftVibrating
-
-        '    IsLeftVibrating(Array.IndexOf(IsLeftVibrating, Con)) = False
-
-        'Next
-
-        'For Each Con In IsRightVibrating
-
-        '    IsRightVibrating(Array.IndexOf(IsRightVibrating, Con)) = False
-
-        'Next
 
         InitializeToolTips()
 
@@ -1955,7 +1794,6 @@ Public Class Form1
         Controllers.TimeToVibe = NumericUpDownTimeToVib.Value
 
     End Sub
-
 
 
 End Class
