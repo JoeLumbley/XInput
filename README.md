@@ -124,13 +124,29 @@ End Enum
 ```vb
 Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
 Private Const NeutralEnd As Short = 16384 '16,383.5 = 32,767 / 2
-Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
+
 ```
-- These constants define the neutral zones for the thumbsticks and the trigger thresholds:
+
   - `NeutralStart` and `NeutralEnd` define the range for determining if a thumbstick is in a neutral position.
+
+  [The Neutral Zone](#the-neutral-zone)
+
+---
+
+
+
+## Trigger Threshold Constant
+
+```vb
+Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
+
+```
+
   - `TriggerThreshold` defines the minimum value for the triggers to be considered pressed.
 
 ---
+
+
 
 ## Initialization Method
 
