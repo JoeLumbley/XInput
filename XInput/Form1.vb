@@ -864,39 +864,11 @@ Public Class Form1
 
             If Controllers.Connected(controllerNumber) Then
 
-                ' Right Thumbstick X Axis
-                If Controllers.RightThumbstickLeft(controllerNumber) Then
+                UpdateRightThumbstickXAxisLabel(controllerNumber)
 
-                    LabelRightThumbX.Text =
-                        $"Controller {controllerNumber} Right Thumbstick Left"
+                UpdateRightThumbstickYAxisLabel(controllerNumber)
 
-                End If
 
-                If Controllers.RightThumbstickRight(controllerNumber) Then
-
-                    LabelRightThumbX.Text =
-                        $"Controller {controllerNumber} Right Thumbstick Right"
-
-                End If
-
-                ClearRightThumbstickXLabel()
-
-                ' Right Thumbstick Y Axis
-                If Controllers.RightThumbstickUp(controllerNumber) Then
-
-                    LabelRightThumbY.Text =
-                        $"Controller {controllerNumber} Right Thumbstick Up"
-
-                End If
-
-                If Controllers.RightThumbstickDown(controllerNumber) Then
-
-                    LabelRightThumbY.Text =
-                        $"Controller {controllerNumber} Right Thumbstick Down"
-
-                End If
-
-                ClearRightThumbstickYLabel()
 
                 ' Left Thumbstick X Axis
                 If Controllers.LeftThumbstickLeft(controllerNumber) Then
@@ -956,6 +928,44 @@ Public Class Form1
 
         Next
 
+    End Sub
+
+    Private Sub UpdateRightThumbstickYAxisLabel(controllerNumber As Integer)
+        ' UpdateRightThumbstickYAxisLabel
+        If Controllers.RightThumbstickUp(controllerNumber) Then
+
+            LabelRightThumbY.Text =
+                $"Controller {controllerNumber} Right Thumbstick Up"
+
+        End If
+
+        If Controllers.RightThumbstickDown(controllerNumber) Then
+
+            LabelRightThumbY.Text =
+                $"Controller {controllerNumber} Right Thumbstick Down"
+
+        End If
+
+        ClearRightThumbstickYLabel()
+    End Sub
+
+    Private Sub UpdateRightThumbstickXAxisLabel(controllerNumber As Integer)
+        ' UpdateRightThumbstickXAxisLabel
+        If Controllers.RightThumbstickLeft(controllerNumber) Then
+
+            LabelRightThumbX.Text =
+                $"Controller {controllerNumber} Right Thumbstick Left"
+
+        End If
+
+        If Controllers.RightThumbstickRight(controllerNumber) Then
+
+            LabelRightThumbX.Text =
+                $"Controller {controllerNumber} Right Thumbstick Right"
+
+        End If
+
+        ClearRightThumbstickXLabel()
     End Sub
 
     Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
