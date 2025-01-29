@@ -1144,7 +1144,7 @@ Public Class Form1
 
         End If
 
-        ClearLeftThumbButtonLabel()
+        ClearLeftThumbstickButtonLabel()
 
         If Controllers.RightStick(ControllerNumber) Then
 
@@ -1574,7 +1574,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ClearLeftThumbButtonLabel()
+    Private Sub ClearLeftThumbstickButtonLabel()
         ' Clears the left thumbstick button label when all controllers' left thumbstick
         ' buttons are not active.
 
