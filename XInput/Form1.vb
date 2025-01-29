@@ -97,7 +97,7 @@ Public Structure XboxControllers
     Public Buttons() As UShort
 
     'Public LeftTriggerNeutral() As Boolean
-    Public RightTriggerNeutral() As Boolean
+    'Public RightTriggerNeutral() As Boolean
 
     Public LeftThumbstickXaxisNeutral() As Boolean
     Public LeftThumbstickYaxisNeutral() As Boolean
@@ -179,7 +179,7 @@ Public Structure XboxControllers
 
         ' Initialize arrays to check if triggers are in the neutral position.
         'LeftTriggerNeutral = New Boolean(0 To 3) {}
-        RightTriggerNeutral = New Boolean(0 To 3) {}
+        'RightTriggerNeutral = New Boolean(0 To 3) {}
 
         ' Initialize array to check if the D-Pad is in the neutral position.
         DPadNeutral = New Boolean(0 To 3) {}
@@ -209,7 +209,7 @@ Public Structure XboxControllers
             RightThumbstickYaxisNeutral(i) = True
 
             'LeftTriggerNeutral(i) = True
-            RightTriggerNeutral(i) = True
+            'RightTriggerNeutral(i) = True
 
             DPadNeutral(i) = True
 
@@ -311,7 +311,7 @@ Public Structure XboxControllers
 
             ' Check that all Triggers are initialized as neutral. 
             'Debug.Assert(LeftTriggerNeutral(i), $"Left Trigger for Controller {i} should be neutral.")
-            Debug.Assert(RightTriggerNeutral(i), $"Right Trigger for Controller {i} should be neutral.")
+            'Debug.Assert(RightTriggerNeutral(i), $"Right Trigger for Controller {i} should be neutral.")
 
             ' Check that all DPads are initialized as neutral. 
             Debug.Assert(DPadNeutral(i), $"DPad for Controller {i} should be neutral.")
@@ -666,14 +666,14 @@ Public Structure XboxControllers
 
             RightTrigger(ControllerNumber) = True
 
-            RightTriggerNeutral(ControllerNumber) = False
+            'RightTriggerNeutral(ControllerNumber) = False
 
         Else
             ' The right trigger is in the neutral position. Pre-Travel.
 
             RightTrigger(ControllerNumber) = False
 
-            RightTriggerNeutral(ControllerNumber) = True
+            'RightTriggerNeutral(ControllerNumber) = True
 
         End If
 
@@ -1366,7 +1366,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-                Not Controllers.RightTriggerNeutral(i) Then
+               Controllers.RightTrigger(i) Then
                 ' A non-neutral right trigger was found.
 
                 ConSum = False ' Report the non-neutral right trigger.
