@@ -1161,8 +1161,8 @@ Public Class Form1
         ' Clears the letter buttons label when all controllers' letter buttons
         ' are up.
 
-        Dim ConSum As Boolean = True ' Assume all controllers' letter buttons
-        ' are neutral initially.
+        ' Assume all controllers' letter buttons are neutral initially.
+        Dim Neutral As Boolean = True
 
         ' Search for a non-neutral letter button.
         For i As Integer = 0 To 3
@@ -1171,7 +1171,7 @@ Public Class Form1
                Not Controllers.LetterButtonsNeutral(i) Then
                 ' A non-neutral letter button was found.
 
-                ConSum = False ' Report the non-neutral letter button.
+                Neutral = False ' Report the non-neutral letter button.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1180,7 +1180,7 @@ Public Class Form1
         Next
 
         ' Are all controllers' letter buttons in the neutral position?
-        If ConSum Then
+        If Neutral Then
             ' Yes, all controllers' letter buttons are in the neutral position.
 
             LabelButtons.Text = String.Empty ' Clear label.
@@ -1193,8 +1193,8 @@ Public Class Form1
         ' Clears the left thumbstick Y-axis label when all controllers left
         ' thumbsticks on the Y-axis are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers left thumbsticks
-        ' on the Y-axis are neutral initially.
+        ' Assume all controllers left thumbsticks on the Y-axis are neutral initially.
+        Dim Neutral As Boolean = True
 
         ' Search for a non-neutral left thumbstick on the Y-axis.
         For i As Integer = 0 To 3
@@ -1203,7 +1203,7 @@ Public Class Form1
                Not Controllers.LeftThumbstickYaxisNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
-                ConSum = False ' Report the non-neutral thumbstick.
+                Neutral = False ' Report the non-neutral thumbstick.
 
                 Exit For ' No need to search further so stop the search.
 
@@ -1213,7 +1213,7 @@ Public Class Form1
 
         ' Are all controllers left thumbsticks on the Y-axis in the neutral
         ' position?
-        If ConSum = True Then
+        If Neutral = True Then
             ' Yes, all controllers left thumbsticks on the Y-axis are in the
             ' neutral position.
 
@@ -1227,7 +1227,7 @@ Public Class Form1
         ' Clears the left thumbstick X-axis label when all controllers left
         ' thumbsticks on the X-axis are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers left thumbsticks
+        Dim Neutral As Boolean = True ' Assume all controllers left thumbsticks
         ' on the X-axis are neutral initially.
 
         ' Search for a non-neutral left thumbstick on the X-axis.
@@ -1237,7 +1237,7 @@ Public Class Form1
                Not Controllers.LeftThumbstickXaxisNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
-                ConSum = False ' Report the non-neutral thumbstick.
+                Neutral = False ' Report the non-neutral thumbstick.
 
                 Exit For ' No need to search further so stop the search.
 
@@ -1247,7 +1247,7 @@ Public Class Form1
 
         ' Are all controllers left thumbsticks on the X-axis in the neutral
         ' position?
-        If ConSum = True Then
+        If Neutral = True Then
             ' Yes, all controllers left thumbsticks on the X-axis are in the
             ' neutral position.
 
@@ -1261,8 +1261,8 @@ Public Class Form1
         ' Clears the right thumbstick X-axis label when all controllers right
         ' thumbsticks on the X-axis are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers right thumbsticks
-        ' on the X-axis are neutral initially.
+        ' Assume all controllers right thumbsticks on the X-axis are neutral initially.
+        Dim Neutral As Boolean = True
 
         ' Search for a non-neutral right thumbstick on the X-axis.
         For i As Integer = 0 To 3
@@ -1271,7 +1271,7 @@ Public Class Form1
                Not Controllers.RightThumbstickXaxisNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
-                ConSum = False ' Report the non-neutral thumbstick.
+                Neutral = False ' Report the non-neutral thumbstick.
 
                 Exit For ' No need to search further so stop the search.
 
@@ -1281,7 +1281,7 @@ Public Class Form1
 
         ' Are all controllers right thumbsticks on the X-axis in the neutral
         ' position?
-        If ConSum = True Then
+        If Neutral = True Then
             ' Yes, all controllers right thumbsticks on the X-axis are in the
             ' neutral position.
 
@@ -1295,8 +1295,8 @@ Public Class Form1
         ' Clears the right thumbstick Y-axis label when all controllers right
         ' thumbsticks on the Y-axis are neutral.
 
-        Dim ConSum As Boolean = True ' Assume all controllers right thumbsticks
-        ' on the Y-axis are neutral initially.
+        ' Assume all controllers right thumbsticks on the Y-axis are neutral initially.
+        Dim Neutral As Boolean = True
 
         ' Search for a non-neutral right thumbstick on the Y-axis.
         For i As Integer = 0 To 3
@@ -1305,7 +1305,7 @@ Public Class Form1
                Not Controllers.RightThumbstickYaxisNeutral(i) Then
                 ' A non-neutral thumbstick was found.
 
-                ConSum = False ' Report the non-neutral thumbstick.
+                Neutral = False ' Report the non-neutral thumbstick.
 
                 Exit For ' No need to search further so stop the search.
 
@@ -1315,7 +1315,7 @@ Public Class Form1
 
         ' Are all controllers right thumbsticks on the Y-axis in the neutral
         ' position?
-        If ConSum = True Then
+        If Neutral = True Then
             ' Yes, all controllers right thumbsticks on the Y-axis are in the
             ' neutral position.
 
@@ -1327,19 +1327,19 @@ Public Class Form1
 
     Private Sub ClearRightTriggerLabel()
         ' Clears the right trigger label when all controllers right triggers
-        ' are neutral.
+        ' are not active.
 
-        ' Assume all controllers right triggers are neutral initially.
-        Dim ConSum As Boolean = True
+        ' Assume all controllers right triggers are not active initially.
+        Dim NotActive As Boolean = True
 
-        ' Search for a non-neutral right trigger.
+        ' Search for a active right trigger.
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
                Controllers.RightTrigger(i) Then
-                ' A non-neutral right trigger was found.
+                ' A active right trigger was found.
 
-                ConSum = False ' Report the non-neutral right trigger.
+                NotActive = False ' Report the active right trigger.
 
                 Exit For  ' No need to search further, so stop the search.
 
@@ -1347,9 +1347,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers right triggers in the neutral position?
-        If ConSum = True Then
-            ' Yes, all controllers right triggers are in the neutral position.
+        ' Are all controllers right triggers not active?
+        If NotActive = True Then
+            ' Yes, all controllers right triggers are not active.
 
             LabelRightTrigger.Text = String.Empty ' Clear label.
 
@@ -1359,39 +1359,29 @@ Public Class Form1
 
     Private Sub ClearLeftTriggerLabel()
         ' Clears the left trigger label when all controllers left triggers are
-        ' neutral.
+        ' not active.
 
-        ' Assume all controllers left triggers are neutral initially.
-        Dim ConSum As Boolean = True
+        ' Assume all controllers left triggers are not active initially.
+        Dim NotActive As Boolean = True
 
-        ' Search for a non-neutral left trigger.
+        ' Search for a active left trigger.
         For i As Integer = 0 To 3
 
-            'If Controllers.Connected(i) AndAlso
-            '   Not Controllers.LeftTriggerNeutral(i) Then
-            '    ' A non-neutral left trigger was found.
-
-            '    ConSum = False ' Report the non-neutral left trigger.
-
-            '    Exit For ' No need to search further so stop the search.
-
-            'End If
             If Controllers.Connected(i) AndAlso
                Controllers.LeftTrigger(i) Then
-                ' A non-neutral left trigger was found.
+                ' A active left trigger was found.
 
-                ConSum = False ' Report the non-neutral left trigger.
+                NotActive = False ' Report the active left trigger.
 
                 Exit For ' No need to search further so stop the search.
 
             End If
 
-
         Next
 
-        ' Are all controllers left triggers in the neutral position?
-        If ConSum = True Then
-            ' Yes, all controllers left triggers are in the neutral position.
+        ' Are all controllers left triggers not active?
+        If NotActive = True Then
+            ' Yes, all controllers left triggers are not active.
 
             LabelLeftTrigger.Text = String.Empty ' Clear label. 
 
@@ -1449,19 +1439,19 @@ Public Class Form1
     End Sub
 
     Private Sub ClearStartLabel()
-        ' Clears the start label when all controllers' start buttons are neutral.
+        ' Clears the start label when all controllers' start buttons are not active.
 
-        ' Assume all controllers' start buttons are neutral initially.
-        Dim ConSum As Boolean = True
+        ' Assume all controllers' start buttons are not active initially.
+        Dim NotActive As Boolean = True
 
-        ' Search for a non-neutral start button.
+        ' Search for a active start button.
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
                Controllers.Start(i) Then
-                ' A non-neutral start button was found.
+                ' A active start button was found.
 
-                ConSum = False ' Report the non-neutral start button.
+                NotActive = False ' Report the active start button.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1469,9 +1459,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers' start buttons in the neutral position?
-        If ConSum Then
-            ' Yes, all controllers' start buttons are in the neutral position.
+        ' Are all controllers' start buttons not active?
+        If NotActive Then
+            ' Yes, all controllers' start buttons are not active.
 
             LabelStart.Text = String.Empty ' Clear label.
 
@@ -1480,19 +1470,19 @@ Public Class Form1
     End Sub
 
     Private Sub ClearBackLabel()
-        ' Clears the back label when all controllers' back buttons are neutral.
+        ' Clears the back label when all controllers' back buttons are not active.
 
-        ' Assume all controllers' back buttons are neutral initially.
-        Dim ConSum As Boolean = True
+        ' Assume all controllers' back buttons are not active initially.
+        Dim NotActive As Boolean = True
 
-        ' Search for a non-neutral back button.
+        ' Search for a active back button.
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
                Controllers.Back(i) Then
-                ' A non-neutral back button was found.
+                ' A active back button was found.
 
-                ConSum = False ' Report the non-neutral back button.
+                NotActive = False ' Report the active back button.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1500,9 +1490,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers' back buttons in the neutral position?
-        If ConSum Then
-            ' Yes, all controllers' back buttons are in the neutral position.
+        ' Are all controllers' back buttons not active?
+        If NotActive Then
+            ' Yes, all controllers' back buttons are not active.
 
             LabelBack.Text = String.Empty ' Clear label.
 
@@ -1512,19 +1502,19 @@ Public Class Form1
 
     Private Sub ClearLeftBumperLabel()
         ' Clears the left bumper label when all controllers' left bumpers are
-        ' neutral.
+        ' not active.
 
-        ' Assume all controllers' left bumpers are neutral initially.
+        ' Assume all controllers' left bumpers are not active initially.
         Dim NotActive As Boolean = True
 
-        ' Search for a non-neutral left bumper.
+        ' Search for a active left bumper.
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
                Controllers.LeftBumper(i) Then
-                ' A non-neutral left bumper was found.
+                ' A active left bumper was found.
 
-                NotActive = False ' Report the non-neutral left bumper.
+                NotActive = False ' Report the active left bumper.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1532,9 +1522,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers' left bumpers in the neutral position?
+        ' Are all controllers' left bumpers not active?
         If NotActive Then
-            ' Yes, all controllers' left bumpers are in the neutral position.
+            ' Yes, all controllers' left bumpers are not active.
 
             LabelLeftBumper.Text = String.Empty ' Clear label.
 
@@ -1564,9 +1554,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers' right bumpers in the not active position?
+        ' Are all controllers' right bumpers not active?
         If NotActive Then
-            ' Yes, all controllers' right bumpers are in the not active position.
+            ' Yes, all controllers' right bumpers are not active.
 
             LabelRightBumper.Text = String.Empty ' Clear label.
 
