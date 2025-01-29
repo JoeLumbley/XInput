@@ -132,10 +132,10 @@ Public Structure XboxControllers
     Public LeftBumperButton() As Boolean
     Public RightBumperButton() As Boolean
 
-    Public AButton() As Boolean
-    Public BButton() As Boolean
-    Public XButton() As Boolean
-    Public YButton() As Boolean
+    Public A() As Boolean
+    Public B() As Boolean
+    Public X() As Boolean
+    Public Y() As Boolean
 
     Public RightThumbstickUp() As Boolean
     Public RightThumbstickDown() As Boolean
@@ -241,10 +241,10 @@ Public Structure XboxControllers
         RightTrigger = New Boolean(0 To 3) {}
 
         ' Initialize arrays for letter button states (A, B, X, Y).
-        AButton = New Boolean(0 To 3) {}
-        BButton = New Boolean(0 To 3) {}
-        XButton = New Boolean(0 To 3) {}
-        YButton = New Boolean(0 To 3) {}
+        A = New Boolean(0 To 3) {}
+        B = New Boolean(0 To 3) {}
+        X = New Boolean(0 To 3) {}
+        Y = New Boolean(0 To 3) {}
 
         ' Initialize arrays for bumper button states.
         LeftBumperButton = New Boolean(0 To 3) {}
@@ -340,10 +340,10 @@ Public Structure XboxControllers
             Debug.Assert(Not RightTrigger(i), $"Right Trigger for Controller {i} should not be true.")
 
             ' Check that letter button states (A, B, X, Y) are not active.
-            Debug.Assert(Not AButton(i), $"A Button for Controller {i} should not be true.")
-            Debug.Assert(Not BButton(i), $"B Button for Controller {i} should not be true.")
-            Debug.Assert(Not XButton(i), $"X Button for Controller {i} should not be true.")
-            Debug.Assert(Not YButton(i), $"Y Button for Controller {i} should not be true.")
+            Debug.Assert(Not A(i), $"A Button for Controller {i} should not be true.")
+            Debug.Assert(Not B(i), $"B Button for Controller {i} should not be true.")
+            Debug.Assert(Not X(i), $"X Button for Controller {i} should not be true.")
+            Debug.Assert(Not Y(i), $"Y Button for Controller {i} should not be true.")
 
             ' Check that bumper button states are not active.
             Debug.Assert(Not LeftBumperButton(i), $"Left Bumper Button for Controller {i} should not be true.")
@@ -475,10 +475,10 @@ Public Structure XboxControllers
 
     Private Sub UpdateLetterButtons(CID As Integer)
 
-        AButton(CID) = (State.Gamepad.wButtons And Button.A) <> 0
-        BButton(CID) = (State.Gamepad.wButtons And Button.B) <> 0
-        XButton(CID) = (State.Gamepad.wButtons And Button.X) <> 0
-        YButton(CID) = (State.Gamepad.wButtons And Button.Y) <> 0
+        A(CID) = (State.Gamepad.wButtons And Button.A) <> 0
+        B(CID) = (State.Gamepad.wButtons And Button.B) <> 0
+        X(CID) = (State.Gamepad.wButtons And Button.X) <> 0
+        Y(CID) = (State.Gamepad.wButtons And Button.Y) <> 0
 
     End Sub
 
@@ -1678,13 +1678,13 @@ Public Class Form1
 
         Dim buttons As New List(Of String)
 
-        If Controllers.AButton(controllerNumber) Then buttons.Add("A")
+        If Controllers.A(controllerNumber) Then buttons.Add("A")
 
-        If Controllers.BButton(controllerNumber) Then buttons.Add("B")
+        If Controllers.B(controllerNumber) Then buttons.Add("B")
 
-        If Controllers.XButton(controllerNumber) Then buttons.Add("X")
+        If Controllers.X(controllerNumber) Then buttons.Add("X")
 
-        If Controllers.YButton(controllerNumber) Then buttons.Add("Y")
+        If Controllers.Y(controllerNumber) Then buttons.Add("Y")
 
         If buttons.Count > 0 Then
 
