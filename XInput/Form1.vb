@@ -107,8 +107,8 @@ Public Structure XboxControllers
 
     Public DPadNeutral() As Boolean
 
-    Public LeftBumperNeutral() As Boolean
-    Public RightBumperNeutral() As Boolean
+    'Public LeftBumperNeutral() As Boolean
+    'Public RightBumperNeutral() As Boolean
 
     Public LetterButtonsNeutral() As Boolean
 
@@ -192,8 +192,8 @@ Public Structure XboxControllers
         BackNeutral = New Boolean(0 To 3) {}
 
         ' Initialize arrays to check if bumpers are in the neutral position.
-        LeftBumperNeutral = New Boolean(0 To 3) {}
-        RightBumperNeutral = New Boolean(0 To 3) {}
+        'LeftBumperNeutral = New Boolean(0 To 3) {}
+        'RightBumperNeutral = New Boolean(0 To 3) {}
 
         ' Initialize arrays to check if stick buttons are in the neutral position.
         LeftStickNeutral = New Boolean(0 To 3) {}
@@ -218,8 +218,8 @@ Public Structure XboxControllers
             StartNeutral(i) = True
             BackNeutral(i) = True
 
-            LeftBumperNeutral(i) = True
-            RightBumperNeutral(i) = True
+            'LeftBumperNeutral(i) = True
+            'RightBumperNeutral(i) = True
 
             LeftStickNeutral(i) = True
             RightStickNeutral(i) = True
@@ -324,8 +324,8 @@ Public Structure XboxControllers
             Debug.Assert(BackNeutral(i), $"Back button for Controller {i} should be neutral.")
 
             ' Check that Bumpers are initialized as neutral. 
-            Debug.Assert(LeftBumperNeutral(i), $"Left Bumper for Controller {i} should be neutral.")
-            Debug.Assert(RightBumperNeutral(i), $"Right Bumper for Controller {i} should be neutral.")
+            'Debug.Assert(LeftBumperNeutral(i), $"Left Bumper for Controller {i} should be neutral.")
+            'Debug.Assert(RightBumperNeutral(i), $"Right Bumper for Controller {i} should be neutral.")
 
             ' Check that Sticks are initialized as neutral. 
             Debug.Assert(LeftStickNeutral(i), $"Left Stick for Controller {i} should be neutral.")
@@ -1126,11 +1126,11 @@ Public Class Form1
             LabelLeftBumper.Text =
                 $"Controller {ControllerNumber} Left Bumper"
 
-            Controllers.LeftBumperNeutral(ControllerNumber) = False
+            'Controllers.LeftBumperNeutral(ControllerNumber) = False
 
         Else
 
-            Controllers.LeftBumperNeutral(ControllerNumber) = True
+            'Controllers.LeftBumperNeutral(ControllerNumber) = True
 
         End If
 
@@ -1141,11 +1141,11 @@ Public Class Form1
             LabelRightBumper.Text =
                 $"Controller {ControllerNumber} Right Bumper"
 
-            Controllers.RightBumperNeutral(ControllerNumber) = False
+            'Controllers.RightBumperNeutral(ControllerNumber) = False
 
         Else
 
-            Controllers.RightBumperNeutral(ControllerNumber) = True
+            'Controllers.RightBumperNeutral(ControllerNumber) = True
 
         End If
 
@@ -1551,7 +1551,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.LeftBumperNeutral(i) Then
+               Controllers.LeftBumper(i) Then
                 ' A non-neutral left bumper was found.
 
                 ConSum = False ' Report the non-neutral left bumper.
@@ -1583,7 +1583,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.RightBumperNeutral(i) Then
+               Controllers.RightBumper(i) Then
                 ' A non-neutral right bumper was found.
 
                 ConSum = False ' Report the non-neutral right bumper.
