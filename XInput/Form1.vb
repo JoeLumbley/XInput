@@ -115,8 +115,8 @@ Public Structure XboxControllers
     Public StartNeutral() As Boolean
     Public BackNeutral() As Boolean
 
-    Public LeftStickButtonNeutral() As Boolean
-    Public RightStickButtonNeutral() As Boolean
+    Public LeftStickNeutral() As Boolean
+    Public RightStickNeutral() As Boolean
 
     Public DPadUp() As Boolean
     Public DPadDown() As Boolean
@@ -196,8 +196,8 @@ Public Structure XboxControllers
         RightBumperNeutral = New Boolean(0 To 3) {}
 
         ' Initialize arrays to check if stick buttons are in the neutral position.
-        LeftStickButtonNeutral = New Boolean(0 To 3) {}
-        RightStickButtonNeutral = New Boolean(0 To 3) {}
+        LeftStickNeutral = New Boolean(0 To 3) {}
+        RightStickNeutral = New Boolean(0 To 3) {}
 
         ' Set all thumbstick axes, triggers, D-Pad, letter buttons, start/back buttons, bumpers,
         ' and stick buttons to neutral for all controllers (indices 0 to 3).
@@ -221,8 +221,8 @@ Public Structure XboxControllers
             LeftBumperNeutral(i) = True
             RightBumperNeutral(i) = True
 
-            LeftStickButtonNeutral(i) = True
-            RightStickButtonNeutral(i) = True
+            LeftStickNeutral(i) = True
+            RightStickNeutral(i) = True
 
         Next
 
@@ -268,6 +268,14 @@ Public Structure XboxControllers
 
         LeftVibrateStart = New Date(0 To 3) {}
         RightVibrateStart = New Date(0 To 3) {}
+
+        For i As Integer = 0 To 3
+
+            LeftVibrateStart(i) = Now
+
+            RightVibrateStart(i) = Now
+
+        Next
 
         IsLeftVibrating = New Boolean(0 To 3) {}
         IsRightVibrating = New Boolean(0 To 3) {}
@@ -320,8 +328,8 @@ Public Structure XboxControllers
             Debug.Assert(RightBumperNeutral(i), $"Right Bumper for Controller {i} should be neutral.")
 
             ' Check that Sticks are initialized as neutral. 
-            Debug.Assert(LeftStickButtonNeutral(i), $"Left Stick for Controller {i} should be neutral.")
-            Debug.Assert(RightStickButtonNeutral(i), $"Right Stick for Controller {i} should be neutral.")
+            Debug.Assert(LeftStickNeutral(i), $"Left Stick for Controller {i} should be neutral.")
+            Debug.Assert(RightStickNeutral(i), $"Right Stick for Controller {i} should be neutral.")
 
             ' Check that additional Right Thumbstick states are not active.
             Debug.Assert(Not RightThumbstickLeft(i), $"Right Thumbstick Left for Controller {i} should not be true.")
@@ -340,14 +348,14 @@ Public Structure XboxControllers
             Debug.Assert(Not RightTrigger(i), $"Right Trigger for Controller {i} should not be true.")
 
             ' Check that letter button states (A, B, X, Y) are not active.
-            Debug.Assert(Not A(i), $"A Button for Controller {i} should not be true.")
-            Debug.Assert(Not B(i), $"B Button for Controller {i} should not be true.")
-            Debug.Assert(Not X(i), $"X Button for Controller {i} should not be true.")
-            Debug.Assert(Not Y(i), $"Y Button for Controller {i} should not be true.")
+            Debug.Assert(Not A(i), $"A for Controller {i} should not be true.")
+            Debug.Assert(Not B(i), $"B for Controller {i} should not be true.")
+            Debug.Assert(Not X(i), $"X for Controller {i} should not be true.")
+            Debug.Assert(Not Y(i), $"Y for Controller {i} should not be true.")
 
             ' Check that bumper button states are not active.
-            Debug.Assert(Not LeftBumper(i), $"Left Bumper Button for Controller {i} should not be true.")
-            Debug.Assert(Not RightBumper(i), $"Right Bumper Button for Controller {i} should not be true.")
+            Debug.Assert(Not LeftBumper(i), $"Left Bumper for Controller {i} should not be true.")
+            Debug.Assert(Not RightBumper(i), $"Right Bumper for Controller {i} should not be true.")
 
             ' Check that D-Pad directional states are not active.
             Debug.Assert(Not DPadUp(i), $"D-Pad Up for Controller {i} should not be true.")
@@ -360,8 +368,16 @@ Public Structure XboxControllers
             Debug.Assert(Not Back(i), $"Back Button for Controller {i} should not be true.")
 
             ' Check that stick button states are not active.
-            Debug.Assert(Not LeftStick(i), $"Left Stick Button for Controller {i} should not be true.")
-            Debug.Assert(Not RightStick(i), $"Right Stick Button for Controller {i} should not be true.")
+            Debug.Assert(Not LeftStick(i), $"Left Stick for Controller {i} should not be true.")
+            Debug.Assert(Not RightStick(i), $"Right Stick for Controller {i} should not be true.")
+
+
+            Debug.Assert(Not LeftVibrateStart(i) = Nothing, $"Left Vibrate Start for Controller {i} should not be Nothing.")
+            Debug.Assert(Not RightVibrateStart(i) = Nothing, $"Right Vibrate Start for Controller {i} should not be Nothing.")
+
+            Debug.Assert(Not IsLeftVibrating(i), $"Is Left Vibrating for Controller {i} should not be true.")
+            Debug.Assert(Not IsRightVibrating(i), $"Is Right Vibrating for Controller {i} should not be true.")
+
 
         Next
 
@@ -1144,11 +1160,11 @@ Public Class Form1
             LabelLeftThumbButton.Text =
                 $"Controller {ControllerNumber} Left Thumbstick Button"
 
-            Controllers.LeftStickButtonNeutral(ControllerNumber) = False
+            Controllers.LeftStickNeutral(ControllerNumber) = False
 
         Else
 
-            Controllers.LeftStickButtonNeutral(ControllerNumber) = True
+            Controllers.LeftStickNeutral(ControllerNumber) = True
 
         End If
 
@@ -1159,11 +1175,11 @@ Public Class Form1
             LabelRightThumbButton.Text =
                 $"Controller {ControllerNumber} Right Thumbstick Button"
 
-            Controllers.RightStickButtonNeutral(ControllerNumber) = False
+            Controllers.RightStickNeutral(ControllerNumber) = False
 
         Else
 
-            Controllers.RightStickButtonNeutral(ControllerNumber) = True
+            Controllers.RightStickNeutral(ControllerNumber) = True
 
         End If
 
@@ -1589,7 +1605,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.LeftStickButtonNeutral(i) Then
+               Not Controllers.LeftStickNeutral(i) Then
                 ' A non-neutral left thumb button was found.
 
                 ConSum = False ' Report the non-neutral left thumb button.
@@ -1622,7 +1638,7 @@ Public Class Form1
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
-               Not Controllers.RightStickButtonNeutral(i) Then
+               Not Controllers.RightStickNeutral(i) Then
                 ' A non-neutral right thumb button was found.
 
                 ConSum = False ' Report the non-neutral right thumb button.
