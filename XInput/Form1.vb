@@ -856,6 +856,12 @@ Public Class Form1
 
         Controllers.Update()
 
+        UpdateLabels()
+
+    End Sub
+
+    Private Sub UpdateLabels()
+
         DoButtonLogic()
 
         For controllerNumber As Integer = 0 To 3
@@ -879,7 +885,6 @@ Public Class Form1
             End If
 
         Next
-
     End Sub
 
     Private Sub UpdateRightTriggerLabel(controllerNumber As Integer)
