@@ -96,9 +96,6 @@ Public Structure XboxControllers
 
     Public Buttons() As UShort
 
-    'Public LeftTriggerNeutral() As Boolean
-    'Public RightTriggerNeutral() As Boolean
-
     Public LeftThumbstickXaxisNeutral() As Boolean
     Public LeftThumbstickYaxisNeutral() As Boolean
 
@@ -107,16 +104,7 @@ Public Structure XboxControllers
 
     Public DPadNeutral() As Boolean
 
-    'Public LeftBumperNeutral() As Boolean
-    'Public RightBumperNeutral() As Boolean
-
     Public LetterButtonsNeutral() As Boolean
-
-    'Public StartNeutral() As Boolean
-    'Public BackNeutral() As Boolean
-
-    'Public LeftStickNeutral() As Boolean
-    'Public RightStickNeutral() As Boolean
 
     Public DPadUp() As Boolean
     Public DPadDown() As Boolean
@@ -177,27 +165,11 @@ Public Structure XboxControllers
         RightThumbstickXaxisNeutral = New Boolean(0 To 3) {}
         RightThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 
-        ' Initialize arrays to check if triggers are in the neutral position.
-        'LeftTriggerNeutral = New Boolean(0 To 3) {}
-        'RightTriggerNeutral = New Boolean(0 To 3) {}
-
         ' Initialize array to check if the D-Pad is in the neutral position.
         DPadNeutral = New Boolean(0 To 3) {}
 
         ' Initialize array to check if letter buttons are in the neutral position.
         LetterButtonsNeutral = New Boolean(0 To 3) {}
-
-        ' Initialize arrays to check if start and back buttons are in the neutral position.
-        'StartNeutral = New Boolean(0 To 3) {}
-        'BackNeutral = New Boolean(0 To 3) {}
-
-        ' Initialize arrays to check if bumpers are in the neutral position.
-        'LeftBumperNeutral = New Boolean(0 To 3) {}
-        'RightBumperNeutral = New Boolean(0 To 3) {}
-
-        ' Initialize arrays to check if stick buttons are in the neutral position.
-        'LeftStickNeutral = New Boolean(0 To 3) {}
-        'RightStickNeutral = New Boolean(0 To 3) {}
 
         ' Set all thumbstick axes, triggers, D-Pad, letter buttons, start/back buttons, bumpers,
         ' and stick buttons to neutral for all controllers (indices 0 to 3).
@@ -208,21 +180,9 @@ Public Structure XboxControllers
             RightThumbstickXaxisNeutral(i) = True
             RightThumbstickYaxisNeutral(i) = True
 
-            'LeftTriggerNeutral(i) = True
-            'RightTriggerNeutral(i) = True
-
             DPadNeutral(i) = True
 
             LetterButtonsNeutral(i) = True
-
-            'StartNeutral(i) = True
-            'BackNeutral(i) = True
-
-            'LeftBumperNeutral(i) = True
-            'RightBumperNeutral(i) = True
-
-            'LeftStickNeutral(i) = True
-            'RightStickNeutral(i) = True
 
         Next
 
@@ -309,27 +269,11 @@ Public Structure XboxControllers
             Debug.Assert(RightThumbstickXaxisNeutral(i), $"Right Thumbstick X-axis for Controller {i} should be neutral.")
             Debug.Assert(RightThumbstickYaxisNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
 
-            ' Check that all Triggers are initialized as neutral. 
-            'Debug.Assert(LeftTriggerNeutral(i), $"Left Trigger for Controller {i} should be neutral.")
-            'Debug.Assert(RightTriggerNeutral(i), $"Right Trigger for Controller {i} should be neutral.")
-
             ' Check that all DPads are initialized as neutral. 
             Debug.Assert(DPadNeutral(i), $"DPad for Controller {i} should be neutral.")
 
             ' Check that all Letter Buttons are initialized as neutral. 
             Debug.Assert(LetterButtonsNeutral(i), $"Letter Buttons for Controller {i} should be neutral.")
-
-            ' Check that Start and Back Buttons are initialized as neutral. 
-            'Debug.Assert(StartNeutral(i), $"Start button for Controller {i} should be neutral.")
-            'Debug.Assert(BackNeutral(i), $"Back button for Controller {i} should be neutral.")
-
-            ' Check that Bumpers are initialized as neutral. 
-            'Debug.Assert(LeftBumperNeutral(i), $"Left Bumper for Controller {i} should be neutral.")
-            'Debug.Assert(RightBumperNeutral(i), $"Right Bumper for Controller {i} should be neutral.")
-
-            ' Check that Sticks are initialized as neutral. 
-            'Debug.Assert(LeftStickNeutral(i), $"Left Stick for Controller {i} should be neutral.")
-            'Debug.Assert(RightStickNeutral(i), $"Right Stick for Controller {i} should be neutral.")
 
             ' Check that additional Right Thumbstick states are not active.
             Debug.Assert(Not RightThumbstickLeft(i), $"Right Thumbstick Left for Controller {i} should not be true.")
@@ -371,13 +315,11 @@ Public Structure XboxControllers
             Debug.Assert(Not LeftStick(i), $"Left Stick for Controller {i} should not be true.")
             Debug.Assert(Not RightStick(i), $"Right Stick for Controller {i} should not be true.")
 
-
             Debug.Assert(Not LeftVibrateStart(i) = Nothing, $"Left Vibrate Start for Controller {i} should not be Nothing.")
             Debug.Assert(Not RightVibrateStart(i) = Nothing, $"Right Vibrate Start for Controller {i} should not be Nothing.")
 
             Debug.Assert(Not IsLeftVibrating(i), $"Is Left Vibrating for Controller {i} should not be true.")
             Debug.Assert(Not IsRightVibrating(i), $"Is Right Vibrating for Controller {i} should not be true.")
-
 
         Next
 
@@ -671,14 +613,10 @@ Public Structure XboxControllers
 
             RightTrigger(ControllerNumber) = True
 
-            'RightTriggerNeutral(ControllerNumber) = False
-
         Else
             ' The right trigger is in the neutral position. Pre-Travel.
 
             RightTrigger(ControllerNumber) = False
-
-            'RightTriggerNeutral(ControllerNumber) = True
 
         End If
 
@@ -695,14 +633,10 @@ Public Structure XboxControllers
 
             LeftTrigger(ControllerNumber) = True
 
-            'LeftTriggerNeutral(ControllerNumber) = False
-
         Else
             ' The left trigger is in the neutral position. Pre-Travel.
 
             LeftTrigger(ControllerNumber) = False
-
-            'LeftTriggerNeutral(ControllerNumber) = True
 
         End If
 
@@ -720,34 +654,9 @@ Public Structure XboxControllers
 
         End If
 
-        'If DPadUp(controllerNumber) Then
-
-        'End If
-
-
-        'Dim direction As String = GetDPadDirection(controllerNumber)
-
-        '' Are all DPad buttons up?
-        'If Not String.IsNullOrEmpty(direction) Then
-        '    ' No, all DPad buttons are not up.
-
-        '    'LabelDPad.Text = $"Controller {controllerNumber} DPad {direction}"
-
-        '    DPadNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
-
-        'Else
-        '    ' Yes, all DPad buttons are up.
-
-        '    DPadNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
-
-        'End If
-
-        'ClearDPadLabel()
-
     End Sub
 
     Private Sub UpdateLetterButtonsNeutral(controllerNumber As Integer)
-
 
         If A(controllerNumber) Or B(controllerNumber) Or X(controllerNumber) Or Y(controllerNumber) Then
 
@@ -759,61 +668,7 @@ Public Structure XboxControllers
 
         End If
 
-
-        'Dim buttonText As String = GetButtonText(controllerNumber)
-
-        '' Are any letter buttons pressed?
-        'If Not String.IsNullOrEmpty(buttonText) Then
-        '    ' Yes, letter buttons are pressed.
-
-        '    LabelButtons.Text = buttonText
-
-        '    Controllers.LetterButtonsNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
-
-        'Else
-        '    ' No, letter buttons are Not pressed.
-
-        '    Controllers.LetterButtonsNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
-
-        'End If
-
-        'ClearLetterButtonsLabel()
-
     End Sub
-
-    Private Function GetDPadDirection(controllerNumber As Integer) As String
-
-        If DPadUp(controllerNumber) Then
-
-            If DPadLeft(controllerNumber) Then Return "Left+Up"
-
-            If DPadRight(controllerNumber) Then Return "Right+Up"
-
-            Return "Up"
-
-        End If
-
-        If DPadDown(controllerNumber) Then
-
-            If DPadLeft(controllerNumber) Then Return "Left+Down"
-
-            If DPadRight(controllerNumber) Then Return "Right+Down"
-
-            Return "Down"
-
-        End If
-
-        If DPadLeft(controllerNumber) Then Return "Left"
-
-        If DPadRight(controllerNumber) Then Return "Right"
-
-        Return String.Empty ' Return an empty string if no buttons are pressed.
-
-    End Function
-
-
-
-
 
     <DllImport("XInput1_4.dll")>
     Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
@@ -863,8 +718,6 @@ Public Structure XboxControllers
 
             Else
                 ' The motor speed was not set. Fail.
-                ' You can log or handle the failure here if needed.
-                ' Example: Console.WriteLine(XInputSetState(ControllerID, Vibration).ToString())
 
                 Debug.Print($"{ControllerID} did not vibrate.")
 
@@ -872,10 +725,7 @@ Public Structure XboxControllers
 
         Catch ex As Exception
 
-            'DisplayError(ex)
             Debug.Print($"Error sending vibration motor command: {ControllerID} | {ex.Message}")
-
-
 
             Exit Sub
 
@@ -946,12 +796,6 @@ Public Structure XboxControllers
         Next
 
     End Sub
-
-    'Private Sub DisplayError(ex As Exception)
-
-    '    MsgBox(ex.ToString()) ' Display the exception message in a message box.
-
-    'End Sub
 
 End Structure
 
