@@ -1578,8 +1578,8 @@ Public Class Form1
         ' Clears the left thumbstick button label when all controllers' left thumbstick
         ' buttons are not active.
 
-        Dim NotActive As Boolean = True ' Assume all controllers' left thumbstick
-        ' buttons are not active initially.
+        ' Assume all controllers' left thumbstick buttons are not active initially.
+        Dim NotActive As Boolean = True
 
         ' Search for a active left thumbstick button.
         For i As Integer = 0 To 3
