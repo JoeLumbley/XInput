@@ -475,6 +475,8 @@ Public Structure XboxControllers
 
         UpdateStartBackButtons(CID)
 
+        DoDPadLogic2(CID)
+
         ' Store the button states for the current controller ID
         Buttons(CID) = State.Gamepad.wButtons
 
@@ -702,6 +704,78 @@ Public Structure XboxControllers
         End If
 
     End Sub
+
+    Private Sub DoDPadLogic2(controllerNumber As Integer)
+
+        If DPadDown(controllerNumber) Or DPadLeft(controllerNumber) Or DPadRight(controllerNumber) Or DPadUp(controllerNumber) Then
+
+            DPadNeutral(controllerNumber) = False
+
+        Else
+
+            DPadNeutral(controllerNumber) = True
+
+        End If
+
+        'If DPadUp(controllerNumber) Then
+
+        'End If
+
+
+        'Dim direction As String = GetDPadDirection(controllerNumber)
+
+        '' Are all DPad buttons up?
+        'If Not String.IsNullOrEmpty(direction) Then
+        '    ' No, all DPad buttons are not up.
+
+        '    'LabelDPad.Text = $"Controller {controllerNumber} DPad {direction}"
+
+        '    DPadNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
+
+        'Else
+        '    ' Yes, all DPad buttons are up.
+
+        '    DPadNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
+
+        'End If
+
+        'ClearDPadLabel()
+
+    End Sub
+
+    Private Function GetDPadDirection(controllerNumber As Integer) As String
+
+        If DPadUp(controllerNumber) Then
+
+            If DPadLeft(controllerNumber) Then Return "Left+Up"
+
+            If DPadRight(controllerNumber) Then Return "Right+Up"
+
+            Return "Up"
+
+        End If
+
+        If DPadDown(controllerNumber) Then
+
+            If DPadLeft(controllerNumber) Then Return "Left+Down"
+
+            If DPadRight(controllerNumber) Then Return "Right+Down"
+
+            Return "Down"
+
+        End If
+
+        If DPadLeft(controllerNumber) Then Return "Left"
+
+        If DPadRight(controllerNumber) Then Return "Right"
+
+        Return String.Empty ' Return an empty string if no buttons are pressed.
+
+    End Function
+
+
+
+
 
     <DllImport("XInput1_4.dll")>
     Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
@@ -1068,7 +1142,7 @@ Public Class Form1
 
             If Controllers.Connected(controllerNumber) Then
 
-                DoDPadLogic(controllerNumber)
+                UpdateDPadLabel(controllerNumber)
 
                 DoLetterButtonLogic(controllerNumber)
 
@@ -1083,23 +1157,34 @@ Public Class Form1
         Next
 
     End Sub
+    'UpdateDPadLabel
+    Private Sub UpdateDPadLabel(controllerNumber As Integer)
 
-    Private Sub DoDPadLogic(controllerNumber As Integer)
+        'Dim direction As String = GetDPadDirection(controllerNumber)
+
+        '' Are all DPad buttons up?
+        'If Controllers.DPadNeutral(controllerNumber) Then
+        '    ' No, all DPad buttons are not up.
+
+        '    LabelDPad.Text = $"Controller {controllerNumber} DPad {direction}"
+
+        '    'Controllers.DPadNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
+
+        'Else
+        '    ' Yes, all DPad buttons are up.
+
+        '    'Controllers.DPadNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
+
+        'End If
+
+        'ClearDPadLabel()
+
 
         Dim direction As String = GetDPadDirection(controllerNumber)
 
-        ' Are all DPad buttons up?
-        If Not String.IsNullOrEmpty(direction) Then
-            ' No, all DPad buttons are not up.
+        If Not Controllers.DPadNeutral(controllerNumber) Then
 
             LabelDPad.Text = $"Controller {controllerNumber} DPad {direction}"
-
-            Controllers.DPadNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
-
-        Else
-            ' Yes, all DPad buttons are up.
-
-            Controllers.DPadNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
 
         End If
 
