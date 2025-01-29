@@ -1094,12 +1094,12 @@ Public Class Form1
 
             LabelDPad.Text = $"Controller {controllerNumber} DPad {direction}"
 
-            Controllers.DPadNeutral(controllerNumber) = False
+            Controllers.DPadNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
 
         Else
             ' Yes, all DPad buttons are up.
 
-            Controllers.DPadNeutral(controllerNumber) = True
+            Controllers.DPadNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
 
         End If
 
@@ -1117,12 +1117,12 @@ Public Class Form1
 
             LabelButtons.Text = buttonText
 
-            Controllers.LetterButtonsNeutral(controllerNumber) = False
+            Controllers.LetterButtonsNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
 
         Else
             ' No, letter buttons are Not pressed.
 
-            Controllers.LetterButtonsNeutral(controllerNumber) = True
+            Controllers.LetterButtonsNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
 
         End If
 
