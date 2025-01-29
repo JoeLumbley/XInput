@@ -144,6 +144,8 @@ Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
 
   - `TriggerThreshold` defines the minimum value for the triggers to be considered pressed.
 
+  [The Trigger Threshold](#the-trigger-threshold)
+
 ---
 
 
