@@ -860,6 +860,24 @@ Public Class Form1
 
     End Sub
 
+    Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
+
+        Controllers.VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+
+    End Sub
+
+    Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
+
+        Controllers.VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
+
+    End Sub
+
+    Private Sub TrackBarSpeed_Scroll(sender As Object, e As EventArgs) Handles TrackBarSpeed.Scroll
+
+        UpdateSpeedLabel()
+
+    End Sub
+
     Private Sub UpdateLabels()
 
         DoButtonLogic()
@@ -885,6 +903,7 @@ Public Class Form1
             End If
 
         Next
+
     End Sub
 
     Private Sub UpdateRightTriggerLabel(controllerNumber As Integer)
@@ -993,23 +1012,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
-
-        Controllers.VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
-
-    End Sub
-
-    Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
-
-        Controllers.VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
-
-    End Sub
-
-    Private Sub TrackBarSpeed_Scroll(sender As Object, e As EventArgs) Handles TrackBarSpeed.Scroll
-
-        UpdateSpeedLabel()
-
-    End Sub
 
     Private Sub NumericUpDownTimeToVib_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDownTimeToVib.ValueChanged
 
