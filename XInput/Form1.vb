@@ -991,7 +991,7 @@ Public Class Form1
 
     Private Sub UpdateLabels()
 
-        DoButtonLogic()
+        'DoButtonLogic()
 
         For controllerNumber As Integer = 0 To 3
 
@@ -1010,6 +1010,16 @@ Public Class Form1
                 UpdateLeftTriggerLabel(controllerNumber)
 
                 UpdateRightTriggerLabel(controllerNumber)
+
+                UpdateDPadLabel(controllerNumber)
+
+                UpdateLetterButtonLabel(controllerNumber)
+
+                UpdateStartBackLabels(controllerNumber)
+
+                UpdateBumperLabel(controllerNumber)
+
+                UpdateStickLabel(controllerNumber)
 
             End If
 
@@ -1183,11 +1193,11 @@ Public Class Form1
 
                 UpdateLetterButtonLabel(controllerNumber)
 
-                DoStartBackLogic(controllerNumber)
+                UpdateStartBackLabels(controllerNumber)
 
-                DoBumperLogic(controllerNumber)
+                UpdateBumperLabel(controllerNumber)
 
-                DoStickLogic(controllerNumber)
+                UpdateStickLabel(controllerNumber)
 
             End If
 
@@ -1195,26 +1205,6 @@ Public Class Form1
 
     End Sub
     Private Sub UpdateDPadLabel(controllerNumber As Integer)
-
-        'Dim direction As String = GetDPadDirection(controllerNumber)
-
-        '' Are all DPad buttons up?
-        'If Controllers.DPadNeutral(controllerNumber) Then
-        '    ' No, all DPad buttons are not up.
-
-        '    LabelDPad.Text = $"Controller {controllerNumber} DPad {direction}"
-
-        '    'Controllers.DPadNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
-
-        'Else
-        '    ' Yes, all DPad buttons are up.
-
-        '    'Controllers.DPadNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
-
-        'End If
-
-        'ClearDPadLabel()
-
 
         Dim direction As String = GetDPadDirection(controllerNumber)
 
@@ -1238,20 +1228,13 @@ Public Class Form1
 
             LabelButtons.Text = buttonText
 
-            'Controllers.LetterButtonsNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
-
-        Else
-            ' No, letter buttons are Not pressed.
-
-            'Controllers.LetterButtonsNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
-
         End If
 
         ClearLetterButtonsLabel()
 
     End Sub
 
-    Private Sub DoStartBackLogic(ControllerNumber As Integer)
+    Private Sub UpdateStartBackLabels(ControllerNumber As Integer)
 
         If Controllers.Start(ControllerNumber) Then
 
@@ -1271,7 +1254,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoBumperLogic(ControllerNumber As Integer)
+    Private Sub UpdateBumperLabel(ControllerNumber As Integer)
 
         If Controllers.LeftBumper(ControllerNumber) Then
 
@@ -1293,7 +1276,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoStickLogic(ControllerNumber As Integer)
+    Private Sub UpdateStickLabel(ControllerNumber As Integer)
 
         If Controllers.LeftStick(ControllerNumber) Then
 
