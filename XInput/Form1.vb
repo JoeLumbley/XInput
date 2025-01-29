@@ -541,7 +541,10 @@ Public Structure XboxControllers
 
     Private Sub UpdateDPadNeutral(controllerNumber As Integer)
 
-        If DPadDown(controllerNumber) Or DPadLeft(controllerNumber) Or DPadRight(controllerNumber) Or DPadUp(controllerNumber) Then
+        If DPadDown(controllerNumber) Or
+           DPadLeft(controllerNumber) Or
+           DPadRight(controllerNumber) Or
+           DPadUp(controllerNumber) Then
 
             DPadNeutral(controllerNumber) = False
 
@@ -555,7 +558,10 @@ Public Structure XboxControllers
 
     Private Sub UpdateLetterButtonsNeutral(controllerNumber As Integer)
 
-        If A(controllerNumber) Or B(controllerNumber) Or X(controllerNumber) Or Y(controllerNumber) Then
+        If A(controllerNumber) Or
+           B(controllerNumber) Or
+           X(controllerNumber) Or
+           Y(controllerNumber) Then
 
             LetterButtonsNeutral(controllerNumber) = False
 
