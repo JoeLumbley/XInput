@@ -698,16 +698,12 @@ Public Structure XboxControllers
 
     Private Vibration As XINPUT_VIBRATION
 
-
-
     Public Sub VibrateLeft(CID As Integer, Speed As UShort)
         ' The range of speed is 0 through 65,535. Unsigned 16-bit (2-byte) integer.
         ' The left motor is the low-frequency rumble motor.
 
         ' Set left motor speed.
         Vibration.wLeftMotorSpeed = Speed
-
-        SendVibrationMotorCommand(CID)
 
         LeftVibrateStart(CID) = Now
 
@@ -721,8 +717,6 @@ Public Structure XboxControllers
 
         ' Set right motor speed.
         Vibration.wRightMotorSpeed = Speed
-
-        SendVibrationMotorCommand(CID)
 
         RightVibrateStart(CID) = Now
 
