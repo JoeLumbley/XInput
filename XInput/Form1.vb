@@ -475,7 +475,9 @@ Public Structure XboxControllers
 
         UpdateStartBackButtons(CID)
 
-        DoDPadLogic2(CID)
+        UpdateDPadNeutral(CID)
+
+        UpdateLetterButtonsNeutral(CID)
 
         ' Store the button states for the current controller ID
         Buttons(CID) = State.Gamepad.wButtons
@@ -705,7 +707,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Private Sub DoDPadLogic2(controllerNumber As Integer)
+    Private Sub UpdateDPadNeutral(controllerNumber As Integer)
 
         If DPadDown(controllerNumber) Or DPadLeft(controllerNumber) Or DPadRight(controllerNumber) Or DPadUp(controllerNumber) Then
 
@@ -740,6 +742,41 @@ Public Structure XboxControllers
         'End If
 
         'ClearDPadLabel()
+
+    End Sub
+
+    Private Sub UpdateLetterButtonsNeutral(controllerNumber As Integer)
+
+
+        If A(controllerNumber) Or B(controllerNumber) Or X(controllerNumber) Or Y(controllerNumber) Then
+
+            LetterButtonsNeutral(controllerNumber) = False
+
+        Else
+
+            LetterButtonsNeutral(controllerNumber) = True
+
+        End If
+
+
+        'Dim buttonText As String = GetButtonText(controllerNumber)
+
+        '' Are any letter buttons pressed?
+        'If Not String.IsNullOrEmpty(buttonText) Then
+        '    ' Yes, letter buttons are pressed.
+
+        '    LabelButtons.Text = buttonText
+
+        '    Controllers.LetterButtonsNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
+
+        'Else
+        '    ' No, letter buttons are Not pressed.
+
+        '    Controllers.LetterButtonsNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
+
+        'End If
+
+        'ClearLetterButtonsLabel()
 
     End Sub
 
@@ -1144,7 +1181,7 @@ Public Class Form1
 
                 UpdateDPadLabel(controllerNumber)
 
-                DoLetterButtonLogic(controllerNumber)
+                UpdateLetterButtonLabel(controllerNumber)
 
                 DoStartBackLogic(controllerNumber)
 
@@ -1157,7 +1194,6 @@ Public Class Form1
         Next
 
     End Sub
-    'UpdateDPadLabel
     Private Sub UpdateDPadLabel(controllerNumber As Integer)
 
         'Dim direction As String = GetDPadDirection(controllerNumber)
@@ -1192,22 +1228,22 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoLetterButtonLogic(controllerNumber As Integer)
+    Private Sub UpdateLetterButtonLabel(controllerNumber As Integer)
 
         Dim buttonText As String = GetButtonText(controllerNumber)
 
         ' Are any letter buttons pressed?
-        If Not String.IsNullOrEmpty(buttonText) Then
+        If Not Controllers.LetterButtonsNeutral(controllerNumber) Then
             ' Yes, letter buttons are pressed.
 
             LabelButtons.Text = buttonText
 
-            Controllers.LetterButtonsNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
+            'Controllers.LetterButtonsNeutral(controllerNumber) = False 'TODO move to XboxControlllers structure.
 
         Else
             ' No, letter buttons are Not pressed.
 
-            Controllers.LetterButtonsNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
+            'Controllers.LetterButtonsNeutral(controllerNumber) = True 'TODO move to XboxControlllers structure.
 
         End If
 
