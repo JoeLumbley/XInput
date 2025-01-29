@@ -429,7 +429,8 @@ Public Structure XboxControllers
         Catch ex As Exception
             ' Something went wrong (An exception occured).
 
-            DisplayError(ex)
+            'DisplayError(ex)
+            Debug.Print($"Error getting XInput state: {controllerNumber} | {ex.Message}")
 
             Return False
 
@@ -456,7 +457,7 @@ Public Structure XboxControllers
         Catch ex As Exception
             ' Something went wrong (An exception occurred).
 
-            DisplayError(ex)
+            Debug.Print($"Error getting XInput state: {controllerNumber} | {ex.Message}")
 
         End Try
 
@@ -871,7 +872,10 @@ Public Structure XboxControllers
 
         Catch ex As Exception
 
-            DisplayError(ex)
+            'DisplayError(ex)
+            Debug.Print($"Error sending vibration motor command: {ControllerID} | {ex.Message}")
+
+
 
             Exit Sub
 
@@ -943,11 +947,11 @@ Public Structure XboxControllers
 
     End Sub
 
-    Private Sub DisplayError(ex As Exception)
+    'Private Sub DisplayError(ex As Exception)
 
-        MsgBox(ex.ToString()) ' Display the exception message in a message box.
+    '    MsgBox(ex.ToString()) ' Display the exception message in a message box.
 
-    End Sub
+    'End Sub
 
 End Structure
 
@@ -989,9 +993,13 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateLabels()
+    Private Sub NumericUpDownTimeToVib_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDownTimeToVib.ValueChanged
 
-        'DoButtonLogic()
+        Controllers.TimeToVibe = NumericUpDownTimeToVib.Value
+
+    End Sub
+
+    Private Sub UpdateLabels()
 
         For controllerNumber As Integer = 0 To 3
 
@@ -1133,12 +1141,6 @@ Public Class Form1
 
     End Sub
 
-
-    Private Sub NumericUpDownTimeToVib_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDownTimeToVib.ValueChanged
-
-        Controllers.TimeToVibe = NumericUpDownTimeToVib.Value
-
-    End Sub
 
     Private Sub InitializeTimer1()
 
