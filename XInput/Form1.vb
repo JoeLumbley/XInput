@@ -1153,7 +1153,7 @@ Public Class Form1
 
         End If
 
-        ClearRightThumbButtonLabel()
+        ClearRightThumbstickButtonLabel()
 
     End Sub
 
@@ -1606,7 +1606,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ClearRightThumbButtonLabel()
+    Private Sub ClearRightThumbstickButtonLabel()
         ' Clears the right thumbstick button label when all controllers' right thumbstick
         ' buttons are not active.
 
