@@ -18,158 +18,349 @@ With a clean and well-commented codebase, this project serves as an invaluable r
 
 
 
-
+---
 
 
 
 # Code Walkthrough
 
-XInput is a Windows application that allows you to use Xbox controllers. It can read button presses, thumbstick movements, and make the controllers vibrate. The application uses a library called **XInput** to communicate with the controllers.
 
-### Imports and DLL Function Declarations
+# Xbox Controller Code Walkthrough
 
-At the beginning of the ```Form1.vb``` file, we import necessary libraries and declare functions from the XInput DLL.
+Welcome to this detailed walkthrough of a code structure designed for Xbox controller input handling using Visual Basic .NET (VB.NET). This document will guide you through each line of the code, explaining its purpose and functionality in a beginner-friendly manner.
 
-``` vbnet
+## Table of Contents
+- [Imports and Structure Definitions](#imports-and-structure-definitions)
+- [XInput Functions and Structures](#xinput-functions-and-structures)
+- [Button Enumeration](#button-enumeration)
+- [Neutral Zone Constants](#neutral-zone-constants)
+- [Initialization Method](#initialization-method)
+- [Update Method](#update-method)
+- [State Update Method](#state-update-method)
+- [Button and Thumbstick Updates](#button-and-thumbstick-updates)
+- [Vibration Functions](#vibration-functions)
+- [Form Initialization](#form-initialization)
+- [Conclusion](#conclusion)
+
+---
+
+## Imports and Structure Definitions
+
+```vb
 Imports System.Runtime.InteropServices
+```
+- This line imports the `System.Runtime.InteropServices` namespace, which provides functionality for interacting with unmanaged code, such as calling native Windows API functions. This is essential for working with the Xbox controller.
 
+```vb
+Public Structure XboxControllers
+```
+- Here, we define a public structure named `XboxControllers`. A structure is a value type that can contain data members and methods. This structure will hold all the necessary information and functions related to Xbox controller input.
+
+---
+
+## XInput Functions and Structures
+
+```vb
 <DllImport("XInput1_4.dll")>
 Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
 End Function
 ```
+- This code declares a function `XInputGetState` from the `XInput1_4.dll` library, which retrieves the current state of the specified Xbox controller.
+- **Parameters:**
+  - `dwUserIndex`: An integer representing the index of the controller (0 for the first controller, 1 for the second, etc.).
+  - `pState`: A reference to an `XINPUT_STATE` structure that will be filled with the controller's state.
+- The function returns an integer indicating the success or failure of the call.
 
-**Imports System.Runtime.InteropServices:** This line allows us to use features that let managed code (like our VB.NET code) interact with unmanaged code (like the XInput DLL).
-
-**DllImport:** This attribute tells the program that we want to use a function from an external library (the XInput DLL) to get the state of the Xbox controller.
-
-
-
-### Defining Structures
-
-Next, we define structures that represent the controller's state and input.
-
-``` vbnet
+```vb
 <StructLayout(LayoutKind.Explicit)>
 Public Structure XINPUT_STATE
-    <FieldOffset(0)>
-    Public dwPacketNumber As UInteger
-    <FieldOffset(4)>
-    Public Gamepad As XINPUT_GAMEPAD
-End Structure
 ```
-**StructLayout:** This attribute specifies how the fields of the structure are laid out in memory.
+- This defines the `XINPUT_STATE` structure, which will hold the state of the controller.
+- The `LayoutKind.Explicit` attribute allows us to define the exact layout of the data in memory.
 
-**XINPUT_STATE:** This structure holds the state of the controller, including a packet number (used to track changes) and the gamepad data.
-
-``` vbnet
-<StructLayout(LayoutKind.Sequential)>
-Public Structure XINPUT_GAMEPAD
-    Public wButtons As UShort
-    Public bLeftTrigger As Byte
-    Public bRightTrigger As Byte
-    Public sThumbLX As Short
-    Public sThumbLY As Short
-    Public sThumbRX As Short
-    Public sThumbRY As Short
-End Structure
+```vb
+<FieldOffset(0)>
+Public dwPacketNumber As UInteger ' Unsigned 32-bit (4-byte) integer range 0 through 4,294,967,295.
+<FieldOffset(4)>
+Public Gamepad As XINPUT_GAMEPAD
 ```
+- This specifies two fields within the `XINPUT_STATE` structure:
+  - `dwPacketNumber`: A packet number to track the state changes.
+  - `Gamepad`: An instance of the `XINPUT_GAMEPAD` structure, which contains the button and thumbstick states.
 
-**XINPUT_GAMEPAD:** This structure contains information about the buttons pressed and the positions of the thumbsticks and triggers.
-
-
-### Initializing the Application
-
-
-When the form loads, we initialize the application.
-
-``` vbnet
-Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    InitializeApp()
-End Sub
+```vb
+Private State As XINPUT_STATE
 ```
+- This declares a private variable `State` of type `XINPUT_STATE`, which will store the current state of the controller.
 
-**Form1_Load:** This is an event handler that runs when the form is loaded. It calls the ```InitializeApp()``` method, which sets up the application.
+---
 
+## Button Enumeration
 
-### Timer for Polling Controller State
-A timer is set to check the controller state every 15 milliseconds.
-
-``` vbnet
-Private Sub InitializeTimer1()
-    Timer1.Interval = 15 ' Set the timer to tick every 15 milliseconds
-    Timer1.Start()       ' Start the timer
-End Sub
+```vb
+Private Enum Button
+    DPadUp = 1
+    DPadDown = 2
+    DPadLeft = 4
+    DPadRight = 8
+    Start = 16
+    Back = 32
+    LeftStick = 64
+    RightStick = 128
+    LeftBumper = 256
+    RightBumper = 512
+    A = 4096
+    B = 8192
+    X = 16384
+    Y = 32768
+End Enum
 ```
+- This enumeration defines constants for each button on the Xbox controller. Each button is assigned a unique bit value, which allows us to use bitwise operations to check if a button is pressed.
 
-**Timer1.Interval:** This sets how often the timer will trigger (every 15 milliseconds).
+---
 
-**Timer1.Start():** This starts the timer, which will call the ```Timer1_Tick``` method repeatedly.
+## Neutral Zone Constants
 
-### Updating Controller Data
-
-In the timer's tick event, we update the controller data.
-
-``` vbnet
-Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-    UpdateControllerData()
-End Sub
+```vb
+Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
+Private Const NeutralEnd As Short = 16384 '16,383.5 = 32,767 / 2
+Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
 ```
+- These constants define the neutral zones for the thumbsticks and the trigger thresholds:
+  - `NeutralStart` and `NeutralEnd` define the range for determining if a thumbstick is in a neutral position.
+  - `TriggerThreshold` defines the minimum value for the triggers to be considered pressed.
 
-**UpdateControllerData():** This method checks the state of the controllers and updates the UI accordingly.
+---
 
-### Getting Controller State
+## Initialization Method
 
-Inside ```UpdateControllerData```, we retrieve the current state of each connected controller.
+```vb
+Public Sub Initialize()
+```
+- This method initializes the Xbox controller structure and its properties.
 
-``` vbnet
+```vb
+Connected = New Boolean(0 To 3) {}
+```
+- Initializes the `Connected` array, which keeps track of whether up to 4 controllers are connected.
+
+```vb
+ConnectionStart = DateTime.Now
+```
+- Records the current date and time when initialization starts. This is useful for managing the connection state.
+
+```vb
+Buttons = New UShort(0 To 3) {}
+```
+- Initializes the `Buttons` array to store the state of the controller buttons.
+
+```vb
+' Initialize arrays to check if thumbstick axes are in the neutral position.
+LeftThumbstickXaxisNeutral = New Boolean(0 To 3) {}
+LeftThumbstickYaxisNeutral = New Boolean(0 To 3) {}
+RightThumbstickXaxisNeutral = New Boolean(0 To 3) {}
+RightThumbstickYaxisNeutral = New Boolean(0 To 3) {}
+```
+- These lines initialize arrays to track the neutral positions of the left and right thumbsticks for each controller.
+
+```vb
+For i As Integer = 0 To 3
+    LeftThumbstickXaxisNeutral(i) = True
+    LeftThumbstickYaxisNeutral(i) = True
+    RightThumbstickXaxisNeutral(i) = True
+    RightThumbstickYaxisNeutral(i) = True
+    DPadNeutral(i) = True
+    LetterButtonsNeutral(i) = True
+Next
+```
+- This loop sets the neutral states for all thumbsticks and buttons to `True` for each controller.
+
+```vb
+TimeToVibe = 1000 'ms
+```
+- Sets the default vibration time to 1000 milliseconds (1 second).
+
+```vb
+TestInitialization()
+```
+- Calls the `TestInitialization` method to verify that everything is set up correctly.
+
+---
+
+## Update Method
+
+```vb
+Public Sub Update()
+```
+- This method is called repeatedly to check for updates in the controller state.
+
+```vb
+Dim ElapsedTime As TimeSpan = Now - ConnectionStart
+```
+- Calculates the elapsed time since the connection started.
+
+```vb
+If ElapsedTime.TotalSeconds >= 1 Then
+    For controllerNumber As Integer = 0 To 3
+        Connected(controllerNumber) = IsConnected(controllerNumber)
+    Next
+    ConnectionStart = DateTime.Now
+End If
+```
+- Every second, it checks if the controllers are still connected and updates the `Connected` array accordingly.
+
+```vb
 For controllerNumber As Integer = 0 To 3
-    Connected(controllerNumber) = IsControllerConnected(controllerNumber)
     If Connected(controllerNumber) Then
-        UpdateControllerState(controllerNumber)
+        UpdateState(controllerNumber)
     End If
 Next
 ```
+- Loops through each controller and updates its state if it is connected.
 
-**For loop:** This loop checks up to four controllers (0 to 3).
+```vb
+UpdateVibrateTimer()
+```
+- Calls the method to update the vibration timer for the controllers.
 
-**IsControllerConnected(controllerNumber):** This function checks if a controller is connected and returns true or false.
+---
 
-**UpdateControllerState(controllerNumber):** If the controller is connected, this method retrieves its current state.
+## State Update Method
 
+```vb
+Public Sub UpdateState(controllerNumber As Integer)
+```
+- This method retrieves and updates the state of a specific controller.
 
-### Updating Button States
+```vb
+Try
+    XInputGetState(controllerNumber, State)
+```
+- Calls the `XInputGetState` function to fill the `State` variable with the current state of the specified controller.
 
+```vb
+UpdateButtons(controllerNumber)
+UpdateLeftThumbstick(controllerNumber)
+UpdateRightThumbstick(controllerNumber)
+UpdateLeftTrigger(controllerNumber)
+UpdateRightTrigger(controllerNumber)
+```
+- Calls various methods to update the state of buttons, thumbsticks, and triggers based on the current controller state.
 
+```vb
+Catch ex As Exception
+    Debug.Print($"Error getting XInput state: {controllerNumber} | {ex.Message}")
+End Try
+```
+- Catches any exceptions that occur during the state update and prints an error message to the debug console.
 
-When we retrieve the controller state, we check which buttons are pressed.
+---
 
-``` vbnet
-Private Sub UpdateButtonPosition(CID As Integer)
-    DPadUpPressed = (ControllerPosition.Gamepad.wButtons And DPadUp) <> 0
-    ' Similar checks for other buttons...
+## Button and Thumbstick Updates
+
+### Button Update Method
+
+```vb
+Private Sub UpdateButtons(CID As Integer)
+```
+- This method updates the state of the buttons for the specified controller.
+
+```vb
+UpdateDPadButtons(CID)
+UpdateLetterButtons(CID)
+UpdateBumperButtons(CID)
+UpdateStickButtons(CID)
+UpdateStartBackButtons(CID)
+```
+- Calls methods to update the states of the D-Pad, letter buttons, bumpers, stick buttons, and start/back buttons.
+
+```vb
+Buttons(CID) = State.Gamepad.wButtons
+```
+- Stores the current state of the buttons in the `Buttons` array.
+
+### Thumbstick Update Method
+
+```vb
+Private Sub UpdateLeftThumbstick(ControllerNumber As Integer)
+```
+- This method updates the state of the left thumbstick.
+
+```vb
+If State.Gamepad.sThumbLX <= NeutralStart Then
+    LeftThumbstickLeft(ControllerNumber) = True
+ElseIf State.Gamepad.sThumbLX >= NeutralEnd Then
+    LeftThumbstickRight(ControllerNumber) = True
+Else
+    LeftThumbstickXaxisNeutral(ControllerNumber) = True
+End If
+```
+- Checks the position of the left thumbstick on the X-axis and updates the corresponding state.
+
+```vb
+If State.Gamepad.sThumbLY <= NeutralStart Then
+    LeftThumbstickDown(ControllerNumber) = True
+ElseIf State.Gamepad.sThumbLY >= NeutralEnd Then
+    LeftThumbstickUp(ControllerNumber) = True
+Else
+    LeftThumbstickYaxisNeutral(ControllerNumber) = True
+End If
+```
+- Similar logic is applied for the Y-axis of the left thumbstick.
+
+### Vibration Functions
+
+```vb
+Public Sub VibrateLeft(CID As Integer, Speed As UShort)
+```
+- This method triggers the left motor of the controller to vibrate at a specified speed.
+
+```vb
+Vibration.wLeftMotorSpeed = Speed
+LeftVibrateStart(CID) = Now
+IsLeftVibrating(CID) = True
+```
+- Sets the left motor speed, records the start time, and marks the left motor as vibrating.
+
+```vb
+Private Sub SendVibrationMotorCommand(ControllerID As Integer)
+```
+- This method sends the vibration command to the specified controller.
+
+```vb
+If XInputSetState(ControllerID, Vibration) = 0 Then
+    ' Success
+Else
+    Debug.Print($"{ControllerID} did not vibrate.")
+End If
+```
+- Sends the vibration command and checks if it was successful.
+
+---
+
+## Form Initialization
+
+```vb
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    InitializeApp()
+    Controllers.Initialize()
 End Sub
 ```
+- This method is called when the form loads. It initializes the application and the controllers.
 
-**wButtons:** This field contains the state of all buttons as a number.
-
-**Bitwise AND operator (```And```):** This checks if a specific button is pressed by comparing it to a constant (like ```DPadUp```).
-
-### Vibration Control
-
-
-To control the vibration of the controller, we have buttons in the UI.
-
-``` vbnet
-Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
-    VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+```vb
+Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    Controllers.Update()
+    UpdateLabels()
 End Sub
 ```
+- This method is triggered by a timer tick event. It updates the controller state and refreshes the UI labels accordingly.
 
-**ButtonVibrateLeft_Click:** This event runs when the "Vibrate Left" button is clicked.
+---
 
-**VibrateLeft():** This method triggers vibration on the specified controller with the desired intensity.
+## Conclusion
 
-
+This walkthrough has provided a detailed examination of the Xbox controller handling code in VB.NET. By understanding each section and its purpose, you should have a clearer idea of how to work with controller input in your applications. If you have any questions or need further clarification, feel free to ask!
 
 
 This application provides a hands-on way to interact with Xbox controllers using VB.NET. By understanding each section of the code, you can see how the application retrieves controller states, manages input, and provides feedback through vibration.
@@ -178,7 +369,7 @@ Feel free to experiment with the code, modify it, and add new features as you le
 
 
 
-
+---
 
 # **The Neutral Zone**
 
@@ -195,7 +386,7 @@ Enhances control sensitivity, allowing for more nuanced gameplay, especially in 
 Understanding the neutral zone is crucial for both developers and players to ensure that controller inputs are accurate and intentional.
 
 
-
+---
 
 # **The Trigger Threshold**
 
