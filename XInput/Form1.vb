@@ -1608,19 +1608,19 @@ Public Class Form1
 
     Private Sub ClearRightThumbButtonLabel()
         ' Clears the right thumbstick button label when all controllers' right thumbstick
-        ' buttons are neutral.
+        ' buttons are not active.
 
-        Dim ConSum As Boolean = True ' Assume all controllers' right thumbstick
-        ' buttons are neutral initially.
+        ' Assume all controllers' right thumbstick buttons are not active initially.
+        Dim NotActive As Boolean = True
 
-        ' Search for a non-neutral right thumbstick button.
+        ' Search for a active right thumbstick button.
         For i As Integer = 0 To 3
 
             If Controllers.Connected(i) AndAlso
                Controllers.RightStick(i) Then
-                ' A non-neutral right thumbstick button was found.
+                ' A active right thumbstick button was found.
 
-                ConSum = False ' Report the non-neutral right thumbstick button.
+                NotActive = False ' Report the active right thumbstick button.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1628,10 +1628,9 @@ Public Class Form1
 
         Next
 
-        ' Are all controllers' right thumbstick buttons in the neutral position?
-        If ConSum Then
-            ' Yes, all controllers' right thumbstick buttons are in the neutral
-            ' position.
+        ' Are all controllers' right thumbstick buttons not active?
+        If NotActive Then
+            ' Yes, all controllers' right thumbstick buttons are not active.
 
             LabelRightThumbButton.Text = String.Empty ' Clear label.
 
