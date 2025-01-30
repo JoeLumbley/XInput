@@ -40,9 +40,6 @@ Public Structure XboxControllers
         Public Gamepad As XINPUT_GAMEPAD
     End Structure
 
-    Private State As XINPUT_STATE
-
-
     <StructLayout(LayoutKind.Sequential)>
     Public Structure XINPUT_GAMEPAD
         Public wButtons As UShort ' Unsigned 16-bit (2-byte) integer range 0 through 65,535.
@@ -53,6 +50,8 @@ Public Structure XboxControllers
         Public sThumbRX As Short
         Public sThumbRY As Short
     End Structure
+
+    Private State As XINPUT_STATE
 
     Private Enum Button
         DPadUp = 1
