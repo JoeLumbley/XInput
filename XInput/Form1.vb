@@ -284,9 +284,7 @@ Public Structure XboxControllers
 
             UpdateButtons(controllerNumber)
 
-            UpdateLeftThumbstick(controllerNumber)
-
-            UpdateRightThumbstick(controllerNumber)
+            UpdateThumbsticks(controllerNumber)
 
             UpdateTriggers(controllerNumber)
 
@@ -296,6 +294,14 @@ Public Structure XboxControllers
             Debug.Print($"Error getting XInput state: {controllerNumber} | {ex.Message}")
 
         End Try
+
+    End Sub
+
+    Private Sub UpdateThumbsticks(controllerNumber As Integer)
+
+        UpdateLeftThumbstick(controllerNumber)
+
+        UpdateRightThumbstick(controllerNumber)
 
     End Sub
 
