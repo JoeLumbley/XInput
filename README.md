@@ -551,8 +551,15 @@ End Sub
 Feel free to experiment with the code, modify it, and add new features as you learn more about programming! If you have any questions, please post on the **Q & A Discussion Forum**, don’t hesitate to ask.
 
 
+[Index](#index)
 
 ---
+
+
+
+
+
+
 
 # **The Neutral Zone**
 
@@ -568,8 +575,13 @@ Reduces the likelihood of unintentional actions, leading to a smoother gaming ex
 Enhances control sensitivity, allowing for more nuanced gameplay, especially in fast-paced or competitive environments.
 Understanding the neutral zone is crucial for both developers and players to ensure that controller inputs are accurate and intentional.
 
+[Index](#index)
 
 ---
+
+
+
+
 
 # **The Trigger Threshold**
 
@@ -590,8 +602,15 @@ Commonly used in racing games (for acceleration and braking), shooting games (fo
 Understanding the trigger threshold is essential for both developers and players to ensure that controller inputs are intentional and accurately reflect the player's actions.
 
 
+---
 
-## Table of Contents
+
+
+
+
+
+
+## Index
 - [Imports and Structure Definitions](#imports-and-structure-definitions)
 - [XInput Functions and Structures](#xinput-functions-and-structures)
 - [Button Enumeration](#button-enumeration)
