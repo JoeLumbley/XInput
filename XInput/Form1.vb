@@ -447,14 +447,13 @@ Public Structure XboxControllers
 
         UpdateRightThumbstickXaxis(ControllerNumber)
 
+        UpdateRightThumbstickYaxis(ControllerNumber)
 
+    End Sub
 
-
-
-        'UpdateRightThumbstickYaxis
-
+    Private Sub UpdateRightThumbstickYaxis(ControllerNumber As Integer)
         ' The range on the Y-axis is -32,768 through 32,767.
-        ' Signed 16-bit (2-byte) integer.
+        ' sThumbRY is a signed 16-bit (2-byte) integer.
 
         ' What position is the right thumbstick in on the Y-axis?
         If State.Gamepad.sThumbRY <= NeutralStart Then
