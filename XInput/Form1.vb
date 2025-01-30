@@ -314,7 +314,8 @@ Public Structure XboxControllers
     End Sub
 
     Private Sub UpdateButtons(CID As Integer)
-        ' The range of buttons is 0 to 65,535. Unsigned 16-bit (2-byte) integer.
+        ' The range of buttons is 0 to 65,535.
+        ' wButtons is a Unsigned 16-bit (2-byte) integer.
 
         UpdateDPadButtons(CID)
 
