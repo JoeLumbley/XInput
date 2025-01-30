@@ -32,6 +32,11 @@ Welcome to this detailed walkthrough of a code structure designed for Xbox contr
 
 ---
 
+
+
+
+
+
 ## Imports
 
 ```vb
@@ -39,7 +44,16 @@ Imports System.Runtime.InteropServices
 ```
 - This line imports the `System.Runtime.InteropServices` namespace, which provides functionality for interacting with unmanaged code, such as calling native Windows API functions. This is essential for working with the Xbox controller.
 
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
 
 ## XboxControllers Structure
 
@@ -49,7 +63,16 @@ Public Structure XboxControllers
 ```
 - Here, we define a public structure named `XboxControllers`. A structure is a value type that can contain data members and methods. This structure will hold all the necessary information and functions related to Xbox controller input.
 
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
 
 ## DLL Import
 
@@ -63,6 +86,16 @@ End Function
   - `dwUserIndex`: An integer representing the index of the controller (0 for the first controller, 1 for the second, etc.).
   - `pState`: A reference to an `XINPUT_STATE` structure that will be filled with the controller's state.
 - The function returns an integer indicating the success or failure of the call.
+
+[Index](#index)
+
+---
+
+
+
+
+
+
 
 
 ## XINPUT_STATE Structure
@@ -84,7 +117,17 @@ Public Gamepad As XINPUT_GAMEPAD
   - `dwPacketNumber`: A packet number to track the state changes.
   - `Gamepad`: An instance of the `XINPUT_GAMEPAD` structure, which contains the button and thumbstick states.
 
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
+
 
 
 ## State
@@ -94,7 +137,14 @@ Private State As XINPUT_STATE
 ```
 - This declares a private variable `State` of type `XINPUT_STATE`, which will store the current state of the controller.
 
+[Index](#index)
+
 ---
+
+
+
+
+
 
 
 
@@ -121,7 +171,18 @@ End Enum
 ```
 - This enumeration defines constants for each button on the Xbox controller. Each button is assigned a unique bit value, which allows us to use bitwise operations to check if a button is pressed.
 
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
+
+
 
 ## Neutral Zone Constants
 
@@ -135,7 +196,12 @@ Private Const NeutralEnd As Short = 16384 '16,383.5 = 32,767 / 2
 
   [The Neutral Zone](#the-neutral-zone)
 
+[Index](#index)
+
 ---
+
+
+
 
 
 
@@ -150,7 +216,16 @@ Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
 
   [The Trigger Threshold](#the-trigger-threshold)
 
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
 
 
 
@@ -207,7 +282,16 @@ TestInitialization()
 ```
 - Calls the `TestInitialization` method to verify that everything is set up correctly.
 
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
 
 ## Update Method
 
@@ -245,7 +329,16 @@ UpdateVibrateTimer()
 ```
 - Calls the method to update the vibration timer for the controllers.
 
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
 
 ## State Update Method
 
@@ -276,7 +369,17 @@ End Try
 ```
 - Catches any exceptions that occur during the state update and prints an error message to the debug console.
 
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
+
 
 ## Button and Thumbstick Updates
 
@@ -378,6 +481,8 @@ End Sub
 ```
 - This method is triggered by a timer tick event. It updates the controller state and refreshes the UI labels accordingly.
 
+[Index](#index)
+
 ---
 
 
@@ -454,7 +559,20 @@ End Sub
 
 Similar methods exist for updating the right thumbstick, triggers, D-Pad, and button states, following the same logic.
 
+
+[Index](#index)
+
 ---
+
+
+
+
+
+
+
+
+
+
 
 ## Vibration Timer Updates
 
@@ -493,7 +611,14 @@ End Sub
 
 The logic for updating the right vibration timer is similar to that of the left, checking the state and elapsed time, and stopping the motor if necessary.
 
+[Index](#index)
+
 ---
+
+
+
+
+
 
 ## Handling Button Click Events
 
@@ -516,7 +641,11 @@ End Sub
 ```
 - This method updates the label displaying the current speed of the vibration based on the value selected in a trackbar.
 
+[Index](#index)
+
 ---
+
+
 
 ## Application Initialization
 
@@ -544,6 +673,8 @@ End Sub
 ```
 - This method sets the timer interval to approximately 15 milliseconds, which helps achieve a frame rate of about 60 frames per second (FPS). It then starts the timer.
 
+[Index](#index)
+
 ---
 
 
@@ -551,7 +682,6 @@ End Sub
 Feel free to experiment with the code, modify it, and add new features as you learn more about programming! If you have any questions, please post on the **Q & A Discussion Forum**, don’t hesitate to ask.
 
 
-[Index](#index)
 
 ---
 
