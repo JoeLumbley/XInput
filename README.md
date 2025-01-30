@@ -434,25 +434,77 @@ Private Sub UpdateLeftThumbstick(ControllerNumber As Integer)
 - This method updates the state of the left thumbstick.
 
 ```vb
+
+' What position is the left thumbstick in on the X-axis?
 If State.Gamepad.sThumbLX <= NeutralStart Then
+    ' The left thumbstick is in the left position.
+
     LeftThumbstickLeft(ControllerNumber) = True
+
+    LeftThumbstickRight(ControllerNumber) = False
+
+    LeftThumbstickXaxisNeutral(ControllerNumber) = False
+
 ElseIf State.Gamepad.sThumbLX >= NeutralEnd Then
+    ' The left thumbstick is in the right position.
+
     LeftThumbstickRight(ControllerNumber) = True
+
+    LeftThumbstickLeft(ControllerNumber) = False
+
+    LeftThumbstickXaxisNeutral(ControllerNumber) = False
+
 Else
+    ' The left thumbstick is in the neutral position.
+
+    LeftThumbstickRight(ControllerNumber) = False
+
+    LeftThumbstickLeft(ControllerNumber) = False
+
     LeftThumbstickXaxisNeutral(ControllerNumber) = True
+
 End If
+
+
 ```
+
 - Checks the position of the left thumbstick on the X-axis and updates the corresponding state.
 
 ```vb
-If State.Gamepad.sThumbLY <= NeutralStart Then
-    LeftThumbstickDown(ControllerNumber) = True
-ElseIf State.Gamepad.sThumbLY >= NeutralEnd Then
-    LeftThumbstickUp(ControllerNumber) = True
-Else
-    LeftThumbstickYaxisNeutral(ControllerNumber) = True
-End If
+
+
+        ' What position is the left thumbstick in on the Y-axis?
+        If State.Gamepad.sThumbLY <= NeutralStart Then
+            ' The left thumbstick is in the down position.
+
+            LeftThumbstickDown(ControllerNumber) = True
+
+            LeftThumbstickUp(ControllerNumber) = False
+
+            LeftThumbstickYaxisNeutral(ControllerNumber) = False
+
+        ElseIf State.Gamepad.sThumbLY >= NeutralEnd Then
+            ' The left thumbstick is in the up position.
+
+            LeftThumbstickUp(ControllerNumber) = True
+
+            LeftThumbstickDown(ControllerNumber) = False
+
+            LeftThumbstickYaxisNeutral(ControllerNumber) = False
+
+        Else
+            ' The left thumbstick is in the neutral position.
+
+            LeftThumbstickUp(ControllerNumber) = False
+
+            LeftThumbstickDown(ControllerNumber) = False
+
+            LeftThumbstickYaxisNeutral(ControllerNumber) = True
+
+        End If
+
 ```
+
 - Similar logic is applied for the Y-axis of the left thumbstick.
 
 ### Vibration Functions
