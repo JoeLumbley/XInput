@@ -288,9 +288,7 @@ Public Structure XboxControllers
 
             UpdateRightThumbstick(controllerNumber)
 
-            UpdateLeftTrigger(controllerNumber)
-
-            UpdateRightTrigger(controllerNumber)
+            UpdateTriggers(controllerNumber)
 
         Catch ex As Exception
             ' Something went wrong (An exception occurred).
@@ -298,6 +296,14 @@ Public Structure XboxControllers
             Debug.Print($"Error getting XInput state: {controllerNumber} | {ex.Message}")
 
         End Try
+
+    End Sub
+
+    Private Sub UpdateTriggers(controllerNumber As Integer)
+
+        UpdateLeftTrigger(controllerNumber)
+
+        UpdateRightTrigger(controllerNumber)
 
     End Sub
 
