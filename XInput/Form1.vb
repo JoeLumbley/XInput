@@ -1102,6 +1102,20 @@ Public Class Form1
 
             RumbleGroupBox.Enabled = True
 
+            If Controllers.Connected(NumControllerToVib.Value) Then
+
+                ButtonVibrateLeft.Enabled = True
+
+                ButtonVibrateRight.Enabled = True
+
+            Else
+
+                ButtonVibrateLeft.Enabled = False
+
+                ButtonVibrateRight.Enabled = False
+
+            End If
+
         Else
 
             NumControllerToVib.Maximum = 0
