@@ -1459,17 +1459,36 @@ Public Class Form1
 
         LabelButtons.Text = String.Empty
 
+
         LabelLeftThumbX.Text = String.Empty
 
         LabelLeftThumbY.Text = String.Empty
 
+
         LabelLeftTrigger.Text = String.Empty
+
 
         LabelRightThumbX.Text = String.Empty
 
         LabelRightThumbY.Text = String.Empty
 
+
         LabelRightTrigger.Text = String.Empty
+
+
+        LabelDPad.Text = String.Empty ' Clear label.
+
+        LabelStart.Text = String.Empty ' Clear label.
+
+        LabelBack.Text = String.Empty ' Clear label.
+
+        LabelLeftBumper.Text = String.Empty ' Clear label.
+
+        LabelRightBumper.Text = String.Empty ' Clear label.
+
+        LabelLeftThumbButton.Text = String.Empty ' Clear label.
+
+        LabelRightThumbButton.Text = String.Empty ' Clear label.
 
     End Sub
 
