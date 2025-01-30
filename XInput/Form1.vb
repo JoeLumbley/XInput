@@ -366,10 +366,11 @@ Public Structure XboxControllers
 
         UpdateLeftThumbstickXaxis(ControllerNumber)
 
+        UpdateLeftThumbstickYaxis(ControllerNumber)
 
+    End Sub
 
-
-        'UpdateLeftThumbstickYaxis
+    Private Sub UpdateLeftThumbstickYaxis(ControllerNumber As Integer)
         ' The range on the Y-axis is -32,768 through 32,767.
         ' Signed 16-bit (2-byte) integer.
 
