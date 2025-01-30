@@ -716,7 +716,7 @@ The neutral zone helps to filter out minor movements that may occur when the thu
 
 For thumbsticks, the neutral zone is defined by a range of values (-16384 to 16384 for a signed 16-bit integer). Movements beyond this range are considered active inputs.
 
-![005](https://github.com/user-attachments/assets/33ffd4c1-8013-431f-9eeb-f8e33de3e931)
+![014](https://github.com/user-attachments/assets/fb9ca8ba-9b9f-4903-a994-673ff4ac1559)
 
 Reduces the likelihood of unintentional actions, leading to a smoother gaming experience.
 Enhances control sensitivity, allowing for more nuanced gameplay, especially in fast-paced or competitive environments.
@@ -749,14 +749,13 @@ Commonly used in racing games (for acceleration and braking), shooting games (fo
 Understanding the trigger threshold is essential for both developers and players to ensure that controller inputs are intentional and accurately reflect the player's actions.
 
 
----
 
 
 ![063](https://github.com/user-attachments/assets/42017bca-10fc-4792-a0e2-005893763b00)
 
 
 
-
+---
 
 ## Index
 - [Imports and Structure Definitions](#imports-and-structure-definitions)
