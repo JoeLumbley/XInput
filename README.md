@@ -44,12 +44,17 @@ Welcome to this detailed walkthrough of a code structure designed for Xbox contr
 
 ---
 
-## Imports and Structure Definitions
+## Imports
 
 ```vb
 Imports System.Runtime.InteropServices
 ```
 - This line imports the `System.Runtime.InteropServices` namespace, which provides functionality for interacting with unmanaged code, such as calling native Windows API functions. This is essential for working with the Xbox controller.
+
+---
+
+## XboxControllers Structure
+
 
 ```vb
 Public Structure XboxControllers
@@ -58,7 +63,7 @@ Public Structure XboxControllers
 
 ---
 
-## XInput Functions and Structures
+## DLL Import
 
 ```vb
 <DllImport("XInput1_4.dll")>
@@ -70,6 +75,9 @@ End Function
   - `dwUserIndex`: An integer representing the index of the controller (0 for the first controller, 1 for the second, etc.).
   - `pState`: A reference to an `XINPUT_STATE` structure that will be filled with the controller's state.
 - The function returns an integer indicating the success or failure of the call.
+
+
+## XINPUT_STATE Structure
 
 ```vb
 <StructLayout(LayoutKind.Explicit)>
@@ -88,12 +96,20 @@ Public Gamepad As XINPUT_GAMEPAD
   - `dwPacketNumber`: A packet number to track the state changes.
   - `Gamepad`: An instance of the `XINPUT_GAMEPAD` structure, which contains the button and thumbstick states.
 
+---
+
+
+## State
+
 ```vb
 Private State As XINPUT_STATE
 ```
 - This declares a private variable `State` of type `XINPUT_STATE`, which will store the current state of the controller.
 
 ---
+
+
+
 
 ## Button Enumeration
 
@@ -376,12 +392,173 @@ End Sub
 
 ---
 
-## Conclusion
-
-This walkthrough has provided a detailed examination of the Xbox controller handling code in VB.NET. By understanding each section and its purpose, you should have a clearer idea of how to work with controller input in your applications. If you have any questions or need further clarification, feel free to ask!
 
 
-This application provides a hands-on way to interact with Xbox controllers using VB.NET. By understanding each section of the code, you can see how the application retrieves controller states, manages input, and provides feedback through vibration.
+
+
+
+
+
+
+## Update Labels Method
+
+```vb
+Private Sub UpdateLabels()
+    For controllerNumber As Integer = 0 To 3
+        UpdateControllerStatusLabel(controllerNumber)
+        If Controllers.Connected(controllerNumber) Then
+            UpdateRightThumbstickXAxisLabel(controllerNumber)
+            UpdateRightThumbstickYAxisLabel(controllerNumber)
+            UpdateLeftThumbstickXAxisLabel(controllerNumber)
+            UpdateLeftThumbstickYAxisLabel(controllerNumber)
+            UpdateLeftTriggerLabel(controllerNumber)
+            UpdateRightTriggerLabel(controllerNumber)
+            UpdateDPadLabel(controllerNumber)
+            UpdateLetterButtonLabel(controllerNumber)
+            UpdateStartBackLabels(controllerNumber)
+            UpdateBumperLabel(controllerNumber)
+            UpdateStickLabel(controllerNumber)
+        End If
+    Next
+End Sub
+```
+- This method updates the UI labels for each controller.
+- It loops through each controller (0 to 3) and checks if it is connected.
+- For connected controllers, it updates various UI elements to reflect the current state of thumbsticks, buttons, and triggers.
+
+### Controller Status Label Update
+
+```vb
+Private Sub UpdateControllerStatusLabel(controllerNumber As Integer)
+    Dim status As String = If(Controllers.Connected(controllerNumber), "Connected", "Not Connected")
+    Dim labelText As String = $"Controller {controllerNumber} {status}"
+    
+    Select Case controllerNumber
+        Case 0
+            LabelController0Status.Text = labelText
+        Case 1
+            LabelController1Status.Text = labelText
+        Case 2
+            LabelController2Status.Text = labelText
+        Case 3
+            LabelController3Status.Text = labelText
+    End Select
+End Sub
+```
+- This method updates the status label for each controller based on whether it is connected or not.
+- It constructs a status message and assigns it to the corresponding label based on the controller number.
+
+### Thumbstick and Trigger Label Updates
+
+```vb
+Private Sub UpdateLeftThumbstickYAxisLabel(controllerNumber As Integer)
+    If Controllers.LeftThumbstickUp(controllerNumber) Then
+        LabelLeftThumbY.Text = $"Controller {controllerNumber} Left Thumbstick Up"
+    End If
+    If Controllers.LeftThumbstickDown(controllerNumber) Then
+        LabelLeftThumbY.Text = $"Controller {controllerNumber} Left Thumbstick Down"
+    End If
+    ClearLeftThumbstickYLabel()
+End Sub
+```
+- This method checks if the left thumbstick is being moved up or down and updates the corresponding UI label.
+- The `ClearLeftThumbstickYLabel` method is called to reset the label if the thumbstick returns to the neutral position.
+
+Similar methods exist for updating the right thumbstick, triggers, D-Pad, and button states, following the same logic.
+
+---
+
+## Vibration Timer Updates
+
+### Vibration Timer Update Method
+
+```vb
+Public Sub UpdateVibrateTimer()
+    UpdateLeftVibrateTimer()
+    UpdateRightVibrateTimer()
+End Sub
+```
+- This method updates the vibration timers for both the left and right motors of the controllers.
+
+### Left Vibration Timer Update
+
+```vb
+Private Sub UpdateLeftVibrateTimer()
+    For Each IsConVibrating In IsLeftVibrating
+        Dim Index As Integer = Array.IndexOf(IsLeftVibrating, IsConVibrating)
+        If Index <> -1 AndAlso IsConVibrating = True Then
+            Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
+            If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
+                IsLeftVibrating(Index) = False
+                Vibration.wLeftMotorSpeed = 0
+            End If
+            SendVibrationMotorCommand(Index)
+        End If
+    Next
+End Sub
+```
+- This method checks if the left motor is still vibrating and calculates how long it has been vibrating.
+- If the elapsed time exceeds the set `TimeToVibe`, it stops the vibration by setting the motor speed to zero.
+- The `SendVibrationMotorCommand` method is called to apply the changes.
+
+### Right Vibration Timer Update
+
+The logic for updating the right vibration timer is similar to that of the left, checking the state and elapsed time, and stopping the motor if necessary.
+
+---
+
+## Handling Button Click Events
+
+### Button Click Event for Vibration
+
+```vb
+Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
+    Controllers.VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+End Sub
+```
+- This event handler is triggered when the "Vibrate Left" button is clicked.
+- It calls the `VibrateLeft` method on the `Controllers` object, passing the selected controller and the desired vibration speed from a trackbar.
+
+### Updating Speed Label
+
+```vb
+Private Sub UpdateSpeedLabel()
+    LabelSpeed.Text = $"Speed: {TrackBarSpeed.Value}"
+End Sub
+```
+- This method updates the label displaying the current speed of the vibration based on the value selected in a trackbar.
+
+---
+
+## Application Initialization
+
+### Application Initialization Method
+
+```vb
+Private Sub InitializeApp()
+    Text = "XInput - Code with Joe"
+    InitializeTimer1()
+    ClearLabels()
+    TrackBarSpeed.Value = 32767
+    UpdateSpeedLabel()
+    InitializeToolTips()
+End Sub
+```
+- This method sets up the application UI, initializes the timer for polling updates, clears any existing labels, sets the default vibration speed, and initializes tooltips for user guidance.
+
+### Timer Initialization
+
+```vb
+Private Sub InitializeTimer1()
+    Timer1.Interval = 15 '1000/60 = 16.67 ms
+    Timer1.Start()
+End Sub
+```
+- This method sets the timer interval to approximately 15 milliseconds, which helps achieve a frame rate of about 60 frames per second (FPS). It then starts the timer.
+
+---
+
+
 
 Feel free to experiment with the code, modify it, and add new features as you learn more about programming! If you have any questions, please post on the **Q & A Discussion Forum**, don’t hesitate to ask.
 
