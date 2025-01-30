@@ -1459,38 +1459,24 @@ Public Class Form1
 
         LabelButtons.Text = String.Empty
 
-
-        LabelLeftThumbX.Text = String.Empty
-
-        LabelLeftThumbY.Text = String.Empty
-
-
-        LabelLeftTrigger.Text = String.Empty
-
-
-        LabelRightThumbX.Text = String.Empty
-
-        LabelRightThumbY.Text = String.Empty
-
-
-        LabelRightTrigger.Text = String.Empty
-
-
         LabelDPad.Text = String.Empty
 
+        LabelLeftThumbX.Text = String.Empty
+        LabelLeftThumbY.Text = String.Empty
+
+        LabelRightThumbX.Text = String.Empty
+        LabelRightThumbY.Text = String.Empty
+
+        LabelLeftTrigger.Text = String.Empty
+        LabelRightTrigger.Text = String.Empty
 
         LabelStart.Text = String.Empty
-
         LabelBack.Text = String.Empty
 
-
         LabelLeftBumper.Text = String.Empty
-
         LabelRightBumper.Text = String.Empty
 
-
         LabelLeftThumbButton.Text = String.Empty
-
         LabelRightThumbButton.Text = String.Empty
 
     End Sub
