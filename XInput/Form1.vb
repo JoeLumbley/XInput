@@ -763,7 +763,7 @@ Public Structure XboxControllers
 
         Catch ex As Exception
 
-            Debug.Print($"Error sending vibration motor command: {ControllerID} | {ex.Message}")
+            Debug.Print($"Error sending vibration motor command: {ControllerID} | {Vibration.wLeftMotorSpeed} |  {Vibration.wRightMotorSpeed} | {ex.Message}")
 
             Exit Sub
 
