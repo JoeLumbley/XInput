@@ -855,17 +855,26 @@ Public Class Form1
 
         UpdateLabels()
 
+
     End Sub
 
     Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
 
-        Controllers.VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+        If Controllers.Connected(NumControllerToVib.Value) Then
+
+            Controllers.VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+
+        End If
 
     End Sub
 
     Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
 
-        Controllers.VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
+        If Controllers.Connected(NumControllerToVib.Value) Then
+
+            Controllers.VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
+
+        End If
 
     End Sub
 
@@ -886,6 +895,8 @@ Public Class Form1
         For controllerNumber As Integer = 0 To 3
 
             UpdateControllerStatusLabel(controllerNumber)
+
+            UpdateControllerToVibeMax(controllerNumber)
 
             If Controllers.Connected(controllerNumber) Then
 
@@ -1064,6 +1075,32 @@ Public Class Form1
                 LabelController3Status.Text = labelText
 
         End Select
+
+    End Sub
+
+    Private Sub UpdateControllerToVibeMax(controllerNumber As Integer)
+
+        Dim NumberOfConnectedControllers As Integer
+
+        For Each Controller In Controllers.Connected
+
+            If Controller Then
+
+                NumberOfConnectedControllers += 1
+
+            End If
+
+        Next
+
+        If NumberOfConnectedControllers > 0 Then
+
+            NumControllerToVib.Maximum = NumberOfConnectedControllers - 1
+
+        Else
+
+            NumControllerToVib.Maximum = 0
+
+        End If
 
     End Sub
 
