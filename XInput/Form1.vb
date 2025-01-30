@@ -757,7 +757,7 @@ Public Structure XboxControllers
             Else
                 ' The motor speed was not set. Fail.
 
-                Debug.Print($"{ControllerID} did not vibrate.")
+                Debug.Print($"{ControllerID} did not vibrate.  {Vibration.wLeftMotorSpeed} |  {Vibration.wRightMotorSpeed} ")
 
             End If
 
