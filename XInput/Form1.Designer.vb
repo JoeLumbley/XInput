@@ -37,7 +37,7 @@ Partial Class Form1
         TrackBarSpeed = New TrackBar()
         LabelSpeed = New Label()
         Label1 = New Label()
-        GroupBox1 = New GroupBox()
+        RumbleGroupBox = New GroupBox()
         Label2 = New Label()
         NumericUpDownTimeToVib = New NumericUpDown()
         GroupBox2 = New GroupBox()
@@ -55,7 +55,7 @@ Partial Class Form1
         LabelController0Status = New Label()
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox1.SuspendLayout()
+        RumbleGroupBox.SuspendLayout()
         CType(NumericUpDownTimeToVib, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox2.SuspendLayout()
         GroupBox3.SuspendLayout()
@@ -182,22 +182,22 @@ Partial Class Form1
         Label1.TabIndex = 13
         Label1.Text = "Controller"
         ' 
-        ' GroupBox1
+        ' RumbleGroupBox
         ' 
-        GroupBox1.Controls.Add(Label2)
-        GroupBox1.Controls.Add(NumericUpDownTimeToVib)
-        GroupBox1.Controls.Add(Label1)
-        GroupBox1.Controls.Add(NumControllerToVib)
-        GroupBox1.Controls.Add(LabelSpeed)
-        GroupBox1.Controls.Add(ButtonVibrateRight)
-        GroupBox1.Controls.Add(ButtonVibrateLeft)
-        GroupBox1.Controls.Add(TrackBarSpeed)
-        GroupBox1.Location = New Point(17, 218)
-        GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(607, 163)
-        GroupBox1.TabIndex = 15
-        GroupBox1.TabStop = False
-        GroupBox1.Text = " Rumble "
+        RumbleGroupBox.Controls.Add(Label2)
+        RumbleGroupBox.Controls.Add(NumericUpDownTimeToVib)
+        RumbleGroupBox.Controls.Add(Label1)
+        RumbleGroupBox.Controls.Add(NumControllerToVib)
+        RumbleGroupBox.Controls.Add(LabelSpeed)
+        RumbleGroupBox.Controls.Add(ButtonVibrateRight)
+        RumbleGroupBox.Controls.Add(ButtonVibrateLeft)
+        RumbleGroupBox.Controls.Add(TrackBarSpeed)
+        RumbleGroupBox.Location = New Point(17, 218)
+        RumbleGroupBox.Name = "RumbleGroupBox"
+        RumbleGroupBox.Size = New Size(607, 163)
+        RumbleGroupBox.TabIndex = 15
+        RumbleGroupBox.TabStop = False
+        RumbleGroupBox.Text = " Rumble "
         ' 
         ' Label2
         ' 
@@ -361,14 +361,14 @@ Partial Class Form1
         ClientSize = New Size(980, 399)
         Controls.Add(GroupBox3)
         Controls.Add(GroupBox2)
-        Controls.Add(GroupBox1)
+        Controls.Add(RumbleGroupBox)
         Name = "Form1"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
         CType(NumControllerToVib, ComponentModel.ISupportInitialize).EndInit()
         CType(TrackBarSpeed, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox1.ResumeLayout(False)
-        GroupBox1.PerformLayout()
+        RumbleGroupBox.ResumeLayout(False)
+        RumbleGroupBox.PerformLayout()
         CType(NumericUpDownTimeToVib, ComponentModel.ISupportInitialize).EndInit()
         GroupBox2.ResumeLayout(False)
         GroupBox2.PerformLayout()
@@ -391,7 +391,7 @@ Partial Class Form1
     Friend WithEvents TrackBarSpeed As TrackBar
     Friend WithEvents LabelSpeed As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents RumbleGroupBox As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents LabelController0Status As Label

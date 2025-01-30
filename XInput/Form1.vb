@@ -1096,9 +1096,13 @@ Public Class Form1
 
             NumControllerToVib.Maximum = NumberOfConnectedControllers - 1
 
+            RumbleGroupBox.Enabled = True
+
         Else
 
             NumControllerToVib.Maximum = 0
+
+            RumbleGroupBox.Enabled = False
 
         End If
 
@@ -1804,7 +1808,7 @@ Public Class Form1
 
         TipText = $"The vibration motors in controllers {Environment.NewLine}provide haptic feedback during gameplay {Environment.NewLine}enhancing the immersive experience"
 
-        ToolTipRumbleGroup.SetToolTip(GroupBox1, TipText)
+        ToolTipRumbleGroup.SetToolTip(RumbleGroupBox, TipText)
 
     End Sub
 
