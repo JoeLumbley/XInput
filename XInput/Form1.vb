@@ -363,9 +363,50 @@ Public Structure XboxControllers
     End Sub
 
     Private Sub UpdateLeftThumbstick(ControllerNumber As Integer)
-        ' The range on the X-axis is -32,768 through 32,767.
-        ' Signed 16-bit (2-byte) integer.
+
+        UpdateLeftThumbstickXaxis(ControllerNumber)
+
+
+
+
+        'UpdateLeftThumbstickYaxis
         ' The range on the Y-axis is -32,768 through 32,767.
+        ' Signed 16-bit (2-byte) integer.
+
+        ' What position is the left thumbstick in on the Y-axis?
+        If State.Gamepad.sThumbLY <= NeutralStart Then
+            ' The left thumbstick is in the down position.
+
+            LeftThumbstickUp(ControllerNumber) = False
+
+            LeftThumbstickYaxisNeutral(ControllerNumber) = False
+
+            LeftThumbstickDown(ControllerNumber) = True
+
+        ElseIf State.Gamepad.sThumbLY >= NeutralEnd Then
+            ' The left thumbstick is in the up position.
+
+            LeftThumbstickDown(ControllerNumber) = False
+
+            LeftThumbstickYaxisNeutral(ControllerNumber) = False
+
+            LeftThumbstickUp(ControllerNumber) = True
+
+        Else
+            ' The left thumbstick is in the neutral position.
+
+            LeftThumbstickUp(ControllerNumber) = False
+
+            LeftThumbstickDown(ControllerNumber) = False
+
+            LeftThumbstickYaxisNeutral(ControllerNumber) = True
+
+        End If
+
+    End Sub
+
+    Private Sub UpdateLeftThumbstickXaxis(ControllerNumber As Integer)
+        ' The range on the X-axis is -32,768 through 32,767.
         ' Signed 16-bit (2-byte) integer.
 
         ' What position is the left thumbstick in on the X-axis?
@@ -395,36 +436,6 @@ Public Structure XboxControllers
             LeftThumbstickRight(ControllerNumber) = False
 
             LeftThumbstickXaxisNeutral(ControllerNumber) = True
-
-        End If
-
-        ' What position is the left thumbstick in on the Y-axis?
-        If State.Gamepad.sThumbLY <= NeutralStart Then
-            ' The left thumbstick is in the down position.
-
-            LeftThumbstickUp(ControllerNumber) = False
-
-            LeftThumbstickYaxisNeutral(ControllerNumber) = False
-
-            LeftThumbstickDown(ControllerNumber) = True
-
-        ElseIf State.Gamepad.sThumbLY >= NeutralEnd Then
-            ' The left thumbstick is in the up position.
-
-            LeftThumbstickDown(ControllerNumber) = False
-
-            LeftThumbstickYaxisNeutral(ControllerNumber) = False
-
-            LeftThumbstickUp(ControllerNumber) = True
-
-        Else
-            ' The left thumbstick is in the neutral position.
-
-            LeftThumbstickUp(ControllerNumber) = False
-
-            LeftThumbstickDown(ControllerNumber) = False
-
-            LeftThumbstickYaxisNeutral(ControllerNumber) = True
 
         End If
 
