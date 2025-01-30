@@ -121,6 +121,30 @@ Public Gamepad As XINPUT_GAMEPAD
 
 
 
+### XINPUT_GAMEPAD Structure
+```vb
+<StructLayout(LayoutKind.Sequential)>
+Public Structure XINPUT_GAMEPAD
+    Public wButtons As UShort ' Unsigned 16-bit (2-byte) integer.
+    Public bLeftTrigger As Byte ' Unsigned 8-bit (1-byte) integer.
+    Public bRightTrigger As Byte
+    Public sThumbLX As Short ' Signed 16-bit (2-byte) integer.
+    Public sThumbLY As Short
+    Public sThumbRX As Short
+    Public sThumbRY As Short
+End Structure
+```
+- **wButtons**: Holds button states (0 to 65,535).
+- **bLeftTrigger** and **bRightTrigger**: Trigger button values (0 to 255).
+- **sThumbLX**, **sThumbLY**, **sThumbRX**, **sThumbRY**: Thumbstick values (-32,768 to 32,767).
+
+[Index](#index)
+
+---
+
+
+
+
 
 
 
