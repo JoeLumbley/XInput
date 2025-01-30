@@ -314,8 +314,6 @@ Public Structure XboxControllers
     End Sub
 
     Private Sub UpdateButtons(CID As Integer)
-        ' The range of buttons is 0 to 65,535.
-        ' wButtons is a Unsigned 16-bit (2-byte) integer.
 
         UpdateDPadButtons(CID)
 
@@ -331,7 +329,6 @@ Public Structure XboxControllers
 
         UpdateLetterButtonsNeutral(CID)
 
-        ' Store the button states for the current controller ID
         Buttons(CID) = State.Gamepad.wButtons
 
     End Sub
@@ -471,20 +468,20 @@ Public Structure XboxControllers
         If State.Gamepad.sThumbRY <= NeutralStart Then
             ' The right thumbstick is in the down position.
 
-            RightThumbstickDown(ControllerNumber) = True
-
             RightThumbstickUp(ControllerNumber) = False
 
             RightThumbstickYaxisNeutral(ControllerNumber) = False
 
+            RightThumbstickDown(ControllerNumber) = True
+
         ElseIf State.Gamepad.sThumbRY >= NeutralEnd Then
             ' The right thumbstick is in the up position.
-
-            RightThumbstickUp(ControllerNumber) = True
 
             RightThumbstickDown(ControllerNumber) = False
 
             RightThumbstickYaxisNeutral(ControllerNumber) = False
+
+            RightThumbstickUp(ControllerNumber) = True
 
         Else
             ' The right thumbstick is in the neutral position.
@@ -507,29 +504,29 @@ Public Structure XboxControllers
         If State.Gamepad.sThumbRX <= NeutralStart Then
             ' The right thumbstick is in the left position.
 
-            RightThumbstickLeft(ControllerNumber) = True
-
             RightThumbstickRight(ControllerNumber) = False
 
             RightThumbstickXaxisNeutral(ControllerNumber) = False
+
+            RightThumbstickLeft(ControllerNumber) = True
 
         ElseIf State.Gamepad.sThumbRX >= NeutralEnd Then
             ' The right thumbstick is in the right position.
 
-            RightThumbstickRight(ControllerNumber) = True
-
             RightThumbstickLeft(ControllerNumber) = False
 
             RightThumbstickXaxisNeutral(ControllerNumber) = False
 
+            RightThumbstickRight(ControllerNumber) = True
+
         Else
             ' The right thumbstick is in the neutral position.
-
-            RightThumbstickXaxisNeutral(ControllerNumber) = True
 
             RightThumbstickLeft(ControllerNumber) = False
 
             RightThumbstickRight(ControllerNumber) = False
+
+            RightThumbstickXaxisNeutral(ControllerNumber) = True
 
         End If
 
