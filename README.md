@@ -29,18 +29,6 @@ With a clean and well-commented codebase, this project serves as an invaluable r
 
 Welcome to this detailed walkthrough of a code structure designed for Xbox controller input handling using Visual Basic .NET (VB.NET). This document will guide you through each line of the code, explaining its purpose and functionality.
 
-## Table of Contents
-- [Imports and Structure Definitions](#imports-and-structure-definitions)
-- [XInput Functions and Structures](#xinput-functions-and-structures)
-- [Button Enumeration](#button-enumeration)
-- [Neutral Zone Constants](#neutral-zone-constants)
-- [Initialization Method](#initialization-method)
-- [Update Method](#update-method)
-- [State Update Method](#state-update-method)
-- [Button and Thumbstick Updates](#button-and-thumbstick-updates)
-- [Vibration Functions](#vibration-functions)
-- [Form Initialization](#form-initialization)
-- [Conclusion](#conclusion)
 
 ---
 
@@ -603,6 +591,18 @@ Understanding the trigger threshold is essential for both developers and players
 
 
 
+## Table of Contents
+- [Imports and Structure Definitions](#imports-and-structure-definitions)
+- [XInput Functions and Structures](#xinput-functions-and-structures)
+- [Button Enumeration](#button-enumeration)
+- [Neutral Zone Constants](#neutral-zone-constants)
+- [Initialization Method](#initialization-method)
+- [Update Method](#update-method)
+- [State Update Method](#state-update-method)
+- [Button and Thumbstick Updates](#button-and-thumbstick-updates)
+- [Vibration Functions](#vibration-functions)
+- [Form Initialization](#form-initialization)
+- [Conclusion](#conclusion)
 
 
 
