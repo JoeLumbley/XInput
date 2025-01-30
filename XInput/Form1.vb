@@ -408,7 +408,7 @@ Public Structure XboxControllers
 
     Private Sub UpdateLeftThumbstickXaxis(ControllerNumber As Integer)
         ' The range on the X-axis is -32,768 through 32,767.
-        ' Signed 16-bit (2-byte) integer.
+        ' sThumbLX is a signed 16-bit (2-byte) integer.
 
         ' What position is the left thumbstick in on the X-axis?
         If State.Gamepad.sThumbLX <= NeutralStart Then
@@ -443,7 +443,6 @@ Public Structure XboxControllers
     End Sub
 
     Private Sub UpdateRightThumbstick(ControllerNumber As Integer)
-
 
         UpdateRightThumbstickXaxis(ControllerNumber)
 
