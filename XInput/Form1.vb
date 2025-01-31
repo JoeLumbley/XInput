@@ -849,6 +849,7 @@ Public Class Form1
 
         UpdateLabels()
 
+        UpdateRumbleGroupUI()
 
     End Sub
 
@@ -886,27 +887,27 @@ Public Class Form1
 
     Private Sub UpdateLabels()
 
-        For controllerNumber As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            UpdateControllerStatusLabel(controllerNumber)
+            UpdateControllerStatusLabel(ControllerNumber)
 
-            UpdateControllerToVibeMax(controllerNumber)
+            'UpdateControllerToVibeMax()
 
-            If Controllers.Connected(controllerNumber) Then
+            If Controllers.Connected(ControllerNumber) Then
 
-                UpdateThumbstickLabels(controllerNumber)
+                UpdateThumbstickLabels(ControllerNumber)
 
-                UpdateTriggerLabels(controllerNumber)
+                UpdateTriggerLabels(ControllerNumber)
 
-                UpdateDPadLabel(controllerNumber)
+                UpdateDPadLabel(ControllerNumber)
 
-                UpdateLetterButtonLabel(controllerNumber)
+                UpdateLetterButtonLabel(ControllerNumber)
 
-                UpdateStartBackLabels(controllerNumber)
+                UpdateStartBackLabels(ControllerNumber)
 
-                UpdateBumperLabels(controllerNumber)
+                UpdateBumperLabels(ControllerNumber)
 
-                UpdateStickLabels(controllerNumber)
+                UpdateStickLabels(ControllerNumber)
 
             End If
 
@@ -1052,7 +1053,6 @@ Public Class Form1
 
     End Sub
 
-
     Private Sub InitializeTimer1()
 
         ' The tick frequency in milliseconds.
@@ -1096,19 +1096,19 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateControllerToVibeMax(controllerNumber As Integer)
+    Private Sub UpdateRumbleGroupUI()
 
         Dim NumberOfConnectedControllers As Integer
 
         Dim HighestIndex As Integer
 
-        For i As Integer = 0 To Controllers.Connected.Length - 1
+        For ControllerNumber As Integer = 0 To Controllers.Connected.Length - 1
 
-            If Controllers.Connected(i) Then
+            If Controllers.Connected(ControllerNumber) Then
 
                 NumberOfConnectedControllers += 1
 
-                HighestIndex = i
+                HighestIndex = ControllerNumber
 
             End If
 
