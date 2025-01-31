@@ -35,9 +35,9 @@ With a clean and well-commented codebase, this project serves as an invaluable r
 
 
 
-# XInput Controller Integration: A Detailed Walkthrough
+# Code Walkthrough
 
-Welcome to the XInput Controller Integration tutorial! In this lesson, we will go through the provided code line by line to understand how it works. This code is designed to integrate Xbox controller support into applications, allowing developers to interact with Xbox controllers seamlessly. Let's dive in!
+Welcome to the XInput project in this walkthrough, we will go through the code line by line to understand how it works. This code is designed to integrate Xbox controller support into applications, allowing developers to interact with Xbox controllers seamlessly. Let's dive in!
 
 ## Imports
 
