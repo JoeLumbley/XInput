@@ -1102,7 +1102,7 @@ Public Class Form1
 
         Dim HighestConnectedControllerNumber As Integer
 
-        For ControllerNumber As Integer = 0 To Controllers.Connected.Length - 1
+        For ControllerNumber As Integer = 0 To 3
 
             If Controllers.Connected(ControllerNumber) Then
 
