@@ -272,7 +272,7 @@ Public Structure XboxControllers
 
         Next
 
-        UpdateVibrateTimer()
+        UpdateVibrateTimers()
 
     End Sub
 
@@ -771,41 +771,13 @@ Public Structure XboxControllers
 
     End Sub
 
-    Public Sub UpdateVibrateTimer()
+    Public Sub UpdateVibrateTimers()
 
         UpdateLeftVibrateTimer()
 
         UpdateRightVibrateTimer()
 
     End Sub
-
-    'Private Sub UpdateLeftVibrateTimer()
-
-    '    For Each IsConVibrating In IsLeftVibrating
-
-    '        Dim Index As Integer =
-    '            Array.IndexOf(IsLeftVibrating, IsConVibrating)
-
-    '        If Index <> -1 AndAlso IsConVibrating = True Then
-
-    '            Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
-
-    '            If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
-
-    '                IsLeftVibrating(Index) = False
-
-    '                ' Turn left motor off (set zero speed).
-    '                Vibration.wLeftMotorSpeed = 0
-
-    '            End If
-
-    '            SendVibrationMotorCommand(Index)
-
-    '        End If
-
-    '    Next
-
-    'End Sub
 
     Private Sub UpdateLeftVibrateTimer()
 
@@ -832,34 +804,6 @@ Public Structure XboxControllers
 
     End Sub
 
-    'Private Sub UpdateRightVibrateTimer()
-
-    '    For Each IsConVibrating In IsRightVibrating
-
-    '        Dim Index As Integer =
-    '            Array.IndexOf(IsRightVibrating, IsConVibrating)
-
-    '        If Index <> -1 AndAlso IsConVibrating = True Then
-
-    '            Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Index)
-
-    '            If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
-
-    '                IsRightVibrating(Index) = False
-
-    '                ' Turn right motor off (set zero speed).
-    '                Vibration.wRightMotorSpeed = 0
-
-    '            End If
-
-    '            SendVibrationMotorCommand(Index)
-
-    '        End If
-
-    '    Next
-
-    'End Sub
-
     Private Sub UpdateRightVibrateTimer()
 
         For Index As Integer = 0 To 3
@@ -884,7 +828,6 @@ Public Structure XboxControllers
         Next
 
     End Sub
-
 
 End Structure
 
