@@ -297,22 +297,6 @@ Public Structure XboxControllers
 
     End Sub
 
-    Private Sub UpdateThumbsticks(controllerNumber As Integer)
-
-        UpdateLeftThumbstick(controllerNumber)
-
-        UpdateRightThumbstick(controllerNumber)
-
-    End Sub
-
-    Private Sub UpdateTriggers(controllerNumber As Integer)
-
-        UpdateLeftTrigger(controllerNumber)
-
-        UpdateRightTrigger(controllerNumber)
-
-    End Sub
-
     Private Sub UpdateButtons(CID As Integer)
 
         UpdateDPadButtons(CID)
@@ -330,6 +314,22 @@ Public Structure XboxControllers
         UpdateLetterButtonsNeutral(CID)
 
         Buttons(CID) = State.Gamepad.wButtons
+
+    End Sub
+
+    Private Sub UpdateThumbsticks(controllerNumber As Integer)
+
+        UpdateLeftThumbstick(controllerNumber)
+
+        UpdateRightThumbstick(controllerNumber)
+
+    End Sub
+
+    Private Sub UpdateTriggers(controllerNumber As Integer)
+
+        UpdateLeftTrigger(controllerNumber)
+
+        UpdateRightTrigger(controllerNumber)
 
     End Sub
 
@@ -779,14 +779,39 @@ Public Structure XboxControllers
 
     End Sub
 
+    'Private Sub UpdateLeftVibrateTimer()
+
+    '    For Each IsConVibrating In IsLeftVibrating
+
+    '        Dim Index As Integer =
+    '            Array.IndexOf(IsLeftVibrating, IsConVibrating)
+
+    '        If Index <> -1 AndAlso IsConVibrating = True Then
+
+    '            Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
+
+    '            If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
+
+    '                IsLeftVibrating(Index) = False
+
+    '                ' Turn left motor off (set zero speed).
+    '                Vibration.wLeftMotorSpeed = 0
+
+    '            End If
+
+    '            SendVibrationMotorCommand(Index)
+
+    '        End If
+
+    '    Next
+
+    'End Sub
+
     Private Sub UpdateLeftVibrateTimer()
 
-        For Each IsConVibrating In IsLeftVibrating
+        For Index As Integer = 0 To 3
 
-            Dim Index As Integer =
-                Array.IndexOf(IsLeftVibrating, IsConVibrating)
-
-            If Index <> -1 AndAlso IsConVibrating = True Then
+            If IsLeftVibrating(Index) Then
 
                 Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
 
@@ -807,14 +832,39 @@ Public Structure XboxControllers
 
     End Sub
 
+    'Private Sub UpdateRightVibrateTimer()
+
+    '    For Each IsConVibrating In IsRightVibrating
+
+    '        Dim Index As Integer =
+    '            Array.IndexOf(IsRightVibrating, IsConVibrating)
+
+    '        If Index <> -1 AndAlso IsConVibrating = True Then
+
+    '            Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Index)
+
+    '            If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
+
+    '                IsRightVibrating(Index) = False
+
+    '                ' Turn right motor off (set zero speed).
+    '                Vibration.wRightMotorSpeed = 0
+
+    '            End If
+
+    '            SendVibrationMotorCommand(Index)
+
+    '        End If
+
+    '    Next
+
+    'End Sub
+
     Private Sub UpdateRightVibrateTimer()
 
-        For Each IsConVibrating In IsRightVibrating
+        For Index As Integer = 0 To 3
 
-            Dim Index As Integer =
-                Array.IndexOf(IsRightVibrating, IsConVibrating)
-
-            If Index <> -1 AndAlso IsConVibrating = True Then
+            If IsRightVibrating(Index) Then
 
                 Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Index)
 
@@ -822,7 +872,7 @@ Public Structure XboxControllers
 
                     IsRightVibrating(Index) = False
 
-                    ' Turn right motor off (set zero speed).
+                    ' Turn left motor off (set zero speed).
                     Vibration.wRightMotorSpeed = 0
 
                 End If
@@ -834,6 +884,7 @@ Public Structure XboxControllers
         Next
 
     End Sub
+
 
 End Structure
 
