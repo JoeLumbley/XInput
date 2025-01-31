@@ -1162,19 +1162,19 @@ Public Class Form1
 
     Private Sub DoButtonLogic()
 
-        For controllerNumber As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(controllerNumber) Then
+            If Controllers.Connected(ControllerNumber) Then
 
-                UpdateDPadLabel(controllerNumber)
+                UpdateDPadLabel(ControllerNumber)
 
-                UpdateLetterButtonLabel(controllerNumber)
+                UpdateLetterButtonLabel(ControllerNumber)
 
-                UpdateStartBackLabels(controllerNumber)
+                UpdateStartBackLabels(ControllerNumber)
 
-                UpdateBumperLabels(controllerNumber)
+                UpdateBumperLabels(ControllerNumber)
 
-                UpdateStickLabels(controllerNumber)
+                UpdateStickLabels(ControllerNumber)
 
             End If
 
@@ -1283,10 +1283,10 @@ Public Class Form1
         Dim Neutral As Boolean = True
 
         ' Search for a non-neutral letter button.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Not Controllers.LetterButtonsNeutral(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Not Controllers.LetterButtonsNeutral(ControllerNumber) Then
                 ' A non-neutral letter button was found.
 
                 Neutral = False ' Report the non-neutral letter button.
@@ -1315,10 +1315,10 @@ Public Class Form1
         Dim Neutral As Boolean = True
 
         ' Search for a non-neutral left thumbstick on the Y-axis.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Not Controllers.LeftThumbstickYaxisNeutral(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Not Controllers.LeftThumbstickYaxisNeutral(ControllerNumber) Then
                 ' A non-neutral thumbstick was found.
 
                 Neutral = False ' Report the non-neutral thumbstick.
@@ -1349,10 +1349,10 @@ Public Class Form1
         ' on the X-axis are neutral initially.
 
         ' Search for a non-neutral left thumbstick on the X-axis.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Not Controllers.LeftThumbstickXaxisNeutral(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Not Controllers.LeftThumbstickXaxisNeutral(ControllerNumber) Then
                 ' A non-neutral thumbstick was found.
 
                 Neutral = False ' Report the non-neutral thumbstick.
@@ -1383,10 +1383,10 @@ Public Class Form1
         Dim Neutral As Boolean = True
 
         ' Search for a non-neutral right thumbstick on the X-axis.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Not Controllers.RightThumbstickXaxisNeutral(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Not Controllers.RightThumbstickXaxisNeutral(ControllerNumber) Then
                 ' A non-neutral thumbstick was found.
 
                 Neutral = False ' Report the non-neutral thumbstick.
@@ -1417,10 +1417,10 @@ Public Class Form1
         Dim Neutral As Boolean = True
 
         ' Search for a non-neutral right thumbstick on the Y-axis.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Not Controllers.RightThumbstickYaxisNeutral(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Not Controllers.RightThumbstickYaxisNeutral(ControllerNumber) Then
                 ' A non-neutral thumbstick was found.
 
                 Neutral = False ' Report the non-neutral thumbstick.
@@ -1451,10 +1451,10 @@ Public Class Form1
         Dim NotActive As Boolean = True
 
         ' Search for a active right trigger.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Controllers.RightTrigger(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Controllers.RightTrigger(ControllerNumber) Then
                 ' A active right trigger was found.
 
                 NotActive = False ' Report the active right trigger.
@@ -1483,10 +1483,10 @@ Public Class Form1
         Dim NotActive As Boolean = True
 
         ' Search for a active left trigger.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Controllers.LeftTrigger(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Controllers.LeftTrigger(ControllerNumber) Then
                 ' A active left trigger was found.
 
                 NotActive = False ' Report the active left trigger.
@@ -1540,10 +1540,10 @@ Public Class Form1
         Dim ConSum As Boolean = True
 
         ' Search for a non-neutral DPad.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Not Controllers.DPadNeutral(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Not Controllers.DPadNeutral(ControllerNumber) Then
                 ' A non-neutral DPad was found.
 
                 ConSum = False ' Report the non-neutral DPad.
@@ -1571,10 +1571,10 @@ Public Class Form1
         Dim NotActive As Boolean = True
 
         ' Search for a active start button.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Controllers.Start(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Controllers.Start(ControllerNumber) Then
                 ' A active start button was found.
 
                 NotActive = False ' Report the active start button.
@@ -1602,10 +1602,10 @@ Public Class Form1
         Dim NotActive As Boolean = True
 
         ' Search for a active back button.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Controllers.Back(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Controllers.Back(ControllerNumber) Then
                 ' A active back button was found.
 
                 NotActive = False ' Report the active back button.
@@ -1634,10 +1634,10 @@ Public Class Form1
         Dim NotActive As Boolean = True
 
         ' Search for a active left bumper.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Controllers.LeftBumper(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Controllers.LeftBumper(ControllerNumber) Then
                 ' A active left bumper was found.
 
                 NotActive = False ' Report the active left bumper.
@@ -1666,10 +1666,10 @@ Public Class Form1
         Dim NotActive As Boolean = True
 
         ' Search for a active right bumper.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Controllers.RightBumper(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Controllers.RightBumper(ControllerNumber) Then
                 ' A active right bumper was found.
 
                 NotActive = False ' Report the active right bumper.
@@ -1698,10 +1698,10 @@ Public Class Form1
         Dim NotActive As Boolean = True
 
         ' Search for a active left thumbstick button.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Controllers.LeftStick(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Controllers.LeftStick(ControllerNumber) Then
                 ' A active left thumbstick button was found.
 
                 NotActive = False ' Report the active left thumbstick button.
@@ -1730,10 +1730,10 @@ Public Class Form1
         Dim NotActive As Boolean = True
 
         ' Search for a active right thumbstick button.
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Controllers.Connected(i) AndAlso
-               Controllers.RightStick(i) Then
+            If Controllers.Connected(ControllerNumber) AndAlso
+               Controllers.RightStick(ControllerNumber) Then
                 ' A active right thumbstick button was found.
 
                 NotActive = False ' Report the active right thumbstick button.
