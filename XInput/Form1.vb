@@ -930,13 +930,25 @@ Public Class Form1
 
     Private Sub UpdateThumbstickLabels(controllerNumber As Integer)
 
-        UpdateRightThumbstickXAxisLabel(controllerNumber)
+        UpdateRightThumbstickLabels(controllerNumber)
 
-        UpdateRightThumbstickYAxisLabel(controllerNumber)
+        UpdateLeftThumbstickLabels(controllerNumber)
+
+    End Sub
+
+    Private Sub UpdateLeftThumbstickLabels(controllerNumber As Integer)
 
         UpdateLeftThumbstickXAxisLabel(controllerNumber)
 
         UpdateLeftThumbstickYAxisLabel(controllerNumber)
+
+    End Sub
+
+    Private Sub UpdateRightThumbstickLabels(controllerNumber As Integer)
+
+        UpdateRightThumbstickXAxisLabel(controllerNumber)
+
+        UpdateRightThumbstickYAxisLabel(controllerNumber)
 
     End Sub
 
