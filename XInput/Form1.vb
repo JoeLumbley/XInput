@@ -900,17 +900,9 @@ Public Class Form1
 
             If Controllers.Connected(controllerNumber) Then
 
-                UpdateRightThumbstickXAxisLabel(controllerNumber)
+                UpdateThumbstickLabels(controllerNumber)
 
-                UpdateRightThumbstickYAxisLabel(controllerNumber)
-
-                UpdateLeftThumbstickXAxisLabel(controllerNumber)
-
-                UpdateLeftThumbstickYAxisLabel(controllerNumber)
-
-                UpdateLeftTriggerLabel(controllerNumber)
-
-                UpdateRightTriggerLabel(controllerNumber)
+                UpdateTriggerLabels(controllerNumber)
 
                 UpdateDPadLabel(controllerNumber)
 
@@ -925,6 +917,26 @@ Public Class Form1
             End If
 
         Next
+
+    End Sub
+
+    Private Sub UpdateTriggerLabels(controllerNumber As Integer)
+
+        UpdateLeftTriggerLabel(controllerNumber)
+
+        UpdateRightTriggerLabel(controllerNumber)
+
+    End Sub
+
+    Private Sub UpdateThumbstickLabels(controllerNumber As Integer)
+
+        UpdateRightThumbstickXAxisLabel(controllerNumber)
+
+        UpdateRightThumbstickYAxisLabel(controllerNumber)
+
+        UpdateLeftThumbstickXAxisLabel(controllerNumber)
+
+        UpdateLeftThumbstickYAxisLabel(controllerNumber)
 
     End Sub
 
