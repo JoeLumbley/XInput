@@ -910,9 +910,9 @@ Public Class Form1
 
                 UpdateStartBackLabels(controllerNumber)
 
-                UpdateBumperLabel(controllerNumber)
+                UpdateBumperLabels(controllerNumber)
 
-                UpdateStickLabel(controllerNumber)
+                UpdateStickLabels(controllerNumber)
 
             End If
 
@@ -1166,9 +1166,9 @@ Public Class Form1
 
                 UpdateStartBackLabels(controllerNumber)
 
-                UpdateBumperLabel(controllerNumber)
+                UpdateBumperLabels(controllerNumber)
 
-                UpdateStickLabel(controllerNumber)
+                UpdateStickLabels(controllerNumber)
 
             End If
 
@@ -1225,7 +1225,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateBumperLabel(ControllerNumber As Integer)
+    Private Sub UpdateBumperLabels(ControllerNumber As Integer)
 
         If Controllers.LeftBumper(ControllerNumber) Then
 
@@ -1247,7 +1247,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateStickLabel(ControllerNumber As Integer)
+    Private Sub UpdateStickLabels(ControllerNumber As Integer)
 
         If Controllers.LeftStick(ControllerNumber) Then
 
