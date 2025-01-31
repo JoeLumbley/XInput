@@ -228,11 +228,11 @@ Public Structure XboxControllers
         LeftVibrateStart = New Date(0 To 3) {}
         RightVibrateStart = New Date(0 To 3) {}
 
-        For i As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            LeftVibrateStart(i) = Now
+            LeftVibrateStart(ControllerNumber) = Now
 
-            RightVibrateStart(i) = Now
+            RightVibrateStart(ControllerNumber) = Now
 
         Next
 
@@ -251,10 +251,10 @@ Public Structure XboxControllers
         ' Every second check for connected controllers.
         If ElapsedTime.TotalSeconds >= 1 Then
 
-            For controllerNumber As Integer = 0 To 3 ' Up to 4 controllers
+            For ControllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
-                Connected(controllerNumber) =
-                    IsConnected(controllerNumber)
+                Connected(ControllerNumber) =
+                    IsConnected(ControllerNumber)
 
             Next
 
@@ -262,11 +262,11 @@ Public Structure XboxControllers
 
         End If
 
-        For controllerNumber As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If Connected(controllerNumber) Then
+            If Connected(ControllerNumber) Then
 
-                UpdateState(controllerNumber)
+                UpdateState(ControllerNumber)
 
             End If
 
@@ -781,22 +781,22 @@ Public Structure XboxControllers
 
     Private Sub UpdateLeftVibrateTimer()
 
-        For Index As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If IsLeftVibrating(Index) Then
+            If IsLeftVibrating(ControllerNumber) Then
 
-                Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
+                Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(ControllerNumber)
 
                 If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
 
-                    IsLeftVibrating(Index) = False
+                    IsLeftVibrating(ControllerNumber) = False
 
                     ' Turn left motor off (set zero speed).
                     Vibration.wLeftMotorSpeed = 0
 
                 End If
 
-                SendVibrationMotorCommand(Index)
+                SendVibrationMotorCommand(ControllerNumber)
 
             End If
 
@@ -806,22 +806,22 @@ Public Structure XboxControllers
 
     Private Sub UpdateRightVibrateTimer()
 
-        For Index As Integer = 0 To 3
+        For ControllerNumber As Integer = 0 To 3
 
-            If IsRightVibrating(Index) Then
+            If IsRightVibrating(ControllerNumber) Then
 
-                Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(Index)
+                Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(ControllerNumber)
 
                 If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
 
-                    IsRightVibrating(Index) = False
+                    IsRightVibrating(ControllerNumber) = False
 
                     ' Turn left motor off (set zero speed).
                     Vibration.wRightMotorSpeed = 0
 
                 End If
 
-                SendVibrationMotorCommand(Index)
+                SendVibrationMotorCommand(ControllerNumber)
 
             End If
 
