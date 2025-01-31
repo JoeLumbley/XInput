@@ -1100,7 +1100,7 @@ Public Class Form1
 
         Dim NumberOfConnectedControllers As Integer
 
-        Dim HighestIndex As Integer
+        Dim HighestConnectedControllerNumber As Integer
 
         For ControllerNumber As Integer = 0 To Controllers.Connected.Length - 1
 
@@ -1108,7 +1108,7 @@ Public Class Form1
 
                 NumberOfConnectedControllers += 1
 
-                HighestIndex = ControllerNumber
+                HighestConnectedControllerNumber = ControllerNumber
 
             End If
 
@@ -1116,7 +1116,7 @@ Public Class Form1
 
         If NumberOfConnectedControllers > 0 Then
 
-            NumControllerToVib.Maximum = HighestIndex
+            NumControllerToVib.Maximum = HighestConnectedControllerNumber
 
             RumbleGroupBox.Enabled = True
 
