@@ -1108,11 +1108,27 @@ Public Class Form1
 
                 ButtonVibrateRight.Enabled = True
 
+                TrackBarSpeed.Enabled = True
+
+                LabelSpeed.Enabled = True
+
+                NumericUpDownTimeToVib.Enabled = True
+
+                LabelTimeToVibe.Enabled = True
+
             Else
 
                 ButtonVibrateLeft.Enabled = False
 
                 ButtonVibrateRight.Enabled = False
+
+                TrackBarSpeed.Enabled = False
+
+                LabelSpeed.Enabled = False
+
+                NumericUpDownTimeToVib.Enabled = False
+
+                LabelTimeToVibe.Enabled = False
 
             End If
 

@@ -38,7 +38,7 @@ Partial Class Form1
         LabelSpeed = New Label()
         Label1 = New Label()
         RumbleGroupBox = New GroupBox()
-        Label2 = New Label()
+        LabelTimeToVibe = New Label()
         NumericUpDownTimeToVib = New NumericUpDown()
         GroupBox2 = New GroupBox()
         LabelRightThumbButton = New Label()
@@ -184,7 +184,7 @@ Partial Class Form1
         ' 
         ' RumbleGroupBox
         ' 
-        RumbleGroupBox.Controls.Add(Label2)
+        RumbleGroupBox.Controls.Add(LabelTimeToVibe)
         RumbleGroupBox.Controls.Add(NumericUpDownTimeToVib)
         RumbleGroupBox.Controls.Add(Label1)
         RumbleGroupBox.Controls.Add(NumControllerToVib)
@@ -199,14 +199,14 @@ Partial Class Form1
         RumbleGroupBox.TabStop = False
         RumbleGroupBox.Text = " Rumble "
         ' 
-        ' Label2
+        ' LabelTimeToVibe
         ' 
-        Label2.AutoSize = True
-        Label2.Location = New Point(306, 37)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(79, 25)
-        Label2.TabIndex = 15
-        Label2.Text = "Time ms"
+        LabelTimeToVibe.AutoSize = True
+        LabelTimeToVibe.Location = New Point(306, 37)
+        LabelTimeToVibe.Name = "LabelTimeToVibe"
+        LabelTimeToVibe.Size = New Size(79, 25)
+        LabelTimeToVibe.TabIndex = 15
+        LabelTimeToVibe.Text = "Time ms"
         ' 
         ' NumericUpDownTimeToVib
         ' 
@@ -406,5 +406,5 @@ Partial Class Form1
     Friend WithEvents LabelLeftThumbButton As Label
     Friend WithEvents LabelRightThumbButton As Label
     Friend WithEvents NumericUpDownTimeToVib As NumericUpDown
-    Friend WithEvents Label2 As Label
+    Friend WithEvents LabelTimeToVibe As Label
 End Class
