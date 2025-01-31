@@ -21,7 +21,6 @@ With a clean and well-commented codebase, this project serves as an invaluable r
 
 
 
-# Code Walkthrough
 
 
 
@@ -34,144 +33,82 @@ With a clean and well-commented codebase, this project serves as an invaluable r
 
 
 
+
+
+# XInput Controller Integration: A Detailed Walkthrough
+
+Welcome to the XInput Controller Integration tutorial! In this lesson, we will go through the provided code line by line to understand how it works. This code is designed to integrate Xbox controller support into applications, allowing developers to interact with Xbox controllers seamlessly. Let's dive in!
 
 ## Imports
 
 ```vb
 Imports System.Runtime.InteropServices
 ```
-- This line imports the `System.Runtime.InteropServices` namespace, which provides functionality for interacting with unmanaged code, such as calling native Windows API functions. This is essential for working with the Xbox controller.
-
-[Index](#index)
-
----
-
-
-
-
-
-
-
+- **Imports System.Runtime.InteropServices**: This line imports the `System.Runtime.InteropServices` namespace, which provides functionality for interacting with unmanaged code. This is crucial for calling functions from the XInput library, which is used to communicate with Xbox controllers.
 
 ## XboxControllers Structure
-
 
 ```vb
 Public Structure XboxControllers
 ```
-- Here, we define a public structure named `XboxControllers`. A structure is a value type that can contain data members and methods. This structure will hold all the necessary information and functions related to Xbox controller input.
+- **Public Structure XboxControllers**: This defines a public structure named `XboxControllers`. A structure is a value type that can hold data members and methods related to Xbox controller input.
 
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-## DLL Import
+### DllImport for XInputGetState
 
 ```vb
 <DllImport("XInput1_4.dll")>
 Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
 End Function
 ```
-- This code declares a function `XInputGetState` from the `XInput1_4.dll` library, which retrieves the current state of the specified Xbox controller.
-- **Parameters:**
-  - `dwUserIndex`: An integer representing the index of the controller (0 for the first controller, 1 for the second, etc.).
-  - `pState`: A reference to an `XINPUT_STATE` structure that will be filled with the controller's state.
-- The function returns an integer indicating the success or failure of the call.
+- **<DllImport("XInput1_4.dll")>**: This attribute allows the function `XInputGetState` to be called from the XInput DLL, which is necessary for getting the current state of the Xbox controller.
+- **Private Shared Function XInputGetState**: This function retrieves the current state of the specified Xbox controller.
+  - **dwUserIndex**: An integer that represents the index of the controller (0 for the first, 1 for the second, etc.).
+  - **ByRef pState As XINPUT_STATE**: A reference to an `XINPUT_STATE` structure that will be filled with the controller's state. The function returns an integer indicating success or failure.
 
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-## XINPUT_STATE Structure
+### XINPUT_STATE Structure
 
 ```vb
 <StructLayout(LayoutKind.Explicit)>
 Public Structure XINPUT_STATE
+    <FieldOffset(0)>
+    Public dwPacketNumber As UInteger ' Unsigned 32-bit (4-byte) integer range 0 through 4,294,967,295.
+    <FieldOffset(4)>
+    Public Gamepad As XINPUT_GAMEPAD
+End Structure
 ```
-- This defines the `XINPUT_STATE` structure, which will hold the state of the controller.
-- The `LayoutKind.Explicit` attribute allows us to define the exact layout of the data in memory.
-
-```vb
-<FieldOffset(0)>
-Public dwPacketNumber As UInteger ' Unsigned 32-bit (4-byte) integer range 0 through 4,294,967,295.
-<FieldOffset(4)>
-Public Gamepad As XINPUT_GAMEPAD
-```
-- This specifies two fields within the `XINPUT_STATE` structure:
-  - `dwPacketNumber`: A packet number to track the state changes.
-  - `Gamepad`: An instance of the `XINPUT_GAMEPAD` structure, which contains the button and thumbstick states.
-
-[Index](#index)
-
----
-
-
+- **<StructLayout(LayoutKind.Explicit)>**: This attribute specifies that the layout of the structure is defined explicitly, allowing for precise control over the memory layout.
+- **Public Structure XINPUT_STATE**: This structure holds the state of the controller.
+  - **dwPacketNumber**: An unsigned 32-bit integer that helps track the state changes.
+  - **Gamepad**: An instance of the `XINPUT_GAMEPAD` structure, which contains the button and thumbstick states.
 
 ### XINPUT_GAMEPAD Structure
+
 ```vb
 <StructLayout(LayoutKind.Sequential)>
 Public Structure XINPUT_GAMEPAD
-    Public wButtons As UShort ' Unsigned 16-bit (2-byte) integer.
-    Public bLeftTrigger As Byte ' Unsigned 8-bit (1-byte) integer.
+    Public wButtons As UShort ' Unsigned 16-bit (2-byte) integer range 0 through 65,535.
+    Public bLeftTrigger As Byte ' Unsigned 8-bit (1-byte) integer range 0 through 255.
     Public bRightTrigger As Byte
-    Public sThumbLX As Short ' Signed 16-bit (2-byte) integer.
+    Public sThumbLX As Short ' Signed 16-bit (2-byte) integer range -32,768 through 32,767.
     Public sThumbLY As Short
     Public sThumbRX As Short
     Public sThumbRY As Short
 End Structure
 ```
-- **wButtons**: Holds button states (0 to 65,535).
-- **bLeftTrigger** and **bRightTrigger**: Trigger button values (0 to 255).
-- **sThumbLX**, **sThumbLY**, **sThumbRX**, **sThumbRY**: Thumbstick values (-32,768 to 32,767).
+- **<StructLayout(LayoutKind.Sequential)>**: This attribute specifies that the fields of the structure should be laid out in the order they are defined.
+- **Public Structure XINPUT_GAMEPAD**: This structure contains the states of the gamepad buttons and thumbsticks.
+  - **wButtons**: Stores the state of the buttons. Each button has a unique bit value.
+  - **bLeftTrigger** and **bRightTrigger**: Store the values of the left and right triggers, respectively.
+  - **sThumbLX**, **sThumbLY**, **sThumbRX**, **sThumbRY**: Store the positions of the thumbsticks along the X and Y axes.
 
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-
-
-
-## State
+### State Variable
 
 ```vb
 Private State As XINPUT_STATE
 ```
-- This declares a private variable `State` of type `XINPUT_STATE`, which will store the current state of the controller.
+- **Private State As XINPUT_STATE**: This variable will hold the current state of the Xbox controller.
 
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-
-## Button Enumeration
+### Button Enumeration
 
 ```vb
 Private Enum Button
@@ -191,82 +128,63 @@ Private Enum Button
     Y = 32768
 End Enum
 ```
-- This enumeration defines constants for each button on the Xbox controller. Each button is assigned a unique bit value, which allows us to use bitwise operations to check if a button is pressed.
+- **Private Enum Button**: This enumeration defines constants for each button on the Xbox controller. Each button is assigned a unique bit value, allowing for easy state checking using bitwise operations.
 
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-
-
-## Neutral Zone Constants
+### Neutral Zone Constants
 
 ```vb
 Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
 Private Const NeutralEnd As Short = 16384 '16,383.5 = 32,767 / 2
-
 ```
+- **Private Const NeutralStart**: This constant defines the starting point of the thumbstick neutral zone.
+- **Private Const NeutralEnd**: This constant defines the endpoint of the thumbstick neutral zone. The thumbstick must move beyond these points to register as active.
 
-  - `NeutralStart` and `NeutralEnd` define the range for determining if a thumbstick is in a neutral position.
-
-  [The Neutral Zone](#the-neutral-zone)
-
-[Index](#index)
-
----
-
-
-
-
-
-
-## Trigger Threshold Constant
+### Trigger Threshold Constant
 
 ```vb
 Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
-
 ```
+- **Private Const TriggerThreshold**: This constant sets the minimum value for the triggers to be considered pressed.
 
-  - `TriggerThreshold` defines the minimum value for the triggers to be considered pressed.
+### Connected Controllers Array
 
-  [The Trigger Threshold](#the-trigger-threshold)
+```vb
+Public Connected() As Boolean
+```
+- **Public Connected() As Boolean**: This array keeps track of whether up to four controllers are connected.
 
-[Index](#index)
+### Other Variables
 
----
+```vb
+Private ConnectionStart As Date
+Public Buttons() As UShort
+Public LeftThumbstickXaxisNeutral() As Boolean
+Public LeftThumbstickYaxisNeutral() As Boolean
+Public RightThumbstickXaxisNeutral() As Boolean
+Public RightThumbstickYaxisNeutral() As Boolean
+Public DPadNeutral() As Boolean
+Public LetterButtonsNeutral() As Boolean
+```
+- These variables are used to store various states of the controllers, including button states, thumbstick positions, and whether the D-Pad and letter buttons are in a neutral position.
 
-
-
-
-
-
-
-
-
-
-## Initialization Method
+### Initialize Method
 
 ```vb
 Public Sub Initialize()
 ```
-- This method initializes the Xbox controller structure and its properties.
+- **Public Sub Initialize()**: This method initializes the Xbox controller structure and its properties.
+
+#### Inside the Initialize Method
 
 ```vb
 Connected = New Boolean(0 To 3) {}
 ```
-- Initializes the `Connected` array, which keeps track of whether up to 4 controllers are connected.
+- Initializes the `Connected` array to indicate whether controllers are connected.
 
 ```vb
 ConnectionStart = DateTime.Now
 ```
-- Records the current date and time when initialization starts. This is useful for managing the connection state.
+- Records the current date and time when initialization starts.
 
 ```vb
 Buttons = New UShort(0 To 3) {}
@@ -274,13 +192,18 @@ Buttons = New UShort(0 To 3) {}
 - Initializes the `Buttons` array to store the state of the controller buttons.
 
 ```vb
-' Initialize arrays to check if thumbstick axes are in the neutral position.
 LeftThumbstickXaxisNeutral = New Boolean(0 To 3) {}
 LeftThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 RightThumbstickXaxisNeutral = New Boolean(0 To 3) {}
 RightThumbstickYaxisNeutral = New Boolean(0 To 3) {}
 ```
-- These lines initialize arrays to track the neutral positions of the left and right thumbsticks for each controller.
+- Initializes arrays to check if thumbstick axes are in the neutral position.
+
+```vb
+DPadNeutral = New Boolean(0 To 3) {}
+LetterButtonsNeutral = New Boolean(0 To 3) {}
+```
+- Initializes arrays to check if the D-Pad and letter buttons are in the neutral position.
 
 ```vb
 For i As Integer = 0 To 3
@@ -292,7 +215,7 @@ For i As Integer = 0 To 3
     LetterButtonsNeutral(i) = True
 Next
 ```
-- This loop sets the neutral states for all thumbsticks and buttons to `True` for each controller.
+- This loop sets all thumbstick axes and button states to neutral for all controllers.
 
 ```vb
 TimeToVibe = 1000 'ms
@@ -304,23 +227,14 @@ TestInitialization()
 ```
 - Calls the `TestInitialization` method to verify that everything is set up correctly.
 
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-## Update Method
+### Update Method
 
 ```vb
 Public Sub Update()
 ```
-- This method is called repeatedly to check for updates in the controller state.
+- **Public Sub Update()**: This method is called repeatedly to check for updates in the controller state.
+
+#### Inside the Update Method
 
 ```vb
 Dim ElapsedTime As TimeSpan = Now - ConnectionStart
@@ -329,8 +243,8 @@ Dim ElapsedTime As TimeSpan = Now - ConnectionStart
 
 ```vb
 If ElapsedTime.TotalSeconds >= 1 Then
-    For controllerNumber As Integer = 0 To 3
-        Connected(controllerNumber) = IsConnected(controllerNumber)
+    For ControllerNumber As Integer = 0 To 3
+        Connected(ControllerNumber) = IsConnected(ControllerNumber)
     Next
     ConnectionStart = DateTime.Now
 End If
@@ -338,79 +252,48 @@ End If
 - Every second, it checks if the controllers are still connected and updates the `Connected` array accordingly.
 
 ```vb
-For controllerNumber As Integer = 0 To 3
-    If Connected(controllerNumber) Then
-        UpdateState(controllerNumber)
+For ControllerNumber As Integer = 0 To 3
+    If Connected(ControllerNumber) Then
+        UpdateState(ControllerNumber)
     End If
 Next
 ```
 - Loops through each controller and updates its state if it is connected.
 
 ```vb
-UpdateVibrateTimer()
+UpdateVibrateTimers()
 ```
-- Calls the method to update the vibration timer for the controllers.
+- Calls the method to update the vibration timers for the controllers.
 
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-## State Update Method
+### UpdateState Method
 
 ```vb
 Public Sub UpdateState(controllerNumber As Integer)
 ```
-- This method retrieves and updates the state of a specific controller.
+- **Public Sub UpdateState(controllerNumber As Integer)**: This method retrieves and updates the state of a specific controller.
+
+#### Inside the UpdateState Method
 
 ```vb
 Try
     XInputGetState(controllerNumber, State)
-```
-- Calls the `XInputGetState` function to fill the `State` variable with the current state of the specified controller.
-
-```vb
-UpdateButtons(controllerNumber)
-UpdateLeftThumbstick(controllerNumber)
-UpdateRightThumbstick(controllerNumber)
-UpdateLeftTrigger(controllerNumber)
-UpdateRightTrigger(controllerNumber)
-```
-- Calls various methods to update the state of buttons, thumbsticks, and triggers based on the current controller state.
-
-```vb
+    UpdateButtons(controllerNumber)
+    UpdateThumbsticks(controllerNumber)
+    UpdateTriggers(controllerNumber)
 Catch ex As Exception
     Debug.Print($"Error getting XInput state: {controllerNumber} | {ex.Message}")
 End Try
 ```
-- Catches any exceptions that occur during the state update and prints an error message to the debug console.
+- Tries to get the state of the specified controller and update its buttons, thumbsticks, and triggers. If an error occurs, it prints the error message to the debug console.
 
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-
-## Button and Thumbstick Updates
-
-### Button Update Method
+### UpdateButtons Method
 
 ```vb
 Private Sub UpdateButtons(CID As Integer)
 ```
-- This method updates the state of the buttons for the specified controller.
+- **Private Sub UpdateButtons(CID As Integer)**: This method updates the state of the buttons for the specified controller.
+
+#### Inside the UpdateButtons Method
 
 ```vb
 UpdateDPadButtons(CID)
@@ -418,101 +301,144 @@ UpdateLetterButtons(CID)
 UpdateBumperButtons(CID)
 UpdateStickButtons(CID)
 UpdateStartBackButtons(CID)
-```
-- Calls methods to update the states of the D-Pad, letter buttons, bumpers, stick buttons, and start/back buttons.
-
-```vb
+UpdateDPadNeutral(CID)
+UpdateLetterButtonsNeutral(CID)
 Buttons(CID) = State.Gamepad.wButtons
 ```
-- Stores the current state of the buttons in the `Buttons` array.
+- Calls various methods to update the states of the D-Pad, letter buttons, bumpers, stick buttons, and start/back buttons. It also updates the `Buttons` array with the current state of the buttons.
 
-### Thumbstick Update Method
+### UpdateThumbsticks and UpdateTriggers Methods
+
+```vb
+Private Sub UpdateThumbsticks(controllerNumber As Integer)
+    UpdateLeftThumbstick(controllerNumber)
+    UpdateRightThumbstick(controllerNumber)
+End Sub
+
+Private Sub UpdateTriggers(controllerNumber As Integer)
+    UpdateLeftTrigger(controllerNumber)
+    UpdateRightTrigger(controllerNumber)
+End Sub
+```
+- These methods call their respective update methods for the left and right thumbsticks and triggers.
+
+### UpdateDPadButtons Method
+
+```vb
+Private Sub UpdateDPadButtons(CID As Integer)
+    DPadUp(CID) = (State.Gamepad.wButtons And Button.DPadUp) <> 0
+    DPadDown(CID) = (State.Gamepad.wButtons And Button.DPadDown) <> 0
+    DPadLeft(CID) = (State.Gamepad.wButtons And Button.DPadLeft) <> 0
+    DPadRight(CID) = (State.Gamepad.wButtons And Button.DPadRight) <> 0
+End Sub
+```
+- This method checks the current state of the D-Pad buttons and updates the corresponding boolean arrays.
+
+### UpdateThumbstick Methods
 
 ```vb
 Private Sub UpdateLeftThumbstick(ControllerNumber As Integer)
+    UpdateLeftThumbstickXaxis(ControllerNumber)
+    UpdateLeftThumbstickYaxis(ControllerNumber)
+End Sub
+
+Private Sub UpdateRightThumbstick(ControllerNumber As Integer)
+    UpdateRightThumbstickXaxis(ControllerNumber)
+    UpdateRightThumbstickYaxis(ControllerNumber)
+End Sub
 ```
-- This method updates the state of the left thumbstick.
+- These methods call the respective methods to update the X and Y axes of the left and right thumbsticks.
+
+### UpdateTrigger Methods
 
 ```vb
+Private Sub UpdateLeftTrigger(ControllerNumber As Integer)
+    If State.Gamepad.bLeftTrigger > TriggerThreshold Then
+        LeftTrigger(ControllerNumber) = True
+    Else
+        LeftTrigger(ControllerNumber) = False
+    End If
+End Sub
 
-' What position is the left thumbstick in on the X-axis?
-If State.Gamepad.sThumbLX <= NeutralStart Then
-    ' The left thumbstick is in the left position.
-
-    LeftThumbstickLeft(ControllerNumber) = True
-
-    LeftThumbstickRight(ControllerNumber) = False
-
-    LeftThumbstickXaxisNeutral(ControllerNumber) = False
-
-ElseIf State.Gamepad.sThumbLX >= NeutralEnd Then
-    ' The left thumbstick is in the right position.
-
-    LeftThumbstickRight(ControllerNumber) = True
-
-    LeftThumbstickLeft(ControllerNumber) = False
-
-    LeftThumbstickXaxisNeutral(ControllerNumber) = False
-
-Else
-    ' The left thumbstick is in the neutral position.
-
-    LeftThumbstickRight(ControllerNumber) = False
-
-    LeftThumbstickLeft(ControllerNumber) = False
-
-    LeftThumbstickXaxisNeutral(ControllerNumber) = True
-
-End If
-
-
+Private Sub UpdateRightTrigger(ControllerNumber As Integer)
+    If State.Gamepad.bRightTrigger > TriggerThreshold Then
+        RightTrigger(ControllerNumber) = True
+    Else
+        RightTrigger(ControllerNumber) = False
+    End If
+End Sub
 ```
+- These methods check the state of the left and right triggers against the threshold and update their respective boolean arrays.
 
-- Checks the position of the left thumbstick on the X-axis and updates the corresponding state.
+### UpdateDPadNeutral Method
 
 ```vb
-
-
-        ' What position is the left thumbstick in on the Y-axis?
-        If State.Gamepad.sThumbLY <= NeutralStart Then
-            ' The left thumbstick is in the down position.
-
-            LeftThumbstickDown(ControllerNumber) = True
-
-            LeftThumbstickUp(ControllerNumber) = False
-
-            LeftThumbstickYaxisNeutral(ControllerNumber) = False
-
-        ElseIf State.Gamepad.sThumbLY >= NeutralEnd Then
-            ' The left thumbstick is in the up position.
-
-            LeftThumbstickUp(ControllerNumber) = True
-
-            LeftThumbstickDown(ControllerNumber) = False
-
-            LeftThumbstickYaxisNeutral(ControllerNumber) = False
-
-        Else
-            ' The left thumbstick is in the neutral position.
-
-            LeftThumbstickUp(ControllerNumber) = False
-
-            LeftThumbstickDown(ControllerNumber) = False
-
-            LeftThumbstickYaxisNeutral(ControllerNumber) = True
-
-        End If
-
+Private Sub UpdateDPadNeutral(controllerNumber As Integer)
+    If DPadDown(controllerNumber) Or DPadLeft(controllerNumber) Or DPadRight(controllerNumber) Or DPadUp(controllerNumber) Then
+        DPadNeutral(controllerNumber) = False
+    Else
+        DPadNeutral(controllerNumber) = True
+    End If
+End Sub
 ```
+- This method checks if any D-Pad buttons are pressed and updates the neutral state accordingly.
 
-- Similar logic is applied for the Y-axis of the left thumbstick.
+### IsConnected Method
 
-### Vibration Functions
+```vb
+Public Function IsConnected(controllerNumber As Integer) As Boolean
+```
+- **Public Function IsConnected(controllerNumber As Integer) As Boolean**: This method checks if a specific controller is connected.
+
+#### Inside the IsConnected Method
+
+```vb
+Try
+    Return XInputGetState(controllerNumber, State) = 0
+Catch ex As Exception
+    Debug.Print($"Error getting XInput state: {controllerNumber} | {ex.Message}")
+    Return False
+End Try
+```
+- It attempts to get the state of the specified controller. If successful (returns 0), the controller is connected. If an error occurs, it prints the error message and returns `False`.
+
+### TestInitialization Method
+
+```vb
+Public Sub TestInitialization()
+```
+- **Public Sub TestInitialization()**: This method verifies that the initialization of the controllers was successful.
+
+#### Inside the TestInitialization Method
+
+```vb
+Debug.Assert(Not ConnectionStart = Nothing, $"Connection Start should not be Nothing.")
+Debug.Assert(Buttons IsNot Nothing, $"Buttons should not be Nothing.")
+Debug.Assert(Not TimeToVibe = Nothing, $"TimeToVibe should not be Nothing.")
+```
+- These assertions check that critical variables are initialized correctly.
+
+```vb
+For i As Integer = 0 To 3
+    Debug.Assert(Not Connected(i), $"Controller {i} should not be connected after initialization.")
+    Debug.Assert(LeftThumbstickXaxisNeutral(i), $"Left Thumbstick X-axis for Controller {i} should be neutral.")
+    Debug.Assert(LeftThumbstickYaxisNeutral(i), $"Left Thumbstick Y-axis for Controller {i} should be neutral.")
+    Debug.Assert(RightThumbstickXaxisNeutral(i), $"Right Thumbstick X-axis for Controller {i} should be neutral.")
+    Debug.Assert(RightThumbstickYaxisNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
+    Debug.Assert(DPadNeutral(i), $"DPad for Controller {i} should be neutral.")
+    Debug.Assert(LetterButtonsNeutral(i), $"Letter Buttons for Controller {i} should be neutral.")
+Next
+```
+- This loop checks that all controllers are initialized as not connected and that their thumbsticks and buttons are in the neutral position.
+
+### Vibrate Methods
 
 ```vb
 Public Sub VibrateLeft(CID As Integer, Speed As UShort)
 ```
-- This method triggers the left motor of the controller to vibrate at a specified speed.
+- **Public Sub VibrateLeft(CID As Integer, Speed As UShort)**: This method triggers the left motor of the controller to vibrate at a specified speed.
+
+#### Inside the VibrateLeft Method
 
 ```vb
 Vibration.wLeftMotorSpeed = Speed
@@ -521,23 +447,103 @@ IsLeftVibrating(CID) = True
 ```
 - Sets the left motor speed, records the start time, and marks the left motor as vibrating.
 
+### SendVibrationMotorCommand Method
+
 ```vb
 Private Sub SendVibrationMotorCommand(ControllerID As Integer)
 ```
-- This method sends the vibration command to the specified controller.
+- **Private Sub SendVibrationMotorCommand(ControllerID As Integer)**: This method sends the vibration command to the specified controller.
+
+#### Inside the SendVibrationMotorCommand Method
 
 ```vb
 If XInputSetState(ControllerID, Vibration) = 0 Then
-    ' Success
+    ' The motor speed was set. Success.
 Else
-    Debug.Print($"{ControllerID} did not vibrate.")
+    Debug.Print($"{ControllerID} did not vibrate.  {Vibration.wLeftMotorSpeed} |  {Vibration.wRightMotorSpeed} ")
 End If
 ```
-- Sends the vibration command and checks if it was successful.
+- Checks if the vibration command was successful and prints a message if it failed.
 
----
+### UpdateVibrateTimers Method
 
-## Form Initialization
+```vb
+Public Sub UpdateVibrateTimers()
+    UpdateLeftVibrateTimer()
+    UpdateRightVibrateTimer()
+End Sub
+```
+- This method updates the vibration timers for both the left and right motors of the controllers.
+
+### UpdateLeftVibrateTimer Method
+
+```vb
+Private Sub UpdateLeftVibrateTimer()
+```
+- **Private Sub UpdateLeftVibrateTimer()**: This method checks if the left motor is still vibrating and calculates how long it has been vibrating.
+
+#### Inside the UpdateLeftVibrateTimer Method
+
+```vb
+For ControllerNumber As Integer = 0 To 3
+    If IsLeftVibrating(ControllerNumber) Then
+        Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(ControllerNumber)
+        If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
+            IsLeftVibrating(ControllerNumber) = False
+            Vibration.wLeftMotorSpeed = 0
+        End If
+        SendVibrationMotorCommand(ControllerNumber)
+    End If
+Next
+```
+- This loop checks if the left motor is vibrating. If the elapsed time exceeds the set vibration time, it stops the vibration and sets the motor speed to zero.
+
+### UpdateRightVibrateTimer Method
+
+```vb
+Private Sub UpdateRightVibrateTimer()
+```
+- **Private Sub UpdateRightVibrateTimer()**: This method checks if the right motor is still vibrating and calculates how long it has been vibrating.
+
+#### Inside the UpdateRightVibrateTimer Method
+
+```vb
+For ControllerNumber As Integer = 0 To 3
+
+    If IsRightVibrating(ControllerNumber) Then
+
+        Dim ElapsedTime As TimeSpan = Now - RightVibrateStart(ControllerNumber)
+
+        If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
+
+            IsRightVibrating(ControllerNumber) = False
+
+            Vibration.wRightMotorSpeed = 0
+
+        End If
+
+        SendVibrationMotorCommand(ControllerNumber)
+
+    End If
+
+Next
+
+```
+
+- This loop checks if the right motor is vibrating. If the elapsed time exceeds the set vibration time, it stops the vibration and sets the motor speed to zero.
+
+## Form1 Class
+
+### Class Declaration
+
+```vb
+Public Class Form1
+    Private Controllers As XboxControllers
+```
+- **Public Class Form1**: This defines the main form of the application.
+- **Private Controllers As XboxControllers**: This variable holds an instance of the `XboxControllers` structure, allowing access to its methods and properties.
+
+### Form Load Event
 
 ```vb
 Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -545,61 +551,88 @@ Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     Controllers.Initialize()
 End Sub
 ```
-- This method is called when the form loads. It initializes the application and the controllers.
+- **Private Sub Form1_Load**: This event handler is called when the form loads.
+- **InitializeApp()**: Calls the method to set up the application.
+- **Controllers.Initialize()**: Initializes the Xbox controllers.
+
+### Timer Tick Event
 
 ```vb
 Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
     Controllers.Update()
     UpdateLabels()
+    UpdateRumbleGroupUI()
 End Sub
 ```
-- This method is triggered by a timer tick event. It updates the controller state and refreshes the UI labels accordingly.
+- **Private Sub Timer1_Tick**: This event handler is triggered by a timer tick event.
+- **Controllers.Update()**: Calls the update method to check the current state of the controllers.
+- **UpdateLabels()**: Updates the UI labels to reflect the current state of the controllers.
+- **UpdateRumbleGroupUI()**: Updates the UI elements related to the vibration settings.
 
-[Index](#index)
+### Button Click Events
 
----
+```vb
+Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
+    If Controllers.Connected(NumControllerToVib.Value) Then
+        Controllers.VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
+    End If
+End Sub
+```
+- **Private Sub ButtonVibrateLeft_Click**: This event handler is triggered when the "Vibrate Left" button is clicked.
+- Checks if the selected controller is connected and calls the `VibrateLeft` method with the specified speed.
 
+```vb
+Private Sub ButtonVibrateRight_Click(sender As Object, e As EventArgs) Handles ButtonVibrateRight.Click
+    If Controllers.Connected(NumControllerToVib.Value) Then
+        Controllers.VibrateRight(NumControllerToVib.Value, TrackBarSpeed.Value)
+    End If
+End Sub
+```
+- **Private Sub ButtonVibrateRight_Click**: Similar to the left vibration button, this triggers vibration on the right motor.
 
+### TrackBar and NumericUpDown Events
 
+```vb
+Private Sub TrackBarSpeed_Scroll(sender As Object, e As EventArgs) Handles TrackBarSpeed.Scroll
+    UpdateSpeedLabel()
+End Sub
+```
+- **Private Sub TrackBarSpeed_Scroll**: This event updates the speed label based on the value selected in the trackbar.
 
+```vb
+Private Sub NumericUpDownTimeToVib_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDownTimeToVib.ValueChanged
+    Controllers.TimeToVibe = NumericUpDownTimeToVib.Value
+End Sub
+```
+- **Private Sub NumericUpDownTimeToVib_ValueChanged**: Updates the vibration duration when the numeric up/down value changes.
 
-
-
-
-
-## Update Labels Method
+### UpdateLabels Method
 
 ```vb
 Private Sub UpdateLabels()
-    For controllerNumber As Integer = 0 To 3
-        UpdateControllerStatusLabel(controllerNumber)
-        If Controllers.Connected(controllerNumber) Then
-            UpdateRightThumbstickXAxisLabel(controllerNumber)
-            UpdateRightThumbstickYAxisLabel(controllerNumber)
-            UpdateLeftThumbstickXAxisLabel(controllerNumber)
-            UpdateLeftThumbstickYAxisLabel(controllerNumber)
-            UpdateLeftTriggerLabel(controllerNumber)
-            UpdateRightTriggerLabel(controllerNumber)
-            UpdateDPadLabel(controllerNumber)
-            UpdateLetterButtonLabel(controllerNumber)
-            UpdateStartBackLabels(controllerNumber)
-            UpdateBumperLabel(controllerNumber)
-            UpdateStickLabel(controllerNumber)
+    For ControllerNumber As Integer = 0 To 3
+        UpdateControllerStatusLabel(ControllerNumber)
+        If Controllers.Connected(ControllerNumber) Then
+            UpdateThumbstickLabels(ControllerNumber)
+            UpdateTriggerLabels(ControllerNumber)
+            UpdateDPadLabel(ControllerNumber)
+            UpdateLetterButtonLabel(ControllerNumber)
+            UpdateStartBackLabels(ControllerNumber)
+            UpdateBumperLabels(ControllerNumber)
+            UpdateStickLabels(ControllerNumber)
         End If
     Next
 End Sub
 ```
-- This method updates the UI labels for each controller.
-- It loops through each controller (0 to 3) and checks if it is connected.
-- For connected controllers, it updates various UI elements to reflect the current state of thumbsticks, buttons, and triggers.
+- **Private Sub UpdateLabels**: This method updates the UI labels for each controller.
+- It loops through each controller (0 to 3) and checks if it is connected. For connected controllers, it updates various UI elements to reflect the current state of thumbsticks, buttons, and triggers.
 
-### Controller Status Label Update
+### UpdateControllerStatusLabel Method
 
 ```vb
 Private Sub UpdateControllerStatusLabel(controllerNumber As Integer)
     Dim status As String = If(Controllers.Connected(controllerNumber), "Connected", "Not Connected")
     Dim labelText As String = $"Controller {controllerNumber} {status}"
-    
     Select Case controllerNumber
         Case 0
             LabelController0Status.Text = labelText
@@ -612,147 +645,83 @@ Private Sub UpdateControllerStatusLabel(controllerNumber As Integer)
     End Select
 End Sub
 ```
-- This method updates the status label for each controller based on whether it is connected or not.
-- It constructs a status message and assigns it to the corresponding label based on the controller number.
+- **Private Sub UpdateControllerStatusLabel**: This method updates the status label for each controller based on whether it is connected or not.
 
-### Thumbstick and Trigger Label Updates
-
-```vb
-Private Sub UpdateLeftThumbstickYAxisLabel(controllerNumber As Integer)
-    If Controllers.LeftThumbstickUp(controllerNumber) Then
-        LabelLeftThumbY.Text = $"Controller {controllerNumber} Left Thumbstick Up"
-    End If
-    If Controllers.LeftThumbstickDown(controllerNumber) Then
-        LabelLeftThumbY.Text = $"Controller {controllerNumber} Left Thumbstick Down"
-    End If
-    ClearLeftThumbstickYLabel()
-End Sub
-```
-- This method checks if the left thumbstick is being moved up or down and updates the corresponding UI label.
-- The `ClearLeftThumbstickYLabel` method is called to reset the label if the thumbstick returns to the neutral position.
-
-Similar methods exist for updating the right thumbstick, triggers, D-Pad, and button states, following the same logic.
-
-
-[Index](#index)
-
----
-
-
-
-
-
-
-
-
-
-
-
-## Vibration Timer Updates
-
-### Vibration Timer Update Method
+### Rumble Group UI Method
 
 ```vb
-Public Sub UpdateVibrateTimer()
-    UpdateLeftVibrateTimer()
-    UpdateRightVibrateTimer()
-End Sub
-```
-- This method updates the vibration timers for both the left and right motors of the controllers.
+Private Sub UpdateRumbleGroupUI()
+    Dim NumberOfConnectedControllers As Integer
+    Dim HighestConnectedControllerNumber As Integer
 
-### Left Vibration Timer Update
-
-```vb
-Private Sub UpdateLeftVibrateTimer()
-    For Each IsConVibrating In IsLeftVibrating
-        Dim Index As Integer = Array.IndexOf(IsLeftVibrating, IsConVibrating)
-        If Index <> -1 AndAlso IsConVibrating = True Then
-            Dim ElapsedTime As TimeSpan = Now - LeftVibrateStart(Index)
-            If ElapsedTime.TotalMilliseconds >= TimeToVibe Then
-                IsLeftVibrating(Index) = False
-                Vibration.wLeftMotorSpeed = 0
-            End If
-            SendVibrationMotorCommand(Index)
+    For ControllerNumber As Integer = 0 To 3
+        If Controllers.Connected(ControllerNumber) Then
+            NumberOfConnectedControllers += 1
+            HighestConnectedControllerNumber = ControllerNumber
         End If
     Next
+
+    If NumberOfConnectedControllers > 0 Then
+        NumControllerToVib.Maximum = HighestConnectedControllerNumber
+        RumbleGroupBox.Enabled = True
+        If Controllers.Connected(NumControllerToVib.Value) Then
+            ButtonVibrateLeft.Enabled = True
+            ButtonVibrateRight.Enabled = True
+            TrackBarSpeed.Enabled = True
+            LabelSpeed.Enabled = True
+            NumericUpDownTimeToVib.Enabled = True
+            LabelTimeToVibe.Enabled = True
+        Else
+            ButtonVibrateLeft.Enabled = False
+            ButtonVibrateRight.Enabled = False
+            TrackBarSpeed.Enabled = False
+            LabelSpeed.Enabled = False
+            NumericUpDownTimeToVib.Enabled = False
+            LabelTimeToVibe.Enabled = False
+        End If
+    Else
+        NumControllerToVib.Maximum = 0
+        RumbleGroupBox.Enabled = False
+    End If
 End Sub
 ```
-- This method checks if the left motor is still vibrating and calculates how long it has been vibrating.
-- If the elapsed time exceeds the set `TimeToVibe`, it stops the vibration by setting the motor speed to zero.
-- The `SendVibrationMotorCommand` method is called to apply the changes.
+- **Private Sub UpdateRumbleGroupUI**: This method updates the UI elements related to vibration settings based on the connected controllers.
 
-### Right Vibration Timer Update
+### Additional Methods for Clearing Labels
 
-The logic for updating the right vibration timer is similar to that of the left, checking the state and elapsed time, and stopping the motor if necessary.
+The code contains several methods that clear labels when the respective buttons or thumbsticks are not active. These methods check the state of each controller and update the UI accordingly.
 
-[Index](#index)
+### Conclusion
+
+In this detailed walkthrough, we've covered the key components of the Xbox controller integration code. This code allows developers to interact with Xbox controllers, monitor their states, and provide haptic feedback through vibration. Understanding each part of this code will empower you to implement and customize Xbox controller functionality in your applications.
+
+If you have any questions or need further clarification on specific parts of the code, feel free to ask! Happy coding!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
-
-
-
-
-
-
-## Handling Button Click Events
-
-### Button Click Event for Vibration
-
-```vb
-Private Sub ButtonVibrateLeft_Click(sender As Object, e As EventArgs) Handles ButtonVibrateLeft.Click
-    Controllers.VibrateLeft(NumControllerToVib.Value, TrackBarSpeed.Value)
-End Sub
-```
-- This event handler is triggered when the "Vibrate Left" button is clicked.
-- It calls the `VibrateLeft` method on the `Controllers` object, passing the selected controller and the desired vibration speed from a trackbar.
-
-### Updating Speed Label
-
-```vb
-Private Sub UpdateSpeedLabel()
-    LabelSpeed.Text = $"Speed: {TrackBarSpeed.Value}"
-End Sub
-```
-- This method updates the label displaying the current speed of the vibration based on the value selected in a trackbar.
-
-[Index](#index)
-
----
-
-
-
-## Application Initialization
-
-### Application Initialization Method
-
-```vb
-Private Sub InitializeApp()
-    Text = "XInput - Code with Joe"
-    InitializeTimer1()
-    ClearLabels()
-    TrackBarSpeed.Value = 32767
-    UpdateSpeedLabel()
-    InitializeToolTips()
-End Sub
-```
-- This method sets up the application UI, initializes the timer for polling updates, clears any existing labels, sets the default vibration speed, and initializes tooltips for user guidance.
-
-### Timer Initialization
-
-```vb
-Private Sub InitializeTimer1()
-    Timer1.Interval = 15 '1000/60 = 16.67 ms
-    Timer1.Start()
-End Sub
-```
-- This method sets the timer interval to approximately 15 milliseconds, which helps achieve a frame rate of about 60 frames per second (FPS). It then starts the timer.
-
-[Index](#index)
-
----
-
-
-
 
 
 
