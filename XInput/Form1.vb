@@ -1537,7 +1537,7 @@ Public Class Form1
         ' Clears the DPad label when all controllers' DPad are neutral.
 
         ' Assume all controllers' DPad are neutral initially.
-        Dim ConSum As Boolean = True
+        Dim Neutral As Boolean = True
 
         ' Search for a non-neutral DPad.
         For ControllerNumber As Integer = 0 To 3
@@ -1546,7 +1546,7 @@ Public Class Form1
                Not Controllers.DPadNeutral(ControllerNumber) Then
                 ' A non-neutral DPad was found.
 
-                ConSum = False ' Report the non-neutral DPad.
+                Neutral = False ' Report the non-neutral DPad.
 
                 Exit For ' No need to search further, so stop the search.
 
@@ -1555,7 +1555,7 @@ Public Class Form1
         Next
 
         ' Are all controllers' DPad in the neutral position?
-        If ConSum Then
+        If Neutral Then
             ' Yes, all controllers' DPad are in the neutral position.
 
             LabelDPad.Text = String.Empty ' Clear label.
