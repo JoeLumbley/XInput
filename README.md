@@ -78,7 +78,7 @@ End Function
 <StructLayout(LayoutKind.Explicit)>
 Public Structure XINPUT_STATE
     <FieldOffset(0)>
-    Public dwPacketNumber As UInteger ' Unsigned 32-bit (4-byte) integer range 0 through 4,294,967,295.
+    Public dwPacketNumber As UInteger
     <FieldOffset(4)>
     Public Gamepad As XINPUT_GAMEPAD
 End Structure
