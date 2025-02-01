@@ -155,6 +155,11 @@ Private Const NeutralEnd As Short = 16384 '16,383.5 = 32,767 / 2
 - **Private Const NeutralStart**: This constant defines the starting point of the thumbstick neutral zone.
 - **Private Const NeutralEnd**: This constant defines the endpoint of the thumbstick neutral zone. The thumbstick must move beyond these points to register as active.
 
+[The Neutral Zone](#the-neutral-zone)
+
+
+[Index](#index)
+
 ---
 
 ### Trigger Threshold Constant
