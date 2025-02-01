@@ -46,6 +46,8 @@ Imports System.Runtime.InteropServices
 ```
 - **Imports System.Runtime.InteropServices**: This line imports the `System.Runtime.InteropServices` namespace, which provides functionality for interacting with unmanaged code. This is crucial for calling functions from the XInput library, which is used to communicate with Xbox controllers.
 
+[Index](#index)
+
 ---
 
 ## XboxControllers Structure
@@ -54,6 +56,8 @@ Imports System.Runtime.InteropServices
 Public Structure XboxControllers
 ```
 - **Public Structure XboxControllers**: This defines a public structure named `XboxControllers`. A structure is a value type that can hold data members and methods related to Xbox controller input.
+
+[Index](#index)
 
 ---
 
@@ -69,6 +73,8 @@ End Function
 - **Private Shared Function XInputGetState**: This function retrieves the current state of the specified Xbox controller.
   - **dwUserIndex**: An integer that represents the index of the controller (0 for the first, 1 for the second, etc.).
   - **ByRef pState As XINPUT_STATE**: A reference to an `XINPUT_STATE` structure that will be filled with the controller's state. The function returns an integer indicating success or failure.
+
+[Index](#index)
 
 ---
 
@@ -87,6 +93,8 @@ End Structure
 - **Public Structure XINPUT_STATE**: This structure holds the state of the controller.
   - **dwPacketNumber**: An unsigned 32-bit integer range 0 through 4,294,967,295 that helps track the state changes.
   - **Gamepad**: An instance of the `XINPUT_GAMEPAD` structure, which contains the button and thumbstick states.
+
+[Index](#index)
 
 ---
 
@@ -110,6 +118,7 @@ End Structure
   - **bLeftTrigger** and **bRightTrigger**: Store the values of the left and right triggers, respectively.
   - **sThumbLX**, **sThumbLY**, **sThumbRX**, **sThumbRY**: Store the positions of the thumbsticks along the X and Y axes.
 
+[Index](#index)
 
 ---
 
@@ -119,6 +128,8 @@ End Structure
 Private State As XINPUT_STATE
 ```
 - **Private State As XINPUT_STATE**: This variable will hold the current state of the Xbox controller.
+
+[Index](#index)
 
 ---
 
@@ -143,6 +154,8 @@ Private Enum Button
 End Enum
 ```
 - **Private Enum Button**: This enumeration defines constants for each button on the Xbox controller. Each button is assigned a unique bit value, allowing for easy state checking using bitwise operations.
+
+[Index](#index)
 
 ---
 
@@ -184,6 +197,8 @@ Public Connected() As Boolean
 ```
 - **Public Connected() As Boolean**: This array keeps track of whether up to four controllers are connected.
 
+[Index](#index)
+
 ---
 
 ### Other Variables
@@ -199,6 +214,8 @@ Public DPadNeutral() As Boolean
 Public LetterButtonsNeutral() As Boolean
 ```
 - These variables are used to store various states of the controllers, including button states, thumbstick positions, and whether the D-Pad and letter buttons are in a neutral position.
+
+[Index](#index)
 
 ---
 
@@ -264,6 +281,8 @@ TestInitialization()
 ```
 - Calls the `TestInitialization` method to verify that everything is set up correctly.
 
+[Index](#index)
+
 ---
 
 ### Update Method
@@ -305,6 +324,8 @@ UpdateVibrateTimers()
 ```
 - Calls the method to update the vibration timers for the controllers.
 
+[Index](#index)
+
 ---
 
 ### UpdateState Method
@@ -328,6 +349,8 @@ Catch ex As Exception
 End Try
 ```
 - Tries to get the state of the specified controller and update its buttons, thumbsticks, and triggers. If an error occurs, it prints the error message to the debug console.
+
+[Index](#index)
 
 ---
 
@@ -353,6 +376,8 @@ Buttons(CID) = State.Gamepad.wButtons
 ```
 - Calls various methods to update the states of the D-Pad, letter buttons, bumpers, stick buttons, and start/back buttons. It also updates the `Buttons` array with the current state of the buttons.
 
+[Index](#index)
+
 ---
 
 ### UpdateThumbsticks and UpdateTriggers Methods
@@ -370,6 +395,8 @@ End Sub
 ```
 - These methods call their respective update methods for the left and right thumbsticks and triggers.
 
+[Index](#index)
+
 ---
 
 ### UpdateDPadButtons Method
@@ -383,6 +410,8 @@ Private Sub UpdateDPadButtons(CID As Integer)
 End Sub
 ```
 - This method checks the current state of the D-Pad buttons and updates the corresponding boolean arrays.
+
+[Index](#index)
 
 ---
 
@@ -400,6 +429,8 @@ Private Sub UpdateRightThumbstick(ControllerNumber As Integer)
 End Sub
 ```
 - These methods call the respective methods to update the X and Y axes of the left and right thumbsticks.
+
+[Index](#index)
 
 ---
 
@@ -424,6 +455,8 @@ End Sub
 ```
 - These methods check the state of the left and right triggers against the threshold and update their respective boolean arrays.
 
+[Index](#index)
+
 ---
 
 ### UpdateDPadNeutral Method
@@ -438,6 +471,8 @@ Private Sub UpdateDPadNeutral(controllerNumber As Integer)
 End Sub
 ```
 - This method checks if any D-Pad buttons are pressed and updates the neutral state accordingly.
+
+[Index](#index)
 
 ---
 
@@ -460,6 +495,8 @@ Catch ex As Exception
 End Try
 ```
 - It attempts to get the state of the specified controller. If successful (returns 0), the controller is connected. If an error occurs, it prints the error message and returns `False`.
+
+[Index](#index)
 
 ---
 
@@ -493,6 +530,7 @@ Next
 ```
 - This loop checks that all controllers are initialized as not connected and that their thumbsticks and buttons are in the neutral position.
 
+[Index](#index)
 
 ---
 
@@ -512,6 +550,8 @@ LeftVibrateStart(CID) = Now
 IsLeftVibrating(CID) = True
 ```
 - Sets the left motor speed, records the start time, and marks the left motor as vibrating.
+
+[Index](#index)
 
 ---
 
@@ -534,6 +574,8 @@ End If
 ```
 - Checks if the vibration command was successful and prints a message if it failed.
 
+[Index](#index)
+
 ---
 
 ### UpdateVibrateTimers Method
@@ -545,6 +587,8 @@ Public Sub UpdateVibrateTimers()
 End Sub
 ```
 - This method updates the vibration timers for both the left and right motors of the controllers.
+
+[Index](#index)
 
 ---
 
@@ -571,6 +615,8 @@ For ControllerNumber As Integer = 0 To 3
 Next
 ```
 - This loop checks if the left motor is vibrating. If the elapsed time exceeds the set vibration time, it stops the vibration and sets the motor speed to zero.
+
+[Index](#index)
 
 ---
 
@@ -609,6 +655,10 @@ Next
 
 - This loop checks if the right motor is vibrating. If the elapsed time exceeds the set vibration time, it stops the vibration and sets the motor speed to zero.
 
+[Index](#index)
+
+---
+
 ## Form1 Class
 
 ### Class Declaration
@@ -619,6 +669,8 @@ Public Class Form1
 ```
 - **Public Class Form1**: This defines the main form of the application.
 - **Private Controllers As XboxControllers**: This variable holds an instance of the `XboxControllers` structure, allowing access to its methods and properties.
+
+[Index](#index)
 
 ---
 
