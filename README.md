@@ -871,8 +871,13 @@ Understanding the trigger threshold is essential for both developers and players
 ---
 
 ## Index
-- [Imports and Structure Definitions](#imports-and-structure-definitions)
-- [XInput Functions and Structures](#xinput-functions-and-structures)
+- [Imports](#imports)
+- [XboxControllers Structure](#xboxcontrollers-structure)
+
+- [DllImport for XInputGetState](#dllimport-for-xinputgetstate)
+- [XINPUT_STATE Structure](#xinput_state-structure)
+- [XINPUT_GAMEPAD Structure](#xinput_gamepad-structure)
+- [State Variable](#state-variable)
 - [Button Enumeration](#button-enumeration)
 - [Neutral Zone Constants](#neutral-zone-constants)
 - [Initialization Method](#initialization-method)
