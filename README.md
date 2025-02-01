@@ -61,7 +61,8 @@ Public Structure XboxControllers
 
 ```vb
 <DllImport("XInput1_4.dll")>
-Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
+Private Shared Function XInputGetState(dwUserIndex As Integer,
+                                 ByRef pState As XINPUT_STATE) As Integer
 End Function
 ```
 - **<DllImport("XInput1_4.dll")>**: This attribute allows the function `XInputGetState` to be called from the XInput DLL, which is necessary for getting the current state of the Xbox controller.
