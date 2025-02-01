@@ -85,7 +85,7 @@ End Structure
 ```
 - **<StructLayout(LayoutKind.Explicit)>**: This attribute specifies that the layout of the structure is defined explicitly, allowing for precise control over the memory layout.
 - **Public Structure XINPUT_STATE**: This structure holds the state of the controller.
-  - **dwPacketNumber**: An unsigned 32-bit integer that helps track the state changes.
+  - **dwPacketNumber**: An unsigned 32-bit integer range 0 through 4,294,967,295 that helps track the state changes.
   - **Gamepad**: An instance of the `XINPUT_GAMEPAD` structure, which contains the button and thumbstick states.
 
 ---
