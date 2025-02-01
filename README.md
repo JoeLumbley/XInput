@@ -169,6 +169,12 @@ Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
 ```
 - **Private Const TriggerThreshold**: This constant sets the minimum value for the triggers to be considered pressed.
 
+
+[The Trigger Threshold](#the-trigger-threshold)
+
+
+[Index](#index)
+
 ---
 
 ### Connected Controllers Array
