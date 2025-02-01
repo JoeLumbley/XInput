@@ -199,7 +199,6 @@ Public Sub Initialize()
 - **Public Sub Initialize()**: This method initializes the Xbox controller structure and its properties.
 
 
----
 
 #### Inside the Initialize Method
 
@@ -263,7 +262,6 @@ Public Sub Update()
 ```
 - **Public Sub Update()**: This method is called repeatedly to check for updates in the controller state.
 
----
 
 #### Inside the Update Method
 
@@ -305,7 +303,6 @@ Public Sub UpdateState(controllerNumber As Integer)
 ```
 - **Public Sub UpdateState(controllerNumber As Integer)**: This method retrieves and updates the state of a specific controller.
 
----
 
 #### Inside the UpdateState Method
 
@@ -330,7 +327,6 @@ Private Sub UpdateButtons(CID As Integer)
 ```
 - **Private Sub UpdateButtons(CID As Integer)**: This method updates the state of the buttons for the specified controller.
 
----
 
 #### Inside the UpdateButtons Method
 
@@ -441,7 +437,6 @@ Public Function IsConnected(controllerNumber As Integer) As Boolean
 ```
 - **Public Function IsConnected(controllerNumber As Integer) As Boolean**: This method checks if a specific controller is connected.
 
----
 
 #### Inside the IsConnected Method
 
@@ -464,7 +459,6 @@ Public Sub TestInitialization()
 ```
 - **Public Sub TestInitialization()**: This method verifies that the initialization of the controllers was successful.
 
----
 
 #### Inside the TestInitialization Method
 
@@ -498,7 +492,6 @@ Public Sub VibrateLeft(CID As Integer, Speed As UShort)
 ```
 - **Public Sub VibrateLeft(CID As Integer, Speed As UShort)**: This method triggers the left motor of the controller to vibrate at a specified speed.
 
----
 
 #### Inside the VibrateLeft Method
 
@@ -518,7 +511,6 @@ Private Sub SendVibrationMotorCommand(ControllerID As Integer)
 ```
 - **Private Sub SendVibrationMotorCommand(ControllerID As Integer)**: This method sends the vibration command to the specified controller.
 
----
 
 #### Inside the SendVibrationMotorCommand Method
 
@@ -552,7 +544,6 @@ Private Sub UpdateLeftVibrateTimer()
 ```
 - **Private Sub UpdateLeftVibrateTimer()**: This method checks if the left motor is still vibrating and calculates how long it has been vibrating.
 
----
 
 #### Inside the UpdateLeftVibrateTimer Method
 
@@ -579,7 +570,6 @@ Private Sub UpdateRightVibrateTimer()
 ```
 - **Private Sub UpdateRightVibrateTimer()**: This method checks if the right motor is still vibrating and calculates how long it has been vibrating.
 
----
 
 #### Inside the UpdateRightVibrateTimer Method
 
