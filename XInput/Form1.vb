@@ -29,23 +29,24 @@ Imports System.Runtime.InteropServices
 Public Structure XboxControllers
 
     <DllImport("XInput1_4.dll")>
-    Private Shared Function XInputGetState(dwUserIndex As Integer, ByRef pState As XINPUT_STATE) As Integer
+    Private Shared Function XInputGetState(dwUserIndex As Integer,
+                                     ByRef pState As XINPUT_STATE) As Integer
     End Function
 
     <StructLayout(LayoutKind.Explicit)>
     Public Structure XINPUT_STATE
         <FieldOffset(0)>
-        Public dwPacketNumber As UInteger ' Unsigned 32-bit (4-byte) integer range 0 through 4,294,967,295.
+        Public dwPacketNumber As UInteger ' Unsigned integer range 0 through 4,294,967,295.
         <FieldOffset(4)>
         Public Gamepad As XINPUT_GAMEPAD
     End Structure
 
     <StructLayout(LayoutKind.Sequential)>
     Public Structure XINPUT_GAMEPAD
-        Public wButtons As UShort ' Unsigned 16-bit (2-byte) integer range 0 through 65,535.
-        Public bLeftTrigger As Byte ' Unsigned 8-bit (1-byte) integer range 0 through 255.
+        Public wButtons As UShort ' Unsigned integer range 0 through 65,535.
+        Public bLeftTrigger As Byte ' Unsigned integer range 0 through 255.
         Public bRightTrigger As Byte
-        Public sThumbLX As Short ' Signed 16-bit (2-byte) integer range -32,768 through 32,767.
+        Public sThumbLX As Short ' Signed integer range -32,768 through 32,767.
         Public sThumbLY As Short
         Public sThumbRX As Short
         Public sThumbRY As Short
@@ -170,8 +171,8 @@ Public Structure XboxControllers
         ' Initialize array to check if letter buttons are in the neutral position.
         LetterButtonsNeutral = New Boolean(0 To 3) {}
 
-        ' Set all thumbstick axes, triggers, D-Pad, letter buttons, start/back buttons, bumpers,
-        ' and stick buttons to neutral for all controllers (indices 0 to 3).
+        ' Set all thumbstick axes, triggers, D-Pad, letter buttons, start/back buttons,
+        ' bumpers,and stick buttons to neutral for all controllers (indices 0 to 3).
         For i As Integer = 0 To 3
 
             LeftThumbstickXaxisNeutral(i) = True
@@ -630,77 +631,115 @@ Public Structure XboxControllers
     Public Sub TestInitialization()
 
         ' Check that ConnectionStart is not Nothing (initialization was successful)
-        Debug.Assert(Not ConnectionStart = Nothing, $"Connection Start should not be Nothing.")
+        Debug.Assert(Not ConnectionStart = Nothing,
+                     $"Connection Start should not be Nothing.")
 
         ' Check that Buttons array is initialized
-        Debug.Assert(Buttons IsNot Nothing, $"Buttons should not be Nothing.")
+        Debug.Assert(Buttons IsNot Nothing,
+                     $"Buttons should not be Nothing.")
 
-        Debug.Assert(Not TimeToVibe = Nothing, $"TimeToVibe should not be Nothing.")
+        Debug.Assert(Not TimeToVibe = Nothing,
+                     $"TimeToVibe should not be Nothing.")
 
         For i As Integer = 0 To 3
 
             ' Check that all controllers are initialized as not connected
-            Debug.Assert(Not Connected(i), $"Controller {i} should not be connected after initialization.")
+            Debug.Assert(Not Connected(i),
+                         $"Controller {i} should not be connected after initialization.")
 
             ' Check that all axes of the Left Thumbsticks are initialized as neutral. 
-            Debug.Assert(LeftThumbstickXaxisNeutral(i), $"Left Thumbstick X-axis for Controller {i} should be neutral.")
-            Debug.Assert(LeftThumbstickYaxisNeutral(i), $"Left Thumbstick Y-axis for Controller {i} should be neutral.")
+            Debug.Assert(LeftThumbstickXaxisNeutral(i),
+                         $"Left Thumbstick X-axis for Controller {i} should be neutral.")
+            Debug.Assert(LeftThumbstickYaxisNeutral(i),
+                         $"Left Thumbstick Y-axis for Controller {i} should be neutral.")
 
             ' Check that all axes of the Right Thumbsticks are initialized as neutral. 
-            Debug.Assert(RightThumbstickXaxisNeutral(i), $"Right Thumbstick X-axis for Controller {i} should be neutral.")
-            Debug.Assert(RightThumbstickYaxisNeutral(i), $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
+            Debug.Assert(RightThumbstickXaxisNeutral(i),
+                         $"Right Thumbstick X-axis for Controller {i} should be neutral.")
+            Debug.Assert(RightThumbstickYaxisNeutral(i),
+                         $"Right Thumbstick Y-axis for Controller {i} should be neutral.")
 
             ' Check that all DPads are initialized as neutral. 
-            Debug.Assert(DPadNeutral(i), $"DPad for Controller {i} should be neutral.")
+            Debug.Assert(DPadNeutral(i),
+                         $"DPad for Controller {i} should be neutral.")
 
             ' Check that all Letter Buttons are initialized as neutral. 
-            Debug.Assert(LetterButtonsNeutral(i), $"Letter Buttons for Controller {i} should be neutral.")
+            Debug.Assert(LetterButtonsNeutral(i),
+                         $"Letter Buttons for Controller {i} should be neutral.")
 
             ' Check that additional Right Thumbstick states are not active.
-            Debug.Assert(Not RightThumbstickLeft(i), $"Right Thumbstick Left for Controller {i} should not be true.")
-            Debug.Assert(Not RightThumbstickRight(i), $"Right Thumbstick Right for Controller {i} should not be true.")
-            Debug.Assert(Not RightThumbstickDown(i), $"Right Thumbstick Down for Controller {i} should not be true.")
-            Debug.Assert(Not RightThumbstickUp(i), $"Right Thumbstick Up for Controller {i} should not be true.")
+            Debug.Assert(Not RightThumbstickLeft(i),
+                         $"Right Thumbstick Left for Controller {i} should not be true.")
+            Debug.Assert(Not RightThumbstickRight(i),
+                         $"Right Thumbstick Right for Controller {i} should not be true.")
+            Debug.Assert(Not RightThumbstickDown(i),
+                         $"Right Thumbstick Down for Controller {i} should not be true.")
+            Debug.Assert(Not RightThumbstickUp(i),
+                         $"Right Thumbstick Up for Controller {i} should not be true.")
 
             ' Check that additional Left Thumbstick states are not active.
-            Debug.Assert(Not LeftThumbstickLeft(i), $"Left Thumbstick Left for Controller {i} should not be true.")
-            Debug.Assert(Not LeftThumbstickRight(i), $"Left Thumbstick Right for Controller {i} should not be true.")
-            Debug.Assert(Not LeftThumbstickDown(i), $"Left Thumbstick Down for Controller {i} should not be true.")
-            Debug.Assert(Not LeftThumbstickUp(i), $"Left Thumbstick Up for Controller {i} should not be true.")
+            Debug.Assert(Not LeftThumbstickLeft(i),
+                         $"Left Thumbstick Left for Controller {i} should not be true.")
+            Debug.Assert(Not LeftThumbstickRight(i),
+                         $"Left Thumbstick Right for Controller {i} should not be true.")
+            Debug.Assert(Not LeftThumbstickDown(i),
+                         $"Left Thumbstick Down for Controller {i} should not be true.")
+            Debug.Assert(Not LeftThumbstickUp(i),
+                         $"Left Thumbstick Up for Controller {i} should not be true.")
 
             ' Check that trigger states are not active.
-            Debug.Assert(Not LeftTrigger(i), $"Left Trigger for Controller {i} should not be true.")
-            Debug.Assert(Not RightTrigger(i), $"Right Trigger for Controller {i} should not be true.")
+            Debug.Assert(Not LeftTrigger(i),
+                         $"Left Trigger for Controller {i} should not be true.")
+            Debug.Assert(Not RightTrigger(i),
+                         $"Right Trigger for Controller {i} should not be true.")
 
             ' Check that letter button states (A, B, X, Y) are not active.
-            Debug.Assert(Not A(i), $"A for Controller {i} should not be true.")
-            Debug.Assert(Not B(i), $"B for Controller {i} should not be true.")
-            Debug.Assert(Not X(i), $"X for Controller {i} should not be true.")
-            Debug.Assert(Not Y(i), $"Y for Controller {i} should not be true.")
+            Debug.Assert(Not A(i),
+                         $"A for Controller {i} should not be true.")
+            Debug.Assert(Not B(i),
+                         $"B for Controller {i} should not be true.")
+            Debug.Assert(Not X(i),
+                         $"X for Controller {i} should not be true.")
+            Debug.Assert(Not Y(i),
+                         $"Y for Controller {i} should not be true.")
 
             ' Check that bumper button states are not active.
-            Debug.Assert(Not LeftBumper(i), $"Left Bumper for Controller {i} should not be true.")
-            Debug.Assert(Not RightBumper(i), $"Right Bumper for Controller {i} should not be true.")
+            Debug.Assert(Not LeftBumper(i),
+                         $"Left Bumper for Controller {i} should not be true.")
+            Debug.Assert(Not RightBumper(i),
+                         $"Right Bumper for Controller {i} should not be true.")
 
             ' Check that D-Pad directional states are not active.
-            Debug.Assert(Not DPadUp(i), $"D-Pad Up for Controller {i} should not be true.")
-            Debug.Assert(Not DPadDown(i), $"D-Pad Down for Controller {i} should not be true.")
-            Debug.Assert(Not DPadLeft(i), $"D-Pad Left for Controller {i} should not be true.")
-            Debug.Assert(Not DPadRight(i), $"D-Pad Right for Controller {i} should not be true.")
+            Debug.Assert(Not DPadUp(i),
+                         $"D-Pad Up for Controller {i} should not be true.")
+            Debug.Assert(Not DPadDown(i),
+                         $"D-Pad Down for Controller {i} should not be true.")
+            Debug.Assert(Not DPadLeft(i),
+                         $"D-Pad Left for Controller {i} should not be true.")
+            Debug.Assert(Not DPadRight(i),
+                         $"D-Pad Right for Controller {i} should not be true.")
 
             ' Check that start and back button states are not active.
-            Debug.Assert(Not Start(i), $"Start Button for Controller {i} should not be true.")
-            Debug.Assert(Not Back(i), $"Back Button for Controller {i} should not be true.")
+            Debug.Assert(Not Start(i),
+                         $"Start Button for Controller {i} should not be true.")
+            Debug.Assert(Not Back(i),
+                         $"Back Button for Controller {i} should not be true.")
 
             ' Check that stick button states are not active.
-            Debug.Assert(Not LeftStick(i), $"Left Stick for Controller {i} should not be true.")
-            Debug.Assert(Not RightStick(i), $"Right Stick for Controller {i} should not be true.")
+            Debug.Assert(Not LeftStick(i),
+                         $"Left Stick for Controller {i} should not be true.")
+            Debug.Assert(Not RightStick(i),
+                         $"Right Stick for Controller {i} should not be true.")
 
-            Debug.Assert(Not LeftVibrateStart(i) = Nothing, $"Left Vibrate Start for Controller {i} should not be Nothing.")
-            Debug.Assert(Not RightVibrateStart(i) = Nothing, $"Right Vibrate Start for Controller {i} should not be Nothing.")
+            Debug.Assert(Not LeftVibrateStart(i) = Nothing,
+                         $"Left Vibrate Start for Controller {i} should not be Nothing.")
+            Debug.Assert(Not RightVibrateStart(i) = Nothing,
+                         $"Right Vibrate Start for Controller {i} should not be Nothing.")
 
-            Debug.Assert(Not IsLeftVibrating(i), $"Is Left Vibrating for Controller {i} should not be true.")
-            Debug.Assert(Not IsRightVibrating(i), $"Is Right Vibrating for Controller {i} should not be true.")
+            Debug.Assert(Not IsLeftVibrating(i),
+                         $"Is Left Vibrating for Controller {i} should not be true.")
+            Debug.Assert(Not IsRightVibrating(i),
+                         $"Is Right Vibrating for Controller {i} should not be true.")
 
         Next
 
@@ -709,7 +748,8 @@ Public Structure XboxControllers
     End Sub
 
     <DllImport("XInput1_4.dll")>
-    Private Shared Function XInputSetState(playerIndex As Integer, ByRef vibration As XINPUT_VIBRATION) As Integer
+    Private Shared Function XInputSetState(playerIndex As Integer,
+                                     ByRef vibration As XINPUT_VIBRATION) As Integer
     End Function
 
     Public Structure XINPUT_VIBRATION
@@ -1889,11 +1929,12 @@ End Class
 
 ' Passing Structures
 
-' Passing structures refers to the process of sending structured data as a parameter to a function
-' or method. Structures, also known as structs, allow you to group related data together under a
-' single name. When passing structures as parameters you are essentially sending a block of data
-' that contains multiple fields or members. This can be useful for organizing related data and
-' passing them around your program efficiently.
+' Passing structures refers to the process of sending structured data as a
+' parameter to a function or method. Structures, also known as structs, allow you
+' to group related data together under a single name. When passing structures as
+' parameters you are essentially sending a block of data that contains multiple
+' fields or members. This can be useful for organizing related data and passing
+' them around your program efficiently.
 
 ' https://learn.microsoft.com/en-us/dotnet/framework/interop/passing-structures
 
