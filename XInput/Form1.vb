@@ -72,19 +72,19 @@ Public Structure XboxControllers
     End Enum
 
     ' Set the start of the thumbstick neutral zone to 1/2 over.
-    Private Const NeutralStart As Short = -16384 '-16,384 = -32,768 / 2
+    Private Const NeutralStart As Short = -16384 ' -16,384 = -32,768 / 2
     ' The thumbstick position must be more than 1/2 over the neutral start to
     ' register as moved.
     ' A short is a signed 16-bit (2-byte) integer range -32,768 through 32,767.
     ' This gives us 65,536 values.
 
     ' Set the end of the thumbstick neutral zone to 1/2 over.
-    Private Const NeutralEnd As Short = 16384 '16,383.5 = 32,767 / 2
+    Private Const NeutralEnd As Short = 16384 ' 16,383.5 = 32,767 / 2
     ' The thumbstick position must be more than 1/2 over the neutral end to
     ' register as moved.
 
     ' Set the trigger threshold to 1/4 pull.
-    Private Const TriggerThreshold As Byte = 64 '64 = 256 / 4
+    Private Const TriggerThreshold As Byte = 64 ' 64 = 256 / 4
     ' The trigger position must be greater than the trigger threshold to
     ' register as pulled.
     ' A byte is a unsigned 8-bit (1-byte) integer range 0 through 255.
@@ -254,8 +254,7 @@ Public Structure XboxControllers
 
             For ControllerNumber As Integer = 0 To 3 ' Up to 4 controllers
 
-                Connected(ControllerNumber) =
-                    IsConnected(ControllerNumber)
+                Connected(ControllerNumber) = IsConnected(ControllerNumber)
 
             Next
 
