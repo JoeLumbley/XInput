@@ -625,7 +625,6 @@ Public Structure XboxControllers
         Catch ex As Exception
             ' Something went wrong (An exception occured).
 
-            'DisplayError(ex)
             Debug.Print($"Error getting XInput state: {controllerNumber} | {ex.Message}")
 
             Return False
