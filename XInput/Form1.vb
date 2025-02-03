@@ -937,8 +937,6 @@ Public Class Form1
 
             UpdateControllerStatusLabel(ControllerNumber)
 
-            'UpdateControllerToVibeMax()
-
             If Controllers.Connected(ControllerNumber) Then
 
                 UpdateThumbstickLabels(ControllerNumber)
@@ -1126,17 +1124,25 @@ Public Class Form1
 
                 LabelController0Status.Text = labelText
 
+
+
             Case 1
 
                 LabelController1Status.Text = labelText
+
+
 
             Case 2
 
                 LabelController2Status.Text = labelText
 
+
+
             Case 3
 
                 LabelController3Status.Text = labelText
+
+
 
         End Select
 
@@ -1227,6 +1233,7 @@ Public Class Form1
         Next
 
     End Sub
+
     Private Sub UpdateDPadLabel(controllerNumber As Integer)
 
         Dim direction As String = GetDPadDirection(controllerNumber)
@@ -1377,7 +1384,7 @@ Public Class Form1
 
         ' Are all controllers left thumbsticks on the Y-axis in the neutral
         ' position?
-        If Neutral = True Then
+        If Neutral Then
             ' Yes, all controllers left thumbsticks on the Y-axis are in the
             ' neutral position.
 
@@ -1411,7 +1418,7 @@ Public Class Form1
 
         ' Are all controllers left thumbsticks on the X-axis in the neutral
         ' position?
-        If Neutral = True Then
+        If Neutral Then
             ' Yes, all controllers left thumbsticks on the X-axis are in the
             ' neutral position.
 
@@ -1445,7 +1452,7 @@ Public Class Form1
 
         ' Are all controllers right thumbsticks on the X-axis in the neutral
         ' position?
-        If Neutral = True Then
+        If Neutral Then
             ' Yes, all controllers right thumbsticks on the X-axis are in the
             ' neutral position.
 
@@ -1479,7 +1486,7 @@ Public Class Form1
 
         ' Are all controllers right thumbsticks on the Y-axis in the neutral
         ' position?
-        If Neutral = True Then
+        If Neutral Then
             ' Yes, all controllers right thumbsticks on the Y-axis are in the
             ' neutral position.
 
@@ -1512,7 +1519,7 @@ Public Class Form1
         Next
 
         ' Are all controllers right triggers not active?
-        If NotActive = True Then
+        If NotActive Then
             ' Yes, all controllers right triggers are not active.
 
             LabelRightTrigger.Text = String.Empty ' Clear label.
@@ -1544,7 +1551,7 @@ Public Class Form1
         Next
 
         ' Are all controllers left triggers not active?
-        If NotActive = True Then
+        If NotActive Then
             ' Yes, all controllers left triggers are not active.
 
             LabelLeftTrigger.Text = String.Empty ' Clear label. 
