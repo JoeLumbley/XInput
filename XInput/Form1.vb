@@ -758,6 +758,7 @@ Public Structure XboxControllers
     End Function
 
     Public Structure XINPUT_VIBRATION
+
         Public wLeftMotorSpeed As UShort
         Public wRightMotorSpeed As UShort
     End Structure
