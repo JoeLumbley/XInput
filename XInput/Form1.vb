@@ -26,6 +26,10 @@
 
 Imports System.Runtime.InteropServices
 
+
+
+
+
 Public Structure XboxControllers
 
     <DllImport("XInput1_4.dll")>
@@ -35,6 +39,7 @@ Public Structure XboxControllers
 
     <StructLayout(LayoutKind.Explicit)>
     Public Structure XINPUT_STATE
+
         <FieldOffset(0)>
         Public dwPacketNumber As UInteger ' Unsigned integer range 0 through 4,294,967,295.
         <FieldOffset(4)>
@@ -43,6 +48,7 @@ Public Structure XboxControllers
 
     <StructLayout(LayoutKind.Sequential)>
     Public Structure XINPUT_GAMEPAD
+
         Public wButtons As UShort ' Unsigned integer range 0 through 65,535.
         Public bLeftTrigger As Byte ' Unsigned integer range 0 through 255.
         Public bRightTrigger As Byte
@@ -55,6 +61,7 @@ Public Structure XboxControllers
     Private State As XINPUT_STATE
 
     Private Enum Button
+
         DPadUp = 1
         DPadDown = 2
         DPadLeft = 4
