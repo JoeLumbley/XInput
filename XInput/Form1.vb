@@ -1212,28 +1212,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DoButtonLogic()
-
-        For ControllerNumber As Integer = 0 To 3
-
-            If Controllers.Connected(ControllerNumber) Then
-
-                UpdateDPadLabel(ControllerNumber)
-
-                UpdateLetterButtonLabel(ControllerNumber)
-
-                UpdateStartBackLabels(ControllerNumber)
-
-                UpdateBumperLabels(ControllerNumber)
-
-                UpdateStickLabels(ControllerNumber)
-
-            End If
-
-        Next
-
-    End Sub
-
     Private Sub UpdateDPadLabel(controllerNumber As Integer)
 
         Dim direction As String = GetDPadDirection(controllerNumber)
@@ -1776,8 +1754,8 @@ Public Class Form1
     End Sub
 
     Private Sub ClearRightThumbstickButtonLabel()
-        ' Clears the right thumbstick button label when all controllers' right thumbstick
-        ' buttons are not active.
+        ' Clears the right thumbstick button label when all controllers' right
+        ' thumbstick buttons are not active.
 
         ' Assume all controllers' right thumbstick buttons are not active initially.
         Dim NotActive As Boolean = True
@@ -1883,7 +1861,8 @@ Public Class Form1
 
     Private Sub InitializeToolTips()
 
-        Dim ToolTipTimeToVib As New ToolTip With {
+        Dim ToolTipTimeToVib As New ToolTip With
+        {
             .AutoPopDelay = 8000,
             .InitialDelay = 1000,
             .ReshowDelay = 500
@@ -1893,7 +1872,8 @@ Public Class Form1
 
         ToolTipTimeToVib.SetToolTip(NumericUpDownTimeToVib, TipText)
 
-        Dim ToolTipConToVib As New ToolTip With {
+        Dim ToolTipConToVib As New ToolTip With
+        {
             .AutoPopDelay = 8000,
             .InitialDelay = 1000,
             .ReshowDelay = 500
@@ -1903,7 +1883,8 @@ Public Class Form1
 
         ToolTipConToVib.SetToolTip(NumControllerToVib, TipText)
 
-        Dim ToolTipVibSpeed As New ToolTip() With {
+        Dim ToolTipVibSpeed As New ToolTip() With
+        {
             .AutoPopDelay = 10000,
             .InitialDelay = 1000,
             .ReshowDelay = 500
@@ -1913,7 +1894,8 @@ Public Class Form1
 
         ToolTipVibSpeed.SetToolTip(TrackBarSpeed, TipText)
 
-        Dim ToolTipRumbleGroup As New ToolTip() With {
+        Dim ToolTipRumbleGroup As New ToolTip() With
+        {
             .AutoPopDelay = 10000,
             .InitialDelay = 1000,
             .ReshowDelay = 500
