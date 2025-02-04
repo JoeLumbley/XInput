@@ -38,7 +38,7 @@ Public Structure XboxControllers
     End Function
 
     <StructLayout(LayoutKind.Explicit)>
-    Public Structure XINPUT_STATE
+    Private Structure XINPUT_STATE
 
         <FieldOffset(0)>
         Public dwPacketNumber As UInteger ' Unsigned integer range 0 through 4,294,967,295.
@@ -47,7 +47,7 @@ Public Structure XboxControllers
     End Structure
 
     <StructLayout(LayoutKind.Sequential)>
-    Public Structure XINPUT_GAMEPAD
+    Private Structure XINPUT_GAMEPAD
 
         Public wButtons As UShort ' Unsigned integer range 0 through 65,535.
         Public bLeftTrigger As Byte ' Unsigned integer range 0 through 255.
@@ -283,7 +283,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Public Sub UpdateState(controllerNumber As Integer)
+    Private Sub UpdateState(controllerNumber As Integer)
 
         Try
 
@@ -613,7 +613,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Public Function IsConnected(controllerNumber As Integer) As Boolean
+    Private Function IsConnected(controllerNumber As Integer) As Boolean
 
         Try
 
@@ -633,7 +633,7 @@ Public Structure XboxControllers
 
     End Function
 
-    Public Sub TestInitialization()
+    Private Sub TestInitialization()
 
         ' Check that ConnectionStart is not Nothing (initialization was successful)
         Debug.Assert(Not ConnectionStart = Nothing,
@@ -757,7 +757,7 @@ Public Structure XboxControllers
                                      ByRef vibration As XINPUT_VIBRATION) As Integer
     End Function
 
-    Public Structure XINPUT_VIBRATION
+    Private Structure XINPUT_VIBRATION
 
         Public wLeftMotorSpeed As UShort
         Public wRightMotorSpeed As UShort
@@ -817,7 +817,7 @@ Public Structure XboxControllers
 
     End Sub
 
-    Public Sub UpdateVibrateTimers()
+    Private Sub UpdateVibrateTimers()
 
         UpdateLeftVibrateTimer()
 
