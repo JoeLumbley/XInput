@@ -881,7 +881,17 @@ Public Class Form1
 
     Private Controllers As XboxControllers
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    'Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    '    InitializeApp()
+
+    '    Controllers.Initialize()
+
+    'End Sub
+
+    Public Sub New()
+
+        InitializeComponent()
 
         InitializeApp()
 
