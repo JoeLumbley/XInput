@@ -800,6 +800,7 @@ Public Structure XboxControllers
             If XInputSetState(ControllerID, Vibration) = 0 Then
                 ' The motor speed was set. Success.
 
+                Debug.Print($"{ControllerID} did vibrate.  {Vibration.wLeftMotorSpeed} |  {Vibration.wRightMotorSpeed} ")
             Else
                 ' The motor speed was not set. Fail.
 
